@@ -18,5 +18,5 @@ ENV LC_ALL en_US.UTF-8
 COPY . .
 COPY netrc /root/.netrc
 RUN chmod +x aria.sh
-
+RUN rm README.md
 CMD ["bash","start.sh"]

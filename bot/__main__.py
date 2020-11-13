@@ -2,10 +2,10 @@ import shutil, psutil
 import signal
 import pickle
 
-from os import execl, path, remove
+from os import execl, kill, path, remove
 from sys import executable
 import time
-
+from telegram import ParseMode
 from telegram.ext import CommandHandler, run_async
 from bot import dispatcher, updater, botStartTime
 from bot.helper.ext_utils import fs_utils
@@ -13,7 +13,7 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers
 
 
 @run_async
@@ -37,10 +37,10 @@ def stats(update, context):
 @run_async
 def start(update, context):
     start_string = f'''
-This is a bot which can mirror all your links to Google drive!
+Hi, I'm Ayanami, a multipurpose bot for [Dank-del](t.me/dank_as_fuck)
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-    sendMessage(start_string, context.bot, update)
+    update.effective_message.reply_photo("https://telegra.ph/file/87b7878ee9d6273af566f.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
 
 
 @run_async
@@ -93,6 +93,9 @@ def bot_help(update, context):
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
+/weebhelp - get help for anime, manga and character module.
+
+/stickerhelp - get help for stickers module. 
 '''
     sendMessage(help_string, context.bot, update)
 

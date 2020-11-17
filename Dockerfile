@@ -1,20 +1,27 @@
-FROM ubuntu:20.04
+FROM archlinux
+
+ENV PIP_NO_CACHE_DIR 1
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
-RUN apt-get -qq update && \
-    DEBIAN_FRONTEND="noninteractive" apt-get -qq install -y tzdata aria2 git python3 python3-pip \
-    locales python3-lxml \
-    curl pv jq ffmpeg \
-    p7zip-full p7zip-rar
+RUN pacman -Syu --noconfirm \
+    git \
+    python-lxml \
+    curl \
+    pv \
+    jq \
+    ffmpeg \
+    python \
+    p7zip \
+    python-pip \
+    openssl \
+    wget \
+    gcc \
+    neofetch \
+    && rm -rf /var/cache/pacman/pkg /tmp
+    
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt && \
-    apt-get -qq purge git
-
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+RUN python3 -m pip install -r requirements.txt
 COPY . .
 COPY netrc /root/.netrc
 RUN chmod +x aria.sh

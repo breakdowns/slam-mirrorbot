@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
 RUN pacman -Syu --noconfirm \
     git \
+    aria2 \
     python-lxml \
     curl \
     pv \

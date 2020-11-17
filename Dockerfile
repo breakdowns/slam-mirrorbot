@@ -25,5 +25,5 @@ RUN python3 -m pip install -r requirements.txt
 COPY . .
 COPY netrc /root/.netrc
 RUN chmod +x aria.sh
-RUN rm README.md
+
 CMD ["bash","start.sh"]

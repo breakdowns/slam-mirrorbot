@@ -13,6 +13,7 @@ RUN pacman -Syu --noconfirm \
     jq \
     ffmpeg \
     python \
+    fakeroot \
     p7zip \
     python-pip \
     openssl \

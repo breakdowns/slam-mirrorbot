@@ -1,7 +1,8 @@
 import shutil, psutil
 import signal
 import pickle
-
+from pyrogram import idle
+from bot import app
 from os import execl, kill, path, remove
 from sys import executable
 import time
@@ -13,7 +14,7 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search
 
 
 @run_async
@@ -96,6 +97,8 @@ def bot_help(update, context):
 /weebhelp - get help for anime, manga and character module.
 
 /stickerhelp - get help for stickers module. 
+
+/tshelp - get help for torrent search module.
 '''
     sendMessage(help_string, context.bot, update)
 
@@ -130,5 +133,6 @@ def main():
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
 
-
+app.start()
 main()
+idle()

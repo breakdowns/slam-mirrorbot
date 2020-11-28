@@ -2,7 +2,7 @@ import logging
 import os
 import threading
 import time
-
+from pyrogram import Client
 import aria2p
 import telegram.ext as tg
 from dotenv import load_dotenv
@@ -102,7 +102,7 @@ try:
         USE_SERVICE_ACCOUNTS = False
 except KeyError:
     USE_SERVICE_ACCOUNTS = False
-
+app = Client('ayanami', api_id=TELEGRAM_API, api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
 updater = tg.Updater(token=BOT_TOKEN,use_context=True)
 bot = updater.bot
 dispatcher = updater.dispatcher

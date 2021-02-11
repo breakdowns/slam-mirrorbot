@@ -38,10 +38,10 @@ def stats(update, context):
 @run_async
 def start(update, context):
     start_string = f'''
-Hi, I'm Ayanami, a multipurpose bot for [Dank-del](t.me/dank_as_fuck)
+Hi, I'm Slam, a multipurpose bot for [hafitz](t.me/hafitzXD)
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/87b7878ee9d6273af566f.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
+    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
 
 
 @run_async

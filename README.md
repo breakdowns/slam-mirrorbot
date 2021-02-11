@@ -1,6 +1,6 @@
 ![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)
 
-# Slam
+# Slam Mirror Bot
 A personal torrent leech bot for Hafitz
 
 Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot/)

@@ -1,14 +1,17 @@
-![Ayanami](https://telegra.ph/file/87b7878ee9d6273af566f.jpg)
+![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)
 
-# Ayanami
-A personal torrent leech bot for Dank-del
+# Slam
+A personal torrent leech bot for Hafitz
 
 Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot/)
 
-
-
+Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
 
 ## Deploying on Heroku
+
+<p><a href="https://heroku.com/deploy?template=https://github.com/breakdowns/slam-mirrorbot"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+
+
 - Run the script to generate token file(token.pickle) for Google Drive:
 ```
 python3 generate_drive_token.py

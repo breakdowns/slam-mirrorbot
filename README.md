@@ -7,56 +7,26 @@ Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bo
 
 Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
 
+## Getting Google OAuth API credential file
+
+- Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)
+- Go to the OAuth Consent tab, fill it, and save.
+- Go to the Credentials tab and click Create Credentials -> OAuth Client ID
+- Choose Desktop and Create.
+- Use the download button to download your credentials.
+- Move that file to the root of mirror-bot, and rename it to credentials.json
+- Visit [Google API page](https://console.developers.google.com/apis/library)
+- Search for Drive and enable it if it is disabled
+- Finally, run the script to generate token file (token.pickle) for Google Drive:
+```
+pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+python3 generate_drive_token.py
+```
+
 ## Deploying on Heroku
 
 <p><a href="https://heroku.com/deploy?template=https://github.com/breakdowns/slam-mirrorbot"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
-
-- Run the script to generate token file(token.pickle) for Google Drive:
-```
-python3 generate_drive_token.py
-```
-- Install [Heroku cli](https://devcenter.heroku.com/articles/heroku-cli)
-- Login into your heroku account with command:
-```
-heroku login
-```
-- Create a new heroku app:
-```
-heroku create appname	
-```
-- Select This App in your Heroku-cli: 
-```
-heroku git:remote -a appname
-```
-- Change Dyno Stack to a Docker Container:
-```
-heroku stack:set container
-```
-- Add Private Credentials and Config Stuff:
-```
-git add -f credentials.json token.pickle config.env
-```
-- Commit new changes:
-```
-git commit -m "Added Creds."
-```
-- Push Code to Heroku:
-```
-git push heroku master --force
-```
-- Restart Worker by these commands:
-```
-heroku ps:scale worker=0
-```
-```
-heroku ps:scale worker=1	 	
-```
-Heroku-Note: Doing authorizations ( /authorize command ) through telegram wont be permanent as heroku uses ephemeral filesystem. They will be reset on each dyno boot. As a workaround you can:
+Note: Doing authorizations ( /authorize command ) through telegram wont be permanent as heroku uses ephemeral filesystem. They will be reset on each dyno boot. As a workaround you can:
 - Make a file authorized_chats.txt and write the user names and chat_id of you want to authorize, each separated by new line
 - Then force add authorized_chats.txt to git and push it to heroku
-```
-git add authorized_chats.txt -f
-git commit -asm "Added hardcoded authorized_chats.txt"
-git push heroku heroku:master
-```

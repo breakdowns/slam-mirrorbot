@@ -34,7 +34,7 @@ class GoogleDriveHelper:
         # Redirect URI for installed apps, can be left as is
         self.__REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
         self.__G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
-        self.__G_DRIVE_BASE_DOWNLOAD_URL = "https://drive.google.com/file/d/{}/view" #Default https://drive.google.com/uc?id={}&export=download
+        self.__G_DRIVE_BASE_DOWNLOAD_URL = "https://drive.google.com/uc?id={}&export=download"
         self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL = "https://drive.google.com/drive/folders/{}"
         self.__listener = listener
         self.__service = self.authorize()

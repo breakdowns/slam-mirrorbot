@@ -34,7 +34,7 @@ class GoogleDriveHelper:
         # Redirect URI for installed apps, can be left as is
         self.__REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
         self.__G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
-        self.__G_DRIVE_BASE_DOWNLOAD_URL = "https://drive.google.com/uc?id={}&export=download"
+        self.__G_DRIVE_BASE_DOWNLOAD_URL = "https://drive.google.com/file/d/{}/view" #Default https://drive.google.com/uc?id={}&export=download
         self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL = "https://drive.google.com/drive/folders/{}"
         self.__listener = listener
         self.__service = self.authorize()
@@ -100,6 +100,24 @@ class GoogleDriveHelper:
             file_metadata['parents'] = [parent_id]
         return self.__service.files().create(supportsTeamDrives=True,
                                              body=file_metadata, media_body=media_body).execute()
+    def deletefile(self, link: str):
+        try:
+            file_id = self.getIdFromUrl(link)
+        except (KeyError,IndexError):
+            msg = "Google drive ID could not be found in the provided link"
+            return msg
+        msg = ''
+        try:
+            res = self.__service.files().delete(fileId=file_id, supportsTeamDrives=IS_TEAM_DRIVE).execute()
+            msg = "File/Folder Sukses Terhapus 🗑️"
+        except HttpError as err:
+            LOGGER.error(str(err))
+            if "File not found" in str(err):
+                msg = "No such file exist"
+            else:
+                msg = "Something went wrong check log"
+        finally:
+            return msg
 
     def switchServiceAccount(self):
         global SERVICE_ACCOUNT_INDEX
@@ -407,15 +425,8 @@ class GoogleDriveHelper:
                 scopes=self.__OAUTH_SCOPE)
         return build('drive', 'v3', credentials=credentials, cache_discovery=False)
 
-    def escapes(self, str):
-        chars = ['\\', "'", '"', r'\a', r'\b', r'\f', r'\n', r'\r', r'\t']
-        for char in chars:
-            str = str.replace(char, '\\'+char)
-        return str
-
     def drive_list(self, fileName):
         msg = ""
-        fileName = self.escapes(str(fileName))
         # Create Search Query for API request.
         query = f"'{parent_id}' in parents and (name contains '{fileName}')"
         response = self.__service.files().list(supportsTeamDrives=True,

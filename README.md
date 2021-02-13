@@ -22,11 +22,6 @@ Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 python3 generate_drive_token.py
 ```
-Or
-```
-pip3 install -r requirements-cli.txt
-python3 generate_drive_token.py
-```
 
 ## Deploying on Heroku
 

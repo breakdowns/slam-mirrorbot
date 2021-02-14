@@ -8,7 +8,7 @@ Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bo
 Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
 
 ## Installing requirements
-- Clone this repo:
+Clone this repo:
 ```
 git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
 cd mirrorbot

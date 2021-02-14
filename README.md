@@ -14,7 +14,12 @@ Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
 - Go to the Credentials tab and click Create Credentials -> OAuth Client ID
 - Choose Desktop and Create.
 - Use the download button to download your credentials.
-- Move that file to the root of slam-mirrorbot, and rename it to credentials.json
+- Clone this repo:
+```
+git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
+cd mirrorbot
+```
+- Move that file to the root of mirrorbot, and rename it to credentials.json
 - Visit [Google API page](https://console.developers.google.com/apis/library)
 - Search for Drive and enable it if it is disabled
 - Finally, run the script to generate token file (token.pickle) for Google Drive:
@@ -25,8 +30,6 @@ python3 generate_drive_token.py
 ## Session String
 Generate session string by running:
 ```
-git clone https://github.com/breakdowns/slam-mirrorbot
-cd slam-mirrorbot
 python3 generate_string_session.py
 ```
 

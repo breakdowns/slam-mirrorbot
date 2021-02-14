@@ -22,6 +22,13 @@ Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 python3 generate_drive_token.py
 ```
+## Session String
+Generate session string by running:
+```
+git clone https://github.com/breakdowns/slam-mirrorbot
+cd slam-mirrorbot
+python3 generate_string_session.py
+```
 
 ## Deploying on Heroku
 

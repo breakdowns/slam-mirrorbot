@@ -8,7 +8,7 @@ Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bo
 Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
 
 ## Installing requirements
-Clone this repo:
+- Clone this repo:
 ```
 git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
 cd mirrorbot
@@ -30,7 +30,7 @@ pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 python3 generate_drive_token.py
 ```
 ## Session String
-Generate session string by running:
+- Generate session string by running:
 ```
 python3 generate_string_session.py
 ```

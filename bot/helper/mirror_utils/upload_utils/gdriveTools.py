@@ -109,7 +109,7 @@ class GoogleDriveHelper:
         msg = ''
         try:
             res = self.__service.files().delete(fileId=file_id, supportsTeamDrives=IS_TEAM_DRIVE).execute()
-            msg = "File/Folder Deleted Successfully"
+            msg = "Successfully deleted"
         except HttpError as err:
             LOGGER.error(str(err))
             if "File not found" in str(err):

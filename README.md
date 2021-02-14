@@ -13,6 +13,10 @@ Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
 git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
 cd mirrorbot
 ```
+- Generate session string by running:
+```
+python3 generate_string_session.py
+```
 
 ## Getting Google OAuth API credential file
 
@@ -28,11 +32,6 @@ cd mirrorbot
 ```
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 python3 generate_drive_token.py
-```
-## Session String
-- Generate session string by running:
-```
-python3 generate_string_session.py
 ```
 
 ## Deploying on Heroku

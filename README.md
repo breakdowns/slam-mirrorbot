@@ -5,18 +5,9 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 
 Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot/)
 
-Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot)
+Some features from [magneto-python-aria](https://github.com/magneto261290/magneto-python-aria/)
 
-## Installing requirements
-- Clone this repo:
-```
-git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
-cd mirrorbot
-```
-- Generate session string by running:
-```
-python3 generate_string_session.py
-```
+Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot/)
 
 ## Getting Google OAuth API credential file
 
@@ -25,6 +16,11 @@ python3 generate_string_session.py
 - Go to the Credentials tab and click Create Credentials -> OAuth Client ID
 - Choose Desktop and Create.
 - Use the download button to download your credentials.
+- Clone this repo:
+```
+git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
+cd mirrorbot
+```
 - Move that file to the root of mirrorbot, and rename it to credentials.json
 - Visit [Google API page](https://console.developers.google.com/apis/library)
 - Search for Drive and enable it if it is disabled
@@ -36,7 +32,4 @@ python3 generate_drive_token.py
 
 ## Deploying on Heroku
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/breakdowns/slam-mirrorbot/tree/beta"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
-
-Heroku Note: Doing authorizations ( /authorize command ) through telegram wont be permanent as heroku uses ephemeral filesystem. They will be reset on each dyno boot. As a workaround you can:
-- Edit a [authorized_chats.txt](https://github.com/breakdowns/slam-mirrorbot/blob/master/authorized_chats.txt) file and write the user_id and chat_id of you want to authorize, each separated by new line
+<p><a href="https://heroku.com/deploy?template=https://github.com/breakdowns/slam-mirrorbot"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>

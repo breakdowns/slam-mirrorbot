@@ -2,7 +2,6 @@ import logging
 import os
 import threading
 import time
-from pyrogram import Client
 import aria2p
 import telegram.ext as tg
 from dotenv import load_dotenv

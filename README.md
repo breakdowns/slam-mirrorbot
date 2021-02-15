@@ -36,7 +36,7 @@ python3 generate_drive_token.py
 
 ## Deploying on Heroku
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/breakdowns/slam-mirrorbot"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/breakdowns/slam-mirrorbot/tree/beta"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 Heroku Note: Doing authorizations ( /authorize command ) through telegram wont be permanent as heroku uses ephemeral filesystem. They will be reset on each dyno boot. As a workaround you can:
 - Edit a [authorized_chats.txt](https://github.com/breakdowns/slam-mirrorbot/blob/master/authorized_chats.txt) file and write the user_id and chat_id of you want to authorize, each separated by new line

@@ -34,7 +34,7 @@
         "required":false
       },
       "OWNER_ID": {
-        "description": "The Telegram User ID of the Owner of the Bot. Get it by using /info in MissRoseBot",
+        "description": "The Telegram User ID of the Owner of the Bot. Get it by using /info in @MissRose_bot.",
         "required": true
       },
       "AUTO_DELETE_MESSAGE_DURATION": {
@@ -50,7 +50,7 @@
         "required": false
       },
       "AUTHORIZED_CHATS": {
-        "description": "Put user_id and chat_id of you want to authorize.",
+        "description": "Put User ID and Chat ID of you want to authorize.",
         "required": false
       },
       "INDEX_URL": {
@@ -58,7 +58,7 @@
         "required": false
       },
       "TELEGRAM_API": {
-        "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.",
+        "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org.",
         "required": true
       },
       "TELEGRAM_HASH": {

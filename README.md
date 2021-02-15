@@ -5,9 +5,9 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 
 Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot/)
 
-Some features from [magneto-python-aria](https://github.com/magneto261290/magneto-python-aria/)
-
 Original Source [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot/)
+
+Some features from [magneto-python-aria](https://github.com/magneto261290/magneto-python-aria/)
 
 ## Getting Google OAuth API credential file
 

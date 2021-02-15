@@ -29,7 +29,7 @@ cd mirrorbot
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 python3 generate_drive_token.py
 ```
-- Fork this repo than upload credentials.json and token.pickle to your forks
+- Fork this repo, than upload credentials.json and token.pickle to your forks
 
 ## Deploying on Heroku
 

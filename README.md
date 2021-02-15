@@ -33,3 +33,8 @@ python3 generate_drive_token.py
 ## Deploying on Heroku
 
 <p><a href="https://heroku.com/deploy?template=https://github.com/breakdowns/slam-mirrorbot"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+
+## Credits
+- [Izzy12](https://github.com/lzzy12)
+- [Dank-del](https://github.com/Dank-del)
+- [magneto261290](https://github.com/magneto261290)

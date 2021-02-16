@@ -47,6 +47,7 @@
       },
       "USE_SERVICE_ACCOUNTS": {
         "description": "Whether to use service accounts or not. For this to work see 'Using service accounts' section below.",
+        "value": "False",
         "required": false
       },
       "AUTHORIZED_CHATS": {

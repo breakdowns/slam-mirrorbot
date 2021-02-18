@@ -47,6 +47,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Service account support
 - Mirror all youtube-dl supported links
 - Mirror telegram files
+- Delete files from drive
 - Add stickers to your pack
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor

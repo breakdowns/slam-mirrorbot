@@ -18,6 +18,6 @@ class _BotCommands:
         self.CloneCommand = "clone"
         self.WatchCommand = 'watch'
         self.TarWatchCommand = 'tarwatch'
-        self.DeleteCommand = 'delete'
+        self.DeleteCommand = 'del'
 
 BotCommands = _BotCommands()

@@ -48,7 +48,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Mirror all youtube-dl supported links
 - Mirror telegram files
 - Add stickers to your pack
-- Search anime, character, manga, torrent.
+- Nyaa.si and Sukebei torrent search support.
 
 ## Using service accounts for uploading to avoid user rate limit
 For Service Account to work, you must set USE_SERVICE_ACCOUNTS="True" in config file or environment variables

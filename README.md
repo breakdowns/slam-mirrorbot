@@ -37,7 +37,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 <p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 ## Features supported:
-- Mirroring direct download links to google drive
+- Mirroring direct download links to Google Drive
 - Download progress
 - Upload progress
 - Download/upload speeds and ETAs

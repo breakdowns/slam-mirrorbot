@@ -74,7 +74,7 @@ def bot_help(update, context):
 
 /{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
 
-/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link] : starts mirroring and if downloaded file is any archive , extracts it to google drive
+/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: starts mirroring and if downloaded file is any archive, extracts it to google drive
 
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: start mirroring and upload the archived (.tar) version of the download
 
@@ -82,7 +82,7 @@ def bot_help(update, context):
 
 /{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
 
-/{BotCommands.CancelMirror} : Reply to the message by which the download was initiated and that download will be cancelled
+/{BotCommands.CancelMirror}: Reply to the message by which the download was initiated and that download will be cancelled
 
 /{BotCommands.StatusCommand}: Shows a status of all the downloads
 
@@ -94,11 +94,11 @@ def bot_help(update, context):
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
-/weebhelp - get help for anime, manga and character module.
+/weebhelp: Get help for anime, manga and character module.
 
-/stickerhelp - get help for stickers module. 
+/stickerhelp: Get help for stickers module. 
 
-/tshelp - get help for torrent search module.
+/tshelp: Get help for torrent search module.
 '''
     sendMessage(help_string, context.bot, update)
 

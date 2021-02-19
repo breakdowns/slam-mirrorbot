@@ -94,11 +94,11 @@ def bot_help(update, context):
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
+/tshelp: Get help for torrent search module.
+
 /weebhelp: Get help for anime, manga and character module.
 
-/stickerhelp: Get help for stickers module. 
-
-/tshelp: Get help for torrent search module.
+/stickerhelp: Get help for stickers module.
 '''
     sendMessage(help_string, context.bot, update)
 

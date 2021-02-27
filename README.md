@@ -51,6 +51,11 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Add stickers to your pack
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
+- Extract these filetypes and uploads to google drive
+> ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
+> APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
+> HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
+> NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 
 ## Using service accounts for uploading to avoid user rate limit
 For Service Account to work, you must set USE_SERVICE_ACCOUNTS="True" in config file or environment variables

@@ -98,7 +98,6 @@ where host is the name of extractor (eg. youtube, twitch). Multiple accounts of 
 
 ## Credits
 Thanks to:
-
 - [Izzy12](https://github.com/lzzy12/) for original repo
 - [magneto261290](https://github.com/magneto261290/) for some features and fixs
 - [Dank-del](https://github.com/Dank-del/) for source

@@ -3,14 +3,6 @@
 # Slam Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
-Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot/)
-
-Original repo [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot/)
-
-Some fixes from [magneto-python-aria](https://github.com/magneto261290/magneto-python-aria/)
-
-Speedtest from [MirrorX](https://github.com/iamLiquidX/MirrorX/)
-
 ## Getting Google OAuth API credential file
 
 - Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)
@@ -99,7 +91,7 @@ where host is the name of extractor (eg. youtube, twitch). Multiple accounts of 
 ## Credits
 Thanks to:
 - [Izzy12](https://github.com/lzzy12/) for original repo
-- [magneto261290](https://github.com/magneto261290/) for some features and fixs
+- [magneto261290](https://github.com/magneto261290/) for some features and fixes
 - [Dank-del](https://github.com/Dank-del/) for source
 - [SVR666](https://github.com/SVR666/) for some featurs
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module

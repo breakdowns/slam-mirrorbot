@@ -97,4 +97,9 @@ machine host login username password my_youtube_password
 where host is the name of extractor (eg. youtube, twitch). Multiple accounts of different hosts can be added each separated by a new line
 
 ## Credits
-Huge thanks to [everyone](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors) who has helped make this bot awesome!
+- [Izzy12](https://github.com/lzzy12/) for original repo
+- [magneto261290](https://github.com/magneto261290/) for some features and fixs
+- [Dank-del](https://github.com/Dank-del/) for source
+- [SVR666](https://github.com/SVR666/) for some featurs
+- [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
+and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

@@ -7,7 +7,7 @@ Fork of [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bo
 
 Original repo [Ayanamileechbot](https://gitlab.com/Dank-del/ayanamileechbot/)
 
-Some features from [magneto-python-aria](https://github.com/magneto261290/magneto-python-aria/)
+Some fixes from [magneto-python-aria](https://github.com/magneto261290/magneto-python-aria/)
 
 Speedtest from [MirrorX](https://github.com/iamLiquidX/MirrorX/)
 

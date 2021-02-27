@@ -92,7 +92,7 @@ where host is the name of extractor (eg. youtube, twitch). Multiple accounts of 
 Thanks to:
 - [Izzy12](https://github.com/lzzy12/) for original repo
 - [magneto261290](https://github.com/magneto261290/) for some features
-- [Dank-del](https://github.com/Dank-del/) for source
+- [Dank-del](https://github.com/Dank-del/) for Ayanamileechbot
 - [SVR666](https://github.com/SVR666/) for some fixes
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
 

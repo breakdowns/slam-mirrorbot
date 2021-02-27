@@ -96,9 +96,5 @@ Thanks to:
 - [Dank-del](https://github.com/Dank-del/) for Ayanamileechbot
 - [SVR666](https://github.com/SVR666/) for some fixes
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
-[Izzy12](https://github.com/lzzy12/) for [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot/)
-[magneto261290](https://github.com/magneto261290/) for some features and fixs
-[iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
-[SVR666](https://github.com/SVR666/) for some fixs
-[Dank-del](https://github.com/Dank-del/) for original repo
+
 and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

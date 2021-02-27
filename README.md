@@ -45,6 +45,12 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Add stickers to your pack
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
+- Speedtest
+- Extract these filetypes and uploads to google drive
+> ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
+> APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
+> HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
+> NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 
 ## Using service accounts for uploading to avoid user rate limit
 For Service Account to work, you must set USE_SERVICE_ACCOUNTS="True" in config file or environment variables
@@ -83,6 +89,13 @@ machine host login username password my_youtube_password
 where host is the name of extractor (eg. youtube, twitch). Multiple accounts of different hosts can be added each separated by a new line
 
 ## Credits
+
+Thanks to:
+- [Izzy12](https://github.com/lzzy12/) for original repo
+- [magneto261290](https://github.com/magneto261290/) for some features
+- [Dank-del](https://github.com/Dank-del/) for Ayanamileechbot
+- [SVR666](https://github.com/SVR666/) for some fixes
+- [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
 [Izzy12](https://github.com/lzzy12/) for [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot/)
 [magneto261290](https://github.com/magneto261290/) for some features and fixs
 [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module

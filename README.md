@@ -1,4 +1,4 @@
-![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)
+[![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
 # Slam Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
@@ -92,8 +92,8 @@ where host is the name of extractor (eg. youtube, twitch). Multiple accounts of 
 
 Thanks to:
 - [Izzy12](https://github.com/lzzy12/) for original repo
+- [Dank-del](https://github.com/Dank-del/) for base repo
 - [magneto261290](https://github.com/magneto261290/) for some features
-- [Dank-del](https://github.com/Dank-del/) for Ayanamileechbot
 - [SVR666](https://github.com/SVR666/) for some fixes
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
 

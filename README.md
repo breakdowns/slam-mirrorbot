@@ -97,6 +97,8 @@ machine host login username password my_youtube_password
 where host is the name of extractor (eg. youtube, twitch). Multiple accounts of different hosts can be added each separated by a new line
 
 ## Credits
+Thanks to:
+
 - [Izzy12](https://github.com/lzzy12/) for original repo
 - [magneto261290](https://github.com/magneto261290/) for some features and fixs
 - [Dank-del](https://github.com/Dank-del/) for source

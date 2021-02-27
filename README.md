@@ -51,6 +51,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Add stickers to your pack
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
+- Speedtest
 - Extract these filetypes and uploads to google drive
 > ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
 > APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 

@@ -7,8 +7,8 @@
       "python"
     ],
     "repository": "https://github.com/breakdowns/slam-mirrorbot",
-    "website": "https://breakdowns.github.io",
-    "success_url": "https://t.me/SlamMirrorSupport",
+    "website": "https://t.me/SlamMirrorSupport",
+    "success_url": "https://github.com/breakdowns/slam-mirrorbot/blob/master/README.md",
     "stack": "container",
     "env": {
       "ENV": {

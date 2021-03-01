@@ -77,6 +77,10 @@
       "MEGA_PASSWORD": {
         "description": "Your password for your mega.nz account.",
         "required": false
+      },
+      "BLOCK_MEGA_LINKS": {
+        "description": "If you want to remove mega.nz mirror support, set it to True.",
+        "required": false
       }
     }
 }

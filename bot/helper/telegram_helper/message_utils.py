@@ -67,11 +67,14 @@ def update_all_messages():
     with status_reply_dict_lock:
         for chat_id in list(status_reply_dict.keys()):
             if status_reply_dict[chat_id] and msg != status_reply_dict[chat_id].text:
+                if len(msg) == 0:
+                    msg = "Starting DL"
                 try:
                     editMessage(msg, status_reply_dict[chat_id])
                 except Exception as e:
                     LOGGER.error(str(e))
                 status_reply_dict[chat_id].text = msg
+
 
 
 def sendStatusMessage(msg, bot):
@@ -86,5 +89,7 @@ def sendStatusMessage(msg, bot):
                 LOGGER.error(str(e))
                 del status_reply_dict[msg.message.chat.id]
                 pass
+        if len(progress) == 0:
+            progress = "Starting DL"
         message = sendMessage(progress, bot, msg)
         status_reply_dict[msg.message.chat.id] = message

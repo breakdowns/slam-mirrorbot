@@ -7,7 +7,7 @@
       "python"
     ],
     "repository": "https://github.com/breakdowns/slam-mirrorbot",
-    "website": "https://github.com/breakdowns/slam-mirrorbot",
+    "website": "https://t.me/SlamMirrorSupport",
     "success_url": "https://github.com/breakdowns/slam-mirrorbot/blob/master/README.md",
     "stack": "container",
     "env": {
@@ -65,6 +65,22 @@
       "TELEGRAM_HASH": {
         "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org.",
         "required": true
+      },
+      "MEGA_API_KEY": {
+        "description": "Mega.nz api key to mirror mega.nz links. Get it from https://mega.nz/sdk.",
+        "required": false
+      },
+      "MEGA_EMAIL_ID": {
+        "description": "Your email id you used to sign up on mega.nz.",
+        "required": false
+      },
+      "MEGA_PASSWORD": {
+        "description": "Your password for your mega.nz account.",
+        "required": false
+      },
+      "BLOCK_MEGA_LINKS": {
+        "description": "If you want to remove mega.nz mirror support, set it to True.",
+        "required": false
       }
     }
 }

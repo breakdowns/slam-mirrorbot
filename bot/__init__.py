@@ -87,6 +87,21 @@ except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)
 
+try:
+    MEGA_API_KEY = getConfig('MEGA_API_KEY')
+except KeyError:
+    LOGGER.warning('MEGA API KEY not provided!')
+    MEGA_API_KEY = None
+try:
+    MEGA_EMAIL_ID = getConfig('MEGA_EMAIL_ID')
+    MEGA_PASSWORD = getConfig('MEGA_PASSWORD')
+    if len(MEGA_EMAIL_ID) == 0 or len(MEGA_PASSWORD) == 0:
+        raise KeyError
+except KeyError:
+    LOGGER.warning('MEGA Credentials not provided!')
+    MEGA_EMAIL_ID = None
+    MEGA_PASSWORD = None
+
 LOGGER.info("Generating USER_SESSION_STRING")
 with Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN) as app:
     USER_SESSION_STRING = app.export_session_string()
@@ -113,6 +128,16 @@ try:
         USE_SERVICE_ACCOUNTS = False
 except KeyError:
     USE_SERVICE_ACCOUNTS = False
+
+try:
+    BLOCK_MEGA_LINKS = getConfig('BLOCK_MEGA_LINKS')
+    if BLOCK_MEGA_LINKS.lower() == 'true':
+        BLOCK_MEGA_LINKS = True
+    else:
+        BLOCK_MEGA_LINKS = False
+except KeyError:
+    BLOCK_MEGA_LINKS = False
+
 app = Client('slam', api_id=TELEGRAM_API, api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
 updater = tg.Updater(token=BOT_TOKEN,use_context=True)
 bot = updater.bot

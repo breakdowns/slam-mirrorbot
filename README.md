@@ -39,6 +39,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Docker support
 - Uploading To Team Drives.
 - Index Link support
+- Copy files/folder from someone's drive to your drive
 - Service account support
 - Mirror all youtube-dl supported links
 - Mirror telegram files

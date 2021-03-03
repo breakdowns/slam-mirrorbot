@@ -81,6 +81,14 @@
       "BLOCK_MEGA_LINKS": {
         "description": "If you want to remove mega.nz mirror support, set it to True.",
         "required": false
+      },
+      "SHORTENER": {
+        "description": "if you want to use shortener in Gdrive and index link.",
+        "required": false
+      },
+      "SHORTENER_API": {
+        "description": "Fill your shortener api key if you are using shortener.",
+        "required": false
       }
     }
 }

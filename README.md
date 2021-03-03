@@ -48,7 +48,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
 - Inline buttons support
-- Speedtest
+- Speedtest with picture results
 - Extract these filetypes and uploads to google drive
 > ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
 > APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
@@ -99,5 +99,6 @@ Thanks to:
 - [magneto261290](https://github.com/magneto261290/) for some features
 - [SVR666](https://github.com/SVR666/) for some fixes
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
+- [4amparaboy](https://github.com/4amparaboy/) for some help
 
 and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

@@ -7,7 +7,7 @@ from telegram.ext import CallbackContext, Filters, run_async, CommandHandler
 
 
 @run_async
-def speedtst(update, context):
+def speedtest(update, context):
     message = update.effective_message
     ed_msg = message.reply_text("Running Speed Test . . . ")
     test = Speedtest()
@@ -18,16 +18,16 @@ def speedtst(update, context):
     result = test.results.dict()
     path = (result['share'])
     string_speed = f'''
-📬 <b>Server</b>
-🌀 <b>Name:</b> <code>{result['server']['name']}</code>
-🏁 <b>Country:</b> <code>{result['server']['country']}, {result['server']['cc']}</code>
-🌐 <b>Sponsor:</b> <code>{result['server']['sponsor']}</code>
+<b>Server</b>
+<b>Name:</b> <code>{result['server']['name']}</code>
+<b>Country:</b> <code>{result['server']['country']}, {result['server']['cc']}</code>
+<b>Sponsor:</b> <code>{result['server']['sponsor']}</code>
     
 <b>SpeedTest Results</b>
-🔼 <b>Upload:</b> <code>{speed_convert(result['upload'] / 8)}</code>
-🔽 <b>Download:</b>  <code>{speed_convert(result['download'] / 8)}</code>
-📶 <b>Ping:</b> <code>{result['ping']} ms</code>
-🖥️ <b>ISP:</b> <code>{result['client']['isp']}</code>
+<b>Upload:</b> <code>{speed_convert(result['upload'] / 8)}</code>
+<b>Download:</b>  <code>{speed_convert(result['download'] / 8)}</code>
+<b>Ping:</b> <code>{result['ping']} ms</code>
+<b>ISP:</b> <code>{result['client']['isp']}</code>
 '''
     ed_msg.delete()
     try:
@@ -46,7 +46,7 @@ def speed_convert(size):
     return f"{round(size, 2)} {units[zero]}"
 
 
-SPEED_HANDLER = CommandHandler(BotCommands.SpeedCommand, speedtst, 
+SPEED_HANDLER = CommandHandler(BotCommands.SpeedCommand, speedtest, 
                                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
 
 dispatcher.add_handler(SPEED_HANDLER)

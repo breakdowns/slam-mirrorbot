@@ -3,7 +3,7 @@ from telegram.ext import CommandHandler, run_async
 from telegram import InlineKeyboardMarkup
 
 from bot import Interval, INDEX_URL, BLOCK_MEGA_LINKS
-from bot import dispatcher, DOWNLOAD_DIR, DOWNLOAD_STATUS_UPDATE_INTERVAL, download_dict, download_dict_lock
+from bot import dispatcher, DOWNLOAD_DIR, DOWNLOAD_STATUS_UPDATE_INTERVAL, download_dict, download_dict_lock, SHORTENER, SHORTENER_API
 from bot.helper.ext_utils import fs_utils, bot_utils
 from bot.helper.ext_utils.bot_utils import setInterval
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException, NotSupportedExtractionArchive
@@ -93,12 +93,12 @@ class MirrorListener(listeners.MirrorListeners):
         else:
             path = f'{DOWNLOAD_DIR}{self.uid}/{name}'
         up_name = pathlib.PurePath(path).name
+        up_path = f'{DOWNLOAD_DIR}{self.uid}/{up_name}'
         if up_name == "None":
             up_name = "".join(os.listdir(f'{DOWNLOAD_DIR}{self.uid}/'))
         LOGGER.info(f"Upload Name : {up_name}")
         drive = gdriveTools.GoogleDriveHelper(up_name, self)
-        if size == 0:
-            size = fs_utils.get_path_size(m_path)
+        size = fs_utils.get_path_size(up_path)
         upload_status = UploadStatus(drive, size, self)
         with download_dict_lock:
             download_dict[self.uid] = upload_status
@@ -137,17 +137,25 @@ class MirrorListener(listeners.MirrorListeners):
     def onUploadProgress(self):
         pass
 
-    def onUploadComplete(self, link: str):
+    def onUploadComplete(self, link: str, size):
         with download_dict_lock:
-            msg = f'<b>Filename : </b><code>{download_dict[self.uid].name()}</code>\n<b>Size : </b><code>{download_dict[self.uid].size()}</code>'
+            msg = f'<b>Filename : </b><code>{download_dict[self.uid].name()}</code>\n<b>Size : </b><code>{size}</code>'
             buttons = button_build.ButtonMaker()
-            buttons.buildbutton("✨Drive Link✨", link)
+            if SHORTENER is not None and SHORTENER_API is not None:
+                surl = requests.get('https://{}/api?api={}&url={}&format=text'.format(SHORTENER, SHORTENER_API, link)).text
+                buttons.buildbutton("✨Drive Link✨", surl)
+            else:
+                buttons.buildbutton("✨Drive Link✨", link)
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 share_url = requests.utils.requote_uri(f'{INDEX_URL}/{download_dict[self.uid].name()}')
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
-                buttons.buildbutton("⚡Index Link⚡", share_url)
+                if SHORTENER is not None and SHORTENER_API is not None:
+                    siurl = requests.get('https://{}/api?api={}&url={}&format=text'.format(SHORTENER, SHORTENER_API, share_url)).text
+                    buttons.buildbutton("⚡Index Link⚡", siurl)
+                else:
+                    buttons.buildbutton("⚡Index Link⚡", share_url)
             if self.message.from_user.username:
                 uname = f"@{self.message.from_user.username}"
             else:

@@ -6,6 +6,7 @@ import aria2p
 import telegram.ext as tg
 from dotenv import load_dotenv
 from pyrogram import Client
+from telegraph import Telegraph
 import socket
 
 socket.setdefaulttimeout(600)
@@ -105,6 +106,12 @@ except KeyError:
 LOGGER.info("Generating USER_SESSION_STRING")
 with Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN) as app:
     USER_SESSION_STRING = app.export_session_string()
+#Generate Telegraph Token
+LOGGER.info("Generating Telegraph Token")
+telegraph = Telegraph()
+telegraph.create_account(short_name="mirror_bot")
+telegraph_token = telegraph.get_access_token()
+
 try:
     INDEX_URL = getConfig('INDEX_URL')
     if len(INDEX_URL) == 0:

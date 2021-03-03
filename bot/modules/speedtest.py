@@ -1,5 +1,4 @@
-import speedtest
-
+from speedtest import Speedtest
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot import dispatcher, AUTHORIZED_CHATS
 from bot.helper.telegram_helper.bot_commands import BotCommands
@@ -11,24 +10,30 @@ from telegram.ext import CallbackContext, Filters, run_async, CommandHandler
 def speedtst(update, context):
     message = update.effective_message
     ed_msg = message.reply_text("Running Speed Test . . . ")
-    test = speedtest.Speedtest()
+    test = Speedtest()
     test.get_best_server()
     test.download()
     test.upload()
     test.results.share()
     result = test.results.dict()
-    context.bot.editMessageText(
-        "Download Speed: "
-        f"{speed_convert(result['download'])}\n"
-        "Upload Speed: "
-        f"{speed_convert(result['upload'])}\n"
-        "Ping: "
-        f"{result['ping']}\n"
-        "ISP: "
-        f"{result['client']['isp']}",
-        update.effective_chat.id,
-        ed_msg.message_id,
-    )
+    path = (result['share'])
+    string_speed = f'''
+📬 <b>Server</b>
+🌀 <b>Name:</b> <code>{result['server']['name']}</code>
+🏁 <b>Country:</b> <code>{result['server']['country']}, {result['server']['cc']}</code>
+🌐 <b>Sponsor:</b> <code>{result['server']['sponsor']}</code>
+    
+<b>SpeedTest Results</b>
+🔼 <b>Upload:</b> <code>{speed_convert(result['upload'] / 8)}/s</code>
+🔽 <b>Download:</b>  <code>{speed_convert(result['download'] / 8)}/s/code>
+📶 <b>Ping:</b> <code>{result['ping']} ms</code>
+🖥️ <b>ISP:</b> <code>{result['client']['isp']}</code>
+'''
+    ed_msg.delete()
+    try:
+        update.effective_message.reply_photo(path, string_speed, parse_mode=ParseMode.HTML)
+    except:
+        update.effective_message.reply_text(string_speed, parse_mode=ParseMode.HTML)
 
 def speed_convert(size):
     """Hi human, you can't read bytes?"""

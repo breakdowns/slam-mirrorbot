@@ -3,6 +3,7 @@
     "description": "Telegram mirror bot with python",
     "logo": "https://telegra.ph/file/6507910fd06d18dfaba82.jpg",
     "keywords": [
+      "bot",
       "telegram",
       "python"
     ],
@@ -25,7 +26,7 @@
       },
       "DOWNLOAD_DIR": {
         "description": "The path to the local folder where the downloads should be downloaded to.",
-		"value": "/home/username/mirror-bot/downloads",
+        "value": "/home/username/mirror-bot/downloads",
         "required": false
       },
       "DOWNLOAD_STATUS_UPDATE_INTERVAL": {
@@ -47,7 +48,6 @@
       },
       "USE_SERVICE_ACCOUNTS": {
         "description": "Whether to use service accounts or not. For this to work see 'Using service accounts' section below.",
-        "value": "False",
         "required": false
       },
       "AUTHORIZED_CHATS": {

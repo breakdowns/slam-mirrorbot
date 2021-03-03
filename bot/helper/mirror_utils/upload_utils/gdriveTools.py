@@ -16,15 +16,18 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 from tenacity import *
 
+from telegram import InlineKeyboardMarkup
+from bot.helper.telegram_helper import button_build
+from telegraph import Telegraph
 from bot import parent_id, DOWNLOAD_DIR, IS_TEAM_DRIVE, INDEX_URL, \
-    USE_SERVICE_ACCOUNTS, download_dict
+    USE_SERVICE_ACCOUNTS, download_dict, telegraph_token
 from bot.helper.ext_utils.bot_utils import *
 from bot.helper.ext_utils.fs_utils import get_mime_type
 
 LOGGER = logging.getLogger(__name__)
 logging.getLogger('googleapiclient.discovery').setLevel(logging.ERROR)
 SERVICE_ACCOUNT_INDEX = 0
-
+TELEGRAPHLIMIT = 95
 
 class GoogleDriveHelper:
     def __init__(self, name=None, listener=None):
@@ -51,6 +54,8 @@ class GoogleDriveHelper:
         self.updater = None
         self.name = name
         self.update_interval = 3
+        self.telegraph_content = []
+        self.path = []
 
     def cancel(self):
         self.is_cancelled = True
@@ -311,21 +316,24 @@ class GoogleDriveHelper:
             if meta.get("mimeType") == self.__G_DRIVE_DIR_MIME_TYPE:
                 dir_id = self.create_directory(meta.get('name'), parent_id)
                 result = self.cloneFolder(meta.get('name'), meta.get('name'), meta.get('id'), dir_id)
-                msg += f'<a href="{self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)}">{meta.get("name")}</a>' \
-                        f' ({get_readable_file_size(self.transferred_size)})'
+                msg += f'<b>Filename : </b><code>{meta.get("name")}</code>\n<b>Size : </b>{get_readable_file_size(self.transferred_size)}'
+                buttons = button_build.ButtonMaker()
+                buttons.buildbutton("✨Drive Link✨", self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id))
                 if INDEX_URL is not None:
                     url = requests.utils.requote_uri(f'{INDEX_URL}/{meta.get("name")}/')
-                    msg += f' | <a href="{url}"> Index URL</a>'
+                    buttons.buildbutton("⚡Index Link⚡", url)
             else:
                 file = self.copyFile(meta.get('id'), parent_id)
-                msg += f'<a href="{self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))}">{file.get("name")}</a>'
+                msg += f'<b>Filename : </b><code>{file.get("name")}</code>'
+                buttons = button_build.ButtonMaker()
+                buttons.buildbutton("✨Drive Link✨", self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id")))
                 try:
-                    msg += f' ({get_readable_file_size(int(meta.get("size")))}) '
+                    msg += f'\n<b>Size : </b><code>{get_readable_file_size(int(meta.get("size")))}</code>'
                 except TypeError:
                     pass
                 if INDEX_URL is not None:
                         url = requests.utils.requote_uri(f'{INDEX_URL}/{file.get("name")}')
-                        msg += f' | <a href="{url}"> Index URL</a>'
+                        buttons.buildbutton("⚡Index Link⚡", url)
         except Exception as err:
             if isinstance(err, RetryError):
                 LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
@@ -333,7 +341,7 @@ class GoogleDriveHelper:
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
             return err
-        return msg
+        return msg, InlineKeyboardMarkup(buttons.build_menu(2))
 
     def cloneFolder(self, name, local_path, folder_id, parent_id):
         LOGGER.info(f"Syncing: {local_path}")
@@ -424,6 +432,26 @@ class GoogleDriveHelper:
                 f'accounts/{SERVICE_ACCOUNT_INDEX}.json',
                 scopes=self.__OAUTH_SCOPE)
         return build('drive', 'v3', credentials=credentials, cache_discovery=False)
+    def edit_telegraph(self):
+        nxt_page = 1 
+        prev_page = 0
+        for content in self.telegraph_content :
+            if nxt_page == 1 :
+                content += f'<b><a href="https://telegra.ph/{self.path[nxt_page]}">Next</a></b>'
+                nxt_page += 1
+            else :
+                if prev_page <= self.num_of_path:
+                    content += f'<b><a href="https://telegra.ph/{self.path[prev_page]}">Prev</a></b>'
+                    prev_page += 1
+                if nxt_page < self.num_of_path:
+                    content += f'<b> | <a href="https://telegra.ph/{self.path[nxt_page]}">Next</a></b>'
+                    nxt_page += 1
+            Telegraph(access_token=telegraph_token).edit_page(path = self.path[prev_page],
+                                 title = 'Mirror Bot Search',
+                                 author_name='Mirror Bot',
+                                 author_url='https://github.com/magneto261290/magneto-python-ariap',
+                                 html_content=content)
+        return
 
     def escapes(self, str):	
         chars = ['\\', "'", '"', r'\a', r'\b', r'\f', r'\n', r'\r', r'\t']	
@@ -440,22 +468,55 @@ class GoogleDriveHelper:
                                                includeTeamDriveItems=True,
                                                q=query,
                                                spaces='drive',
-                                               pageSize=20,
+                                               pageSize=200,
                                                fields='files(id, name, mimeType, size)',
                                                orderBy='modifiedTime desc').execute()
-        for file in response.get('files', []):
-            if file.get(
-                    'mimeType') == "application/vnd.google-apps.folder":  # Detect Whether Current Entity is a Folder or File.
-                msg += f"⁍ <a href='https://drive.google.com/drive/folders/{file.get('id')}'>{file.get('name')}" \
-                       f"</a> (folder)"
-                if INDEX_URL is not None:
-                    url = requests.utils.requote_uri(f'{INDEX_URL}/{file.get("name")}/')
-                    msg += f' | <a href="{url}"> Index URL</a>'
-            else:
-                msg += f"⁍ <a href='https://drive.google.com/uc?id={file.get('id')}" \
-                       f"&export=download'>{file.get('name')}</a> ({get_readable_file_size(int(file.get('size')))})"
-                if INDEX_URL is not None:
-                    url = requests.utils.requote_uri(f'{INDEX_URL}/{file.get("name")}')
-                    msg += f' | <a href="{url}"> Index URL</a>'
-            msg += '\n'
-        return msg
+        content_count = 0
+        if response["files"]:
+            msg += f'<h4>Results : {fileName}</h4><br><br>'
+            for file in response.get('files', []):
+                if file.get('mimeType') == "application/vnd.google-apps.folder":  # Detect Whether Current Entity is a Folder or File.
+                    msg += f"⁍<code>{file.get('name')}<br>(folder📁)</code><br>" \
+                           f"<b><a href='https://drive.google.com/drive/folders/{file.get('id')}'>Drive Link</a></b>"
+                    if INDEX_URL is not None:
+                        url = requests.utils.requote_uri(f'{INDEX_URL}/{file.get("name")}/')
+                        msg += f' <b>| <a href="{url}">Index Link</a></b>'
+                else:
+                    msg += f"⁍<code>{file.get('name')}<br>({get_readable_file_size(int(file.get('size')))})📄</code><br>" \
+                           f"<b><a href='https://drive.google.com/uc?id={file.get('id')}&export=download'>Drive Link</a></b>"
+                    if INDEX_URL is not None:
+                        url = requests.utils.requote_uri(f'{INDEX_URL}/{file.get("name")}')
+                        msg += f' <b>| <a href="{url}">Index Link</a></b>'
+                msg += '<br><br>'
+                content_count += 1
+                if content_count == TELEGRAPHLIMIT :
+                    self.telegraph_content.append(msg)
+                    msg = ""
+                    content_count = 0
+                    
+            if msg != '':
+                self.telegraph_content.append(msg)
+
+            if len(self.telegraph_content) == 0:
+                return "No Result Found :(", None
+
+            for content in self.telegraph_content :
+                self.path.append(Telegraph(access_token=telegraph_token).create_page(
+                                                        title = 'Slam Mirror Bot Search',
+                                                        author_name='Slam Mirror Bot',
+                                                        author_url='https://github.com/breakdowns/slam-mirrorbot',
+                                                        html_content=content
+                                                        )['path'])
+
+            self.num_of_path = len(self.path)
+            if self.num_of_path > 1:
+                self.edit_telegraph()
+
+            msg = f"<b>Search Results For {fileName} 👇</b>"
+            buttons = button_build.ButtonMaker()   
+            buttons.buildbutton("HERE", f"https://telegra.ph/{self.path[0]}")
+
+            return msg, InlineKeyboardMarkup(buttons.build_menu(1))
+
+        else :
+            return '', ''

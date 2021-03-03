@@ -7,7 +7,7 @@ from telegram.ext import CallbackContext, Filters, run_async, CommandHandler
 
 
 @run_async
-def speedtst(update, context):
+def speedtest(update, context):
     message = update.effective_message
     ed_msg = message.reply_text("Running Speed Test . . . ")
     test = Speedtest()
@@ -18,7 +18,7 @@ def speedtst(update, context):
     result = test.results.dict()
     path = (result['share'])
     string_speed = f'''
-📬 <b>Server</b>
+<b>Server</b>
 🌀 <b>Name:</b> <code>{result['server']['name']}</code>
 🏁 <b>Country:</b> <code>{result['server']['country']}, {result['server']['cc']}</code>
 🌐 <b>Sponsor:</b> <code>{result['server']['sponsor']}</code>

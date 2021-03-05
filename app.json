@@ -47,11 +47,11 @@
         "required": false
       },
       "USE_SERVICE_ACCOUNTS": {
-        "description": "Whether to use service accounts or not. For this to work see 'Using service accounts' section below.",
+        "description": "Whether to use service accounts or not. For this to work see 'Using service accounts' in repo.",
         "required": false
       },
       "AUTHORIZED_CHATS": {
-        "description": "Put User ID and Chat ID of you want to authorize.",
+        "description": "Fill User ID and Chat ID of you want to authorize.",
         "required": false
       },
       "INDEX_URL": {
@@ -83,11 +83,35 @@
         "required": false
       },
       "SHORTENER": {
-        "description": "if you want to use shortener in Gdrive and index link.",
+        "description": "If you want to use shortener in Gdrive and index link.",
         "required": false
       },
       "SHORTENER_API": {
         "description": "Fill your shortener api key if you are using shortener.",
+        "required": false
+      },
+      "BUTTON_THREE_NAME": {
+        "description": "Extra buttons (optional).",
+        "required": false
+      },
+      "BUTTON_THREE_URL": {
+        "description": "Fill your URL if you are using extra buttons.",
+        "required": false
+      },
+      "BUTTON_FOUR_NAME": {
+        "description": "Extra buttons (optional).",
+        "required": false
+      },
+      "BUTTON_FOUR_URL": {
+        "description": "Fill your URL if you are using extra buttons.",
+        "required": false
+      },
+      "BUTTON_FIVE_NAME": {
+        "description": "Extra buttons (optional).",
+        "required": false
+      },
+      "BUTTON_FIVE_URL": {
+        "description": "Fill your URL if you are using extra buttons.",
         "required": false
       }
     }

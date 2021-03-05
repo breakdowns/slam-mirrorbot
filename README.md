@@ -33,7 +33,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 ## Features supported:
 - Mirroring direct download links to Google Drive
 - Mirroring Mega.nz links to google drive (In development stage)
-- Copy files/folder from someone's drive to your drive
+- Copy files from someone's drive to your drive (Using Autorclone)
 - Download/upload progress
 - Download/upload speeds and ETAs
 - Docker support
@@ -46,6 +46,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Add stickers to your pack
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
+- Index Link support
 - Shortener support
 - Custom Buttons
 - Speedtest with picture results

@@ -90,10 +90,6 @@
         "description": "If this field is set to True, bot will check file in drive, if it is present in drive, downloading will be stopped.",
         "required": false
       },
-      "UPTOBOX_TOKEN": {
-        "description": "Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).",
-        "required": false
-      },
       "SHORTENER": {
         "description": "If you want to use shortener in Gdrive and index link.",
         "required": false

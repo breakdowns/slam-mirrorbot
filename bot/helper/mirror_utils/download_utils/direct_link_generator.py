@@ -8,6 +8,8 @@ from https://github.com/AvinashReddy3108/PaperplaneExtended . I hereby take no c
 than the modifications. See https://github.com/AvinashReddy3108/PaperplaneExtended/commits/master/userbot/modules/direct_links.py
 for original authorship. """
 
+from bot import UPTOBOX_TOKEN
+import logging
 import json
 import re
 import urllib.parse
@@ -32,6 +34,8 @@ def direct_link_generator(link: str):
         return cm_ru(link)
     elif 'mediafire.com' in link:
         return mediafire(link)
+    elif 'uptobox.com' in link:
+        return uptobox(link)
     elif 'osdn.net' in link:
         return osdn(link)
     elif 'github.com' in link:
@@ -98,6 +102,29 @@ def cm_ru(url: str) -> str:
     except json.decoder.JSONDecodeError:
         raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
     dl_url = data['download']
+    return dl_url
+
+def uptobox(url: str) -> str:
+    """ Uptobox direct links generator
+    based on https://github.com/jovanzers/WinTenCermin """
+    try:
+        link = re.findall(r'\bhttps?://.*uptobox\.com\S+', url)[0]
+    except IndexError:
+        raise DirectDownloadLinkException("`No Uptobox links found`\n")
+    if UPTOBOX_TOKEN is None:
+        logging.error('UPTOBOX_TOKEN not provided!')
+        dl_url = url
+    else:
+        try:
+            link = re.findall(r'\bhttp?://.*uptobox\.com/dl\S+', url)[0]
+            logging.info('Uptobox direct link')
+            dl_url = url
+        except:
+            file_id = re.findall(r'\bhttps?://.*uptobox\.com/(\w+)', url)[0]
+            file_link = 'https://uptobox.com/api/link?token=%s&file_code=%s' % (UPTOBOX_TOKEN, file_id)
+            req = requests.get(file_link)
+            result = req.json()
+            dl_url = result['data']['dlLink']
     return dl_url
 
 

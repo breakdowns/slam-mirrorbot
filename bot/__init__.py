@@ -91,6 +91,11 @@ except KeyError as e:
     exit(1)
 
 try:
+    UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
+except KeyError:
+    logging.warning('UPTOBOX_TOKEN not provided!')
+    UPTOBOX_TOKEN = None
+try:
     MEGA_API_KEY = getConfig('MEGA_API_KEY')
 except KeyError:
     LOGGER.warning('MEGA API KEY not provided!')

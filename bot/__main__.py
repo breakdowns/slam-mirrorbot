@@ -82,9 +82,9 @@ def bot_help(update, context):
 
 /{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to google drive
 
-/{BotCommands.CloneCommand}: Copy file/folder to google drive
-
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
+
+/{BotCommands.CloneCommand}: Copy file/folder to google drive
 
 /{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
 

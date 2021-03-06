@@ -102,5 +102,6 @@ Thanks to:
 - [SVR666](https://github.com/SVR666/) for some fixes
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
 - [4amparaboy](https://github.com/4amparaboy/) for some help
+- [WinTenDev](https://github.com/WinTenDev/) for Uptobox support
 
 and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

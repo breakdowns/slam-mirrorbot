@@ -66,6 +66,10 @@
         "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org.",
         "required": true
       },
+      "UPTOBOX_TOKEN": {
+        "description": "Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).",
+        "required": false
+      },
       "MEGA_API_KEY": {
         "description": "Mega.nz api key to mirror mega.nz links. Get it from https://mega.nz/sdk.",
         "required": false
@@ -80,6 +84,10 @@
       },
       "BLOCK_MEGA_LINKS": {
         "description": "If you want to remove mega.nz mirror support, set it to True.",
+        "required": false
+      },
+      "STOP_DUPLICATE_MIRROR": {
+        "description": "If this field is set to True, bot will check file in drive, if it is present in drive, downloading will be stopped.",
         "required": false
       },
       "SHORTENER": {

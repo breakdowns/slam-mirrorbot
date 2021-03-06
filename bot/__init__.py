@@ -91,6 +91,16 @@ except KeyError as e:
     exit(1)
 
 try:
+    UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
+except KeyError:
+    logging.warning('UPTOBOX_TOKEN not provided!')
+    UPTOBOX_TOKEN = None
+try:
+    UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
+except KeyError:
+    logging.warning('UPTOBOX_TOKEN not provided!')
+    UPTOBOX_TOKEN = None
+try:
     MEGA_API_KEY = getConfig('MEGA_API_KEY')
 except KeyError:
     LOGGER.warning('MEGA API KEY not provided!')
@@ -160,6 +170,14 @@ try:
 except KeyError:
     BUTTON_FIVE_NAME = None
     BUTTON_FIVE_URL = None
+try:
+    STOP_DUPLICATE_MIRROR = getConfig('STOP_DUPLICATE_MIRROR')
+    if STOP_DUPLICATE_MIRROR.lower() == 'true':
+        STOP_DUPLICATE_MIRROR = True
+    else:
+        STOP_DUPLICATE_MIRROR = False
+except KeyError:
+    STOP_DUPLICATE_MIRROR = False
 try:
     IS_TEAM_DRIVE = getConfig('IS_TEAM_DRIVE')
     if IS_TEAM_DRIVE.lower() == 'true':

@@ -32,7 +32,8 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 
 ## Features supported:
 - Mirroring direct download links to Google Drive
-- Mirroring Mega.nz links to google drive (In development stage)
+- Mirroring Mega.nz links to Google Drive (In development stage)
+- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Copy files from someone's drive to your drive (Using Autorclone)
 - Download/upload progress
 - Download/upload speeds and ETAs

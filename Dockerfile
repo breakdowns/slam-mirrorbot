@@ -20,8 +20,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 COPY . .
-COPY netrc /root/.netrc
-RUN chmod 600 /root/.netrc
+COPY .netrc /root/.netrc
 RUN chmod +x aria.sh
 
 CMD ["bash","start.sh"]

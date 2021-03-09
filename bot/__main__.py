@@ -35,9 +35,9 @@ def stats(update, context):
             f'<b>Free:</b> {free}\n\n' \
             f'📊Data Usage📊\n<b>Upload:</b> {sent}\n' \
             f'<b>Down:</b> {recv}\n\n' \
-            f'<b>CPU:</b> {cpuUsage}%\n ' \
-            f'<b>RAM:</b> {memory}%\n ' \
-            f'<b>Disk:</b> {disk}%'\n
+            f'<b>CPU:</b> {cpuUsage}%\n' \
+            f'<b>RAM:</b> {memory}%\n' \
+            f'<b>Disk:</b> {disk}%'
     sendMessage(stats, context.bot, update)
 
 

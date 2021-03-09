@@ -2,7 +2,7 @@ import shutil, psutil
 import signal
 import pickle
 from pyrogram import idle
-from bot import app
+
 from os import execl, kill, path, remove
 from sys import executable
 import time
@@ -143,6 +143,7 @@ def main():
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
 
-app.start()
+
 main()
 idle()
+stop()

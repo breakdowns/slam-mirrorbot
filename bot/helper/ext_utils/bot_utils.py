@@ -104,7 +104,7 @@ def get_readable_message():
                 msg += f"\n<b>Speed :</b> {download.speed()}, \n<b>ETA:</b> {download.eta()} "
                 # if hasattr(download, 'is_torrent'):
                 try:
-                    msg += f"\n<b>Info :- Seeders:</b> {download.aria_download().num_seeders}" \
+                    msg += f"\n<b>Info:- Seeders:</b> {download.aria_download().num_seeders}" \
                         f" & <b>Peers :</b> {download.aria_download().connections}"
                 except:
                     pass

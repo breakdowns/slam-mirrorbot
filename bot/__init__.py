@@ -219,7 +219,7 @@ except KeyError:
     SHORTENER = None
     SHORTENER_API = None
 
-app = Client('slam', api_id=TELEGRAM_API, api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
+
 updater = tg.Updater(token=BOT_TOKEN,use_context=True)
 bot = updater.bot
 dispatcher = updater.dispatcher

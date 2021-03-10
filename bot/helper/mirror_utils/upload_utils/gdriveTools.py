@@ -504,7 +504,7 @@ class GoogleDriveHelper:
                                                orderBy='modifiedTime desc').execute()
         content_count = 0
         if response["files"]:
-            msg += f'<h4>Results : {fileName}</h4><br><br>'
+            msg += f'<h4>{len(response["files"])} Results : {fileName}</h4><br><br>'
             for file in response.get('files', []):
                 if file.get('mimeType') == "application/vnd.google-apps.folder":  # Detect Whether Current Entity is a Folder or File.
                     furl = f"https://drive.google.com/drive/folders/{file.get('id')}"

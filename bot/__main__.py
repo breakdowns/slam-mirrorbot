@@ -104,8 +104,7 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-
-/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner and Sudo only).
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
 
 /tshelp: Get help for torrent search module.
 

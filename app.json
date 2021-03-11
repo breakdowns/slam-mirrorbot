@@ -71,7 +71,7 @@
         "required": true
       },
       "HEROKU_APP_NAME": {
-        "description": "Add the Heroku app name here. It helps with userbot updates.",
+        "description": "Add the Heroku app name here.",
         "required": true
       },
       "UPTOBOX_TOKEN": {

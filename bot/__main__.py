@@ -104,6 +104,9 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
+
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner and Sudo only).
+
 /tshelp: Get help for torrent search module.
 
 /weebhelp: Get help for anime, manga and character module.

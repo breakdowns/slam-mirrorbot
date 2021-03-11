@@ -66,6 +66,16 @@
         "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org.",
         "required": true
       },
+      "HEROKU_API_KEY": {
+        "description": "Your Heroku API key, get it from https://dashboard.heroku.com/account.",
+        "value": "",
+        "required": true
+      },
+      "HEROKU_APP_NAME": {
+        "description": "Add the Heroku app name here. It helps with userbot updates.",
+        "value": "",
+        "required": true
+      },
       "UPTOBOX_TOKEN": {
         "description": "Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).",
         "required": false

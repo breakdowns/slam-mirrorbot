@@ -14,7 +14,7 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest, usage
 
 
 @run_async
@@ -103,6 +103,9 @@ def bot_help(update, context):
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
+
+
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner and Sudo only).
 
 /tshelp: Get help for torrent search module.
 

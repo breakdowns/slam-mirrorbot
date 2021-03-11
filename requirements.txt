@@ -16,6 +16,7 @@ TgCrypto
 youtube_dl
 feedparser
 natsort
+heroku3
 aiohttp
 speedtest-cli>=2.1.2
 messages

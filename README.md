@@ -49,13 +49,11 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Shell and Executor
 - Index Link support
 - Shortener support
+- Speedtest with picture results
 - Custom Buttons
 - Custom Filename
-```
-Only for url, telegram files and ytdl.
-Not for mega links and magnet/torrents
-```
-- Speedtest with picture results
+> Only for url, telegram files and ytdl.
+> Not for mega links and magnet/torrents
 - Extract these filetypes and uploads to google drive
 > ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
 > APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 

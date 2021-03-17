@@ -52,7 +52,7 @@ Fork this repo, than upload credentials.json and token.pickle to your forks
 - Custom Buttons
 - Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
 - Speedtest with picture results
-- For extracting password protected files and using custom filename see these examples :-
+- Extracting password protected files and using custom filename see these examples :-
 > https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
 - Extract these filetypes and uploads to google drive
 > ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 

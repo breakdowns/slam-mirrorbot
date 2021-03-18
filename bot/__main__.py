@@ -14,7 +14,7 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest, usage
 
 
 @run_async
@@ -35,8 +35,8 @@ def stats(update, context):
             f'<b>Free:</b> {free}\n\n' \
             f'📊Data Usage📊\n<b>Upload:</b> {sent}\n' \
             f'<b>Down:</b> {recv}\n\n' \
-            f'<b>CPU:</b> {cpuUsage}% ' \
-            f'<b>RAM:</b> {memory}% ' \
+            f'<b>CPU:</b> {cpuUsage}%\n' \
+            f'<b>RAM:</b> {memory}%\n' \
             f'<b>Disk:</b> {disk}%'
     sendMessage(stats, context.bot, update)
 
@@ -44,7 +44,7 @@ def stats(update, context):
 @run_async
 def start(update, context):
     start_string = f'''
-Hi, I'm Slam, a multipurpose bot for [hafitz](t.me/hafitzXD)
+Hi, I'm [Slam](https://github.com/breakdowns/slam-mirrorbot), a multipurpose bot for [hafitz](t.me/hafitzXD)
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
@@ -103,6 +103,8 @@ def bot_help(update, context):
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
+
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
 
 /tshelp: Get help for torrent search module.
 

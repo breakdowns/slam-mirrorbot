@@ -86,6 +86,8 @@ try:
     AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
+    HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
+    HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
 except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)
@@ -194,6 +196,14 @@ try:
         USE_SERVICE_ACCOUNTS = False
 except KeyError:
     USE_SERVICE_ACCOUNTS = False
+try:
+    BLOCK_MEGA_FOLDER = getConfig('BLOCK_MEGA_FOLDER')
+    if BLOCK_MEGA_FOLDER.lower() == 'true':
+        BLOCK_MEGA_FOLDER = True
+    else:
+        BLOCK_MEGA_FOLDER = False
+except KeyError:
+    BLOCK_MEGA_FOLDER = False
 try:
     BLOCK_MEGA_LINKS = getConfig('BLOCK_MEGA_LINKS')
     if BLOCK_MEGA_LINKS.lower() == 'true':

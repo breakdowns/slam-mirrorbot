@@ -66,6 +66,14 @@
         "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org.",
         "required": true
       },
+      "HEROKU_API_KEY": {
+        "description": "Your Heroku API key, get it from https://dashboard.heroku.com/account.",
+        "required": true
+      },
+      "HEROKU_APP_NAME": {
+        "description": "Add the Heroku app name here.",
+        "required": true
+      },
       "UPTOBOX_TOKEN": {
         "description": "Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).",
         "required": false
@@ -80,6 +88,10 @@
       },
       "MEGA_PASSWORD": {
         "description": "Your password for your mega.nz account.",
+        "required": false
+      },
+      "BLOCK_MEGA_FOLDER": {
+        "description": "If you want to remove mega.nz folder support, set it to True.",
         "required": false
       },
       "BLOCK_MEGA_LINKS": {

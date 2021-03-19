@@ -26,7 +26,7 @@ python3 generate_drive_token.py
 
 ## Deployment
 
-Fork this repo, than upload token.pickle to your forks
+Fork this repo, than upload **token.pickle** to your forks
 
 <p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 

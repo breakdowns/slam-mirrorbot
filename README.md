@@ -47,6 +47,7 @@ python3 generate_drive_token.py
 - **BLOCK_MEGA_FOLDER**: (Optional field) If you want to remove mega.nz folder support, set it to True.
 - **BLOCK_MEGA_LINKS**: (Optional field) If you want to remove mega.nz mirror support (bcoz it's too much buggy and unstable), set it to `True`.
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
+- **SHORTENER_API**: Fill your shortener api key if you are using shortener.
 - **SHORTENER**: (Optional field) if you want to use shortener in Gdrive and index link, fill shotener url here. Examples:
 
 > exe.io
@@ -60,7 +61,6 @@ python3 generate_drive_token.py
 > shortzon.com
 
 Note :- Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
-- **SHORTENER_API**: Fill your shortener api key if you are using shortener.
 
 </details>
 

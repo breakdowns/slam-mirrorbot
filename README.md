@@ -3,7 +3,7 @@
 # Slam Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive. This project is heavily inspired from @out386 's telegram bot which is written in JS.
 
-# How to deploy?
+## How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:
 ## Installing requirements
 
@@ -22,22 +22,6 @@ sudo snap install docker
 - For Arch and it's derivatives:
 ```
 sudo pacman -S docker python
-```
-
-## Getting Google OAuth API credential file
-
-- Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)
-- Go to the OAuth Consent tab, fill it, and save.
-- Go to the Credentials tab and click Create Credentials -> OAuth Client ID
-- Choose Desktop and Create.
-- Use the download button to download your credentials.
-- Move that file to the root of mirrorbot, and rename it to credentials.json
-- Visit [Google API page](https://console.developers.google.com/apis/library)
-- Search for Drive and enable it if it is disabled
-- Finally, run the script to generate token file (token.pickle) for Google Drive:
-```
-pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
-python3 generate_drive_token.py
 ```
 
 ## Setting up config file
@@ -79,6 +63,22 @@ python3 generate_drive_token.py
 Note :- Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
 
 </details>
+
+## Getting Google OAuth API credential file
+
+- Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)
+- Go to the OAuth Consent tab, fill it, and save.
+- Go to the Credentials tab and click Create Credentials -> OAuth Client ID
+- Choose Desktop and Create.
+- Use the download button to download your credentials.
+- Move that file to the root of mirrorbot, and rename it to credentials.json
+- Visit [Google API page](https://console.developers.google.com/apis/library)
+- Search for Drive and enable it if it is disabled
+- Finally, run the script to generate token file (token.pickle) for Google Drive:
+```
+pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+python3 generate_drive_token.py
+```
 
 ## Deploying
 

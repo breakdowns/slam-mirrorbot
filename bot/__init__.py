@@ -105,12 +105,12 @@ LOGGER.info("Telegraph Token Generated: '" + telegraph_token + "'")
 try:
     HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
 except KeyError:
-    LOGGER.warning('HEROKU API KEY not provided!')
+    logging.warning('HEROKU API KEY not provided!')
     HEROKU_API_KEY = None
 try:
     HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
 except KeyError:
-    LOGGER.warning('HEROKU APP NAME not provided!')
+    logging.warning('HEROKU APP NAME not provided!')
     HEROKU_APP_NAME = None
 try:
     UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')

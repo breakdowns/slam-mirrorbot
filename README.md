@@ -1,7 +1,28 @@
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
 # Slam Mirror Bot
-This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
+This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive. This project is heavily inspired from @out386 's telegram bot which is written in JS.
+
+# How to deploy?
+Deploying is pretty much straight forward and is divided into several steps as follows:
+## Installing requirements
+
+- Clone this repo:
+```
+git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
+cd mirrorbot
+```
+
+- Install requirements
+For Debian based distros
+```
+sudo apt install python3
+sudo snap install docker 
+```
+- For Arch and it's derivatives:
+```
+sudo pacman -S docker python
+```
 
 ## Getting Google OAuth API credential file
 
@@ -10,11 +31,6 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Go to the Credentials tab and click Create Credentials -> OAuth Client ID
 - Choose Desktop and Create.
 - Use the download button to download your credentials.
-- Clone this repo:
-```
-git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
-cd mirrorbot
-```
 - Move that file to the root of mirrorbot, and rename it to credentials.json
 - Visit [Google API page](https://console.developers.google.com/apis/library)
 - Search for Drive and enable it if it is disabled
@@ -64,7 +80,22 @@ Note :- Above are the supported url shorteners. Except these only some url short
 
 </details>
 
-## Deployment
+## Deploying
+
+- Start docker daemon (skip if already running):
+```
+sudo dockerd
+```
+- Build Docker image:
+```
+sudo docker build . -t mirrorbot
+```
+- Run the image:
+```
+sudo docker run mirrorbot
+```
+
+## Deploying on Heroku
 
 Give Star & Fork this repo, then upload **token.pickle** to your forks
 

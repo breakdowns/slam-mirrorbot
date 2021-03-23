@@ -75,7 +75,7 @@
         "required": true
       },
       "UPTOBOX_TOKEN": {
-        "description": "Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).",
+        "description": "Uptobox premium token to mirror uptobox links. Get it from https://uptobox.com/my_account.",
         "required": false
       },
       "MEGA_API_KEY": {

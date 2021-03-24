@@ -1,4 +1,4 @@
-[![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
+[![NezukoV2](https://telegra.ph/file/6752643fa00df23d4e79b.png)]
 
 # Slam Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
@@ -161,7 +161,7 @@ python3 add_to_team_drive.py -d SharedTeamDriveSrcID
 ```
 
 ## Youtube-dl authentication using .netrc file
-For using your premium accounts in youtube-dl, edit the [.netrc](https://github.com/breakdowns/slam-mirrorbot/blob/master/.netrc) file according to following format:
+For using your premium accounts in youtube-dl, edit the [.netrc](https://github.com/ichiyo797/NezukoV2/blob/master/.netrc) file according to following format:
 ```
 machine host login username password my_youtube_password
 ```
@@ -179,5 +179,6 @@ Thanks to:
 - [WinTenDev](https://github.com/WinTenDev/) for Uptobox support
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
 - [ydner](https://github.com/ydner/) for Usage module
+- [breakdowns](https://github.com/breakdowns)
 
 and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

@@ -13,7 +13,7 @@ python-magic
 beautifulsoup4>=4.8.2,<4.8.10
 pyrogram
 TgCrypto
-yt-dlp
+youtube_dl
 feedparser
 natsort
 heroku3

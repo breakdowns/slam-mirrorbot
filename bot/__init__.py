@@ -86,40 +86,14 @@ try:
     AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
-    HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
-    HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
 except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)
 
-try:
-    UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
-except KeyError:
-    logging.warning('UPTOBOX_TOKEN not provided!')
-    UPTOBOX_TOKEN = None
-try:
-    UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
-except KeyError:
-    logging.warning('UPTOBOX_TOKEN not provided!')
-    UPTOBOX_TOKEN = None
-try:
-    MEGA_API_KEY = getConfig('MEGA_API_KEY')
-except KeyError:
-    LOGGER.warning('MEGA API KEY not provided!')
-    MEGA_API_KEY = None
-try:
-    MEGA_EMAIL_ID = getConfig('MEGA_EMAIL_ID')
-    MEGA_PASSWORD = getConfig('MEGA_PASSWORD')
-    if len(MEGA_EMAIL_ID) == 0 or len(MEGA_PASSWORD) == 0:
-        raise KeyError
-except KeyError:
-    LOGGER.warning('MEGA Credentials not provided!')
-    MEGA_EMAIL_ID = None
-    MEGA_PASSWORD = None
-
 LOGGER.info("Generating USER_SESSION_STRING")
 with Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN) as app:
     USER_SESSION_STRING = app.export_session_string()
+
 #Generate Telegraph Token
 sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))
 LOGGER.info("Generating Telegraph Token using '" + sname + "' name")
@@ -128,6 +102,21 @@ telegraph.create_account(short_name=sname)
 telegraph_token = telegraph.get_access_token()
 LOGGER.info("Telegraph Token Generated: '" + telegraph_token + "'")
 
+try:
+    HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
+except KeyError:
+    logging.warning('HEROKU API KEY not provided!')
+    HEROKU_API_KEY = None
+try:
+    HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
+except KeyError:
+    logging.warning('HEROKU APP NAME not provided!')
+    HEROKU_APP_NAME = None
+try:
+    UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
+except KeyError:
+    logging.warning('UPTOBOX_TOKEN not provided!')
+    UPTOBOX_TOKEN = None
 try:
     MEGA_API_KEY = getConfig('MEGA_API_KEY')
 except KeyError:

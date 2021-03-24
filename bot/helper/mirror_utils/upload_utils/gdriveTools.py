@@ -371,7 +371,7 @@ class GoogleDriveHelper:
                 err = err.last_attempt.exception()
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
-            return err
+            return err, ""
         return msg, InlineKeyboardMarkup(buttons.build_menu(2))
 
     def cloneFolder(self, name, local_path, folder_id, parent_id):
@@ -501,7 +501,7 @@ class GoogleDriveHelper:
                                                spaces='drive',
                                                pageSize=200,
                                                fields='files(id, name, mimeType, size)',
-                                               orderBy='modifiedTime desc').execute()
+                                               orderBy='name asc').execute()
         content_count = 0
         if response["files"]:
             msg += f'<h4>{len(response["files"])} Results : {fileName}</h4><br><br>'

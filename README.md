@@ -3,8 +3,44 @@
 # Slam Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
+## Features supported:
+<details>
+    <summary><b>Click here for more details</b></summary>
+
+- Mirroring direct download links to Google Drive
+- Mirroring Mega.nz links to Google Drive (In development stage)
+- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
+- Copy files from someone's drive to your drive (Using Autorclone)
+- Download/upload progress
+- Download/upload speeds and ETAs
+- Docker support
+- Uploading To Team Drives.
+- Index Link support
+- Service account support
+- Mirror all youtube-dl supported links
+- Mirror telegram files
+- Delete files from drive
+- Add stickers to your pack
+- Nyaa.si and Sukebei Torrent search
+- Shell and Executor
+- Index Link support
+- Shortener support
+- Custom Buttons
+- Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
+- Speedtest with picture results
+- Extracting password protected files and using custom filename see these examples:
+> https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
+- Extract these filetypes and uploads to google drive
+> ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
+> APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
+> HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
+> NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
+
+</details>
+
 ## How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:
+
 ## Installing requirements
 
 - Clone this repo:
@@ -26,8 +62,16 @@ sudo pacman -S docker python
 
 ## Setting up config file
 <details>
-    <summary><b>Click Here for more details</b></summary>
+    <summary><b>Click here for more details</b></summary>
 
+```
+cp config_sample.env config.env
+```
+- Remove the first line saying:
+```
+_____REMOVE_THIS_LINE_____=True
+```
+Fill up rest of the fields. Meaning of each fields are discussed below:
 - **BOT_TOKEN**: The telegram bot token that you get from [@BotFather](https://t.me/BotFather)
 - **GDRIVE_FOLDER_ID**: This is the folder ID of the Google Drive Folder to which you want to upload all the mirrors.
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
@@ -60,7 +104,7 @@ sudo pacman -S docker python
 
 > shortzon.com
 
-Note :- Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
+Note: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
 
 </details>
 
@@ -74,7 +118,7 @@ Note :- Above are the supported url shorteners. Except these only some url short
 - Move that file to the root of mirrorbot, and rename it to credentials.json
 - Visit [Google API page](https://console.developers.google.com/apis/library)
 - Search for Drive and enable it if it is disabled
-- Finally, run the script to generate token file (token.pickle) for Google Drive:
+- Finally, run the script to generate **token.pickle** file for Google Drive:
 ```
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 python3 generate_drive_token.py
@@ -101,42 +145,12 @@ Give Star & Fork this repo, then upload **token.pickle** to your forks
 
 <p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
-## Features supported:
-- Mirroring direct download links to Google Drive
-- Mirroring Mega.nz links to Google Drive (In development stage)
-- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
-- Copy files from someone's drive to your drive (Using Autorclone)
-- Download/upload progress
-- Download/upload speeds and ETAs
-- Docker support
-- Uploading To Team Drives.
-- Index Link support
-- Service account support
-- Mirror all youtube-dl supported links
-- Mirror telegram files
-- Delete files from drive
-- Add stickers to your pack
-- Nyaa.si and Sukebei Torrent search
-- Shell and Executor
-- Index Link support
-- Shortener support
-- Custom Buttons
-- Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
-- Speedtest with picture results
-- Extracting password protected files and using custom filename see these examples:
-> https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
-- Extract these filetypes and uploads to google drive
-> ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
-> APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
-> HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
-> NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
-
 ## Using service accounts for uploading to avoid user rate limit
-For Service Account to work, you must set USE_SERVICE_ACCOUNTS="True" in config file or environment variables
+For Service Account to work, you must set **USE_SERVICE_ACCOUNTS="True"** in config file or environment variables
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts
 **NOTE:** Using service accounts is only recommended while uploading to a team drive.
 
-## Generate service accounts [What is service account](https://cloud.google.com/iam/docs/service-accounts)
+## Generate service accounts. [What is service account](https://cloud.google.com/iam/docs/service-accounts)
 
 Let us create only the service accounts that we need. 
 **Warning:** abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 sa allow you plenty of use, its also possible that over abuse might get your projects banned by google. 
@@ -149,7 +163,7 @@ Note: 1 service account can copy around 750gb a day, 1 project can make 100 serv
 
 A folder named accounts will be created which will contain keys for the service accounts
 
-NOTE: If you have created SAs in past from this script, you can also just re download the keys by running:
+**NOTE:** If you have created SAs in past from this script, you can also just re download the keys by running:
 ```
 python3 gen_sa_accounts.py --download-keys project_id
 ```
@@ -170,7 +184,7 @@ where host is the name of extractor (eg. youtube, twitch). Multiple accounts of 
 ## Credits
 
 Thanks to:
-- [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS.
+- [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS
 - [Izzy12](https://github.com/lzzy12/) for original repo
 - [Dank-del](https://github.com/Dank-del/) for base repo
 - [magneto261290](https://github.com/magneto261290/) for some features

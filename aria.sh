@@ -12,5 +12,4 @@ aria2c --enable-rpc --rpc-listen-all=false --rpc-listen-port 6800 --check-certif
    --disk-cache=64M --file-allocation=prealloc --continue=true \
    --max-file-not-found=5 --max-tries=20 --auto-file-renaming=true \
    --bt-enable-lpd=true --seed-time=0.01 --seed-ratio=1.0 \
-   --bt-force-encryption=true --bt-require-crypto=true --bt-min-crypto-level=arc4 \
    --content-disposition-default-utf8=true --http-accept-gzip=true --reuse-uri=true

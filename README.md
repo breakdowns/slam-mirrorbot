@@ -145,6 +145,27 @@ Give Star & Fork this repo, then upload **token.pickle** to your forks
 
 <p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
+## Bot commands to be set in botfather
+
+```
+mirror - Start Mirroring
+tarmirror - Upload tar (zipped) file
+unzipmirror - Extract files
+clone - copy file/folder to drive
+watch - mirror YT-DL support link
+tarwatch - mirror youtube playlist link as tar
+cancel - Cancel a task
+cancelall - Cancel all tasks
+del - Delete file from Drive
+list - [query] searches files in G-Drive
+status - Get Mirror Status message
+stats - Bot Usage Stats
+help - Get Detailed Help
+speedtest - Check Speed of the host
+log - Bot Log [owner only]
+repo - Get the bot repo
+```
+
 ## Using service accounts for uploading to avoid user rate limit
 For Service Account to work, you must set **USE_SERVICE_ACCOUNTS="True"** in config file or environment variables
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts

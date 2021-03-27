@@ -329,9 +329,9 @@ class GoogleDriveHelper:
                     url = requests.utils.requote_uri(f'{INDEX_URL}/{meta.get("name")}/')
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = requests.get('https://{}/api?api={}&url={}&format=text'.format(SHORTENER, SHORTENER_API, url)).text
-                        buttons.buildbutton("🔥Index Link🔥", siurl)
+                        buttons.buildbutton("🚀Index Link🚀", siurl)
                     else:
-                        buttons.buildbutton("🔥Index Link🔥", url)
+                        buttons.buildbutton("🚀Index Link🚀", url)
                 if BUTTON_THREE_NAME is not None and BUTTON_THREE_URL is not None:
                     buttons.buildbutton(f"{BUTTON_THREE_NAME}", f"{BUTTON_THREE_URL}")
                 if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
@@ -356,9 +356,9 @@ class GoogleDriveHelper:
                     url = requests.utils.requote_uri(f'{INDEX_URL}/{file.get("name")}')
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = requests.get('https://{}/api?api={}&url={}&format=text'.format(SHORTENER, SHORTENER_API, url)).text
-                        buttons.buildbutton("🔥Index Link🔥", siurl)
+                        buttons.buildbutton("🚀Index Link🚀", siurl)
                     else:
-                        buttons.buildbutton("🔥Index Link🔥", url)
+                        buttons.buildbutton("🚀Index Link🚀", url)
                 if BUTTON_THREE_NAME is not None and BUTTON_THREE_URL is not None:
                     buttons.buildbutton(f"{BUTTON_THREE_NAME}", f"{BUTTON_THREE_URL}")
                 if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:

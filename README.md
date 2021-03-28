@@ -163,13 +163,13 @@ heroku git:remote -a appname
 ```
 heroku stack:set container
 ```
-- Add Private Credentials and Config Stuff:
+- Add Private Token and Config Stuff:
 ```
-git add -f credentials.json token.pickle config.env
+git add -f token.pickle config.env
 ```
 - Commit new changes:
 ```
-git commit -m "Added Creds."
+git commit -m "Added Token."
 ```
 - Push Code to Heroku:
 ```

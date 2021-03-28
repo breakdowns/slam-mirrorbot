@@ -32,10 +32,10 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 > https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
 - Extract these filetypes and uploads to google drive
 ```
-> ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
-> APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
-> HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
-> NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
+ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
+APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
+HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
+NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
 
 </details>

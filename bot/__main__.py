@@ -54,7 +54,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 def repo(update, context):
     bot.send_message(update.message.chat_id,
     reply_to_message_id=update.message.message_id,
-    text="Repo: `https://github.com/breakdowns/slam-mirrorbot`", parse_mode="Markdown")
+    text="*Repo:* https://github.com/breakdowns/slam-mirrorbot", disable_web_page_preview=True)
 
 
 @run_async

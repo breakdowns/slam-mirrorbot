@@ -103,7 +103,7 @@ urlshortx.com
 shortzon.com
 ```
 
-Note: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
+**Note**: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
 
 </details>
 
@@ -168,12 +168,12 @@ repo - Get the bot repo
 ## Using service accounts for uploading to avoid user rate limit
 For Service Account to work, you must set **USE_SERVICE_ACCOUNTS="True"** in config file or environment variables
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts
-**NOTE:** Using service accounts is only recommended while uploading to a team drive.
+**NOTE**: Using service accounts is only recommended while uploading to a team drive.
 
 ## Generate service accounts. [What is service account](https://cloud.google.com/iam/docs/service-accounts)
 
 Let us create only the service accounts that we need. 
-**Warning:** abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 sa allow you plenty of use, its also possible that over abuse might get your projects banned by google. 
+**Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 sa allow you plenty of use, its also possible that over abuse might get your projects banned by google. 
 
 ```
 Note: 1 service account can copy around 750gb a day, 1 project can make 100 service accounts so that's 75tb a day, for most users this should easily suffice. 
@@ -183,7 +183,7 @@ Note: 1 service account can copy around 750gb a day, 1 project can make 100 serv
 
 A folder named accounts will be created which will contain keys for the service accounts
 
-**NOTE:** If you have created SAs in past from this script, you can also just re download the keys by running:
+**NOTE**: If you have created SAs in past from this script, you can also just re download the keys by running:
 ```
 python3 gen_sa_accounts.py --download-keys project_id
 ```

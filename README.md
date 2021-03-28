@@ -214,5 +214,6 @@ Thanks to:
 - [WinTenDev](https://github.com/WinTenDev/) for Uptobox support
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
 - [ydner](https://github.com/ydner/) for Usage module
+- [breakdowns](https://github.com/breakdowns) idk
 
 and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

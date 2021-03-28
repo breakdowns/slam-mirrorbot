@@ -93,16 +93,15 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
 - **SHORTENER_API**: Fill your shortener api key if you are using shortener.
 - **SHORTENER**: (Optional field) if you want to use shortener in Gdrive and index link, fill shotener url here. Examples:
+```
+exe.io
+gplinks.in
+shrinkme.io
+urlshortx.com
+shortzon.com
 
-> exe.io
-
-> gplinks.in
-
-> shrinkme.io
-
-> urlshortx.com
-
-> shortzon.com
+Additionally, some other shorteners are also supported unofficially.
+```
 
 Note: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
 

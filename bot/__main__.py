@@ -60,8 +60,9 @@ def repo(update, context):
 @run_async
 def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
-    # Save restart message object in order to reply to it after restarting
+    LOGGER.info(f'Restarting the Bot...')
     fs_utils.clean_all()
+    # Save restart message object in order to reply to it after restarting
     with open('restart.pickle', 'wb') as status:
         pickle.dump(restart_message, status)
     execl(executable, executable, "-m", "bot")
@@ -131,6 +132,7 @@ def main():
         with open('restart.pickle', 'rb') as status:
             restart_message = pickle.load(status)
         restart_message.edit_text("Restarted Successfully!")
+        LOGGER.info('Restarted Successfully!')
         remove('restart.pickle')
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,

@@ -61,8 +61,8 @@ def repo(update, context):
 def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
     LOGGER.info(f'Restarting the Bot...')
-    fs_utils.clean_all()
     # Save restart message object in order to reply to it after restarting
+    fs_utils.clean_all()
     with open('restart.pickle', 'wb') as status:
         pickle.dump(restart_message, status)
     execl(executable, executable, "-m", "bot")

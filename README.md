@@ -31,10 +31,12 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Extracting password protected files and using custom filename see these examples:
 > https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
 - Extract these filetypes and uploads to google drive
+```
 > ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
 > APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
 > HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
 > NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
+```
 
 </details>
 
@@ -99,8 +101,6 @@ gplinks.in
 shrinkme.io
 urlshortx.com
 shortzon.com
-
-Additionally, some other shorteners are also supported unofficially.
 ```
 
 Note: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.

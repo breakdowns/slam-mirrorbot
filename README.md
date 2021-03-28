@@ -23,7 +23,6 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Check Heroku dynos stats
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
-- Index Link support
 - Shortener support
 - Custom Buttons
 - Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)

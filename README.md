@@ -11,8 +11,7 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Mirroring Mega.nz links to Google Drive (In development stage)
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Copy files from someone's drive to your drive (Using Autorclone)
-- Download/upload progress
-- Download/upload speeds and ETAs
+- Download/upload progress, speeds and ETAs
 - Docker support
 - Uploading To Team Drives.
 - Index Link support
@@ -21,6 +20,7 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Mirror telegram files
 - Delete files from drive
 - Add stickers to your pack
+- Check Heroku dynos stats
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
 - Index Link support

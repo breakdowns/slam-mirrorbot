@@ -55,6 +55,7 @@ For Debian based distros
 sudo apt install python3
 sudo snap install docker 
 ```
+Install Docker by following the [official docker docs](https://docs.docker.com/engine/install/debian/)
 - For Arch and it's derivatives:
 ```
 sudo pacman -S docker python

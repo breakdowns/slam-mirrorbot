@@ -54,12 +54,13 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 def repo(update, context):
     bot.send_message(update.message.chat_id,
     reply_to_message_id=update.message.message_id,
-    text="Repo: `https://github.com/breakdowns/slam-mirrorbot`", parse_mode="Markdown")
+    text="Repo: https://github.com/breakdowns/slam-mirrorbot", disable_web_page_preview=True)
 
 
 @run_async
 def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
+    LOGGER.info(f'Restarting the Bot...')
     # Save restart message object in order to reply to it after restarting
     fs_utils.clean_all()
     with open('restart.pickle', 'wb') as status:
@@ -131,6 +132,7 @@ def main():
         with open('restart.pickle', 'rb') as status:
             restart_message = pickle.load(status)
         restart_message.edit_text("Restarted Successfully!")
+        LOGGER.info('Restarted Successfully!')
         remove('restart.pickle')
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,

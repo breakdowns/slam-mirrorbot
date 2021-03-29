@@ -11,8 +11,7 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Mirroring Mega.nz links to Google Drive (In development stage)
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Copy files from someone's drive to your drive (Using Autorclone)
-- Download/upload progress
-- Download/upload speeds and ETAs
+- Download/upload progress, speeds and ETAs
 - Docker support
 - Uploading To Team Drives.
 - Index Link support
@@ -21,9 +20,9 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Mirror telegram files
 - Delete files from drive
 - Add stickers to your pack
+- Check Heroku dynos stats
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
-- Index Link support
 - Shortener support
 - Custom Buttons
 - Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
@@ -31,10 +30,12 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Extracting password protected files and using custom filename see these examples:
 > https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
 - Extract these filetypes and uploads to google drive
-> ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
-> APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
-> HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
-> NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
+```
+ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
+APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT, 
+HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
+NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
+```
 
 </details>
 
@@ -80,31 +81,29 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. Note: Set to -1 to never automatically delete messages
 - **IS_TEAM_DRIVE**: (Optional field) Set to "True" if GDRIVE_FOLDER_ID is from a Team Drive else False or Leave it empty.
-- **USE_SERVICE_ACCOUNTS**: (Optional field) (Leave empty if unsure) Whether to use service accounts or not. For this to work see  "Using service accounts" section below.
+- **USE_SERVICE_ACCOUNTS**: (Optional field) (Leave empty if unsure) Whether to use service accounts or not. For this to work see "Using service accounts" section below.
 - **INDEX_URL**: (Optional field) Refer to https://github.com/maple3142/GDIndex/ The URL should not have any trailing '/'
 - **API_KEY**: This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
 - **API_HASH**: This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org
+- **USE_TELEGRAPH**: Set to 'true' to use Telegra.ph for search results from '/list' bot command, or else set to 'false'.
 - **MEGA_API_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account 
 - **STOP_DUPLICATE_MIRROR**: (Optional field) (Leave empty if unsure) if this field is set to `True` , bot will check file in drive, if it is present in drive, downloading will ne stopped. (Note - File will be checked using filename, not using filehash, so this feature is not perfect yet)
-- **BLOCK_MEGA_FOLDER**: (Optional field) If you want to remove mega.nz folder support, set it to True.
+- **BLOCK_MEGA_FOLDER**: (Optional field) If you want to remove mega.nz folder support, set it to `True`.
 - **BLOCK_MEGA_LINKS**: (Optional field) If you want to remove mega.nz mirror support (bcoz it's too much buggy and unstable), set it to `True`.
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
 - **SHORTENER_API**: Fill your shortener api key if you are using shortener.
 - **SHORTENER**: (Optional field) if you want to use shortener in Gdrive and index link, fill shotener url here. Examples:
+```
+exe.io
+gplinks.in
+shrinkme.io
+urlshortx.com
+shortzon.com
+```
 
-> exe.io
-
-> gplinks.in
-
-> shrinkme.io
-
-> urlshortx.com
-
-> shortzon.com
-
-Note: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
+**Note**: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
 
 </details>
 
@@ -145,15 +144,36 @@ Give Star & Fork this repo, then upload **token.pickle** to your forks
 
 <p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
+## Bot commands to be set in [@BotFather](https://t.me/BotFather)
+
+```
+mirror - Start Mirroring
+tarmirror - Upload tar (zipped) file
+unzipmirror - Extract files
+clone - copy file/folder to drive
+watch - mirror YT-DL support link
+tarwatch - mirror youtube playlist link as tar
+cancel - Cancel a task
+cancelall - Cancel all tasks
+del - Delete file from Drive
+list - [query] searches files in G-Drive
+status - Get Mirror Status message
+stats - Bot Usage Stats
+help - Get Detailed Help
+speedtest - Check Speed of the host
+log - Bot Log [owner only]
+repo - Get the bot repo
+```
+
 ## Using service accounts for uploading to avoid user rate limit
 For Service Account to work, you must set **USE_SERVICE_ACCOUNTS="True"** in config file or environment variables
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts
-**NOTE:** Using service accounts is only recommended while uploading to a team drive.
+**NOTE**: Using service accounts is only recommended while uploading to a team drive.
 
 ## Generate service accounts. [What is service account](https://cloud.google.com/iam/docs/service-accounts)
 
 Let us create only the service accounts that we need. 
-**Warning:** abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 sa allow you plenty of use, its also possible that over abuse might get your projects banned by google. 
+**Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 sa allow you plenty of use, its also possible that over abuse might get your projects banned by google. 
 
 ```
 Note: 1 service account can copy around 750gb a day, 1 project can make 100 service accounts so that's 75tb a day, for most users this should easily suffice. 
@@ -163,7 +183,7 @@ Note: 1 service account can copy around 750gb a day, 1 project can make 100 serv
 
 A folder named accounts will be created which will contain keys for the service accounts
 
-**NOTE:** If you have created SAs in past from this script, you can also just re download the keys by running:
+**NOTE**: If you have created SAs in past from this script, you can also just re download the keys by running:
 ```
 python3 gen_sa_accounts.py --download-keys project_id
 ```
@@ -193,5 +213,6 @@ Thanks to:
 - [WinTenDev](https://github.com/WinTenDev/) for Uptobox support
 - [iamLiquidX](https://github.com/iamLiquidX/) for Speedtest module
 - [ydner](https://github.com/ydner/) for Usage module
+- [breakdowns](https://github.com/breakdowns) idk
 
 and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

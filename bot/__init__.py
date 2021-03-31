@@ -90,17 +90,31 @@ except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)
 
+try:
+    if os.environ['USE_TELEGRAPH'].upper() == 'TRUE':
+        USE_TELEGRAPH = True
+    else:
+        raise KeyError
+except KeyError:
+    USE_TELEGRAPH = False
+
+# Generate USER_SESSION_STRING
 LOGGER.info("Generating USER_SESSION_STRING")
 with Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN) as app:
     USER_SESSION_STRING = app.export_session_string()
 
-#Generate Telegraph Token
-sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))
-LOGGER.info("Generating Telegraph Token using '" + sname + "' name")
-telegraph = Telegraph()
-telegraph.create_account(short_name=sname)
-telegraph_token = telegraph.get_access_token()
-LOGGER.info("Telegraph Token Generated: '" + telegraph_token + "'")
+# Generate TELEGRAPH_TOKEN
+if USE_TELEGRAPH:
+    sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))
+    LOGGER.info("Using Telegra.ph")
+    LOGGER.info("Generating TELEGRAPH_TOKEN")
+    telegraph = Telegraph()
+    telegraph.create_account(short_name=sname)
+    TELEGRAPH_TOKEN = telegraph.get_access_token()
+if not USE_TELEGRAPH:
+    TELEGRAPH_TOKEN = None
+    LOGGER.info("Not Using Telegra.ph")
+    pass
 
 try:
     HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
@@ -210,7 +224,6 @@ except KeyError:
     SHORTENER = None
     SHORTENER_API = None
 
-app = Client('slam', api_id=TELEGRAM_API, api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
 updater = tg.Updater(token=BOT_TOKEN,use_context=True)
 bot = updater.bot
 dispatcher = updater.dispatcher

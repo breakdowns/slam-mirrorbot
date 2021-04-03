@@ -8,7 +8,7 @@
       "python"
     ],
     "repository": "https://github.com/breakdowns/slam-mirrorbot",
-    "website": "https://t.me/SlamMirrorSupport",
+    "website": "https://t.me/SlamMirrorSupportGroup",
     "success_url": "https://github.com/breakdowns/slam-mirrorbot/blob/master/README.md",
     "stack": "container",
     "env": {
@@ -26,7 +26,7 @@
       },
       "DOWNLOAD_DIR": {
         "description": "The path to the local folder where the downloads should be downloaded to.",
-        "value": "/home/username/mirror-bot/downloads",
+        "value": "/home/slam/mirror-bot/downloads",
         "required": false
       },
       "DOWNLOAD_STATUS_UPDATE_INTERVAL": {
@@ -66,6 +66,11 @@
         "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org.",
         "required": true
       },
+      "USE_TELEGRAPH": {
+        "description": "Set to true to use Telegra.ph for search results from /list bot command, or else set to false.",
+        "value": "",
+        "required": true
+      },
       "HEROKU_API_KEY": {
         "description": "Your Heroku API key, get it from https://dashboard.heroku.com/account.",
         "required": true
@@ -75,7 +80,7 @@
         "required": true
       },
       "UPTOBOX_TOKEN": {
-        "description": "Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).",
+        "description": "Uptobox premium token to mirror uptobox links. Get it from https://uptobox.com/my_account.",
         "required": false
       },
       "MEGA_API_KEY": {

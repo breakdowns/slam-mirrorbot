@@ -44,15 +44,23 @@ def stats(update, context):
 @run_async
 def start(update, context):
     start_string = f'''
-Hi, I'm [Slam](https://github.com/breakdowns/slam-mirrorbot), a multipurpose bot for [hafitz](t.me/hafitzXD)
+Hi {update.message.chat.first_name}, This bot can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
 
 
 @run_async
+def repo(update, context):
+    bot.send_message(update.message.chat_id,
+    reply_to_message_id=update.message.message_id,
+    text="Repo: https://github.com/breakdowns/slam-mirrorbot", disable_web_page_preview=True)
+
+
+@run_async
 def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
+    LOGGER.info(f'Restarting the Bot...')
     # Save restart message object in order to reply to it after restarting
     fs_utils.clean_all()
     with open('restart.pickle', 'wb') as status:
@@ -102,9 +110,11 @@ def bot_help(update, context):
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
+
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
+/{BotCommands.RepoCommand}: Get the bot repo.
 
 /tshelp: Get help for torrent search module.
 
@@ -122,6 +132,7 @@ def main():
         with open('restart.pickle', 'rb') as status:
             restart_message = pickle.load(status)
         restart_message.edit_text("Restarted Successfully!")
+        LOGGER.info('Restarted Successfully!')
         remove('restart.pickle')
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,
@@ -135,12 +146,15 @@ def main():
     stats_handler = CommandHandler(BotCommands.StatsCommand,
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter)
+    repo_handler = CommandHandler(BotCommands.RepoCommand, repo,
+                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
+    dispatcher.add_handler(repo_handler)
     updater.start_polling()
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)

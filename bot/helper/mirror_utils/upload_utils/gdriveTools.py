@@ -510,7 +510,7 @@ class GoogleDriveHelper:
                     if file.get(
                             'mimeType') == "application/vnd.google-apps.folder":  # Detect Whether Current Entity is a Folder or File.
                         furl = f"https://drive.google.com/drive/folders/{file.get('id')}"
-                        msg += f"⁍<code>{file.get('name')}<br>(folder📁)</code><br>"
+                        msg += f"⁍<code>{file.get('name')}<br>(folder)📁</code><br>"
                         if SHORTENER is not None and SHORTENER_API is not None:
                             sfurl = requests.get(
                                 'https://{}/api?api={}&url={}&format=text'.format(SHORTENER, SHORTENER_API, furl)).text

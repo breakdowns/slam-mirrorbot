@@ -107,10 +107,11 @@ with Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_to
 if USE_TELEGRAPH:
     sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))
     LOGGER.info("Using Telegra.ph")
-    LOGGER.info("Generating TELEGRAPH_TOKEN")
+    LOGGER.info("Generating TELEGRAPH_TOKEN using '" + sname + "' name")
     telegraph = Telegraph()
     telegraph.create_account(short_name=sname)
     TELEGRAPH_TOKEN = telegraph.get_access_token()
+    LOGGER.info("Telegraph Token Generated: '" + TELEGRAPH_TOKEN + "'")
 if not USE_TELEGRAPH:
     TELEGRAPH_TOKEN = None
     LOGGER.info("Not Using Telegra.ph")

@@ -9,7 +9,7 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 
 - Mirroring direct download links to Google Drive
 - Mirroring Mega.nz links to Google Drive (In development stage)
-- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
+- Mirroring Uptobox.com links to Google Drive (**NOTE**: Uptobox account must be premium)
 - Copy files from someone's drive to your drive (Using Autorclone)
 - Download/upload progress, speeds and ETAs
 - Docker support

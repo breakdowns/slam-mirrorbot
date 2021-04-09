@@ -18,7 +18,7 @@ feedparser
 natsort
 heroku3
 aiohttp
-speedtest-cli>=2.1.2
+speedtest-cli
 messages
 lxml
 telegraph

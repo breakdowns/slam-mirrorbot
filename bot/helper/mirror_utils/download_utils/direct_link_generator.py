@@ -44,37 +44,29 @@ def direct_link_generator(link: str):
     else:
         raise DirectDownloadLinkException(f'No Direct link function found for {link}')
 
-""" Zippy-Share up-to-date plugin from https://github.com/UsergeTeam/Userge-Plugins/blob/master/plugins/zippyshare.py """
-""" Thanks to all contributors @aryanvikash, rking32, @BianSepang """
-
-link = r'https://www(\d{1,3}).zippyshare.com/v/(\w{8})/file.html'
-regex_result = (
-    r'var a = (\d{6});\s+var b = (\d{6});\s+document\.getElementById'
-    r'\(\'dlbutton\'\).omg = "f";\s+if \(document.getElementById\(\''
-    r'dlbutton\'\).omg != \'f\'\) {\s+a = Math.ceil\(a/3\);\s+} else'
-    r' {\s+a = Math.floor\(a/3\);\s+}\s+document.getElementById\(\'d'
-    r'lbutton\'\).href = "/d/[a-zA-Z\d]{8}/\"\+\(a \+ \d{6}%b\)\+"/('
-    r'[\w%-.]+)";'
-)
-
 def zippy_share(url: str) -> str:
+    """ ZippyShare direct links generator
+    Based on https://github.com/LameLemon/ziggy"""
+    dl_url = ''
+    try:
+        link = re.findall(r'\bhttps?://.*zippyshare\.com\S+', url)[0]
+    except IndexError:
+        raise DirectDownloadLinkException("`No ZippyShare links found`\n")
     session = requests.Session()
-    with session as ses:
-        match = re.match(link, url)
-        if not match:
-            raise ValueError("Invalid URL: " + str(url))
-        server, id_ = match.group(1), match.group(2)
-        res = ses.get(url)
-        res.raise_for_status()
-        match = re.search(regex_result, res.text, re.DOTALL)
-        if not match:
-            raise ValueError("Invalid Response!")
-        val_1 = int(match.group(1))
-        val_2 = math.floor(val_1 / 3)
-        val_3 = int(match.group(2))
-        val = val_1 + val_2 % val_3
-        name = match.group(3)
-        dl_url = "https://www{}.zippyshare.com/d/{}/{}/{}".format(server, id_, val, name)
+    base_url = re.search('http.+.com', link).group()
+    response = session.get(link)
+    page_soup = BeautifulSoup(response.content, "lxml")
+    scripts = page_soup.find_all("script", {"type": "text/javascript"})
+    for script in scripts:
+        if "getElementById('dlbutton')" in script.text:
+            url_raw = re.search(r'= (?P<url>\".+\" \+ (?P<math>\(.+\)) .+);',
+                                script.text).group('url')
+            math = re.search(r'= (?P<url>\".+\" \+ (?P<math>\(.+\)) .+);',
+                             script.text).group('math')
+            dl_url = url_raw.replace(math, '"' + str(eval(math)) + '"')
+            break
+    dl_url = base_url + eval(dl_url)
+    name = urllib.parse.unquote(dl_url.split('/')[-1])
     return dl_url
 
 

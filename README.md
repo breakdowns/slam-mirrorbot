@@ -4,27 +4,22 @@
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
 ## Features supported:
-<details>
-    <summary><b>Click here for more details</b></summary>
-
-- Mirroring direct download links to Google Drive
+- Mirroring direct download links and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (In development stage)
-- Mirroring Uptobox.com links to Google Drive (**NOTE**: Uptobox account must be premium)
+- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Copy files from someone's drive to your drive (Using Autorclone)
 - Download/upload progress, speeds and ETAs
 - Docker support
-- Uploading To Team Drives.
+- Uploading To Team Drives
 - Index Link support
 - Service account support
 - Mirror all youtube-dl supported links
-- Mirror telegram files
 - Delete files from drive
 - Add stickers to your pack
 - Check Heroku dynos stats
 - Nyaa.si and Sukebei Torrent search
 - Shell and Executor
 - Shortener support
-- Custom Buttons
 - Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
 - Speedtest with picture results
 - Extracting password protected files and using custom filename see these examples:
@@ -36,8 +31,6 @@ APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT,
 HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
-
-</details>
 
 ## How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:

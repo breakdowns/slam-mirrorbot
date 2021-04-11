@@ -134,7 +134,7 @@ sudo docker run mirrorbot
 ## Deploying on Heroku
 
 Give Star & Fork this repo, then upload **token.pickle** to your forks
-
+**NOTE**: If you didn't upload **token.pickle** upload will not working
 <p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 ## Deploying on Heroku using heroku-cli

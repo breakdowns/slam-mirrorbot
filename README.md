@@ -3,10 +3,10 @@
 # Slam Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
-## Features supported:
+# Features supported:
+## From Source Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (In development stage)
-- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Copy files from someone's drive to your drive (Using Autorclone)
 - Download/upload progress, speeds and ETAs
 - Docker support
@@ -15,13 +15,8 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Service account support
 - Mirror all youtube-dl supported links
 - Delete files from drive
-- Add stickers to your pack
-- Check Heroku dynos stats
-- Nyaa.si and Sukebei Torrent search
-- Shell and Executor
 - Shortener support
 - Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
-- Speedtest with picture results
 - Extracting password protected files and using custom filename see these examples:
 > https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
 - Extract these filetypes and uploads to google drive
@@ -31,6 +26,14 @@ APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT,
 HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
+
+## Additional Features
+- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
+- Add stickers to your pack
+- Check Heroku dynos stats
+- Nyaa.si and Sukebei Torrent search
+- Shell and Executor
+- Speedtest with picture results
 
 ## How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:

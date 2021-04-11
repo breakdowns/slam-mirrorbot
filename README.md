@@ -4,7 +4,7 @@
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
 ## Features supported:
-- Mirroring direct download links and Telegram files to Google Drive
+- Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (In development stage)
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Copy files from someone's drive to your drive (Using Autorclone)
@@ -133,7 +133,7 @@ sudo docker run mirrorbot
 
 ## Deploying on Heroku
 
-Give Star & Fork this repo, then upload **token.pickle** to your forks
+Fork this repo, then upload **token.pickle** to your forks
 
 **NOTE**: If you didn't upload **token.pickle** upload will not working
 <p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>

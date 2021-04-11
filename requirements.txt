@@ -22,3 +22,4 @@ speedtest-cli
 messages
 lxml
 telegraph
+google_auth_oauthlib

@@ -104,12 +104,12 @@
         "required": false
       },
       "ENABLE_FILESIZE_LIMIT": {
-        "description": "Change to True if you want to use MAX_TORRENT_SIZE.",
+        "description": "Set it to True if you want to use MAX_TORRENT_SIZE.",
         "value": "false",
         "required": true
       },
       "MAX_TORRENT_SIZE": {
-        "description": ",Fill The amount you want to limit, examples: 1 = 1gb.",
+        "description": "To limit the torrent mirror size, Fill The amount you want to limit, examples: 1 = 1gb.",
         "required": false
       },
       "STOP_DUPLICATE_MIRROR": {

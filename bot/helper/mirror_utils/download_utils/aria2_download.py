@@ -1,4 +1,4 @@
-from bot import aria2, download_dict_lock, STOP_DUPLICATE_MIRROR
+from bot import aria2, download_dict_lock, STOP_DUPLICATE_MIRROR, MAX_TORRENT_SIZE, ENABLE_FILESIZE_LIMIT
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.ext_utils.bot_utils import *
 from .download_helper import DownloadHelper
@@ -22,6 +22,13 @@ class AriaDownloadHelper(DownloadHelper):
         download = api.get_download(gid)
         self.name = download.name
         sname = download.name
+        if ENABLE_FILESIZE_LIMIT:
+          if download.total_length / 1024 / 1024 / 1024 > MAX_TORRENT_SIZE:
+              LOGGER.info(f" Download size Exceeded: {gid}")
+              dl.getListener().onDownloadError(f'File size larger than Maximum Allowed size {MAX_TORRENT_SIZE}GB')
+              aria2.remove([download])
+          return
+        update_all_messages()
         gdrive = GoogleDriveHelper(None)
         smsg, button = gdrive.drive_list(sname)
         if STOP_DUPLICATE_MIRROR:

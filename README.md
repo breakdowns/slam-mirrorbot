@@ -36,7 +36,7 @@ HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS,
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
 
-## How to deploy?
+# How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:
 
 ## Installing requirements
@@ -246,7 +246,7 @@ machine host login username password my_youtube_password
 ```
 where host is the name of extractor (eg. youtube, twitch). Multiple accounts of different hosts can be added each separated by a new line
 
-## Credits
+# Credits
 
 Thanks to:
 - [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS

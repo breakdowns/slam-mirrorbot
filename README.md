@@ -9,6 +9,7 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
+- Limiting torrent size support
 - Check Heroku dynos stats
 - Add stickers to your pack
 - Shell and Executor
@@ -36,7 +37,7 @@ HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS,
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
 
-## How to deploy?
+# How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:
 
 ## Installing requirements
@@ -139,10 +140,9 @@ sudo docker run mirrorbot
 
 ## Deploying on Heroku
 
-Fork this repo, then upload **token.pickle** to your forks
-
-**NOTE**: If you didn't upload **token.pickle** upload will not working
-<p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+- Fork this repo
+- Upload **token.pickle** to your forks
+<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=Heroku" width="200""/></a></p>
 
 ## Deploying on Heroku using heroku-cli
 
@@ -247,7 +247,7 @@ machine host login username password my_youtube_password
 ```
 where host is the name of extractor (eg. youtube, twitch). Multiple accounts of different hosts can be added each separated by a new line
 
-## Credits
+# Credits
 
 Thanks to:
 - [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS

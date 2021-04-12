@@ -111,7 +111,7 @@
       "MAX_TORRENT_SIZE": {
         "description": "To limit the torrent mirror size, Fill The amount you want to limit, examples: if you fill 15 it will limit 15gb.",
         "value": "15",
-        "required": false
+        "required": true
       },
       "STOP_DUPLICATE_MIRROR": {
         "description": "If this field is set to True, bot will check file in drive, if it is present in drive, downloading will be stopped.",

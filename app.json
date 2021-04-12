@@ -110,6 +110,7 @@
       },
       "MAX_TORRENT_SIZE": {
         "description": "To limit the torrent mirror size, Fill The amount you want to limit, examples: 1 = 1gb.",
+        "value": "false",
         "required": false
       },
       "STOP_DUPLICATE_MIRROR": {

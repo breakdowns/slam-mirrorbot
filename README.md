@@ -7,9 +7,9 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 
 ## Additional Features
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
-- Limiting size when mirroring torrent
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
+- Limiting torrent size support
 - Check Heroku dynos stats
 - Add stickers to your pack
 - Shell and Executor

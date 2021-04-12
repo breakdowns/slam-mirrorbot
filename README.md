@@ -3,30 +3,29 @@
 # Slam Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
-## Features supported:
-<details>
-    <summary><b>Click here for more details</b></summary>
+# Features supported:
 
-- Mirroring direct download links to Google Drive
+## Additional Features
+- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
+- Nyaa.si and Sukebei Torrent search
+- Speedtest with picture results
+- Check Heroku dynos stats
+- Add stickers to your pack
+- Shell and Executor
+
+## From Source Repos
+- Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (In development stage)
-- Mirroring Uptobox.com links to Google Drive (**NOTE**: Uptobox account must be premium)
 - Copy files from someone's drive to your drive (Using Autorclone)
 - Download/upload progress, speeds and ETAs
+- Mirror all youtube-dl supported links
 - Docker support
-- Uploading To Team Drives.
+- Uploading To Team Drives
 - Index Link support
 - Service account support
-- Mirror all youtube-dl supported links
-- Mirror telegram files
 - Delete files from drive
-- Add stickers to your pack
-- Check Heroku dynos stats
-- Nyaa.si and Sukebei Torrent search
-- Shell and Executor
 - Shortener support
-- Custom Buttons
 - Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
-- Speedtest with picture results
 - Extracting password protected files and using custom filename see these examples:
 > https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
 - Extract these filetypes and uploads to google drive
@@ -36,8 +35,6 @@ APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT,
 HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
-
-</details>
 
 ## How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:
@@ -90,6 +87,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account 
 - **STOP_DUPLICATE_MIRROR**: (Optional field) (Leave empty if unsure) if this field is set to `True` , bot will check file in drive, if it is present in drive, downloading will ne stopped. (Note - File will be checked using filename, not using filehash, so this feature is not perfect yet)
+- **ENABLE_FILESIZE_LIMIT**: Set it to `True` if you want to use `MAX_TORRENT_SIZE`.
+- **MAX_TORRENT_SIZE**: To limit the torrent mirror size, Fill The amount you want to limit, examples: if you fill `15` it will limit `15gb`.
 - **BLOCK_MEGA_FOLDER**: (Optional field) If you want to remove mega.nz folder support, set it to `True`.
 - **BLOCK_MEGA_LINKS**: (Optional field) If you want to remove mega.nz mirror support (bcoz it's too much buggy and unstable), set it to `True`.
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
@@ -140,8 +139,9 @@ sudo docker run mirrorbot
 
 ## Deploying on Heroku
 
-Give Star & Fork this repo, then upload **token.pickle** to your forks
+Fork this repo, then upload **token.pickle** to your forks
 
+**NOTE**: If you didn't upload **token.pickle** upload will not working
 <p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 ## Deploying on Heroku using heroku-cli

@@ -86,9 +86,19 @@ try:
     AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
+    MAX_TORRENT_SIZE = int(getConfig("MAX_TORRENT_SIZE"))
 except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)
+
+try:
+   ENABLE_FILESIZE_LIMIT = getConfig('ENABLE_FILESIZE_LIMIT')
+   if ENABLE_FILESIZE_LIMIT.lower() == 'true':
+       ENABLE_FILESIZE_LIMIT = True
+   else:
+       ENABLE_FILESIZE_LIMIT = False
+except KeyError:
+    ENABLE_FILESIZE_LIMIT = False
 
 try:
     if os.environ['USE_TELEGRAPH'].upper() == 'TRUE':

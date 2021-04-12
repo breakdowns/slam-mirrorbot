@@ -103,6 +103,15 @@
         "description": "If you want to remove mega.nz mirror support, set it to True.",
         "required": false
       },
+      "ENABLE_FILESIZE_LIMIT": {
+        "description": "Change to True if you want to use MAX_TORRENT_SIZE.",
+        "value": "false",
+        "required": true
+      },
+      "MAX_TORRENT_SIZE": {
+        "description": ",Fill The amount you want to limit, examples: 1 = 1gb.",
+        "required": false
+      },
       "STOP_DUPLICATE_MIRROR": {
         "description": "If this field is set to True, bot will check file in drive, if it is present in drive, downloading will be stopped.",
         "required": false

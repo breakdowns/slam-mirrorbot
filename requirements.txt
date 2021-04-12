@@ -20,5 +20,6 @@ heroku3
 aiohttp
 speedtest-cli
 messages
+js2py
 lxml
 telegraph

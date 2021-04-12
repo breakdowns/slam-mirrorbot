@@ -106,7 +106,7 @@
       "ENABLE_FILESIZE_LIMIT": {
         "description": "Set it to True if you want to use MAX_TORRENT_SIZE.",
         "value": "False",
-        "required": falae
+        "required": false
       },
       "MAX_TORRENT_SIZE": {
         "description": "To limit the torrent mirror size, Fill The amount you want to limit, examples: if you fill 15 it will limit 15gb.",

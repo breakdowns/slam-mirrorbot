@@ -145,7 +145,6 @@ sudo docker run mirrorbot
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=Heroku" width="200""/></a></p>
 
 ## Deploying on Heroku using heroku-cli
-
 <details>
     <summary><b>Click here for more details</b></summary>
 

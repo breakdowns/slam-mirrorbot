@@ -66,11 +66,6 @@
         "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org.",
         "required": true
       },
-      "USE_TELEGRAPH": {
-        "description": "Set to true to use Telegra.ph for search results from /list bot command, or else set to false.",
-        "value": "",
-        "required": true
-      },
       "HEROKU_API_KEY": {
         "description": "Your Heroku API key, get it from https://dashboard.heroku.com/account.",
         "required": true

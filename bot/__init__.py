@@ -90,6 +90,28 @@ except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)
 
+LOGGER.info("Generating USER_SESSION_STRING")
+with Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN) as app:
+    USER_SESSION_STRING = app.export_session_string()
+
+#Generate Telegraph Token
+sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))
+LOGGER.info("Generating Telegraph Token using '" + sname + "' name")
+telegraph = Telegraph()
+telegraph.create_account(short_name=sname)
+telegraph_token = telegraph.get_access_token()
+LOGGER.info("Telegraph Token Generated: '" + telegraph_token + "'")
+
+try:
+    HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
+except KeyError:
+    logging.warning('HEROKU API KEY not provided!')
+    HEROKU_API_KEY = None
+try:
+    HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
+except KeyError:
+    logging.warning('HEROKU APP NAME not provided!')
+    HEROKU_APP_NAME = None
 try:
     MAX_TORRENT_SIZE = int(getConfig("MAX_TORRENT_SIZE"))
 except KeyError:
@@ -102,44 +124,6 @@ try:
        ENABLE_FILESIZE_LIMIT = False
 except KeyError:
     ENABLE_FILESIZE_LIMIT = False
-
-try:
-    if os.environ['USE_TELEGRAPH'].upper() == 'TRUE':
-        USE_TELEGRAPH = True
-    else:
-        raise KeyError
-except KeyError:
-    USE_TELEGRAPH = False
-
-# Generate USER_SESSION_STRING
-LOGGER.info("Generating USER_SESSION_STRING")
-with Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN) as app:
-    USER_SESSION_STRING = app.export_session_string()
-
-# Generate TELEGRAPH_TOKEN
-if USE_TELEGRAPH:
-    sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))
-    LOGGER.info("Using Telegra.ph")
-    LOGGER.info("Generating TELEGRAPH_TOKEN using '" + sname + "' name")
-    telegraph = Telegraph()
-    telegraph.create_account(short_name=sname)
-    TELEGRAPH_TOKEN = telegraph.get_access_token()
-    LOGGER.info("Telegraph Token Generated: '" + TELEGRAPH_TOKEN + "'")
-if not USE_TELEGRAPH:
-    TELEGRAPH_TOKEN = None
-    LOGGER.info("Not Using Telegra.ph")
-    pass
-
-try:
-    HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
-except KeyError:
-    logging.warning('HEROKU API KEY not provided!')
-    HEROKU_API_KEY = None
-try:
-    HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
-except KeyError:
-    logging.warning('HEROKU APP NAME not provided!')
-    HEROKU_APP_NAME = None
 try:
     UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
 except KeyError:

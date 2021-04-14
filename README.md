@@ -83,7 +83,6 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **INDEX_URL**: (Optional field) Refer to https://github.com/maple3142/GDIndex/ The URL should not have any trailing '/'
 - **API_KEY**: This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
 - **API_HASH**: This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org
-- **USE_TELEGRAPH**: Set to `true` to use Telegra.ph for search results from /list bot command, or else set to `false`.
 - **MEGA_API_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account 
@@ -140,8 +139,9 @@ sudo docker run mirrorbot
 
 ## Deploying on Heroku
 
-- Fork this repo
-- Upload **token.pickle** to your forks
+Fork this repo then upload **token.pickle** to your forks
+
+**NOTE**: If you didn't upload **token.pickle**, uploading will not working.
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 ## Deploying on Heroku using heroku-cli
@@ -155,15 +155,15 @@ heroku login
 ```
 - Create a new heroku app:
 ```
-heroku create <appname>
+heroku create appname
 ```
 - Select This App in your Heroku-cli: 
 ```
-heroku git:remote -a <appname>
+heroku git:remote -a appname
 ```
 - Change Dyno Stack to a Docker Container:
 ```
-heroku stack:set container -a <appname>
+heroku stack:set container -a appname
 ```
 - Add Private Credentials and Config Stuff:
 ```
@@ -180,11 +180,11 @@ git push heroku master --force
 - Restart Worker by these commands,You can Do it manually too in heroku.
 - For Turning off the Bot:
 ```
-heroku ps:scale worker=0 -a <appname>
+heroku ps:scale worker=0 -a appname
 ```
 - For Turning on the Bot:
 ```
-heroku ps:scale worker=1 -a <appname>	 	
+heroku ps:scale worker=1 -a appname		
 ```
 
 </details>

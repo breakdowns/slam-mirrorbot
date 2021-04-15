@@ -22,10 +22,11 @@ class AriaDownloadHelper(DownloadHelper):
         download = api.get_download(gid)
         self.name = download.name
         sname = download.name
+        size = download.total_length
         if ENABLE_FILESIZE_LIMIT:
-          if download.total_length / 1024 / 1024 / 1024 > MAX_TORRENT_SIZE:
+          if size / 1024 / 1024 / 1024 > MAX_TORRENT_SIZE:
               LOGGER.info(f" Download size Exceeded: {gid}")
-              dl.getListener().onDownloadError(f'File size larger than Maximum Allowed size {MAX_TORRENT_SIZE}GB')
+              dl.getListener().onDownloadError(f'File size {get_readable_file_size(size)} larger than Maximum Allowed size {MAX_TORRENT_SIZE}')
               aria2.remove([download])
           return
         update_all_messages()

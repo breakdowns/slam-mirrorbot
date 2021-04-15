@@ -22,7 +22,7 @@ class AriaDownloadHelper(DownloadHelper):
         download = api.get_download(gid)
         self.name = download.name
         sname = download.name
-        size = download.totol_length
+        size = download.total_length
         if ENABLE_FILESIZE_LIMIT:
           if size / 1024 / 1024 / 1024 > MAX_TORRENT_SIZE:
               LOGGER.info(f" Download size Exceeded: {gid}")

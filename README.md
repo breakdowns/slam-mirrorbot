@@ -28,7 +28,7 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Shortener support
 - Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
 - Extracting password protected files, using custom filename and download from password protected index links see these examples:
-<p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-blue?style=for-the-badge" width="190""/></a></p>
+<p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
 - Extract these filetypes and uploads to google drive
 ```
@@ -248,7 +248,7 @@ machine host login username password my_youtube_password
 where host is the name of extractor (eg. youtube, twitch). Multiple accounts of different hosts can be added each separated by a new line
 
 # Support Group
-<p><a href="https://t.me/SlamMirrorSupport"> <img src="https://img.shields.io/badge/Slam%20Mirror%20Support-black?style=for-the-badge&logo=telegram" width="210""/></a></p>
+<p><a href="https://t.me/SlamMirrorSupport"> <img src="https://img.shields.io/badge/Slam%20Mirror%20Support-black?style=for-the-badge&logo=telegram" width="220""/></a></p>
 
 # Credits
 

@@ -355,6 +355,21 @@ def kang(update: Update, context: CallbackContext):
         os.remove("kangsticker.tgs")
 
 
+@run_async
+def delsticker(update, context):
+    msg = update.effective_message
+    if msg.reply_to_message and msg.reply_to_message.sticker:
+        file_id = msg.reply_to_message.sticker.file_id
+        context.bot.delete_sticker_from_set(file_id)
+        msg.reply_text(
+            "Deleted!"
+        )
+    else:
+        update.effective_message.reply_text(
+            "Please reply to sticker message to del sticker"
+        )
+
+
 def makepack_internal(
     update,
     context,
@@ -426,16 +441,18 @@ def makepack_internal(
 @run_async
 def stickhelp(update, context):
     help_string = '''
-• `/stickerid`*:* reply to a sticker to me to tell you its file ID.
-• `/getsticker`*:* reply to a sticker to me to upload its raw PNG file.
-• `/kang`*:* reply to a sticker to add it to your pack.
-• `/stickers`*:* Find stickers for given term on combot sticker catalogue
+• `/stickerid`*:* Reply to a sticker to me to tell you its file ID.
+• `/getsticker`*:* Reply to a sticker to me to upload its raw PNG file.
+• `/kang`*:* Reply to a sticker to add it to your pack.
+• `/remove`*:* Replay to a sticker to remove sticker from an existing pack.
+• `/stickers`*:* Find stickers for given term on combot sticker catalogue.
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", help_string, parse_mode=ParseMode.MARKDOWN)
 
 STICKERID_HANDLER = CommandHandler("stickerid", stickerid)
 GETSTICKER_HANDLER = CommandHandler("getsticker", getsticker)
 KANG_HANDLER = CommandHandler("kang", kang)
+DEL_HANDLER = CommandHandler("remove", delsticker)
 STICKERS_HANDLER = CommandHandler("stickers", cb_sticker)
 STICKHELP_HANDLER = CommandHandler("stickerhelp", stickhelp)
 
@@ -444,4 +461,5 @@ dispatcher.add_handler(STICKERS_HANDLER)
 dispatcher.add_handler(STICKERID_HANDLER)
 dispatcher.add_handler(GETSTICKER_HANDLER)
 dispatcher.add_handler(KANG_HANDLER)
+dispatcher.add_handler(DEL_HANDLER)
 dispatcher.add_handler(STICKHELP_HANDLER)

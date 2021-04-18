@@ -1,4 +1,4 @@
-from bot import aria2, download_dict_lock, STOP_DUPLICATE_MIRROR
+from bot import aria2, download_dict_lock, STOP_DUPLICATE_MIRROR, MAX_TORRENT_SIZE, ENABLE_FILESIZE_LIMIT
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.ext_utils.bot_utils import *
 from .download_helper import DownloadHelper
@@ -22,18 +22,27 @@ class AriaDownloadHelper(DownloadHelper):
         download = api.get_download(gid)
         self.name = download.name
         sname = download.name
-        gdrive = GoogleDriveHelper(None)
-        smsg, button = gdrive.drive_list(sname)
+        size = download.total_length
+        if ENABLE_FILESIZE_LIMIT:
+          if size / 1024 / 1024 / 1024 > MAX_TORRENT_SIZE:
+              LOGGER.info(f" Download size Exceeded: {gid}")
+              dl.getListener().onDownloadError(f'File size {get_readable_file_size(size)} larger than Maximum Allowed size {MAX_TORRENT_SIZE}')
+              aria2.remove([download])
+          return
+        update_all_messages()
         if STOP_DUPLICATE_MIRROR:
-            if smsg:
-                dl.getListener().onDownloadError(f'File is already available in drive.\n\n')
-                print(dl.getListener())
-                if button:
-                    sendMarkup("Here are the search results:👇\n", dl.getListener().bot, dl.getListener().update, button)
-                else:
-                    sendMessage("Here are the search results:👇\n" + smsg, dl.getListener().bot, dl.getListener().update)
-                aria2.remove([download])
-            return
+          if dl.getListener().isTar == True:
+            sname = sname + ".tar"
+          if dl.getListener().extract == True:
+            smsg = None
+          else:
+            gdrive = GoogleDriveHelper(None)
+            smsg, button = gdrive.drive_list(sname)
+          if smsg:
+              dl.getListener().onDownloadError(f'😡 File is already available in drive. You should have search before mirror any file. You might get ban if you do this again. This download has been stopped.\n\n')
+              sendMarkup(" Here are the search results:👇", dl.getListener().bot, dl.getListener().update, button)
+              aria2.remove([download])
+          return
         update_all_messages()
 
     def __onDownloadComplete(self, api: API, gid):

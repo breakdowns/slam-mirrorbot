@@ -10,7 +10,7 @@ aria2p>=0.9.0,<0.15.0
 python-dotenv>=0.10
 tenacity>=6.0.0
 python-magic
-beautifulsoup4>=4.8.2,<4.8.10
+beautifulsoup4
 pyrogram
 TgCrypto
 youtube_dl
@@ -18,7 +18,8 @@ feedparser
 natsort
 heroku3
 aiohttp
-speedtest-cli>=2.1.2
+speedtest-cli
 messages
+js2py
 lxml
 telegraph

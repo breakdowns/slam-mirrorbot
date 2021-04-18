@@ -19,6 +19,7 @@ from random import choice
 
 import requests
 from bs4 import BeautifulSoup
+from js2py import EvalJs
 
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException
 
@@ -41,41 +42,34 @@ def direct_link_generator(link: str):
         return osdn(link)
     elif 'github.com' in link:
         return github(link)
+    elif 'racaty.net' in link:
+        return racaty(link)
     else:
         raise DirectDownloadLinkException(f'No Direct link function found for {link}')
 
-""" Zippy-Share up-to-date plugin from https://github.com/UsergeTeam/Userge-Plugins/blob/master/plugins/zippyshare.py """
-""" Thanks to all contributors @aryanvikash, rking32, @BianSepang """
-
-link = r'https://www(\d{1,3}).zippyshare.com/v/(\w{8})/file.html'
-regex_result = (
-    r'var a = (\d{6});\s+var b = (\d{6});\s+document\.getElementById'
-    r'\(\'dlbutton\'\).omg = "f";\s+if \(document.getElementById\(\''
-    r'dlbutton\'\).omg != \'f\'\) {\s+a = Math.ceil\(a/3\);\s+} else'
-    r' {\s+a = Math.floor\(a/3\);\s+}\s+document.getElementById\(\'d'
-    r'lbutton\'\).href = "/d/[a-zA-Z\d]{8}/\"\+\(a \+ \d{6}%b\)\+"/('
-    r'[\w%-.]+)";'
-)
-
 def zippy_share(url: str) -> str:
-    session = requests.Session()
-    with session as ses:
-        match = re.match(link, url)
-        if not match:
-            raise ValueError("Invalid URL: " + str(url))
-        server, id_ = match.group(1), match.group(2)
-        res = ses.get(url)
-        res.raise_for_status()
-        match = re.search(regex_result, res.text, re.DOTALL)
-        if not match:
-            raise ValueError("Invalid Response!")
-        val_1 = int(match.group(1))
-        val_2 = math.floor(val_1 / 3)
-        val_3 = int(match.group(2))
-        val = val_1 + val_2 % val_3
-        name = match.group(3)
-        dl_url = "https://www{}.zippyshare.com/d/{}/{}/{}".format(server, id_, val, name)
-    return dl_url
+    link = re.findall("https:/.(.*?).zippyshare", url)[0]
+    response_content = (requests.get(url)).content
+    bs_obj = BeautifulSoup(response_content, "lxml")
+
+    try:
+        js_script = bs_obj.find("div", {"class": "center",}).find_all(
+            "script"
+        )[1]
+    except:
+        js_script = bs_obj.find("div", {"class": "right",}).find_all(
+            "script"
+        )[0]
+
+    js_content = re.findall(r'\.href.=."/(.*?)";', str(js_script))
+    js_content = 'var x = "/' + js_content[0] + '"'
+
+    evaljs = EvalJs()
+    setattr(evaljs, "x", None)
+    evaljs.execute(js_content)
+    js_content = getattr(evaljs, "x")
+
+    return f"https://{link}.zippyshare.com{js_content}"
 
 
 def yandex_disk(url: str) -> str:
@@ -179,6 +173,22 @@ def github(url: str) -> str:
         return dl_url
     except KeyError:
         raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
+
+
+def racaty(url: str) -> str:
+    dl_url = ''
+    try:
+        link = re.findall(r'\bhttps?://.*racaty\.net\S+', url)[0]
+    except IndexError:
+        raise DirectDownloadLinkException("`No Racaty links found`\n")
+    reqs=requests.get(link)
+    bss=BeautifulSoup(reqs.text,'html.parser')
+    op=bss.find('input',{'name':'op'})['value']
+    id=bss.find('input',{'name':'id'})['value']
+    rep=requests.post(link,data={'op':op,'id':id})
+    bss2=BeautifulSoup(rep.text,'html.parser')
+    dl_url=bss2.find('a',{'id':'uniqueExpirylink'})['href']
+    return dl_url
 
 
 def useragent():

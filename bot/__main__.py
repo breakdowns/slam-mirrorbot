@@ -8,7 +8,7 @@ from sys import executable
 import time
 from telegram import ParseMode
 from telegram.ext import CommandHandler, run_async
-from bot import dispatcher, updater, botStartTime
+from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
@@ -38,23 +38,29 @@ def stats(update, context):
             f'<b>CPU:</b> {cpuUsage}%\n' \
             f'<b>RAM:</b> {memory}%\n' \
             f'<b>Disk:</b> {disk}%'
-    sendMessage(stats, context.bot, update)
+    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", stats, parse_mode=ParseMode.HTML)
 
 
 @run_async
 def start(update, context):
     start_string = f'''
-Hi {update.message.chat.first_name}, This bot can mirror all your links to Google drive!
+This bot can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
+
+@run_async
+def chat_list(update, context):
+    chatlist =''
+    chatlist += '\n'.join(str(id) for id in AUTHORIZED_CHATS)
+    sendMessage(f'<b>Authorized List:</b>\n{chatlist}\n', context.bot, update)
 
 
 @run_async
 def repo(update, context):
     bot.send_message(update.message.chat_id,
     reply_to_message_id=update.message.message_id,
-    text="Repo: https://github.com/breakdowns/slam-mirrorbot", disable_web_page_preview=True)
+    text="Repo: https://github.com/breakdowns/slam-mirrorbot\nGroup: https://t.me/SlamMirrorSupport", disable_web_page_preview=True)
 
 
 @run_async
@@ -108,6 +114,8 @@ def bot_help(update, context):
 
 /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by owner of the bot)
 
+/{BotCommands.AuthListCommand}: See Authorized list (Can only be invoked by owner of the bot)
+
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
 /{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
@@ -148,6 +156,7 @@ def main():
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter)
     repo_handler = CommandHandler(BotCommands.RepoCommand, repo,
                                    filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
+    authlist_handler = CommandHandler(BotCommands.AuthListCommand, chat_list, filters=CustomFilters.owner_filter)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
@@ -155,6 +164,7 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     dispatcher.add_handler(repo_handler)
+    dispatcher.add_handler(authlist_handler)
     updater.start_polling()
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)

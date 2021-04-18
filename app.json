@@ -66,11 +66,6 @@
         "description": "This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org.",
         "required": true
       },
-      "USE_TELEGRAPH": {
-        "description": "Set to true to use Telegra.ph for search results from /list bot command, or else set to false.",
-        "value": "",
-        "required": true
-      },
       "HEROKU_API_KEY": {
         "description": "Your Heroku API key, get it from https://dashboard.heroku.com/account.",
         "required": true
@@ -101,6 +96,16 @@
       },
       "BLOCK_MEGA_LINKS": {
         "description": "If you want to remove mega.nz mirror support, set it to True.",
+        "required": false
+      },
+      "ENABLE_FILESIZE_LIMIT": {
+        "description": "Set it to True if you want to use MAX_TORRENT_SIZE.",
+        "value": "False",
+        "required": false
+      },
+      "MAX_TORRENT_SIZE": {
+        "description": "To limit the torrent mirror size, Fill The amount you want to limit, examples: if you fill 15 it will limit 15gb.",
+        "value": "15",
         "required": false
       },
       "STOP_DUPLICATE_MIRROR": {

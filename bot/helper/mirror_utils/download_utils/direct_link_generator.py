@@ -42,6 +42,8 @@ def direct_link_generator(link: str):
         return osdn(link)
     elif 'github.com' in link:
         return github(link)
+    elif 'racaty.net' in link:
+        return racaty(link)
     else:
         raise DirectDownloadLinkException(f'No Direct link function found for {link}')
 
@@ -171,6 +173,22 @@ def github(url: str) -> str:
         return dl_url
     except KeyError:
         raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
+
+
+def racaty(url: str) -> str:
+    dl_url = ''
+    try:
+        link = re.findall(r'\bhttps?://.*racaty\.net\S+', url)[0]
+    except IndexError:
+        raise DirectDownloadLinkException("`No Racaty links found`\n")
+    reqs=requests.get(link)
+    bss=BeautifulSoup(reqs.text,'html.parser')
+    op=bss.find('input',{'name':'op'})['value']
+    id=bss.find('input',{'name':'id'})['value']
+    rep=requests.post(link,data={'op':op,'id':id})
+    bss2=BeautifulSoup(rep.text,'html.parser')
+    dl_url=bss2.find('a',{'id':'uniqueExpirylink'})['href']
+    return dl_url
 
 
 def useragent():

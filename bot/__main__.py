@@ -38,7 +38,7 @@ def stats(update, context):
             f'<b>CPU:</b> {cpuUsage}%\n' \
             f'<b>RAM:</b> {memory}%\n' \
             f'<b>Disk:</b> {disk}%'
-    sendMessage(stats, context.bot, update)
+    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", stats, parse_mode=ParseMode.HTML)
 
 
 @run_async
@@ -60,7 +60,7 @@ def chat_list(update, context):
 def repo(update, context):
     bot.send_message(update.message.chat_id,
     reply_to_message_id=update.message.message_id,
-    text="Repo: https://github.com/breakdowns/slam-mirrorbot\nGroup: https://t.me/SlamMirrorSupportGroup", disable_web_page_preview=True)
+    text="Repo: https://github.com/breakdowns/slam-mirrorbot\nGroup: https://t.me/SlamMirrorSupport", disable_web_page_preview=True)
 
 
 @run_async

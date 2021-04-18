@@ -27,8 +27,9 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Delete files from drive
 - Shortener support
 - Custom Filename (Only for url, telegram files and ytdl. Not for mega links and magnet/torrents)
-- Extracting password protected files and using custom filename see these examples:
-> https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
+- Extracting password protected files, using custom filename and download from password protected index links see these examples:
+<p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
+
 - Extract these filetypes and uploads to google drive
 ```
 ZIP, RAR, TAR, 7z, ISO, WIM, CAB, GZIP, BZIP2, 
@@ -141,7 +142,7 @@ sudo docker run mirrorbot
 
 Fork this repo then upload **token.pickle** to your forks
 
-**NOTE**: If you didn't upload **token.pickle**, uploading will not working.
+**NOTE**: If you didn't upload **token.pickle**, uploading will not work.
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 ## Deploying on Heroku using heroku-cli
@@ -245,6 +246,9 @@ For using your premium accounts in youtube-dl, edit the [.netrc](https://github.
 machine host login username password my_youtube_password
 ```
 where host is the name of extractor (eg. youtube, twitch). Multiple accounts of different hosts can be added each separated by a new line
+
+# Support Group
+<p><a href="https://t.me/SlamMirrorSupport"> <img src="https://img.shields.io/badge/Slam%20Mirror%20Support-black?style=for-the-badge&logo=telegram" width="230""/></a></p>
 
 # Credits
 

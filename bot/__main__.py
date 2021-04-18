@@ -38,7 +38,7 @@ def stats(update, context):
             f'<b>CPU:</b> {cpuUsage}%\n' \
             f'<b>RAM:</b> {memory}%\n' \
             f'<b>Disk:</b> {disk}%'
-    sendMessage(stats, context.bot, update)
+    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", stats, parse_mode=ParseMode.HTML)
 
 
 @run_async

@@ -86,6 +86,7 @@ try:
     AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
+    IMAGE_URL = getConfig('IMAGE_URL')
 except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)

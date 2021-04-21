@@ -219,13 +219,15 @@ Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scrip
 ## Generate service accounts. [What is service account](https://cloud.google.com/iam/docs/service-accounts)
 
 Let us create only the service accounts that we need. 
-**Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 sa allow you plenty of use, its also possible that over abuse might get your projects banned by google. 
+**Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 sa allow you plenty of use, its also possible that over abuse might get your projects banned by google.
+
+**Must enable Identity and Access Management (IAM) API at google console/google cloud platform**
 
 ```
 Note: 1 service account can copy around 750gb a day, 1 project can make 100 service accounts so that's 75tb a day, for most users this should easily suffice. 
 ```
 
-`python3 gen_sa_accounts.py --quick-setup 1 --new-only`
+`python3 -m pip install progress && gen_sa_accounts.py --quick-setup 1 --new-only`
 
 A folder named accounts will be created which will contain keys for the service accounts
 

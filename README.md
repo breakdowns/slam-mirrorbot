@@ -44,8 +44,8 @@ Deploying is pretty much straight forward and is divided into several steps as f
 
 - Clone this repo:
 ```
-git clone https://github.com/magneto261290/magneto-python-aria mirror-bot/
-cd mirror-bot
+git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
+cd mirrorbot
 ```
 
 - Install requirements

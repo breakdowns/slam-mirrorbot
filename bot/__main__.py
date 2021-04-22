@@ -16,6 +16,7 @@ from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_tim
 from .helper.telegram_helper.filters import CustomFilters
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest, usage
 
+now=datetime.now(pytz.timezone('Asia/Jakarta'))
 
 @run_async
 def stats(update, context):
@@ -30,6 +31,7 @@ def stats(update, context):
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
     stats = f'<b>Bot Uptime:</b> {currentTime}\n' \
+            f'<b>Start Time:</b> {current}\n' \
             f'<b>Total disk space:</b> {total}\n' \
             f'<b>Used:</b> {used}  ' \
             f'<b>Free:</b> {free}\n\n' \

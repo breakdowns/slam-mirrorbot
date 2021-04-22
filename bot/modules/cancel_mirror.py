@@ -30,8 +30,8 @@ def cancel_mirror(update, context):
             dl = download_dict[mirror_message.message_id]
     if len(args) == 1:
         if mirror_message is None or mirror_message.message_id not in keys:
-            if BotCommands.MirrorCommand in update.message.text or \
-                    BotCommands.TarMirrorCommand in update.message.text:
+            if BotCommands.MirrorCommand in mirror_message.text or \
+                    BotCommands.TarMirrorCommand in mirror_message.text:
                 msg = "Mirror already have been cancelled"
                 sendMessage(msg, context.bot, update)
                 return

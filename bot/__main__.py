@@ -21,6 +21,7 @@ now=datetime.now(pytz.timezone('Asia/Jakarta'))
 @run_async
 def stats(update, context):
     currentTime = get_readable_time((time.time() - botStartTime))
+    current = now.strftime('%Y/%m/%d %I:%M:%S')
     total, used, free = shutil.disk_usage('.')
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)

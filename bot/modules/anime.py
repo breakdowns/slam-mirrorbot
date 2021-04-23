@@ -252,16 +252,16 @@ def manga(update: Update, _):
 @run_async
 def weebhelp(update, context):
     help_string = '''
-• `/al`*:* search anime
-• `/chr`*:* search character
-• `/mng`*:* search manga
+• `/anime`*:* search anime
+• `/character`*:* search character
+• `/manga`*:* search manga
 '''
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.MARKDOWN)
 
 
-ANIME_HANDLER = CommandHandler("al", anime)
-CHARACTER_HANDLER = CommandHandler("chr", character)
-MANGA_HANDLER = CommandHandler("mng", manga)
+ANIME_HANDLER = CommandHandler("anime", anime)
+CHARACTER_HANDLER = CommandHandler("character", character)
+MANGA_HANDLER = CommandHandler("manga", manga)
 WEEBHELP_HANDLER = CommandHandler("weebhelp", weebhelp)
 
 dispatcher.add_handler(ANIME_HANDLER)

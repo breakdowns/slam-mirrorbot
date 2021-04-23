@@ -109,7 +109,7 @@ urlshortx.com
 shortzon.com
 ```
 
-**Note**: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
+**Note**: Above are the supported url shorteners. Except these only some url shorteners are supported.
 
 </details>
 

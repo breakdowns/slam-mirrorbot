@@ -1,6 +1,6 @@
 {
     "name": "slam-mirrorbot ",
-    "description": "Telegram mirror bot with python",
+    "description": "A Telegram bot for all your mirror needs",
     "logo": "https://telegra.ph/file/6507910fd06d18dfaba82.jpg",
     "keywords": [
       "bot",
@@ -8,7 +8,7 @@
       "python"
     ],
     "repository": "https://github.com/breakdowns/slam-mirrorbot",
-    "website": "https://t.me/SlamMirrorSupportGroup",
+    "website": "https://t.me/SlamMirrorSupport",
     "success_url": "https://github.com/breakdowns/slam-mirrorbot/blob/master/README.md",
     "stack": "container",
     "env": {

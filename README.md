@@ -40,7 +40,6 @@ NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 
 # How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:
-
 ## Installing requirements
 
 - Clone this repo:
@@ -53,11 +52,18 @@ cd mirrorbot
 For Debian based distros
 ```
 sudo apt install python3
-sudo snap install docker 
 ```
+Install Docker by following the [official docker docs](https://docs.docker.com/engine/install/debian/)
+
+
 - For Arch and it's derivatives:
 ```
 sudo pacman -S docker python
+```
+
+- Install dependencies for running setup scripts:
+```
+pip3 install -r requirements-cli.txt
 ```
 
 ## Setting up config file
@@ -103,7 +109,7 @@ urlshortx.com
 shortzon.com
 ```
 
-**Note**: Above are the supported url shorteners. Except these only some url shorteners are supported. If you want to use any other url shortener then first ask me that shortener is supported or not.
+**Note**: Above are the supported url shorteners. Except these only some url shorteners are supported.
 
 </details>
 
@@ -112,7 +118,7 @@ shortzon.com
 - Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)
 - Go to the OAuth Consent tab, fill it, and save.
 - Go to the Credentials tab and click Create Credentials -> OAuth Client ID
-- Choose Desktop and Create.
+- Choose Other and Create.
 - Use the download button to download your credentials.
 - Move that file to the root of mirrorbot, and rename it to credentials.json
 - Visit [Google API page](https://console.developers.google.com/apis/library)

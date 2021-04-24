@@ -16,10 +16,10 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 
 ## From Source Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
-- Mirroring Mega.nz links to Google Drive (In development stage)
 - Copy files from someone's drive to your drive (Using Autorclone)
 - Download/upload progress, speeds and ETAs
 - Mirror all youtube-dl supported links
+- Stable Mega.nz support
 - Docker support
 - Uploading To Team Drives
 - Index Link support
@@ -90,8 +90,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **INDEX_URL**: (Optional field) Refer to https://github.com/maple3142/GDIndex/ The URL should not have any trailing '/'
 - **API_KEY**: This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
 - **API_HASH**: This is to authenticate to your telegram account for downloading Telegram files. You can get this from https://my.telegram.org
-- **MEGA_API_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
-- **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
+- **MEGA_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
+- **MEGA_USERNAME**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account 
 - **STOP_DUPLICATE_MIRROR**: (Optional field) (Leave empty if unsure) if this field is set to `True` , bot will check file in drive, if it is present in drive, downloading will ne stopped. (Note - File will be checked using filename, not using filehash, so this feature is not perfect yet)
 - **ENABLE_FILESIZE_LIMIT**: Set it to `True` if you want to use `MAX_TORRENT_SIZE`.

@@ -16,10 +16,10 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 
 ## From Source Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
+- Mirroring Mega.nz links to google drive
 - Copy files from someone's drive to your drive (Using Autorclone)
 - Download/upload progress, speeds and ETAs
 - Mirror all youtube-dl supported links
-- Stable Mega.nz support
 - Docker support
 - Uploading To Team Drives
 - Index Link support

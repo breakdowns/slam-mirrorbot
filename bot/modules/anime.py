@@ -6,6 +6,7 @@ import bs4
 import requests
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 from telegram.ext import run_async, CallbackContext, CommandHandler
+from bot.helper.telegram_helper.message_utils import *
 
 from bot import dispatcher
 
@@ -252,12 +253,11 @@ def manga(update: Update, _):
 @run_async
 def weebhelp(update, context):
     help_string = '''
-• `/anime`*:* search anime
-• `/character`*:* search character
-• `/manga`*:* search manga
+• /anime: search anime
+• /character: search character
+• /manga: search manga
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", help_string, parse_mode=ParseMode.MARKDOWN)
-
+    sendMessage(help_string, context.bot, update)
 
 ANIME_HANDLER = CommandHandler("anime", anime)
 CHARACTER_HANDLER = CommandHandler("character", character)

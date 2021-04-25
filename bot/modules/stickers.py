@@ -11,6 +11,7 @@ from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError, Update
 from telegram.ext import run_async, CallbackContext, CommandHandler
 from telegram.utils.helpers import mention_html
+from bot.helper.telegram_helper.message_utils import *
 
 from bot import dispatcher
 
@@ -441,13 +442,14 @@ def makepack_internal(
 @run_async
 def stickhelp(update, context):
     help_string = '''
-• `/stickerid`*:* Reply to a sticker to me to tell you its file ID.
-• `/getsticker`*:* Reply to a sticker to me to upload its raw PNG file.
-• `/kang`*:* Reply to a sticker to add it to your pack.
-• `/remove`*:* Replay to a sticker to remove sticker from an existing pack.
-• `/stickers`*:* Find stickers for given term on combot sticker catalogue.
+• /stickerid: Reply to a sticker to me to tell you its file ID.
+• /getsticker: Reply to a sticker to me to upload its raw PNG file.
+• /kang: Reply to a sticker to add it to your pack.
+• /remove: Replay to a sticker to remove sticker from an existing pack.
+• /stickers: Find stickers for given term on combot sticker catalogue.
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", help_string, parse_mode=ParseMode.MARKDOWN)
+    sendMessage(help_string, context.bot, update)
+
 
 STICKERID_HANDLER = CommandHandler("stickerid", stickerid)
 GETSTICKER_HANDLER = CommandHandler("getsticker", getsticker)

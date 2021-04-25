@@ -33,17 +33,17 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'<b>Bot Uptime:</b> {currentTime}\n' \
-            f'<b>Start Time:</b> {current}\n' \
-            f'<b>Total disk space:</b> {total}\n' \
-            f'<b>Used:</b> {used}  ' \
-            f'<b>Free:</b> {free}\n\n' \
-            f'📊Data Usage📊\n<b>Upload:</b> {sent}\n' \
-            f'<b>Down:</b> {recv}\n\n' \
-            f'<b>CPU:</b> {cpuUsage}%\n' \
-            f'<b>RAM:</b> {memory}%\n' \
-            f'<b>Disk:</b> {disk}%'
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", stats, parse_mode=ParseMode.HTML)
+    stats = f'<b>Bot Uptime ⌚:</b> {currentTime}\n' \
+            f'<b>Start Time ⌚:</b> {current}\n' \
+            f'<b>Total disk space🗄️:</b> {total}\n' \
+            f'<b>Used 🗃️:</b> {used}  ' \
+            f'<b>Free 🗃️:</b> {free}\n\n' \
+            f'📇Data Usage📇\n<b>Uploaded :</b> {sent}\n' \
+            f'<b>Downloaded:</b> {recv}\n\n' \
+            f'<b>CPU 🖥️:</b> {cpuUsage}% ' \
+            f'<b>RAM ⛏️:</b> {memory}% ' \
+            f'<b>Disk 🗄️:</b> {disk}%'
+    sendMessage(stats, context.bot, update)
 
 
 @run_async
@@ -52,7 +52,7 @@ def start(update, context):
 This bot can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
+    sendMessage(start_string, context.bot, update)
 
 @run_async
 def chat_list(update, context):
@@ -65,7 +65,7 @@ def chat_list(update, context):
 def repo(update, context):
     bot.send_message(update.message.chat_id,
     reply_to_message_id=update.message.message_id,
-    text="Repo: https://github.com/breakdowns/slam-mirrorbot\nGroup: https://t.me/SlamMirrorSupport", disable_web_page_preview=True)
+    text="Repo: https://github.com/reaitten/chizubot\nGroup: https://t.me/MirrorCrew", disable_web_page_preview=True)
 
 
 @run_async
@@ -96,43 +96,24 @@ def log(update, context):
 def bot_help(update, context):
     help_string = f'''
 /{BotCommands.HelpCommand}: To get this message
-
 /{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
-
 /{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to google drive
-
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
-
 /{BotCommands.CloneCommand}: Copy file/folder to google drive
-
 /{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
-
 /{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
-
 /{BotCommands.CancelMirror}: Reply to the message by which the download was initiated and that download will be cancelled
-
 /{BotCommands.StatusCommand}: Shows a status of all the downloads
-
 /{BotCommands.ListCommand} [search term]: Searches the search term in the Google drive, if found replies with the link
-
 /{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on
-
 /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by owner of the bot)
-
 /{BotCommands.AuthListCommand}: See Authorized list (Can only be invoked by owner of the bot)
-
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
-
 /{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
-
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
-
 /{BotCommands.RepoCommand}: Get the bot repo.
-
 /tshelp: Get help for torrent search module.
-
 /weebhelp: Get help for anime, manga and character module.
-
 /stickerhelp: Get help for stickers module.
 '''
     sendMessage(help_string, context.bot, update)
@@ -148,8 +129,7 @@ def main():
         LOGGER.info('Restarted Successfully!')
         remove('restart.pickle')
 
-    start_handler = CommandHandler(BotCommands.StartCommand, start,
-                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
+    start_handler = CommandHandler(BotCommands.StartCommand, start,)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     restart_handler = CommandHandler(BotCommands.RestartCommand, restart,

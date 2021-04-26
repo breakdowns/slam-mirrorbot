@@ -20,6 +20,7 @@ from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clon
 
 now=datetime.now(pytz.timezone('Asia/Jakarta'))
 
+
 @run_async
 def stats(update, context):
     currentTime = get_readable_time((time.time() - botStartTime))
@@ -53,6 +54,7 @@ This bot can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     update.effective_message.reply_photo(IMAGE_URL, start_string, parse_mode=ParseMode.MARKDOWN)
+
 
 @run_async
 def chat_list(update, context):

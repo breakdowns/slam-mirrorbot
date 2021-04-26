@@ -153,10 +153,6 @@ try:
 except KeyError:
     ENABLE_FILESIZE_LIMIT = False
 try:
-    IMAGE_URL = getConfig('IMAGE_URL')
-except KeyError:
-    IMAGE_URL = None
-try:
     UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
 except KeyError:
     logging.warning('UPTOBOX_TOKEN not provided!')

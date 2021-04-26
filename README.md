@@ -2,7 +2,7 @@
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
 ## chizubot fork
-this fork only removes the images from "/start" & other et cetera commands.
+this fork only removes the images from "/start" & other etc. commands.
 you should create a new repository & use this as it's template to edit bot's response messages.
 # Features supported:
 

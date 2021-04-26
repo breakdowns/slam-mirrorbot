@@ -55,7 +55,7 @@ def tar(org_path):
     path = pathlib.PurePath(org_path)
     LOGGER.info(f'Tar: orig_path: {org_path}, tar_path: {tar_path}')
     tar = tarfile.open(tar_path, "w")
-    tar.add(org_path, arcname=path.name)
+    tar.add(org_path, arcname=os.path.basename(org_path))
     tar.close()
     return tar_path
 

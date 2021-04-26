@@ -36,7 +36,7 @@ class MyLogger:
 class YoutubeDLHelper(DownloadHelper):
     def __init__(self, listener):
         super().__init__()
-        self.__name = ""
+        self.name = ""
         self.__start_time = time.time()
         self.__listener = listener
         self.__gid = ""
@@ -102,7 +102,7 @@ class YoutubeDLHelper(DownloadHelper):
         self.__listener.onDownloadError(error)
 
     def extractMetaData(self, link, qual, name):
-        if 'hotstar' or 'sonyliv' in link:
+        if "hotstar" or "sonyliv" in link:
             self.opts['geo_bypass_country'] = 'IN'
 
         with YoutubeDL(self.opts) as ydl:

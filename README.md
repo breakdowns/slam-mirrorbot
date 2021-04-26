@@ -13,6 +13,7 @@ This is a telegram bot writen in python for mirroring files on the internet to o
 - Check Heroku dynos stats
 - Add stickers to your pack
 - Shell and Executor
+- racaty.net support
 
 ## From Source Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive

@@ -71,7 +71,6 @@ class AriaDownloadHelper(DownloadHelper):
     def __onDownloadStopped(self, api, gid):
         LOGGER.info(f"onDownloadStop: {gid}")
         dl = getDownloadByGid(gid)
-        dl = getDownloadByGid(gid)
         if dl:
             dl.getListener().onDownloadError('Dead Torrent!')
 

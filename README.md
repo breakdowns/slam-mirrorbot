@@ -129,7 +129,7 @@ shortzon.com
 - Finally, run the script to generate **token.pickle** file for Google Drive:
 ```
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
-python3 generate_drive_token.py
+python3 script/generate_drive_token.py
 ```
 
 ## Deploying
@@ -234,19 +234,19 @@ Let us create only the service accounts that we need.
 Note: 1 service account can copy around 750gb a day, 1 project can make 100 service accounts so that's 75tb a day, for most users this should easily suffice. 
 ```
 
-`python3 gen_sa_accounts.py --quick-setup 1 --new-only`
+`python3 script/gen_sa_accounts.py --quick-setup 1 --new-only`
 
 A folder named accounts will be created which will contain keys for the service accounts
 
 **NOTE**: If you have created SAs in past from this script, you can also just re download the keys by running:
 ```
-python3 gen_sa_accounts.py --download-keys project_id
+python3 script/gen_sa_accounts.py --download-keys project_id
 ```
 
 ## Add all the service accounts to the Team Drive
 - Run:
 ```
-python3 add_to_team_drive.py -d SharedTeamDriveSrcID
+python3 script/add_to_team_drive.py -d SharedTeamDriveSrcID
 ```
 
 ## Youtube-dl authentication using .netrc file

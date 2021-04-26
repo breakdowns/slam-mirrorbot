@@ -83,7 +83,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **GDRIVE_FOLDER_ID**: This is the folder ID of the Google Drive Folder to which you want to upload all the mirrors.
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
 - **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it 5 seconds at least)  
-- **OWNER_ID**: The Telegram user ID (not username) of the owner of the bot You can get this value for [@userinfobot](https://t.me/userinfobot)
+- **OWNER_ID**: The Telegram user ID (not username) of the owner of the bot. You can get this value for [@userinfobot](https://t.me/userinfobot)
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. Note: Set to -1 to never automatically delete messages
 - **IS_TEAM_DRIVE**: (Optional field) Set to `True` if GDRIVE_FOLDER_ID is from a Team Drive else False or Leave it empty.
@@ -95,7 +95,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account 
 - **STOP_DUPLICATE_MIRROR**: (Optional field) (Leave empty if unsure) if this field is set to `True` , bot will check file in drive, if it is present in drive, downloading will ne stopped. (Note - File will be checked using filename, not using filehash, so this feature is not perfect yet)
-- **HEROKU_API_KEY**: Your Heroku API key. Can be found on [Heroku Account Page](https://dashboard.heroku.com/account), at the bottom of the page.
+- **HEROKU_API_KEY**: Your Heroku API key. Can be found on [Heroku Account Page](https://dashboard.heroku.com/account), scroll down until you reach the bottom of the page.
 - **HEROKU_APP_NAME**: Heroku application name.
 - **ENABLE_FILESIZE_LIMIT**: Set it to `True` if you want to use `MAX_TORRENT_SIZE`.
 - **MAX_TORRENT_SIZE**: To limit the torrent mirror size, Fill The amount you want to limit, examples: if you fill `15` it will limit `15GB`.

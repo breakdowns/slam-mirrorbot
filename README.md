@@ -3,6 +3,18 @@
 # Slam Mirror Bot
 This is a telegram bot writen in python for mirroring files on the internet to our beloved Google Drive.
 
+# Credits
+
+Thanks to:
+- [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS
+- [Izzy12](https://github.com/lzzy12/) for original repo
+- [Dank-del](https://github.com/Dank-del/) for base repo
+- [magneto261290](https://github.com/magneto261290/) for some features
+- [SVR666](https://github.com/SVR666/) for some features & fixes
+- [breakdowns](https://github.com/breakdowns/) me (lol)
+
+and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).
+
 # Features supported:
 
 ## Additional Features
@@ -256,15 +268,3 @@ where host is the name of extractor (eg. youtube, twitch). Multiple accounts of 
 
 # Support Group
 <p><a href="https://t.me/SlamMirrorSupport"> <img src="https://img.shields.io/badge/Slam%20Mirror%20Support-black?style=for-the-badge&logo=telegram" width="230""/></a></p>
-
-# Credits
-
-Thanks to:
-- [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS
-- [Izzy12](https://github.com/lzzy12/) for original repo
-- [Dank-del](https://github.com/Dank-del/) for base repo
-- [magneto261290](https://github.com/magneto261290/) for some features
-- [SVR666](https://github.com/SVR666/) for some features & fixes
-- [breakdowns](https://github.com/breakdowns/) me (lol)
-
-and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

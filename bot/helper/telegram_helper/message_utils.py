@@ -101,7 +101,6 @@ def update_all_messages():
                 status_reply_dict[chat_id].text = msg
 
 
-
 def sendStatusMessage(msg, bot):
     progress = get_readable_message()
     progress += f"<b>CPU:</b> {psutil.cpu_percent()}%\n" \
@@ -134,8 +133,5 @@ def sendStatusMessage(msg, bot):
             except Exception as e:
                 LOGGER.error(str(e))
                 del status_reply_dict[msg.message.chat.id]
-                pass
-        if len(progress) == 0:
-            progress = "Starting DL"
         message = sendMessage(progress, bot, msg)
         status_reply_dict[msg.message.chat.id] = message

@@ -161,7 +161,7 @@ except KeyError:
 try:
     UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
 except KeyError:
-    logging.warning('UPTOBOX_TOKEN not provided!')
+    logging.info('UPTOBOX_TOKEN not provided!')
     UPTOBOX_TOKEN = None
 try:
     INDEX_URL = getConfig('INDEX_URL')

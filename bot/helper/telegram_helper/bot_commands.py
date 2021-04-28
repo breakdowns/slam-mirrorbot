@@ -22,6 +22,6 @@ class _BotCommands:
         self.TarWatchCommand = 'tarwatch'
         self.DeleteCommand = 'del'
         self.UsageCommand = 'usage'
-        self.RepoCommand = null
+        self.RepoCommand = 'repo'
 
 BotCommands = _BotCommands()

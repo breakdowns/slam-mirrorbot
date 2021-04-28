@@ -53,7 +53,8 @@ def start(update, context):
 🧲This bot can LEECH all your links to Google drive!🤗
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-    update.effective_message.reply_photo("", start_string, parse_mode=ParseMode.MARKDOWN)
+    update.effective_message.reply_photo("
+    update.effective_message.reply_photo("https://telegra.ph/file/2716ebe64750c53d3d439.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
 
 
 @run_async

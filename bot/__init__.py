@@ -4,12 +4,16 @@ import threading
 import time
 import random
 import string
+
 import aria2p
 import telegram.ext as tg
 from dotenv import load_dotenv
 from pyrogram import Client
 from telegraph import Telegraph
+
 import socket
+import faulthandler
+faulthandler.enable()
 from megasdkrestclient import MegaSdkRestClient, errors as mega_err
 import subprocess
 

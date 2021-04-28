@@ -44,13 +44,13 @@ def stats(update, context):
             f'<b>CPU:</b> {cpuUsage}%\n' \
             f'<b>RAM:</b> {memory}%\n' \
             f'<b>Disk:</b> {disk}%'
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", stats, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_photo("https://telegra.ph/file/2716ebe64750c53d3d439.jpg", stats, parse_mode=ParseMode.HTML)
 
 
 @run_async
 def start(update, context):
     start_string = f'''
-This bot can mirror all your links to Google drive!
+🧲This bot can LEECH all your links to Google drive!🤗
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     update.effective_message.reply_photo("", start_string, parse_mode=ParseMode.MARKDOWN)

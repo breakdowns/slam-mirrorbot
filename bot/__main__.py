@@ -64,13 +64,6 @@ def chat_list(update, context):
 
 
 @run_async
-def repo(update, context):
-    bot.send_message(update.message.chat_id,
-    reply_to_message_id=update.message.message_id,
-    text="Repo: https://github.com/reaitten/chizubot\nGroup: https://t.me/MirrorCrew", disable_web_page_preview=True)
-
-
-@run_async
 def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
     LOGGER.info(f'Restarting the Bot...')
@@ -113,7 +106,6 @@ def bot_help(update, context):
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 /{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
-/{BotCommands.RepoCommand}: Get the bot repo.
 /tshelp: Get help for torrent search module.
 /weebhelp: Get help for anime, manga and character module.
 /stickerhelp: Get help for stickers module.
@@ -141,8 +133,6 @@ def main():
     stats_handler = CommandHandler(BotCommands.StatsCommand,
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter)
-    repo_handler = CommandHandler(BotCommands.RepoCommand, repo,
-                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     authlist_handler = CommandHandler(BotCommands.AuthListCommand, chat_list, filters=CustomFilters.owner_filter)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(ping_handler)
@@ -150,7 +140,6 @@ def main():
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
-    dispatcher.add_handler(repo_handler)
     dispatcher.add_handler(authlist_handler)
     updater.start_polling()
     LOGGER.info("Bot Started!")

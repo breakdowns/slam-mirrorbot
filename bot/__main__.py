@@ -10,7 +10,7 @@ import pytz
 import time
 from telegram import ParseMode
 from telegram.ext import CommandHandler, run_async
-from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS
+from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
@@ -44,7 +44,7 @@ def stats(update, context):
             f'<b>CPU:</b> {cpuUsage}%\n' \
             f'<b>RAM:</b> {memory}%\n' \
             f'<b>Disk:</b> {disk}%'
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", stats, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_photo(IMAGE_URL, stats, parse_mode=ParseMode.HTML)
 
 
 @run_async
@@ -53,7 +53,7 @@ def start(update, context):
 This bot can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", start_string, parse_mode=ParseMode.MARKDOWN)
+    update.effective_message.reply_photo(IMAGE_URL, start_string, parse_mode=ParseMode.MARKDOWN)
 
 
 @run_async

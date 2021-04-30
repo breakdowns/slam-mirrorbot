@@ -1,7 +1,7 @@
 from telegram import InlineKeyboardMarkup
 from telegram.message import Message
 from telegram.update import Update
-import psutil
+import psutil, shutil
 import time
 from bot import AUTO_DELETE_MESSAGE_DURATION, LOGGER, bot, \
     status_reply_dict, status_reply_dict_lock, download_dict, download_dict_lock

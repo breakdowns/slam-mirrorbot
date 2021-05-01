@@ -12,4 +12,10 @@ aria2c --enable-rpc --rpc-listen-all=false --rpc-listen-port 6800 --check-certif
    --disk-cache=64M --file-allocation=prealloc --continue=true \
    --max-file-not-found=5 --max-tries=20 --auto-file-renaming=true \
    --bt-enable-lpd=true --seed-time=0.01 --seed-ratio=1.0 \
-   --content-disposition-default-utf8=true --http-accept-gzip=true --reuse-uri=true
+   --file-allocation=prealloc --max-file-not-found=5 --max-tries=5 --retry-wait=5 \
+   --auto-file-renaming=true --reuse-uri=true --http-accept-gzip=true --listen-port=49152-65535 \
+   --content-disposition-default-utf8=true --http-accept-gzip=true --reuse-uri=true --bt-tracker-connect-timeout=600 \
+   --dht-listen-port=51513 --enable-dht=true --enable-dht6=true \
+   --dht-file-path=/usr/src/app/dht.dat --dht-file-path6=/usr/src/app/dht6.dat \
+   --dht-entry-point=dht.transmissionbt.com:6881 \
+   --dht-entry-point6=dht.transmissionbt.com:6881

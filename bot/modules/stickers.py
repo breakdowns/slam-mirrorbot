@@ -12,7 +12,7 @@ from telegram import TelegramError, Update
 from telegram.ext import run_async, CallbackContext, CommandHandler
 from telegram.utils.helpers import mention_html
 
-from bot import dispatcher
+from bot import dispatcher, IMAGE_URL
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
@@ -447,7 +447,7 @@ def stickhelp(update, context):
 • `/remove`*:* Replay to a sticker to remove sticker from an existing pack.
 • `/stickers`*:* Find stickers for given term on combot sticker catalogue.
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", help_string, parse_mode=ParseMode.MARKDOWN)
+    update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.MARKDOWN)
 
 STICKERID_HANDLER = CommandHandler("stickerid", stickerid)
 GETSTICKER_HANDLER = CommandHandler("getsticker", getsticker)

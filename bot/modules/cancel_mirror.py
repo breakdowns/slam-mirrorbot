@@ -30,20 +30,24 @@ def cancel_mirror(update, context):
             dl = download_dict[mirror_message.message_id]
     if len(args) == 1:
         if mirror_message is None or mirror_message.message_id not in keys:
-            if BotCommands.MirrorCommand in mirror_message.text or \
-                    BotCommands.TarMirrorCommand in mirror_message.text:
-                msg = "Mirror already have been cancelled"
+            if BotCommands.MirrorCommand in update.message.text or \
+               BotCommands.TarMirrorCommand in update.message.text or \
+               BotCommands.UnzipMirrorCommand in update.message.text:
+                msg = "Mirror Already Have Been Cancelled"
                 sendMessage(msg, context.bot, update)
                 return
             else:
                 msg = "Please reply to the /mirror message which was used to start the download or /cancel gid to cancel it!"
                 sendMessage(msg, context.bot, update)
                 return
-    if dl.status() == "Uploading":
-        sendMessage("Upload in Progress, Don't Cancel it.", context.bot, update)
+    if dl.status() == "Uploading...📤":
+        sendMessage("Upload in Progress, You Can't Cancel It.", context.bot, update)
         return
-    elif dl.status() == "Archiving":
-        sendMessage("Archival in Progress, Don't Cancel it.", context.bot, update)
+    elif dl.status() == "Archiving...🔐":
+        sendMessage("Archival in Progress, You Can't Cancel It.", context.bot, update)
+        return
+    elif dl.status() == "Extracting...📂":
+        sendMessage("Extract in Progress, You Can't Cancel It.", context.bot, update)
         return
     else:
         dl.download().cancel_download()

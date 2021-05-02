@@ -9,7 +9,7 @@ aria2c --enable-rpc --rpc-listen-all=false --rpc-listen-port 6800 --check-certif
    --daemon=true --allow-overwrite=true --max-overall-download-limit=$MAX_DOWNLOAD_SPEED \
    --max-overall-upload-limit=1K --max-concurrent-downloads=$MAX_CONCURRENT_DOWNLOADS \
    --peer-id-prefix=-TR2940- --user-agent=Transmission/2.94 --peer-agent=Transmission/2.94 --continue=true --referer=* \
-   --disk-cache=64M --file-allocation=prealloc --continue=true \
+   --disk-cache=64M --file-allocation=prealloc \
    --max-file-not-found=5 --max-tries=20 --auto-file-renaming=true \
    --bt-enable-lpd=true --seed-time=0.01 --seed-ratio=1.0 \
    --file-allocation=prealloc --max-file-not-found=5 --max-tries=5 --retry-wait=5 \

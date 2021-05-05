@@ -8,7 +8,7 @@ from sys import executable
 from datetime import datetime
 import pytz
 import time
-from telegram import ParseMode
+from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CommandHandler, run_async
 from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
@@ -65,9 +65,11 @@ def chat_list(update, context):
 
 @run_async
 def repo(update, context):
-    bot.send_message(update.message.chat_id,
-    reply_to_message_id=update.message.message_id,
-    text="Repo: https://github.com/breakdowns/slam-mirrorbot\nGroup: https://t.me/SlamMirrorSupport", disable_web_page_preview=True)
+    button = [
+    [InlineKeyboardButton("Repo", url=f"https://github.com/breakdowns/slam-mirrorbot")],
+    [InlineKeyboardButton("Support Group", url=f"https://t.me/SlamMirrorSupport")]]
+    reply_markup = InlineKeyboardMarkup(button)
+    update.effective_message.reply_photo(IMAGE_URL, reply_markup=reply_markup)
 
 
 @run_async

@@ -149,9 +149,5 @@
         "description": "Fill your URL if you are using extra buttons.",
         "required": false
       }
-      "formation": {
-        "worker": {
-          "quantity": 1,
-          "size": "free"
     }
 }

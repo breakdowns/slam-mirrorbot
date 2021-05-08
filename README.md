@@ -109,7 +109,7 @@ exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
 Above are the supported url shorteners. Except these only some url shorteners are supported.
 
-**Note**: You can limit maximum concurrent downloads by changing the value of MAX_CONCURRENT_DOWNLOADS in aria.sh. By default, it's set to 7
+**Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to 7
 
 </details>
 

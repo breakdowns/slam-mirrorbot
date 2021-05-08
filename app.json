@@ -8,8 +8,8 @@
       "python"
     ],
     "repository": "https://github.com/breakdowns/slam-mirrorbot",
-    "website": "https://t.me/SlamMirrorSupport",
-    "success_url": "https://github.com/breakdowns/slam-mirrorbot/blob/master/README.md",
+    "website": "https://github.com/breakdowns/slam-mirrorbot",
+    "success_url": "https://t.me/SlamMirrorSupport",
     "stack": "container",
     "env": {
       "ENV": {
@@ -149,5 +149,9 @@
         "description": "Fill your URL if you are using extra buttons.",
         "required": false
       }
+      "formation": {
+        "worker": {
+          "quantity": 1,
+          "size": "free"
     }
 }

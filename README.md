@@ -105,15 +105,11 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **SHORTENER_API**: Fill your shortener api key if you are using shortener.
 - **SHORTENER**: (Optional field) if you want to use shortener in Gdrive and index link, fill shotener url here. Examples:
 ```
-exe.io
-gplinks.in
-shrinkme.io
-urlshortx.com
-shortzon.com
+exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
 Above are the supported url shorteners. Except these only some url shorteners are supported.
 
-**Note**: You can limit maximum concurrent downloads by changing the value of MAX_CONCURRENT_DOWNLOADS in [aria.sh](https://github.com/breakdowns/slam-mirrorbot/blob/93f0e1fc9beed6c9eb7f0d984b6872864318cf61/aria.sh#L3). By default, it's set to 7
+**Note**: You can limit maximum concurrent downloads by changing the value of MAX_CONCURRENT_DOWNLOADS in aria.sh. By default, it's set to 7
 
 </details>
 

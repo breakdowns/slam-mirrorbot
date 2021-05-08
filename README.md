@@ -122,7 +122,7 @@ shortzon.com
 - Go to the Credentials tab and click Create Credentials -> OAuth Client ID
 - Choose Desktop and Create.
 - Use the download button to download your credentials.
-- Move that file to the root of mirrorbot, and rename it to credentials.json
+- Move that file to the root of mirrorbot, and rename it to **credentials.json**
 - Visit [Google API page](https://console.developers.google.com/apis/library)
 - Search for Drive and enable it if it is disabled
 - Finally, run the script to generate **token.pickle** file for Google Drive:
@@ -148,7 +148,8 @@ sudo docker run mirrorbot
 
 ## Deploying on Heroku
 
-Fork this repo then upload **token.pickle** to your forks
+- Fork this repo then upload **token.pickle** to your forks
+- Hit the deploy to heroku button and follow the further instructions in the screen
 
 **NOTE**: If you didn't upload **token.pickle**, uploading will not work.
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>

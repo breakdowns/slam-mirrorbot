@@ -214,6 +214,7 @@ stats - Bot Usage Stats
 help - Get Detailed Help
 speedtest - Check Speed of the host
 log - Bot Log [owner only]
+restart - restart bot [owner only]
 repo - Get the bot repo
 ```
 

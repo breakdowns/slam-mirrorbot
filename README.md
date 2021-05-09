@@ -130,7 +130,7 @@ python3 generate_drive_token.py
 
 ## Deploying
 
-- Start docker daemon (skip if already running):
+- Start Docker daemon (skip if already running):
 ```
 sudo dockerd
 ```
@@ -265,4 +265,4 @@ Thanks to:
 - [magneto261290](https://github.com/magneto261290/) for some features
 - [SVR666](https://github.com/SVR666/) for some features & fixes
 
-and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).
+And many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

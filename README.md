@@ -155,8 +155,8 @@ sudo docker run mirrorbot
 <details>
     <summary><b>Click here for more details</b></summary>
 
-- Install [Heroku cli](https://devcenter.heroku.com/articles/heroku-cli)
-- Login into your heroku account with command:
+- Install [heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
+- Login into your Heroku account with command:
 ```
 heroku login
 ```

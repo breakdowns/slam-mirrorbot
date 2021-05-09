@@ -94,8 +94,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **MEGA_API_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account
-- **BLOCK_MEGA_FOLDER**: (Optional field) If you want to remove Mega.nz folder support, set it to `True`.
-- **BLOCK_MEGA_LINKS**: (Optional field) If you want to remove Mega.nz mirror support, set it to `True`.
+- **BLOCK_MEGA_FOLDER**: (Optional field) If you want to remove mega.nz folder support, set it to `True`.
+- **BLOCK_MEGA_LINKS**: (Optional field) If you want to remove mega.nz mirror support, set it to `True`.
 - **STOP_DUPLICATE_MIRROR**: (Optional field) (Leave empty if unsure) if this filled is set to `True`, bot will check file in drive, if it is present in drive, downloading will ne stopped. (Note: File will be checked using filename, not using filehash, so this feature is not perfect yet)
 - **ENABLE_FILESIZE_LIMIT**: Set it to `True` if you want to use `MAX_TORRENT_SIZE`.
 - **MAX_TORRENT_SIZE**: To limit the Torrent mirror size, Fill The amount you want to limit, examples: if you fill `15` it will limit `15gb`.

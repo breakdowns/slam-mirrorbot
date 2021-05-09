@@ -208,7 +208,7 @@ tarwatch - Mirror Youtube playlist link as tar
 cancel - Cancel a task
 cancelall - Cancel all tasks
 del - Delete file from Drive
-list - [query] Search files in G-Drive
+list - [query] Searches files in G-Drive
 status - Get Mirror Status message
 stats - Bot Usage Stats
 help - Get Detailed Help

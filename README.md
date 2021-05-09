@@ -23,10 +23,10 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 - Download/upload progress, speeds and ETAs
 - Mirror all Youtube-dl supported links
 - Docker support
-- Uploading To Team Drives
+- Uploading To Team Drive
 - Index Link support
 - Service account support
-- Delete files from drive
+- Delete files from Drive
 - Shortener support
 - Custom Filename (Only for url, Telegram files and Youtube-dl. Not for Mega links and magnet/torrents)
 - Extracting password protected files, using custom filename and download from password protected index links see these examples:

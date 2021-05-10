@@ -441,11 +441,11 @@ def makepack_internal(
 @run_async
 def stickhelp(update, context):
     help_string = '''
-• `/stickerid`*:* Reply to a sticker to me to tell you its file ID.
-• `/getsticker`*:* Reply to a sticker to me to upload its raw PNG file.
-• `/kang`*:* Reply to a sticker to add it to your pack.
-• `/remove`*:* Replay to a sticker to remove sticker from an existing pack.
-• `/stickers`*:* Find stickers for given term on combot sticker catalogue.
+• `/stickerid`*:* Reply to a Sticker to me to tell you its file ID.
+• `/getsticker`*:* Reply to a Sticker to me to upload its raw PNG file.
+• `/kang`*:* Reply to a Sticker to add it to your pack.
+• `/remove`*:* Replay to a Sticker to remove Sticker from an existing pack.
+• `/stickers`*:* Find Stickers for given term on combot Sticker catalogue.
 '''
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.MARKDOWN)
 

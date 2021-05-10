@@ -101,13 +101,13 @@ def bot_help(update, context):
     help_string = f'''
 /{BotCommands.HelpCommand}: To get this message
 
-/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
+/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive
 
-/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to google drive
+/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
 
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
 
-/{BotCommands.CloneCommand}: Copy file/folder to google drive
+/{BotCommands.CloneCommand}: Copy file/folder to Google Drive
 
 /{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
 
@@ -133,11 +133,11 @@ def bot_help(update, context):
 
 /{BotCommands.RepoCommand}: Get the bot repo.
 
-/tshelp: Get help for torrent search module.
+/tshelp: Get help for Torrent search module.
 
-/weebhelp: Get help for anime, manga and character module.
+/weebhelp: Get help for Anime, Manga, and Character module.
 
-/stickerhelp: Get help for stickers module.
+/stickerhelp: Get help for Stickers module.
 '''
     sendMessage(help_string, context.bot, update)
 

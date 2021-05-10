@@ -24,4 +24,3 @@ js2py
 lxml
 telegraph
 pytz
-megasdkrestclient>=0.1.1,<1.0.0

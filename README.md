@@ -9,13 +9,13 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
-- Limiting torrent size support
+- Limiting Torrent size support
 - Check Heroku dynos stats
-- Add stickers to your pack
-- Shell and Executor
-- Racaty.net support
 - Custom image support
- 
+- Racaty.net support
+- Shell and Executor
+- Stickers module
+
 ## From Source Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 4-5gb/day)
@@ -25,10 +25,10 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 - Docker support
 - Uploading To Team Drive
 - Index Link support
-- Service account support
+- Service Account support
 - Delete files from Drive
 - Shortener support
-- Custom Filename (Only for url, Telegram files and Youtube-dl. Not for Mega links and magnet/torrents)
+- Custom Filename (Only for url, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
 - Extracting password protected files, using custom filename and download from password protected index links see these examples:
 <p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
@@ -82,11 +82,11 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **BOT_TOKEN**: The Telegram bot token that you get from [@BotFather](https://t.me/BotFather)
 - **GDRIVE_FOLDER_ID**: This is the folder ID of the Google Drive Folder to which you want to upload all the mirrors.
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
-- **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it 5 seconds at least)  
+- **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)  
 - **OWNER_ID**: The Telegram user ID (not username) of the Owner of the bot
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
-- **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. Note: Set to -1 to never automatically delete messages
-- **IS_TEAM_DRIVE**: (Optional field) Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else False or Leave it empty.
+- **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. Note: Set to `-1` to never automatically delete messages
+- **IS_TEAM_DRIVE**: (Optional field) Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
 - **USE_SERVICE_ACCOUNTS**: (Optional field) (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using service accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.
 - **INDEX_URL**: (Optional field) Refer to https://github.com/maple3142/GDIndex/ The URL should not have any trailing '/'
 - **API_KEY**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
@@ -102,13 +102,13 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **IMAGE_URL**: (Optional field) Show Image/Logo in /start message. Fill value of image your link image, use telegra.ph or any direct link image.
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
-- **SHORTENER**: (Optional field) if you want to use Shortener in Gdrive and index link, fill shotener url here. Examples:
+- **SHORTENER**: (Optional field) if you want to use Shortener in Gdrive and index link, fill Shotener url here. Examples:
 ```
 exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
-Above are the supported url shorteners. Except these only some url shorteners are supported.
+Above are the supported url Shorteners. Except these only some url Shorteners are supported.
 
-**Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to 7
+**Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
 
 </details>
 
@@ -160,7 +160,7 @@ sudo docker run mirrorbot
 ```
 heroku login
 ```
-- Create a new heroku app:
+- Create a new Heroku app:
 ```
 heroku create appname
 ```
@@ -184,7 +184,7 @@ git commit -m "Added Creds."
 ```
 git push heroku master --force
 ```
-- Restart Worker by these commands,You can Do it manually too in Heroku.
+- Restart Worker by these commands, You can Do it manually too in Heroku.
 - For Turning off the Bot:
 ```
 heroku ps:scale worker=0 -a appname
@@ -219,9 +219,9 @@ repo - Get the bot repo
 ```
 
 ## Using Service Accounts for uploading to avoid user rate limit
-For Service Account to work, you must set **USE_SERVICE_ACCOUNTS="True"** in config file or environment variables
-Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts
-**NOTE**: Using service accounts is only recommended while uploading to a Team Drive.
+For Service Account to work, you must set **USE_SERVICE_ACCOUNTS=**"True" in config file or environment variables, 
+Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts.
+**NOTE**: Using Service Accounts is only recommended while uploading to a Team Drive.
 
 ## Generate Service Accounts. [What is service account](https://cloud.google.com/iam/docs/service-accounts)
 
@@ -252,7 +252,7 @@ For using your premium accounts in Youtube-dl, edit the netrc file according to 
 ```
 machine host login username password my_youtube_password
 ```
-Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of different hosts can be added each separated by a new line
+Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of different hosts can be added each separated by a new line.
 
 # Support Group
 <p><a href="https://t.me/SlamMirrorSupport"> <img src="https://img.shields.io/badge/Slam%20Mirror%20Support-black?style=for-the-badge&logo=telegram" width="230""/></a></p>

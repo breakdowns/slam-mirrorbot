@@ -160,7 +160,7 @@ sudo docker run mirrorbot
 ```
 heroku login
 ```
-- Create a new heroku app:
+- Create a new Heroku app:
 ```
 heroku create appname
 ```
@@ -184,7 +184,7 @@ git commit -m "Added Creds."
 ```
 git push heroku master --force
 ```
-- Restart Worker by these commands,You can Do it manually too in Heroku.
+- Restart Worker by these commands, You can Do it manually too in Heroku.
 - For Turning off the Bot:
 ```
 heroku ps:scale worker=0 -a appname

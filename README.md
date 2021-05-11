@@ -102,7 +102,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **IMAGE_URL**: (Optional field) Show Image/Logo in /start message. Fill value of image your link image, use telegra.ph or any direct link image.
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
-- **SHORTENER**: (Optional field) if you want to use Shortener in Gdrive and index link, fill shotener url here. Examples:
+- **SHORTENER**: (Optional field) if you want to use Shortener in Gdrive and index link, fill Shotener url here. Examples:
 ```
 exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```

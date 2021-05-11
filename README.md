@@ -28,7 +28,7 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 - Service Account support
 - Delete files from Drive
 - Shortener support
-- Custom Filename (Only for url, Telegram files and Youtube-dl. Not for Mega links and magnet/torrents)
+- Custom Filename (Only for url, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
 - Extracting password protected files, using custom filename and download from password protected index links see these examples:
 <p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 

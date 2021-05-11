@@ -25,7 +25,7 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 - Docker support
 - Uploading To Team Drive
 - Index Link support
-- Service account support
+- Service Account support
 - Delete files from Drive
 - Shortener support
 - Custom Filename (Only for url, Telegram files and Youtube-dl. Not for Mega links and magnet/torrents)

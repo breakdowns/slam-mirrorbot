@@ -9,13 +9,13 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
-- Limiting torrent size support
+- Limiting Torrent size support
 - Check Heroku dynos stats
-- Add stickers to your pack
-- Shell and Executor
-- Racaty.net support
 - Custom image support
- 
+- Racaty.net support
+- Shell and Executor
+- Stickers module
+
 ## From Source Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 4-5gb/day)

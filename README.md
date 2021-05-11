@@ -219,7 +219,7 @@ repo - Get the bot repo
 ```
 
 ## Using Service Accounts for uploading to avoid user rate limit
-For Service Account to work, you must set **USE_SERVICE_ACCOUNTS="True"** in config file or environment variables, 
+For Service Account to work, you must set **USE_SERVICE_ACCOUNTS=**"True" in config file or environment variables, 
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts.
 **NOTE**: Using Service Accounts is only recommended while uploading to a Team Drive.
 

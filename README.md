@@ -151,50 +151,8 @@ sudo docker run mirrorbot
 **NOTE**: If you didn't upload **token.pickle**, uploading will not work. How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
-## Deploying on Heroku using heroku-cli
-<details>
-    <summary><b>Click here for more details</b></summary>
-
-- Install [heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
-- Login into your Heroku account with command:
-```
-heroku login
-```
-- Create a new Heroku app:
-```
-heroku create appname
-```
-- Select This App in your Heroku-cli: 
-```
-heroku git:remote -a appname
-```
-- Change Dyno Stack to a Docker Container:
-```
-heroku stack:set container -a appname
-```
-- Add Private Credentials and Config Stuff:
-```
-git add -f credentials.json token.pickle config.env heroku.yml
-```
-- Commit new changes:
-```
-git commit -m "Added Creds."
-```
-- Push Code to Heroku:
-```
-git push heroku master --force
-```
-- Restart Worker by these commands, You can Do it manually too in Heroku.
-- For Turning off the Bot:
-```
-heroku ps:scale worker=0 -a appname
-```
-- For Turning on the Bot:
-```
-heroku ps:scale worker=1 -a appname		
-```
-
-</details>
+## Deploying in Heroku with heroku-cli and Goorm IDE
+<p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
 ## Bot commands to be set in [@BotFather](https://t.me/BotFather)
 

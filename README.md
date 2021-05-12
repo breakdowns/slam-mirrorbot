@@ -99,6 +99,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **STOP_DUPLICATE_MIRROR**: (Optional field) (Leave empty if unsure) if this field is set to `True`, bot will check file in drive, if it is present in Drive, downloading will be stopped. (Note: File will be checked using filename, not using filehash, so this feature is not perfect yet)
 - **ENABLE_FILESIZE_LIMIT**: Set it to `True` if you want to use `MAX_TORRENT_SIZE`.
 - **MAX_TORRENT_SIZE**: To limit the Torrent mirror size, Fill The amount you want to limit, examples: if you fill `15` it will limit `15gb`.
+- **HEROKU_API_KEY**: (Only if you deploying on Heroku) Your Heroku API key, get it from https://dashboard.heroku.com/account.
+- **HEROKU_APP_NAME**: (Only if you deploying on Heroku) Your Heroku app name.
 - **IMAGE_URL**: (Optional field) Show Image/Logo in /start message. Fill value of image your link image, use telegra.ph or any direct link image.
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.

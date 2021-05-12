@@ -16,7 +16,7 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest, usage
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest, usage, mediainfo
 
 now=datetime.now(pytz.timezone('Asia/Jakarta'))
 
@@ -132,6 +132,8 @@ def bot_help(update, context):
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
 /{BotCommands.RepoCommand}: Get the bot repo.
+
+/mediainfo: Get detailed info about replied media.
 
 /tshelp: Get help for Torrent search module.
 

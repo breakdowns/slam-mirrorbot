@@ -8,7 +8,7 @@ from sys import executable
 from datetime import datetime
 import pytz
 import time
-from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import ParseMode, BotCommand, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CommandHandler, run_async
 from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
@@ -142,6 +142,26 @@ def bot_help(update, context):
     sendMessage(help_string, context.bot, update)
 
 
+botcmds = [
+BotCommand(f'{BotCommands.MirrorCommand}', 'Start Mirroring'),
+BotCommand(f'{BotCommands.TarMirrorCommand}','Upload tar (zipped) file'),
+BotCommand(f'{BotCommands.UnzipMirrorCommand}','Extract files'),
+BotCommand(f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
+BotCommand(f'{BotCommands.WatchCommand}','Mirror YT-DL support link'),
+BotCommand(f'{BotCommands.TarWatchCommand}','Mirror Youtube playlist link as tar'),
+BotCommand(f'{BotCommands.CancelMirror}','Cancel a task'),
+BotCommand(f'{BotCommands.CancelAllCommand}','Cancel all tasks'),
+BotCommand(f'{BotCommands.DeleteCommand}','Delete file from Drive'),
+BotCommand(f'{BotCommands.ListCommand}',' [query] Searches files in G-Drive'),
+BotCommand(f'{BotCommands.StatusCommand}','Get Mirror Status message'),
+BotCommand(f'{BotCommands.StatsCommand}','Bot Usage Stats'),
+BotCommand(f'{BotCommands.HelpCommand}','Get Detailed Help'),
+BotCommand(f'{BotCommands.SpeedCommand}','Check Speed of the host'),
+BotCommand(f'{BotCommands.LogCommand}','Bot Log [owner only]'),
+BotCommand(f'{BotCommands.RestartCommand}','Restart bot [owner only]'),
+BotCommand(f'{BotCommands.RepoCommand}','Get the bot repo')]
+
+
 def main():
     fs_utils.start_cleanup()
     # Check if the bot is restarting
@@ -151,6 +171,7 @@ def main():
         restart_message.edit_text("Restarted Successfully!")
         LOGGER.info('Restarted Successfully!')
         remove('restart.pickle')
+    bot.set_my_commands(botcmds)
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,
                                    filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)

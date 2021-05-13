@@ -23,7 +23,7 @@ now=datetime.now(pytz.timezone('Asia/Jakarta'))
 
 @run_async
 def stats(update, context):
-    currentTime = get_readable_time((time.time() - botStartTime))
+    currentTime = get_readable_time(time.time() - botStartTime)
     current = now.strftime('%Y/%m/%d %I:%M:%S %p')
     total, used, free = shutil.disk_usage('.')
     total = get_readable_file_size(total)
@@ -117,13 +117,13 @@ def bot_help(update, context):
 
 /{BotCommands.StatusCommand}: Shows a status of all the downloads
 
-/{BotCommands.ListCommand} [search term]: Searches the search term in the Google drive, if found replies with the link
+/{BotCommands.ListCommand} [search term]: Searches the search term in the Google Drive, if found replies with the link
 
 /{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on
 
-/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by owner of the bot)
+/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner of the bot)
 
-/{BotCommands.AuthListCommand}: See Authorized list (Can only be invoked by owner of the bot)
+/{BotCommands.AuthListCommand}: See Authorized list (Can only be invoked by Owner of the bot)
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
@@ -132,6 +132,10 @@ def bot_help(update, context):
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
 /{BotCommands.RepoCommand}: Get the bot repo.
+
+/shell: Run commands in Shell (Terminal).
+
+/eval: Run Python code line.
 
 /mediainfo: Get detailed info about replied media.
 

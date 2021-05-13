@@ -135,8 +135,6 @@ def bot_help(update, context):
 
 /shell: Run commands in Shell (Terminal).
 
-/eval: Run Python code line.
-
 /mediainfo: Get detailed info about replied media.
 
 /tshelp: Get help for Torrent search module.

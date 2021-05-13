@@ -163,7 +163,7 @@ For Service Account to work, you must set **USE_SERVICE_ACCOUNTS=**"True" in con
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts.
 **NOTE**: Using Service Accounts is only recommended while uploading to a Team Drive.
 
-## Generate Service Accounts. [What is service account](https://cloud.google.com/iam/docs/service-accounts)
+# Generate Service Accounts. [What is service account](https://cloud.google.com/iam/docs/service-accounts)
 
 Let us create only the Service Accounts that we need. 
 **Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 SAs allow you plenty of use, its also possible that over abuse might get your projects banned by Google. 
@@ -187,7 +187,7 @@ python3 gen_sa_accounts.py --download-keys project_id
 python3 add_to_team_drive.py -d SharedTeamDriveSrcID
 ```
 
-## Youtube-dl authentication using .netrc file
+# Youtube-dl authentication using .netrc file
 For using your premium accounts in Youtube-dl, edit the netrc file according to following format:
 ```
 machine host login username password my_youtube_password

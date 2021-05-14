@@ -102,7 +102,7 @@ def bot_help(update, context):
     help_string = f'''
 /{BotCommands.HelpCommand}: To get this message
 
-/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive. Plzzz read this for full use of this command https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
+/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive
 
 /{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
 
@@ -122,7 +122,7 @@ def bot_help(update, context):
 
 /{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on
 
-/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner of the bot)
+/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
 
 /{BotCommands.AuthListCommand}: See Authorized list & Sudo User (Can only be invoked by Owner & Sudo of the bot)
 

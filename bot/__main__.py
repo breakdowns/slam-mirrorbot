@@ -124,11 +124,11 @@ def bot_help(update, context):
 
 /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner of the bot)
 
-/{BotCommands.AuthListCommand}: See Authorized list (Can only be invoked by Owner of the bot)
+/{BotCommands.AuthListCommand}: See Authorized list & Sudo User (Can only be invoked by Owner & Sudo of the bot)
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
-/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner & Sudo only).
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 

@@ -61,7 +61,7 @@ def chat_list(update, context):
     chat_list = sudo = ''
     chat_list += '\n'.join(str(id) for id in AUTHORIZED_CHATS)
     sudo += '\n'.join(str(id) for id in SUDO_USER)
-    sendMessage(f'<b><u>Authorized Chats</u></b>\n{user}\n<b><u>Sudo Users</u></b>\n{sudo}', context.bot, update)
+    sendMessage(f'<b><u>Authorized Chats</u></b>\n{chat_list}\n<b><u>Sudo Users</u></b>\n{sudo}', context.bot, update)
 
 
 @run_async

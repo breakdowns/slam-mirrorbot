@@ -10,7 +10,7 @@ import pytz
 import time
 from telegram import ParseMode, BotCommand, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CommandHandler, run_async
-from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, IMAGE_URL
+from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, SUDO_USER, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
@@ -58,9 +58,10 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 
 @run_async
 def chat_list(update, context):
-    chatlist =''
-    chatlist += '\n'.join(str(id) for id in AUTHORIZED_CHATS)
-    sendMessage(f'<b>Authorized List:</b>\n{chatlist}\n', context.bot, update)
+    chat_list = sudo = ''
+    chat_list += '\n'.join(str(id) for id in AUTHORIZED_CHATS)
+    sudo += '\n'.join(str(id) for id in SUDO_USER)
+    sendMessage(f'<b><u>Authorized Chats</u></b>\n{chat_list}\n<b><u>Sudo Users</u></b>\n{sudo}', context.bot, update)
 
 
 @run_async
@@ -121,13 +122,13 @@ def bot_help(update, context):
 
 /{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on
 
-/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner of the bot)
+/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
 
-/{BotCommands.AuthListCommand}: See Authorized list (Can only be invoked by Owner of the bot)
+/{BotCommands.AuthListCommand}: See Authorized list & Sudo User (Can only be invoked by Owner & Sudo of the bot)
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
-/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner & Sudo only).
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 

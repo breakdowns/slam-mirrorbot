@@ -10,7 +10,7 @@ import pytz
 import time
 from telegram import ParseMode, BotCommand, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CommandHandler, run_async
-from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, SUDO, IMAGE_URL
+from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, SUDO_USER, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *

@@ -10,7 +10,7 @@ import pytz
 import time
 from telegram import ParseMode, BotCommand, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CommandHandler, run_async
-from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, IMAGE_URL
+from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, SUDO, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
@@ -58,9 +58,10 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 
 @run_async
 def chat_list(update, context):
-    chatlist =''
-    chatlist += '\n'.join(str(id) for id in AUTHORIZED_CHATS)
-    sendMessage(f'<b>Authorized List:</b>\n{chatlist}\n', context.bot, update)
+    chat_list = sudo = ''
+    chat_list += '\n'.join(str(id) for id in AUTHORIZED_CHATS)
+    sudo += '\n'.join(str(id) for id in SUDO_USER)
+    sendMessage(f'<b><u>Authorized Chats</u></b>\n{user}\n<b><u>Sudo Users</u></b>\n{sudo}', context.bot, update)
 
 
 @run_async
@@ -101,7 +102,7 @@ def bot_help(update, context):
     help_string = f'''
 /{BotCommands.HelpCommand}: To get this message
 
-/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive
+/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive. Plzzz read this for full use of this command https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20
 
 /{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
 

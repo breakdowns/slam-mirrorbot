@@ -7,6 +7,7 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 
 ## Additional Features
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
+- Sudo support (DWYOR, Sudo User can restart your bot and delete your Drive file)
 - Get detailed info about replied media
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
@@ -16,7 +17,6 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 - Racaty.net support
 - Shell and Executor
 - Stickers module
-- Sudo support
 
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
@@ -86,7 +86,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
 - **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)  
 - **OWNER_ID**: The Telegram user ID (not username) of the Owner of the bot
-- **SUDO_USER**: Multiple Telegram user ID (not username) separate by space. (NOTE: Sudo User can restart your bot and delete your Drive file, DWYOR)
+- **SUDO_USER**: Multiple Telegram user ID (not username) separate by space.
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (Note: Set to `-1` to never automatically delete messages)
 - **IS_TEAM_DRIVE**: (Optional field) Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.

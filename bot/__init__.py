@@ -87,6 +87,7 @@ try:
         DOWNLOAD_DIR = DOWNLOAD_DIR + '/'
     DOWNLOAD_STATUS_UPDATE_INTERVAL = int(getConfig('DOWNLOAD_STATUS_UPDATE_INTERVAL'))
     OWNER_ID = int(getConfig('OWNER_ID'))
+    SUDO_USER = tuple(filter(lambda x: x, map(int, os.environ.get("SUDO_USER", "").split())))
     AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')

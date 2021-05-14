@@ -16,6 +16,7 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 - Racaty.net support
 - Shell and Executor
 - Stickers module
+- Sudo support
 
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive

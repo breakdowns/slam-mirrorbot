@@ -116,6 +116,8 @@ def bot_help(update, context):
 
 /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
 
+/{BotCommands.UnAuthorizeCommand}: Unauthorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
+
 /{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only Owner & Sudo)
 
 /{BotCommands.AddSudoCommand}: Add sudo user (Only Owner)

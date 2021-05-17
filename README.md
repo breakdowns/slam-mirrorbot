@@ -74,25 +74,25 @@ pip3 install -r requirements-cli.txt
 
 In the case of Postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
 
-- install Postgresql:
+- Install Postgresql:
 ```
 sudo apt-get update && sudo apt-get install postgresql
 ```
-- change to the Postgres user:
+- Change to the Postgres user:
 ```
 sudo su - postgres
 ```
-- create a new database user (change YOUR_USER appropriately):
+- Create a new database user (change YOUR_USER appropriately):
 ```
 createuser -P -s -e YOUR_USER
 ```
 This will be followed by you needing to input your password.
-- create a new database table:
+- Create a new database table:
 ```
 createdb -O YOUR_USER YOUR_DB_NAME
 ```
 Change YOUR_USER and YOUR_DB_NAME appropriately.
-- finally:
+- Finally:
 ```
 psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER
 ```

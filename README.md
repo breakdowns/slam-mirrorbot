@@ -70,6 +70,7 @@ pip3 install -r requirements-cli.txt
 ## Generate Database
 <details>
     <summary><b>Click here for more details</b></summary>
+
 ##### 1. The easy way
 - Make new Heroku blank app
 - Go to your Heroku blank app

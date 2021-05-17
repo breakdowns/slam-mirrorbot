@@ -38,10 +38,6 @@
         "description": "The Telegram User ID of the Owner of the Bot. Get it by using /info in @MissRose_bot.",
         "required": true
       },
-      "SUDO_USER": {
-        "description": "Multiple Telegram user ID (not username) separate by space.",
-        "required": false
-      },
       "AUTO_DELETE_MESSAGE_DURATION": {
         "description": "Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. Note: Set to -1 to never automatically delete messages.",
         "required": true
@@ -153,5 +149,10 @@
         "description": "Fill your URL if you are using extra buttons.",
         "required": false
       }
-    }
+    },
+    "addons": [
+      {
+        "plan": "heroku-postgresql"
+      }
+    ]
 }

@@ -10,7 +10,7 @@ import pytz
 import time
 from telegram import ParseMode, BotCommand, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CommandHandler, run_async
-from bot import dispatcher, updater, botStartTime, AUTHORIZED_CHATS, SUDO_USER, IMAGE_URL
+from bot import dispatcher, updater, botStartTime, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
@@ -57,14 +57,6 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 
 
 @run_async
-def chat_list(update, context):
-    chat_list = sudo = ''
-    chat_list += '\n'.join(str(id) for id in AUTHORIZED_CHATS)
-    sudo += '\n'.join(str(id) for id in SUDO_USER)
-    sendMessage(f'<b><u>Authorized Chats</u></b>\n{chat_list}\n<b><u>Sudo Users</u></b>\n{sudo}', context.bot, update)
-
-
-@run_async
 def repo(update, context):
     button = [
     [InlineKeyboardButton("Repo", url=f"https://github.com/breakdowns/slam-mirrorbot")],
@@ -99,16 +91,18 @@ def log(update, context):
 
 @run_async
 def bot_help(update, context):
-    help_string = f'''
+    help_string_adm = f'''
 /{BotCommands.HelpCommand}: To get this message
 
-/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive
+/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive.
 
 /{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
 
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
 
 /{BotCommands.CloneCommand}: Copy file/folder to Google Drive
+
+/{BotCommands.DeleteCommand} [link]: Delete file from Google Drive (Only Owner & Sudo)
 
 /{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
 
@@ -124,7 +118,13 @@ def bot_help(update, context):
 
 /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
 
-/{BotCommands.AuthListCommand}: See Authorized list & Sudo User (Can only be invoked by Owner & Sudo of the bot)
+/{BotCommands.UnAuthorizeCommand}: Unauthorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
+
+/{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only Owner & Sudo)
+
+/{BotCommands.AddSudoCommand}: Add sudo user (Only Owner)
+
+/{BotCommands.RmSudoCommand}: Remove sudo users (Only Owner)
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
@@ -144,7 +144,47 @@ def bot_help(update, context):
 
 /stickerhelp: Get help for Stickers module.
 '''
-    sendMessage(help_string, context.bot, update)
+
+    help_string = f'''
+/{BotCommands.HelpCommand}: To get this message
+
+/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive.
+
+/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
+
+/{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
+
+/{BotCommands.CloneCommand}: Copy file/folder to Google Drive
+
+/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
+
+/{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
+
+/{BotCommands.CancelMirror}: Reply to the message by which the download was initiated and that download will be cancelled
+
+/{BotCommands.StatusCommand}: Shows a status of all the downloads
+
+/{BotCommands.ListCommand} [search term]: Searches the search term in the Google Drive, if found replies with the link
+
+/{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on
+
+/{BotCommands.SpeedCommand}: Check Internet Speed of the Host
+
+/{BotCommands.RepoCommand}: Get the bot repo.
+
+/mediainfo: Get detailed info about replied media.
+
+/tshelp: Get help for Torrent search module.
+
+/weebhelp: Get help for Anime, Manga, and Character module.
+
+/stickerhelp: Get help for Stickers module.
+'''
+
+    if CustomFilters.sudo_user(update) or CustomFilters.owner_filter(update):
+        sendMessage(help_string_adm, context.bot, update)
+    else:
+        sendMessage(help_string, context.bot, update)
 
 
 botcmds = [
@@ -183,15 +223,14 @@ def main():
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     restart_handler = CommandHandler(BotCommands.RestartCommand, restart,
-                                     filters=CustomFilters.owner_filter)
+                                     filters=CustomFilters.owner_filter | CustomFilters.sudo_user)
     help_handler = CommandHandler(BotCommands.HelpCommand,
                                   bot_help, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     stats_handler = CommandHandler(BotCommands.StatsCommand,
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
-    log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter)
+    log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user)
     repo_handler = CommandHandler(BotCommands.RepoCommand, repo,
                                    filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
-    authlist_handler = CommandHandler(BotCommands.AuthListCommand, chat_list, filters=CustomFilters.owner_filter)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
@@ -199,7 +238,6 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     dispatcher.add_handler(repo_handler)
-    dispatcher.add_handler(authlist_handler)
     updater.start_polling()
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)

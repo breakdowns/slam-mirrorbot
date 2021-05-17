@@ -7,11 +7,11 @@ This is a Telegram bot writen in Python for mirroring files on the Internet to o
 
 ## Additional Features
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
-- Sudo support (DWYOR, Sudo User can restart your bot and delete your Drive file)
 - Get detailed info about replied media
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
 - Limiting Torrent size support
+- Sudo with database support
 - Check Heroku dynos stats
 - Custom image support
 - Racaty.net support
@@ -71,8 +71,6 @@ pip3 install -r requirements-cli.txt
 ## Generate Database
 <details>
     <summary><b>Click here for more details</b></summary>
-
-In the case of Postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
 
 - Install Postgresql:
 ```

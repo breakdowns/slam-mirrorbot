@@ -116,11 +116,11 @@ def bot_help(update, context):
 
 /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
 
-/{BotCommands.AuthorizedUsersCommand}: authorized users[Only owner & sudo]
+/{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only owner & Sudo)
 
-/{BotCommands.AddSudoCommand}: Add sudo user[Only owner]
+/{BotCommands.AddSudoCommand}: Add sudo user (Only owner)
 
-/{BotCommands.RmSudoCommand}: Remove sudo users[Only owner]
+/{BotCommands.RmSudoCommand}: Remove sudo users (Only owner)
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 

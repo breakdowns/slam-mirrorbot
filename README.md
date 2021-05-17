@@ -72,13 +72,13 @@ pip3 install -r requirements-cli.txt
 <details>
     <summary><b>Click here for more details</b></summary>
 
-In the case of postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
+In the case of Postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
 
-- install postgresql:
+- install Postgresql:
 ```
 sudo apt-get update && sudo apt-get install postgresql
 ```
-- change to the postgres user:
+- change to the Postgres user:
 ```
 sudo su - postgres
 ```

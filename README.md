@@ -69,6 +69,9 @@ sudo pacman -S docker python
 pip3 install -r requirements-cli.txt
 ```
 ## Generate Database
+<details>
+    <summary><b>Click here for more details</b></summary>
+
 In the case of postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
 
 - install postgresql:
@@ -100,6 +103,10 @@ You should now be able to build your database URI. This will be:
 sqldbtype://username:pw@hostname:port/db_name
 ```
 Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, etc) repeat for your username, password, hostname (localhost?), port (5432?), and db name.
+
+**NOTE**: If you deploying on Heroku, no need do this, because it will automatic generate database
+
+</details>
 
 ## Setting up config file
 <details>

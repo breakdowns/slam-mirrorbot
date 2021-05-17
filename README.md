@@ -68,6 +68,38 @@ sudo pacman -S docker python
 ```
 pip3 install -r requirements-cli.txt
 ```
+## Generate Database
+In the case of postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
+
+- install postgresql:
+```
+sudo apt-get update && sudo apt-get install postgresql
+```
+- change to the postgres user:
+```
+sudo su - postgres
+```
+- create a new database user (change YOUR_USER appropriately):
+```
+createuser -P -s -e YOUR_USER
+```
+This will be followed by you needing to input your password.
+- create a new database table:
+```
+createdb -O YOUR_USER YOUR_DB_NAME
+```
+Change YOUR_USER and YOUR_DB_NAME appropriately.
+- finally:
+```
+psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER
+```
+This will allow you to connect to your database via your terminal. By default, YOUR_HOST should be 0.0.0.0:5432.
+
+You should now be able to build your database URI. This will be:
+```
+sqldbtype://username:pw@hostname:port/db_name
+```
+Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, etc) repeat for your username, password, hostname (localhost?), port (5432?), and db name.
 
 ## Setting up config file
 <details>

@@ -75,8 +75,8 @@ pip3 install -r requirements-cli.txt
 - Make new Heroku blank app
 - Go to your Heroku blank app
 - Go to resources
-- In Add-ons and search Heroku Postgres
-- hit **Submit Order Form**
+- In Add-ons search **Heroku Postgres**
+- Hit **Submit Order Form**
 - Copy your Database URL in Heroku Config Vars > DATABASE_URL
 
 **2. The hard way**

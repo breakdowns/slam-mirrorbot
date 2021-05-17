@@ -77,7 +77,7 @@ pip3 install -r requirements-cli.txt
 - Go to resources
 - In Add-ons search **Heroku Postgres**
 - Hit **Submit Order Form**
-- Copy your Database URL in Heroku Config Vars > **DATABASE_URL**
+- Copy your Database URL from Heroku Config Vars > **DATABASE_URL**
 
 **2. The hard way**
 - Install Postgresql:

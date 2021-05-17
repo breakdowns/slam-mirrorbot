@@ -63,7 +63,6 @@ Install Docker by following the [official Docker docs](https://docs.docker.com/e
 ```
 sudo pacman -S docker python
 ```
-
 - Install dependencies for running setup scripts:
 ```
 pip3 install -r requirements-cli.txt

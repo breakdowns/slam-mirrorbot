@@ -102,6 +102,8 @@ def bot_help(update, context):
 
 /{BotCommands.CloneCommand}: Copy file/folder to Google Drive
 
+/{BotCommands.DeleteCommand} [link]: Delete file from Google Drive (Only Owner & Sudo)
+
 /{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
 
 /{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading

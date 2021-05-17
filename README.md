@@ -71,13 +71,14 @@ pip3 install -r requirements-cli.txt
 <details>
     <summary><b>Click here for more details</b></summary>
 
-##### 1. The easy way
+**1. The easy way**
 - Make new Heroku blank app
 - Go to your Heroku blank app
 - Go to resources
 - In Add-ons and search Heroku Postgres
 - hit **Submit Order Form**
-##### 2. The hard way
+
+** 2. The hard way**
 - Install Postgresql:
 ```
 sudo apt-get update && sudo apt-get install postgresql

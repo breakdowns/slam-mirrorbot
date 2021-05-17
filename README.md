@@ -95,7 +95,7 @@ psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER
 ```
 This will allow you to connect to your database via your terminal. By default, YOUR_HOST should be 0.0.0.0:5432.
 
-You should now be able to build your database URI. This will be:
+You should now be able to build your database URL. This will be:
 ```
 sqldbtype://username:pw@hostname:port/db_name
 ```
@@ -122,9 +122,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
 - **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)  
 - **OWNER_ID**: The Telegram user ID (not username) of the Owner of the bot
-- **SUDO_USER**: (Optional field) Multiple Telegram user ID (not username) separate by space.
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
-- **DATABASE_URL**: Your Database. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database)
+- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database)
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
 - **IS_TEAM_DRIVE**: (Optional field) Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
 - **USE_SERVICE_ACCOUNTS**: (Optional field) (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using service accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.

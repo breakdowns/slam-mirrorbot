@@ -31,17 +31,18 @@ class AriaDownloadHelper(DownloadHelper):
             gdrive = GoogleDriveHelper(None)
             smsg, button = gdrive.drive_list(sname)
           if smsg:
-              dl.getListener().onDownloadError(f'File is already available in drive.\n\n')
-              sendMarkup("Here are the search results: 👇", dl.getListener().bot, dl.getListener().update, button)
+              dl.getListener().onDownloadError(f'File is already available in Drive.\n\n')
+              sendMarkup("Here are the search results:", dl.getListener().bot, dl.getListener().update, button)
               aria2.remove([download])
-                
+              return
+
         size = download.total_length
         if ENABLE_FILESIZE_LIMIT:
           if size / 1024 / 1024 / 1024 > MAX_TORRENT_SIZE:
-              LOGGER.info(f" Download size Exceeded: {gid}")
+              LOGGER.info(f"Download size Exceeded: {gid}")
               dl.getListener().onDownloadError(f'File size {get_readable_file_size(size)} larger than Maximum Allowed size {MAX_TORRENT_SIZE}GB')
               aria2.remove([download])
-          return
+              return
         update_all_messages()
 
     def __onDownloadComplete(self, api: API, gid):
@@ -71,8 +72,7 @@ class AriaDownloadHelper(DownloadHelper):
     def __onDownloadStopped(self, api, gid):
         LOGGER.info(f"onDownloadStop: {gid}")
         dl = getDownloadByGid(gid)
-        if dl:
-            dl.getListener().onDownloadError('Dead Torrent!')
+        if dl: dl.getListener().onDownloadError('Dead torrent!')
 
     @new_thread
     def __onDownloadError(self, api, gid):

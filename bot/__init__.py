@@ -11,11 +11,12 @@ from dotenv import load_dotenv
 from pyrogram import Client
 from telegraph import Telegraph
 
+import psycopg2
+from psycopg2 import Error
+
 import socket
 import faulthandler
 faulthandler.enable()
-from megasdkrestclient import MegaSdkRestClient, errors as mega_err
-import subprocess
 
 socket.setdefaulttimeout(600)
 
@@ -28,6 +29,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     handlers=[logging.FileHandler('log.txt'), logging.StreamHandler()],
                     level=logging.INFO)
 
+LOGGER = logging.getLogger(__name__)
+
 load_dotenv('config.env')
 
 Interval = []
@@ -36,8 +39,17 @@ Interval = []
 def getConfig(name: str):
     return os.environ[name]
 
-
-LOGGER = logging.getLogger(__name__)
+def mktable():
+    try:
+        conn = psycopg2.connect(DB_URI)
+        cur = conn.cursor()
+        sql = "CREATE TABLE users (uid bigint, sudo boolean DEFAULT FALSE);"
+        cur.execute(sql)
+        conn.commit()
+        LOGGER.info("Table Created!")
+    except Error as e:
+        LOGGER.error(e)
+        exit(1)
 
 try:
     if bool(getConfig('_____REMOVE_THIS_LINE_____')):
@@ -67,12 +79,7 @@ status_reply_dict = {}
 download_dict = {}
 # Stores list of users and chats the bot is authorized to use in
 AUTHORIZED_CHATS = set()
-if os.path.exists('authorized_chats.txt'):
-    with open('authorized_chats.txt', 'r+') as f:
-        lines = f.readlines()
-        for line in lines:
-            #    LOGGER.info(line.split())
-            AUTHORIZED_CHATS.add(int(line.split()[0]))
+SUDO_USERS = set()
 try:
     achats = getConfig('AUTHORIZED_CHATS')
     achats = achats.split(" ")
@@ -83,6 +90,7 @@ except:
 
 try:
     BOT_TOKEN = getConfig('BOT_TOKEN')
+    DB_URI = getConfig('DATABASE_URL')
     parent_id = getConfig('GDRIVE_FOLDER_ID')
     DOWNLOAD_DIR = getConfig('DOWNLOAD_DIR')
     if DOWNLOAD_DIR[-1] != '/' or DOWNLOAD_DIR[-1] != '\\':
@@ -95,6 +103,26 @@ try:
 except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)
+
+try:
+    conn = psycopg2.connect(DB_URI)
+    cur = conn.cursor()
+    sql = "SELECT * from users;"
+    cur.execute(sql)
+    rows = cur.fetchall()  #returns a list ==> (uid, sudo)
+    for row in rows:
+        AUTHORIZED_CHATS.add(row[0])
+        if row[1]:
+            SUDO_USERS.add(row[0])
+except Error as e:
+    if 'relation "users" does not exist' in str(e):
+        mktable()
+    else:
+        LOGGER.error(e)
+        exit(1)
+finally:
+    cur.close()
+    conn.close()
 
 LOGGER.info("Generating USER_SESSION_STRING")
 with Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN) as app:
@@ -109,35 +137,18 @@ telegraph_token = telegraph.get_access_token()
 LOGGER.info("Telegraph Token Generated: '" + telegraph_token + "'")
 
 try:
-    MEGA_KEY = getConfig('MEGA_KEY')
-
+    MEGA_API_KEY = getConfig('MEGA_API_KEY')
 except KeyError:
-    MEGA_KEY = None
-    LOGGER.info('MEGA API KEY NOT AVAILABLE')
-if MEGA_KEY is not None:
-    # Start megasdkrest binary
-    subprocess.Popen(["megasdkrest", "--apikey", MEGA_KEY])
-    time.sleep(3)  # Wait for the mega server to start listening
-    mega_client = MegaSdkRestClient('http://localhost:6090')
-    try:
-        MEGA_USERNAME = getConfig('MEGA_USERNAME')
-        MEGA_PASSWORD = getConfig('MEGA_PASSWORD')
-        if len(MEGA_USERNAME) > 0 and len(MEGA_PASSWORD) > 0:
-            try:
-                mega_client.login(MEGA_USERNAME, MEGA_PASSWORD)
-            except mega_err.MegaSdkRestClientException as e:
-                logging.error(e.message['message'])
-                exit(0)
-        else:
-            LOGGER.info("Mega API KEY provided but credentials not provided. Starting mega in anonymous mode!")
-            MEGA_USERNAME = None
-            MEGA_PASSWORD = None
-    except KeyError:
-        LOGGER.info("Mega API KEY provided but credentials not provided. Starting mega in anonymous mode!")
-        MEGA_USERNAME = None
-        MEGA_PASSWORD = None
-else:
-    MEGA_USERNAME = None
+    logging.warning('MEGA API KEY not provided!')
+    MEGA_API_KEY = None
+try:
+    MEGA_EMAIL_ID = getConfig('MEGA_EMAIL_ID')
+    MEGA_PASSWORD = getConfig('MEGA_PASSWORD')
+    if len(MEGA_EMAIL_ID) == 0 or len(MEGA_PASSWORD) == 0:
+        raise KeyError
+except KeyError:
+    logging.warning('MEGA Credentials not provided!')
+    MEGA_EMAIL_ID = None
     MEGA_PASSWORD = None
 try:
     HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
@@ -221,6 +232,14 @@ try:
 except KeyError:
     USE_SERVICE_ACCOUNTS = False
 try:
+    BLOCK_MEGA_FOLDER = getConfig('BLOCK_MEGA_FOLDER')
+    if BLOCK_MEGA_FOLDER.lower() == 'true':
+        BLOCK_MEGA_FOLDER = True
+    else:
+        BLOCK_MEGA_FOLDER = False
+except KeyError:
+    BLOCK_MEGA_FOLDER = False
+try:
     BLOCK_MEGA_LINKS = getConfig('BLOCK_MEGA_LINKS')
     if BLOCK_MEGA_LINKS.lower() == 'true':
         BLOCK_MEGA_LINKS = True
@@ -241,6 +260,6 @@ try:
 except KeyError:
     IMAGE_URL = 'https://telegra.ph/file/db03910496f06094f1f7a.jpg'
 
-updater = tg.Updater(token=BOT_TOKEN,use_context=True)
+updater = tg.Updater(token=BOT_TOKEN, use_context=True)
 bot = updater.bot
 dispatcher = updater.dispatcher

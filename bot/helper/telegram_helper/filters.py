@@ -1,6 +1,6 @@
 from telegram.ext import BaseFilter
 from telegram import Message
-from bot import AUTHORIZED_CHATS, OWNER_ID, download_dict, download_dict_lock
+from bot import AUTHORIZED_CHATS, SUDO_USERS, OWNER_ID, download_dict, download_dict_lock
 
 
 class CustomFilters:
@@ -22,6 +22,12 @@ class CustomFilters:
             return bool(message.chat.id in AUTHORIZED_CHATS)
 
     authorized_chat = _AuthorizedChat()
+
+    class _SudoUser(BaseFilter):
+        def filter(self,message):
+            return bool(message.from_user.id in SUDO_USERS)
+
+    sudo_user = _SudoUser()
 
     class _MirrorOwner(BaseFilter):
         def filter(self, message: Message):

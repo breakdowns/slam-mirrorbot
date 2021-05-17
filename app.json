@@ -1,5 +1,5 @@
 {
-    "name": "slam-mirrorbot ",
+    "name": "slam-mirrorbot",
     "description": "A Telegram bot for all your mirror needs",
     "logo": "https://telegra.ph/file/6507910fd06d18dfaba82.jpg",
     "keywords": [
@@ -8,14 +8,14 @@
       "python"
     ],
     "repository": "https://github.com/breakdowns/slam-mirrorbot",
-    "website": "https://t.me/SlamMirrorSupport",
-    "success_url": "https://github.com/breakdowns/slam-mirrorbot/blob/master/README.md",
+    "website": "https://github.com/breakdowns/slam-mirrorbot",
+    "success_url": "https://t.me/SlamMirrorSupport",
     "stack": "container",
     "env": {
       "ENV": {
-      "description": "Setting this to ANYTHING will enable Webhooks when in env mode",
-      "value": "ANYTHING"
-    },
+        "description": "Setting this to ANYTHING will enable Webhooks when in env mode",
+        "value": "ANYTHING"
+      },
       "BOT_TOKEN": {
         "description": "The telegram bot token that you get from @BotFather.",
         "required": true
@@ -78,16 +78,20 @@
         "description": "Uptobox premium token to mirror uptobox links. Get it from https://uptobox.com/my_account.",
         "required": false
       },
-      "MEGA_KEY": {
+      "MEGA_API_KEY": {
         "description": "Mega.nz api key to mirror mega.nz links. Get it from https://mega.nz/sdk.",
         "required": false
       },
-      "MEGA_USERNAME": {
+      "MEGA_EMAIL_ID": {
         "description": "Your email id you used to sign up on mega.nz.",
         "required": false
       },
       "MEGA_PASSWORD": {
         "description": "Your password for your mega.nz account.",
+        "required": false
+      },
+      "BLOCK_MEGA_FOLDER": {
+        "description": "If you want to remove mega.nz folder support, set it to True.",
         "required": false
       },
       "BLOCK_MEGA_LINKS": {
@@ -145,5 +149,10 @@
         "description": "Fill your URL if you are using extra buttons.",
         "required": false
       }
-    }
+    },
+    "addons": [
+      {
+        "plan": "heroku-postgresql"
+      }
+    ]
 }

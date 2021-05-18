@@ -53,16 +53,11 @@ def start(update, context):
 This bot can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-    update.effective_message.reply_photo(IMAGE_URL, start_string, parse_mode=ParseMode.MARKDOWN)
-
-
-@run_async
-def repo(update, context):
     button = [
-    [InlineKeyboardButton("Repo", url=f"https://github.com/breakdowns/slam-mirrorbot")],
-    [InlineKeyboardButton("Support Group", url=f"https://t.me/SlamMirrorSupport")]]
+    [InlineKeyboardButton("Repo", url=f"https://github.com/breakdowns/slam-mirrorbot"),
+     InlineKeyboardButton("Support Group", url=f"https://t.me/SlamMirrorSupport")]]
     reply_markup = InlineKeyboardMarkup(button)
-    update.effective_message.reply_photo(IMAGE_URL, reply_markup=reply_markup)
+    update.effective_message.reply_photo(IMAGE_URL, start_string, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
 
 
 @run_async
@@ -132,8 +127,6 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/{BotCommands.RepoCommand}: Get the bot repo.
-
 /shell: Run commands in Shell (Terminal).
 
 /mediainfo: Get detailed info about replied media.
@@ -170,8 +163,6 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/{BotCommands.RepoCommand}: Get the bot repo.
-
 /mediainfo: Get detailed info about replied media.
 
 /tshelp: Get help for Torrent search module.
@@ -203,8 +194,7 @@ BotCommand(f'{BotCommands.StatsCommand}','Bot Usage Stats'),
 BotCommand(f'{BotCommands.HelpCommand}','Get Detailed Help'),
 BotCommand(f'{BotCommands.SpeedCommand}','Check Speed of the host'),
 BotCommand(f'{BotCommands.LogCommand}','Bot Log [owner only]'),
-BotCommand(f'{BotCommands.RestartCommand}','Restart bot [owner only]'),
-BotCommand(f'{BotCommands.RepoCommand}','Get the bot repo')]
+BotCommand(f'{BotCommands.RestartCommand}','Restart bot [owner only]')]
 
 
 def main():
@@ -229,15 +219,12 @@ def main():
     stats_handler = CommandHandler(BotCommands.StatsCommand,
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user)
-    repo_handler = CommandHandler(BotCommands.RepoCommand, repo,
-                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
-    dispatcher.add_handler(repo_handler)
     updater.start_polling()
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)

@@ -71,6 +71,8 @@ pip3 install -r requirements-cli.txt
 <details>
     <summary><b>Click here for more details</b></summary>
 
+**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database
+
 **1. The easy way**
 - Make new Heroku blank app
 - Go to your Heroku blank app
@@ -109,8 +111,6 @@ You should now be able to build your database URL. This will be:
 sqldbtype://username:pw@hostname:port/db_name
 ```
 Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, etc) repeat for your username, password, hostname (localhost?), port (5432?), and db name.
-
-**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database
 
 </details>
 

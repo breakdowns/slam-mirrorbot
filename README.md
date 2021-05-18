@@ -71,46 +71,22 @@ pip3 install -r requirements-cli.txt
 <details>
     <summary><b>Click here for more details</b></summary>
 
-**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database
+**1. Manually**
+- `sudo apt install -y postgresql postgresql-contrib`
+- `sudo -u postgres bash`
+- `createdb slambot`
+- `psql`
+- `ALTER USER postgres with password 'your-pass';`
+- `exit`
+- `exit`
 
-**1. The easy way**
-- Make new Heroku blank app
-- Go to your Heroku blank app
-- Go to resources
-- In Add-ons search **Heroku Postgres**
-- Hit **Submit Order Form**
-- Copy your Database URL from Heroku Config Vars > **DATABASE_URL**
+Change `DATABASE_URL = "dbname=slambot user=postgres password=your-pass host=127.0.0.1 port=5432"`
+Enter the password in the above string.
 
-**2. The hard way**
-- Install Postgresql:
-```
-sudo apt-get update && sudo apt-get install postgresql
-```
-- Change to the Postgres user:
-```
-sudo su - postgres
-```
-- Create a new database user (change YOUR_USER appropriately):
-```
-createuser -P -s -e YOUR_USER
-```
-This will be followed by you needing to input your password.
-- Create a new database table:
-```
-createdb -O YOUR_USER YOUR_DB_NAME
-```
-Change YOUR_USER and YOUR_DB_NAME appropriately.
-- Finally:
-```
-psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER
-```
-This will allow you to connect to your database via your terminal. By default, YOUR_HOST should be 0.0.0.0:5432.
+**2. Using Heroku PostgreSQL database**
+<p><a href="https://dev.to/prisma/how-to-setup-a-free-postgresql-database-on-heroku-1dc1"> <img src="https://img.shields.io/badge/see%20on%20dev.to-grey?style=for-the-badge&logo=dev-dot-to" width="190""/></a></p>
 
-You should now be able to build your database URL. This will be:
-```
-sqldbtype://username:pw@hostname:port/db_name
-```
-Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, etc) repeat for your username, password, hostname (localhost?), port (5432?), and db name.
+**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database when first deploying
 
 </details>
 

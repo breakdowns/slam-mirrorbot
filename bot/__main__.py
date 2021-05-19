@@ -8,7 +8,7 @@ from sys import executable
 from datetime import datetime
 import pytz
 import time
-from telegram import ParseMode, BotCommand, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import ParseMode, BotCommand, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, run_async
 from bot import dispatcher, updater, botStartTime, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
@@ -53,10 +53,10 @@ def start(update, context):
 This bot can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-    button = [
-    [InlineKeyboardButton("Repo", url=f"https://github.com/breakdowns/slam-mirrorbot"),
-     InlineKeyboardButton("Support Group", url=f"https://t.me/SlamMirrorSupport")]]
-    reply_markup = InlineKeyboardMarkup(button)
+    buttons = button_build.ButtonMaker()
+    buttons.button_build("Repo", "https://github.com/breakdowns/slam-mirrorbot")
+    buttons.button_build("Support Group", "https://t.me/SlamMirrorSupport")
+    reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     update.effective_message.reply_photo(IMAGE_URL, start_string, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
 
 

@@ -100,9 +100,9 @@ _____REMOVE_THIS_LINE_____=True
 ```
 Fill up rest of the fields. Meaning of each fields are discussed below:
 ### Required Field
+- **BOT_TOKEN**: The Telegram bot token that you get from [@BotFather](https://t.me/BotFather)
 - **TELEGRAM_API**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
 - **TELEGRAM_HASH**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org
-- **BOT_TOKEN**: The Telegram bot token that you get from [@BotFather](https://t.me/BotFather)
 - **OWNER_ID**: The Telegram user ID (not username) of the Owner of the bot
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database when first deploying)

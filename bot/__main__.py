@@ -1,6 +1,7 @@
 import shutil, psutil
 import signal
 import pickle
+
 from pyrogram import idle
 from bot import app
 from os import execl, kill, path, remove
@@ -8,7 +9,8 @@ from sys import executable
 from datetime import datetime
 import pytz
 import time
-from telegram import ParseMode, BotCommand, InlineKeyboardMarkup
+
+from telegram import ParseMode, BotCommand
 from telegram.ext import CommandHandler, run_async
 from bot import dispatcher, updater, botStartTime, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
@@ -37,7 +39,7 @@ def stats(update, context):
     disk = psutil.disk_usage('/').percent
     stats = f'<b>Bot Uptime:</b> {currentTime}\n' \
             f'<b>Start Time:</b> {current}\n' \
-            f'<b>Total disk space:</b> {total}\n' \
+            f'<b>Total Disk Space:</b> {total}\n' \
             f'<b>Used:</b> {used}  ' \
             f'<b>Free:</b> {free}\n\n' \
             f'📊Data Usage📊\n<b>Upload:</b> {sent}\n' \

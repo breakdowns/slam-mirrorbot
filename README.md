@@ -1,7 +1,7 @@
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
 # Slam Mirror Bot
-![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot&style=for-the-badge)
+![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=for-the-badge)
 ![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=red&style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues-raw/breakdowns/slam-mirrorbot&style=for-the-badge)

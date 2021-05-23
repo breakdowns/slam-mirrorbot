@@ -1,8 +1,40 @@
-[![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
-# Slam Mirror Bot
-This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
+
+
+
+
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot.svg?style=for-the-badge
+[contributors-url]: https://github.com/breakdowns/slam-mirrorbot/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/breakdowns/slam-mirrorbot.svg?style=for-the-badge
+[forks-url]: https://github.com/breakdowns/slam-mirrorbot/network/members
+[stars-shield]: https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?style=for-the-badge
+[stars-url]: https://github.com/breakdowns/slam-mirrorbot/stargazers
+[issues-shield]: https://img.shields.io/github/issues/breakdowns/slam-mirrorbot.svg?style=for-the-badge
+[issues-url]: https://github.com/breakdowns/slam-mirrorbot/issues
+[product-screenshot]: images/screenshot.png
+
+
+<br />
+<p align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="https://telegra.ph/file/db03910496f06094f1f7a.jpg" alt="Logo" width="500" height="300">
+  </a>
+
+  <h3 align="center"><img src="https://telegra.ph/file/118b58ddd68e3a4ac7b31.png"></h3>
+
+  <h3 align="center">
+   This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive 
+    <h3 />
+
+    
+ 
 # Features supported:
 
 ## Additional Features

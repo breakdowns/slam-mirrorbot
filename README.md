@@ -8,6 +8,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/breakdowns/slam-mirrorbot?color=brown)
 ![GitHub repo size](https://img.shields.io/github/repo-size/breakdowns/slam-mirrorbot?color=red)
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/breakdowns/mega-sdk-python?color=black&label=docker%20size&style=flat)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 
 This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 

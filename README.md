@@ -5,6 +5,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=for-the-badge)
 ![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues-raw/breakdowns/slam-mirrorbot?style=for-the-badge)
+![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/breakdowns/mega-sdk-python?color=black&label=docker%20size&style=for-the-badge)
 
 This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 

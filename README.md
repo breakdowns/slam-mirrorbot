@@ -21,13 +21,7 @@
 [product-screenshot]: images/screenshot.png
 
 
-<br />
-<p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://telegra.ph/file/db03910496f06094f1f7a.jpg" alt="Logo" width="500" height="300">
-  </a>
-
-  <h3 align="center"><img src="https://telegra.ph/file/118b58ddd68e3a4ac7b31.png"></h3>
+[![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
   <h3 align="center">
    This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive 

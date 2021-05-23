@@ -1,26 +1,13 @@
-[contributors-shield]: https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot.svg?style=for-the-badge
-[contributors-url]: https://github.com/breakdowns/slam-mirrorbot/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/breakdowns/slam-mirrorbot.svg?style=for-the-badge
-[forks-url]: https://github.com/breakdowns/slam-mirrorbot/network/members
-[stars-shield]: https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?style=for-the-badge
-[stars-url]: https://github.com/breakdowns/slam-mirrorbot/stargazers
-[issues-shield]: https://img.shields.io/github/issues/breakdowns/slam-mirrorbot.svg?style=for-the-badge
-[issues-url]: https://github.com/breakdowns/slam-mirrorbot/issues
-[product-screenshot]: images/screenshot.png
-
-
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 
-  <h3 align="center">
-   This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive 
-    <h3 />
+# Slam Mirror Bot
+![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot)
+![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=red&style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues-raw/breakdowns/slam-mirrorbot)
 
-    
- 
+This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
+
 # Features supported:
 
 ## Additional Features
@@ -38,9 +25,9 @@
 
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
-- Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 4-5GB/Days)
+- Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 4-5gb/day)
 - Copy files from someone's Drive to your Drive (Using Autorclone)
-- Download/Upload progress, Speeds and ETAs
+- Download/upload progress, speeds and ETAs
 - Mirror all Youtube-dl supported links
 - Docker support
 - Uploading To Team Drive
@@ -48,7 +35,7 @@
 - Service Account support
 - Delete files from Drive
 - Shortener support
-- Custom Filename (Only for URL, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
+- Custom Filename (Only for url, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
 - Extracting password protected files, using custom filename and download from password protected index links see these examples:
 <p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
@@ -69,6 +56,7 @@ Deploying is pretty much straight forward and is divided into several steps as f
 git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
 cd mirrorbot
 ```
+
 - Install requirements
 For Debian based distros
 ```
@@ -89,7 +77,7 @@ pip3 install -r requirements-cli.txt
     <summary><b>Click here for more details</b></summary>
 
 **1. Using ElephantSQL**
-- Go to https://elephantsql.com/ and create account (Skip this if you already have ElephantSQL account)
+- Go to https://elephantsql.com/ and create account (skip this if you already have ElephantDB accounti)
 - Hit **Create New Instance**
 - Follow the further instructions in the screen
 - Hit **Select Region**
@@ -117,21 +105,19 @@ cp config_sample.env config.env
 _____REMOVE_THIS_LINE_____=True
 ```
 Fill up rest of the fields. Meaning of each fields are discussed below:
-### Required Field
 - **BOT_TOKEN**: The Telegram bot token that you get from [@BotFather](https://t.me/BotFather)
-- **TELEGRAM_API**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
-- **TELEGRAM_HASH**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org
-- **OWNER_ID**: The Telegram user ID (not username) of the Owner of the bot
-- **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
-- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database when first deploying)
 - **GDRIVE_FOLDER_ID**: This is the folder ID of the Google Drive Folder to which you want to upload all the mirrors.
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
 - **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)  
+- **OWNER_ID**: The Telegram user ID (not username) of the Owner of the bot
+- **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
+- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database)
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
-### Optional Field
 - **IS_TEAM_DRIVE**: (Optional field) Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
 - **USE_SERVICE_ACCOUNTS**: (Optional field) (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using service accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.
 - **INDEX_URL**: (Optional field) Refer to https://github.com/maple3142/GDIndex/ The URL should not have any trailing '/'
+- **API_KEY**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
+- **API_HASH**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org
 - **MEGA_API_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account
@@ -197,6 +183,7 @@ sudo docker run mirrorbot
 ## Deploying on Heroku with heroku-cli and Goorm IDE
 <p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
+
 # Using Service Accounts for uploading to avoid user rate limit
 For Service Account to work, you must set **USE_SERVICE_ACCOUNTS=**"True" in config file or environment variables, 
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts.
@@ -234,9 +221,10 @@ machine host login username password my_youtube_password
 Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of different hosts can be added each separated by a new line.
 
 # Support Group
-<p><a href="https://t.me/SlamMirrorSupport"> <img src="https://img.shields.io/badge/Slam%20Mirror%20Support-blue?style=for-the-badge&logo=telegram" width="230""/></a></p>
+<p><a href="https://t.me/SlamMirrorSupport"> <img src="https://img.shields.io/badge/Slam%20Mirror%20Support-black?style=for-the-badge&logo=telegram" width="230""/></a></p>
 
 # Credits
+
 Thanks to:
 - [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS
 - [Izzy12](https://github.com/lzzy12/) for original repo

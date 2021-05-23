@@ -1,11 +1,11 @@
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
 # Slam Mirror Bot
-![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=blue&style=plastic)
-![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=plastic)
-![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=plastic)
-![GitHub issues](https://img.shields.io/github/issues-raw/breakdowns/slam-mirrorbot?style=plastic)
-![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/breakdowns/mega-sdk-python?color=black&label=docker%20size&style=plastic)
+![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=blue&style=flat)
+![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=flat)
+![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=flat)
+![GitHub issues](https://img.shields.io/github/issues-raw/breakdowns/slam-mirrorbot?style=flat)
+![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/breakdowns/mega-sdk-python?color=black&label=docker%20size&style=flat)
 
 This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 

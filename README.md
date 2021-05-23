@@ -1,15 +1,3 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-
-
-
-
-
-
-
-
 [contributors-shield]: https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot.svg?style=for-the-badge
 [contributors-url]: https://github.com/breakdowns/slam-mirrorbot/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/breakdowns/slam-mirrorbot.svg?style=for-the-badge
@@ -22,6 +10,10 @@
 
 
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
   <h3 align="center">
    This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive 

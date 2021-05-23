@@ -1,11 +1,11 @@
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
 # Slam Mirror Bot
-![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=blue&style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=for-the-badge)
-![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues-raw/breakdowns/slam-mirrorbot?style=for-the-badge)
-![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/breakdowns/mega-sdk-python?color=black&label=docker%20size&style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=blue&style=plastic)
+![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=plastic)
+![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=plastic)
+![GitHub issues](https://img.shields.io/github/issues-raw/breakdowns/slam-mirrorbot?style=plastic)
+![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/breakdowns/mega-sdk-python?color=black&label=docker%20size&style=plastic)
 
 This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
@@ -178,7 +178,7 @@ sudo docker run mirrorbot
 - Fork this repo then upload **token.pickle** to your forks
 - Hit the **DEPLOY TO HEROKU** button and follow the further instructions in the screen
 
-**NOTE**: If you didn't upload **token.pickle**, uploading will not work. How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
+**NOTE**: If you didn't upload **token.pickle**, uploading will not work. How to generate **token.pickle**? **[Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)**
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 ## Deploying on Heroku with heroku-cli and Goorm IDE

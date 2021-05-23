@@ -10,7 +10,7 @@
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/breakdowns/mega-sdk-python?color=black&label=docker%20size&style=flat)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 
-Slam Mirror Bot is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
+**Slam Mirror Bot** is a Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
 

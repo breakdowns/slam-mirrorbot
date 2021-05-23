@@ -30,7 +30,7 @@
   <h3 align="center"><img src="https://telegra.ph/file/118b58ddd68e3a4ac7b31.png"></h3>
 
   <h3 align="center">
-  { This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive }
+   This is a Telegram bot writen in Python for mirroring files on the Internet to our beloved Google Drive 
     <h3 />
 
     

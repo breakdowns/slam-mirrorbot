@@ -178,8 +178,7 @@ sudo docker run mirrorbot
 
 ## Deploying on Heroku
 
-- Fork this repo then upload **token.pickle** to your forks
-- Then do not forget to star it
+- Give stars and Fork this repo then upload **token.pickle** to your forks
 - Hit the **DEPLOY TO HEROKU** button and follow the further instructions in the screen
 
 **NOTE**: If you didn't upload **token.pickle**, uploading will not work. How to generate **token.pickle**? **[Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)**

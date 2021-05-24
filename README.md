@@ -14,7 +14,7 @@
 
 **Slam Mirror Bot** is a Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
-# Features supported:
+# Features supported: ✨
 
 ## Additional Features
 - Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
@@ -53,7 +53,7 @@ HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS,
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
 
-# How to deploy?
+# How to deploy? 🧑‍🔧
 Deploying is pretty much straight forward and is divided into several steps as follows:
 ## Installing requirements
 
@@ -189,8 +189,7 @@ sudo docker run mirrorbot
 ## Deploying on Heroku with heroku-cli and Goorm IDE
 <p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
-
-# Using Service Accounts for uploading to avoid user rate limit
+# Using Service Accounts for uploading to avoid user rate limit 🔧
 For Service Account to work, you must set **USE_SERVICE_ACCOUNTS=**"True" in config file or environment variables, 
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts.
 **NOTE**: Using Service Accounts is only recommended while uploading to a Team Drive.
@@ -219,14 +218,14 @@ python3 gen_sa_accounts.py --download-keys project_id
 python3 add_to_team_drive.py -d SharedTeamDriveSrcID
 ```
 
-# Youtube-dl authentication using .netrc file
+# Youtube-dl authentication using .netrc file ▶️
 For using your premium accounts in Youtube-dl, edit the netrc file according to following format:
 ```
 machine host login username password my_youtube_password
 ```
 Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of different hosts can be added each separated by a new line.
 
-# Credits
+# Credits 👥
 
 Thanks to:
 - [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS

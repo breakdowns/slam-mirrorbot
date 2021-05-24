@@ -3,11 +3,11 @@
 # Slam Mirror Bot
 ![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=blue&style=flat)
 ![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=flat)
-![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=flat)
 ![GitHub issues](https://img.shields.io/github/issues/breakdowns/slam-mirrorbot)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/breakdowns/slam-mirrorbot)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/breakdowns/slam-mirrorbot)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/breakdowns/slam-mirrorbot)
+![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=flat)
 ![GitHub watchers](https://img.shields.io/github/watchers/breakdowns/slam-mirrorbot?color=brown)
 ![GitHub repo size](https://img.shields.io/github/repo-size/breakdowns/slam-mirrorbot?color=red)
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/breakdowns/mega-sdk-python?color=black&label=docker%20size&style=flat)

@@ -36,7 +36,7 @@
 - Download/upload progress, speeds and ETAs
 - Mirror all Youtube-dl supported links
 - Docker support
-- Uploading To Team Drive
+- Uploading to Team Drive
 - Index Link support
 - Service Account support
 - Delete files from Drive

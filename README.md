@@ -22,7 +22,7 @@
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
 - Limiting Torrent size support
-- Sudo with database support
+- Sudo with Database support
 - Check Heroku dynos stats
 - Custom image support
 - Racaty.net support

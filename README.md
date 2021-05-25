@@ -83,7 +83,7 @@ pip3 install -r requirements-cli.txt
     <summary><b>Click here for more details</b></summary>
 
 **1. Using ElephantSQL**
-- Go to https://elephantsql.com/ and create account (skip this if you already have ElephantDB accounti)
+- Go to https://elephantsql.com/ and create account (skip this if you already have ElephantSQL account)
 - Hit **Create New Instance**
 - Follow the further instructions in the screen
 - Hit **Select Region**

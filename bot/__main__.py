@@ -54,7 +54,7 @@ def stats(update, context):
 def start(update, context):
     start_string = f'''
 This bot can mirror all your links to Google drive!
-Type /{BotCommands.HelpCommand} to get a list of available commands.
+Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     buttons = button_build.ButtonMaker()
     buttons.buildbutton("Repo", "https://github.com/breakdowns/slam-mirrorbot")

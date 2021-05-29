@@ -17,13 +17,13 @@
 # Features supported:
 
 ## Additional Features
-- Mirroring Uptobox.com links to Google Drive
-> Uptobox account must be premium
+- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Get detailed info about replied media
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
 - Limiting Torrent size support
 - Sudo with Database support
+- Multiple trackers support
 - Check Heroku dynos stats
 - Custom image support
 - Racaty.net support

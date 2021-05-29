@@ -23,7 +23,7 @@
 - Speedtest with picture results
 - Limiting Torrent size support
 - Sudo with Database support
-- Multiple trackers support
+- Multiple Trackers support
 - Check Heroku dynos stats
 - Custom image support
 - Racaty.net support

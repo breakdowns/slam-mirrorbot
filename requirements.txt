@@ -9,7 +9,6 @@ google-auth-httplib2
 google-auth-oauthlib
 heroku3
 html-telegraph-poster
-https://raw.githubusercontent.com/Ncode2014/nekadok/req/heroku-dlp-master.zip
 js2py
 lxml
 messages
@@ -27,3 +26,4 @@ speedtest-cli
 telegraph
 tenacity
 TgCrypto
+youtube_dl

@@ -144,17 +144,18 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 ```
 exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
+
+**Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
+
 Above are the supported url Shorteners. Except these only some url Shorteners are supported.
 ### Add more buttons (Optional)
-Two buttons are already added of file link and index link, you can add extra buttons too, these are optional, If you don't know what are below entries, simply leave them, Don't fill anything in them.
+Two buttons are already added of File Link and Index Link, You can add extra buttons too, these are optional, If you don't know what are below entries, simply leave them, Don't fill anything in them.
 - **BUTTON_THREE_NAME**:
 - **BUTTON_THREE_URL**:
 - **BUTTON_FOUR_NAME**:
 - **BUTTON_FOUR_URL**:
 - **BUTTON_FIVE_NAME**:
 - **BUTTON_FIVE_URL**:
-
-**Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
 
 </details>
 

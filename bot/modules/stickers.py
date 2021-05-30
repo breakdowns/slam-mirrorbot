@@ -1,4 +1,5 @@
 import math
+import os
 import urllib.request as urllib
 from PIL import Image
 from html import escape

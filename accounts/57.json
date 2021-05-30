@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sassori",
+  "private_key_id": "9cdf1313edd273e7813aa3f5702caccd4976b095",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCMMT+4k0d6WzNZ\n5HveCTjBV4E9QxcxSfVTnL2dluVUEhyrR049HcqSrUgT/gIE5Dc+p6xR0Ek2yfLM\nmM4rDPTwkxmTabFf8xq8W5izZAldJm2D77thexdQA4hQo7XfsblEshe2iEeIOCRN\nb/adSkmlbpyozYXpJL8+OUW5TpYUD2Pn9tr+e+wSRp+NqE41DD90gpZjjOWYeSs7\ngFRAPirulrTZ5BN70MtStwQVMX7YK+7fR2dO0QEVksayutJKKhI5JsPQqcQOY8FM\nAllVIdUk8WF6kd0uGNpCnY3Cry03wKncE0LfJ3doPyMlOI0+unm2gy/reMnyfFJ+\nXnYaZ0wlAgMBAAECggEABXMl//3cXyRLzb3KbD+S25PplpZqFg9toFoigOLMeBqF\neh8Of+UNlUAejNsTUa9cJRe4OiyiUU/ucV0AqWnFMn5KwJFGRO2avMxuwOKC/q0E\nwDFB6TCIynfTWmx9ddG0hbgf9dznCE5Dva2Rj7HDRSa/TkyXB7uBomCa65uOIqob\nxHVCTaoF04zvWoK65/jc4DCJxcD0Pr1iM72Xuo7kvYPebAhjCIoEaxSVyn9DJ7cy\nPNGxXlmbWYg/bbHxXHYYmKCOvSNVjDRDgdVdyv0o3oXxVHIg70aRMj8QtVUitWhj\nZm+WRE/FpP0GtPiFuJ7BdkWzfm5NvRohPVPGU+qSwQKBgQC+W43xD7G/UsFl7z8i\n8SN8/Y4AvCtKx3U1GwI2KrpIRK3fKN7Pjk01j7i2ZRLLLM7hQaSpoteZSa87dBJ5\nY9ZrvjQ71kW+6T69Dx7sRn7luKli9QiLsZJ4d6i47bF4L18TGWASU3yiLO2I7xN8\nLYS2d3JuEs7llZYKEUM2stns8QKBgQC8iTERkJHjTbq5yq6yE+89SNM6SNHYejwJ\nkypmjSmneJPdcEtlh8kXPg10vAnnL7uUdsFepJud8YKlz9HgAp4JSLCcPU5HtkM5\nauw9OXsf0jl4591AVHtZK37M9Epwe0IfiX4HqKLmK60j+bsWPp1JWzfV5XqdLetw\ntTgWeLYidQKBgG4IyDzPIKUCdi6xJCLTlvr6Kip8mt3H/BVtflLHUhTSNltn6Zu6\nmyDZ6iDsvfdZ+GA3LLKuIchG0pcgWkl3D4wKT3FDQ9++PfjVE7/qZBHwM2GzWHQ/\nefZO3OXA6DQb1e5ZXbJaNhIcvFXKNM40FaHP3AKKtrP5StiY7+xfaB9RAoGAH8Sy\nOvZ0TqvTUekgJKuNPXNe/Ew259Y49ZgRpfQVV73OlJqOac5GiR8Qn2Hr/UOixPJ5\nxNvRyPxf+laZU7i9Lm1MLRd7cEP68drdcbeU0pjWzFOtiWBy5GSa2igzvt5WFwBQ\n9zNoN4aWhyBWcPoeALVZJDalwYRyTqyKhebTMd0CgYEAu7nWnHfq4jAZ0MYwKbbF\nbwAC/YNF/pH3JKguJUmQDRiM80OX/A+3L7jyxP61EIzQ4dikYLo+2VIXA8lN7Zwo\nf55kucN6wBZ0Q+qVS8Oduzq0zyJocpUcUyrT+WY6vTyljW2zA6vxgP0r75t9jSIE\nw8AcpxLRdkjezNhWInFYNog=\n-----END PRIVATE KEY-----\n",
+  "client_email": "sa07-935@sassori.iam.gserviceaccount.com",
+  "client_id": "101886393449636408744",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sa07-935%40sassori.iam.gserviceaccount.com"
+}

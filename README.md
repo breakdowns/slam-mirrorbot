@@ -28,7 +28,6 @@
 - Custom image support
 - Racaty.net support
 - Shell and Executor
-- Change to YT-DLP
 - Stickers module
 
 ## From Original Repos

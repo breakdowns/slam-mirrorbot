@@ -145,7 +145,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
 Above are the supported url Shorteners. Except these only some url Shorteners are supported.
-### Add more buttons
+### Add more buttons (Optional)
 Two buttons are already added of file link and index link, you can add extra buttons too, these are optional, If you don't know what are below entries, simply leave them, Don't fill anything in them.
 - **BUTTON_THREE_NAME**:
 - **BUTTON_THREE_URL**:

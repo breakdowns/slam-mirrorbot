@@ -1,10 +1,9 @@
 import shutil, psutil
 import signal
-import pickle
+import os
 
 from pyrogram import idle
 from bot import app
-from os import execl, kill, path, remove
 from sys import executable
 from datetime import datetime
 import pytz
@@ -12,14 +11,14 @@ import time
 
 from telegram import ParseMode, BotCommand
 from telegram.ext import CommandHandler, run_async
-from bot import dispatcher, updater, botStartTime, IMAGE_URL
+from bot import bot, dispatcher, updater, botStartTime, IMAGE_URL
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest, usage, mediainfo
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest, usage, mediainfo, count
 
 now=datetime.now(pytz.timezone('Asia/Jakarta'))
 
@@ -75,10 +74,11 @@ def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
     LOGGER.info(f'Restarting the Bot...')
     # Save restart message object in order to reply to it after restarting
+    with open(".restartmsg", "w") as f:
+        f.truncate(0)
+        f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
     fs_utils.clean_all()
-    with open('restart.pickle', 'wb') as status:
-        pickle.dump(restart_message, status)
-    execl(executable, executable, "-m", "bot")
+    os.execl(executable, executable, "-m", "bot")
 
 
 @run_async
@@ -106,6 +106,8 @@ def bot_help(update, context):
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
 
 /{BotCommands.CloneCommand}: Copy file/folder to Google Drive
+
+/{BotCommands.CountCommand}: Count files/folders of G-Drive Links
 
 /{BotCommands.DeleteCommand} [link]: Delete file from Google Drive (Only Owner & Sudo)
 
@@ -159,6 +161,8 @@ def bot_help(update, context):
 
 /{BotCommands.CloneCommand}: Copy file/folder to Google Drive
 
+/{BotCommands.CountCommand}: Count files/folders of G-Drive Links
+
 /{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
 
 /{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
@@ -210,12 +214,12 @@ BotCommand(f'{BotCommands.RestartCommand}','Restart bot [owner only]')]
 def main():
     fs_utils.start_cleanup()
     # Check if the bot is restarting
-    if path.exists('restart.pickle'):
-        with open('restart.pickle', 'rb') as status:
-            restart_message = pickle.load(status)
-        restart_message.edit_text("Restarted Successfully!")
-        LOGGER.info('Restarted Successfully!')
-        remove('restart.pickle')
+    if os.path.isfile(".restartmsg"):
+        with open(".restartmsg") as f:
+            chat_id, msg_id = map(int, f)
+        bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
+        os.remove(".restartmsg")
+
     bot.set_my_commands(botcmds)
 
     start_handler = CommandHandler(BotCommands.StartCommand, start)

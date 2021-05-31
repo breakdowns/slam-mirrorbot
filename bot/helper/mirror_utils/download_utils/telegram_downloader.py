@@ -20,7 +20,7 @@ class TelegramDownloadHelper(DownloadHelper):
         self.__name = ""
         self.__gid = ''
         self.__start_time = time.time()
-        self.__user_bot = app
+        self._bot = app
         self.__is_cancelled = False
 
     @property

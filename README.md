@@ -26,7 +26,7 @@
 - Multiple Trackers support
 - Check Heroku dynos stats
 - Custom image support
-- Counting file/folders
+- Counting file/folder
 - Racaty.net support
 - Shell and Executor
 - Stickers module

@@ -107,7 +107,7 @@ def bot_help(update, context):
 
 /{BotCommands.CloneCommand}: Copy file/folder to Google Drive
 
-/{BotCommands.CountCommand}: Count files/folders of G-Drive Links
+/{BotCommands.CountCommand}: Count file/folder of Google Drive Links
 
 /{BotCommands.DeleteCommand} [link]: Delete file from Google Drive (Only Owner & Sudo)
 
@@ -161,7 +161,7 @@ def bot_help(update, context):
 
 /{BotCommands.CloneCommand}: Copy file/folder to Google Drive
 
-/{BotCommands.CountCommand}: Count files/folders of G-Drive Links
+/{BotCommands.CountCommand}: Count file/folder of Google Drive Links
 
 /{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
 
@@ -197,6 +197,7 @@ BotCommand(f'{BotCommands.MirrorCommand}', 'Start Mirroring'),
 BotCommand(f'{BotCommands.TarMirrorCommand}','Upload tar (zipped) file'),
 BotCommand(f'{BotCommands.UnzipMirrorCommand}','Extract files'),
 BotCommand(f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
+BotCommand(f'{BotCommands.CountCommand}','Count file/folder of Drive Links'),
 BotCommand(f'{BotCommands.WatchCommand}','Mirror YT-DL support link'),
 BotCommand(f'{BotCommands.TarWatchCommand}','Mirror Youtube playlist link as tar'),
 BotCommand(f'{BotCommands.CancelMirror}','Cancel a task'),

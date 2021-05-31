@@ -161,7 +161,6 @@ Two buttons are already added of File Link and Index Link, you can add extra but
 </details>
 
 ## Getting Google OAuth API credential file
-
 - Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)
 - Go to the OAuth Consent tab, fill it, and save.
 - Go to the Credentials tab and click Create Credentials -> OAuth Client ID

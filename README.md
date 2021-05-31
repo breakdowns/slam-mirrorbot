@@ -25,8 +25,8 @@
 - Sudo with Database support
 - Multiple Trackers support
 - Check Heroku dynos stats
-- Counting file/folders
 - Custom image support
+- Counting file/folders
 - Racaty.net support
 - Shell and Executor
 - Stickers module

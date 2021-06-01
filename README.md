@@ -12,7 +12,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-mirrorbot)
 [![Slam Mirror Support](https://img.shields.io/badge/slam%20mirror%20bot-support%20group-blue)](https://t.me/SlamMirrorSupport)
 
-**Slam Mirror Bot** is a Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
+**Slam Mirror Bot** is a multipurpose Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
 
@@ -26,7 +26,7 @@
 - Multiple Trackers support
 - Check Heroku dynos stats
 - Custom image support
-- Counting file/folders
+- Counting file/folder
 - Racaty.net support
 - Shell and Executor
 - Stickers module

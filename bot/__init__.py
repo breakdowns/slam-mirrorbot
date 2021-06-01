@@ -90,7 +90,7 @@ except:
 
 try:
     BOT_TOKEN = getConfig('BOT_TOKEN')
-    DB_URI = os.environ.get("DATABASE_URL")
+    DB_URI = getConfig('DATABASE_URL')
     parent_id = getConfig('GDRIVE_FOLDER_ID')
     DOWNLOAD_DIR = getConfig('DOWNLOAD_DIR')
     if not DOWNLOAD_DIR.endswith("/"):
@@ -100,7 +100,7 @@ try:
     AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
-    GROUP_ID = getConfig("GROUP_ID")
+    GROUP_ID = os.environ.get('GROUP_ID', None)
 except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)

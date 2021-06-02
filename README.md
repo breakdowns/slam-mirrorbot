@@ -150,7 +150,7 @@ Above are the supported url Shorteners. Except these only some url Shorteners ar
 
 **Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
 ### Add more buttons (Optional)
-Two buttons are already added of File Link and Index Link, you can add extra buttons too, these are optional, if you don't know what are below entries, simply leave them, don't fill anything in them.
+Two buttons are already added of Drive Link and Index Link, you can add extra buttons, these are optional, if you don't know what are below entries, simply leave them, don't fill anything in them.
 - **BUTTON_THREE_NAME**:
 - **BUTTON_THREE_URL**:
 - **BUTTON_FOUR_NAME**:
@@ -215,41 +215,41 @@ Let us create only the Service Accounts that we need.
 ```
 python3 gen_sa_accounts.py --quick-setup 1 --new-only
 ```
-A folder named accounts will be created which will contain keys for the Service Accounts
+A folder named accounts will be created which will contain keys for the Service Accounts.
 
-OR you can create service accounts to current project, no need to create new one.
+Or you can create Service Accounts to current project, no need to create new one
 
-1. List your projests ids
+- List your projects ids
 ```
 python3 gen_sa_accounts.py --list-projects
 ```
-2. Enable services automatically by this cmd
+- Enable services automatically by this command
 ```
 python3 gen_sa_accounts.py --enable-services $PROJECTID
 ```
-3. Create sevice accounts to current project
+- Create Sevice Accounts to current project
 ```
 python3 gen_sa_accounts.py --create-sas $PROJECTID
 ```
-4. Download sevice accounts as accounts folder
+- Download Sevice Accounts as accounts folder
 ```
 python3 gen_sa_accounts.py --download-keys $PROJECTID
 ```
-If u want to add service accounts to google group so follow these steps also
+If you want to add Service Accounts to Google Group, follow these steps
 
-5. Mount accounts folder
+- Mount accounts folder
 ```
 cd accounts
 ```
-6. Grab emails form all accounts to emails.txt file that would be created in accounts folder
+- Grab emails form all accounts to emails.txt file that would be created in accounts folder
 ```
 grep -oPh '"client_email": "\K[^"]+' *.json > emails.txt
 ```
-7. Unmount acounts folder
+- Unmount acounts folder
 ```
 cd -
 ```
-Then add emails from emails.txt to google group, after that add google group to your shared drive and promote it to (manager).
+Then add emails from emails.txt to Google Group, after that add Google Group to your Shared Drive and promote it to manager.
 
 **NOTE**: If you have created SAs in past from this script, you can also just re download the keys by running:
 ```
@@ -267,7 +267,7 @@ For using your premium accounts in Youtube-dl or for protected index links, edit
 ```
 machine host login username password my_youtube_password
 ```
-For index link with only password without username, even http auth will not work, so this is the solution.
+For Index Link with only password without username, even http auth will not work, so this is the solution.
 ```
 machine example.workers.dev password index_password
 ```

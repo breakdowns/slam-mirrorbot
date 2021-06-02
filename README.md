@@ -215,9 +215,9 @@ Let us create only the Service Accounts that we need.
 ```
 python3 gen_sa_accounts.py --quick-setup 1 --new-only
 ```
-A folder named accounts will be created which will contain keys for the Service Accounts
+A folder named accounts will be created which will contain keys for the Service Accounts.
 
-Or you can create Service Accounts to current project, no need to create new one.
+Or you can create Service Accounts to current project, no need to create new one
 
 - List your projects ids
 ```
@@ -267,7 +267,7 @@ For using your premium accounts in Youtube-dl or for protected index links, edit
 ```
 machine host login username password my_youtube_password
 ```
-For index link with only password without username, even http auth will not work, so this is the solution.
+For Index Link with only password without username, even http auth will not work, so this is the solution.
 ```
 machine example.workers.dev password index_password
 ```

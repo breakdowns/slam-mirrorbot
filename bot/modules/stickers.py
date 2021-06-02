@@ -1,7 +1,6 @@
 import math
 import os
 import urllib.request as urllib
-from io import BytesIO
 from PIL import Image
 from html import escape
 

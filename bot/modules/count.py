@@ -21,7 +21,7 @@ def countNode(update, context):
         gd = GoogleDriveHelper()
         result = gd.count(link)
         deleteMessage(context.bot,msg)
-        sendMessage(result + cc, context.bot,update)
+        sendMessage(result + cc, context.bot, update)
     else:
         sendMessage("Provide G-Drive Shareable Link to Count.", context.bot, update)
 

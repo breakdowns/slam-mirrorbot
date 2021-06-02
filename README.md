@@ -219,23 +219,23 @@ A folder named accounts will be created which will contain keys for the Service 
 
 OR you can create service accounts to current project, no need to create new one.
 
-1. List your projests ids
+1. List your projects ids
 ```
 python3 gen_sa_accounts.py --list-projects
 ```
-2. Enable services automatically by this cmd
+2. Enable services automatically by this command
 ```
 python3 gen_sa_accounts.py --enable-services $PROJECTID
 ```
-3. Create sevice accounts to current project
+3. Create Sevice Accounts to current project
 ```
 python3 gen_sa_accounts.py --create-sas $PROJECTID
 ```
-4. Download sevice accounts as accounts folder
+4. Download Sevice Accounts as accounts folder
 ```
 python3 gen_sa_accounts.py --download-keys $PROJECTID
 ```
-If u want to add service accounts to google group so follow these steps also
+If you want to add Service Accounts to Google Group, follow these steps
 
 5. Mount accounts folder
 ```
@@ -249,7 +249,7 @@ grep -oPh '"client_email": "\K[^"]+' *.json > emails.txt
 ```
 cd -
 ```
-Then add emails from emails.txt to google group, after that add google group to your shared drive and promote it to (manager).
+Then add emails from emails.txt to Google Group, after that add Google Group to your Shared Drive and promote it to manager.
 
 **NOTE**: If you have created SAs in past from this script, you can also just re download the keys by running:
 ```

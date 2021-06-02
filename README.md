@@ -211,13 +211,45 @@ Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scrip
 Let us create only the Service Accounts that we need. 
 **Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 SAs allow you plenty of use, its also possible that over abuse might get your projects banned by Google. 
 
+`Note: 1 Service Account can copy around 750gb a day, 1 project can make 100 Service Accounts so that's 75tb a day, for most users this should easily suffice. `
 ```
-Note: 1 Service Account can copy around 750gb a day, 1 project can make 100 Service Accounts so that's 75tb a day, for most users this should easily suffice. 
+python3 gen_sa_accounts.py --quick-setup 1 --new-only
 ```
-
-`python3 gen_sa_accounts.py --quick-setup 1 --new-only`
-
 A folder named accounts will be created which will contain keys for the Service Accounts
+
+OR you can create service accounts to current project, no need to create new one.
+
+1. List your projests ids
+```
+python3 gen_sa_accounts.py --list-projects
+```
+2. Enable services automatically by this cmd
+```
+python3 gen_sa_accounts.py --enable-services $PROJECTID
+```
+3. Create sevice accounts to current project
+```
+python3 gen_sa_accounts.py --create-sas $PROJECTID
+```
+4. Download sevice accounts as accounts folder
+```
+python3 gen_sa_accounts.py --download-keys $PROJECTID
+```
+If u want to add service accounts to google group so follow these steps also
+
+5. Mount accounts folder
+```
+cd accounts
+```
+6. Grab emails form all accounts to emails.txt file that would be created in accounts folder
+```
+grep -oPh '"client_email": "\K[^"]+' *.json > emails.txt
+```
+7. Unmount acounts folder
+```
+cd -
+```
+Then add emails from emails.txt to google group, after that add google group to your shared drive and promote it to (manager).
 
 **NOTE**: If you have created SAs in past from this script, you can also just re download the keys by running:
 ```
@@ -231,9 +263,13 @@ python3 add_to_team_drive.py -d SharedTeamDriveSrcID
 ```
 
 # Youtube-dl authentication using .netrc file
-For using your premium accounts in Youtube-dl, edit the netrc file according to following format:
+For using your premium accounts in Youtube-dl or for protected index links, edit the netrc file according to following format:
 ```
 machine host login username password my_youtube_password
+```
+For index link with only password without username, even http auth will not work, so this is the solution.
+```
+machine example.workers.dev password index_password
 ```
 Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of different hosts can be added each separated by a new line.
 

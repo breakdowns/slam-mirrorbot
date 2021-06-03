@@ -329,21 +329,6 @@ def kang(update: Update, context: CallbackContext):
         os.remove("kangsticker.tgs")
 
 
-@run_async
-def delsticker(update, context):
-    msg = update.effective_message
-    if msg.reply_to_message and msg.reply_to_message.sticker:
-        file_id = msg.reply_to_message.sticker.file_id
-        context.bot.delete_sticker_from_set(file_id)
-        msg.reply_text(
-            "Deleted!"
-        )
-    else:
-        update.effective_message.reply_text(
-            "Please reply to sticker message to del sticker"
-        )
-
-
 def makepack_internal(
     update,
     context,
@@ -410,6 +395,21 @@ def makepack_internal(
     else:
         msg.reply_text(
             "Failed to create sticker pack. Possibly due to blek mejik.")
+
+
+@run_async
+def delsticker(update, context):
+    msg = update.effective_message
+    if msg.reply_to_message and msg.reply_to_message.sticker:
+        file_id = msg.reply_to_message.sticker.file_id
+        context.bot.delete_sticker_from_set(file_id)
+        msg.reply_text(
+            "Sticker deleted!"
+        )
+    else:
+        update.effective_message.reply_text(
+            "Please reply to sticker message to del sticker"
+        )
 
 
 @run_async

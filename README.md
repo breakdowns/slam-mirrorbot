@@ -12,7 +12,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-mirrorbot)
 [![Slam Mirror Support](https://img.shields.io/badge/slam%20mirror%20bot-support%20group-blue)](https://t.me/SlamMirrorSupport)
 
-**Slam Mirror Bot** is a Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
+**Slam Mirror Bot** is a multipurpose Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
 
@@ -26,9 +26,9 @@
 - Multiple Trackers support
 - Check Heroku dynos stats
 - Custom image support
+- Counting file/folder
 - Racaty.net support
 - Shell and Executor
-- Change to YT-DLP
 - Stickers module
 
 ## From Original Repos
@@ -145,14 +145,22 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 ```
 exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
+
 Above are the supported url Shorteners. Except these only some url Shorteners are supported.
 
 **Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
+### Add more buttons (Optional)
+Two buttons are already added of Drive Link and Index Link, you can add extra buttons, these are optional, if you don't know what are below entries, simply leave them, don't fill anything in them.
+- **BUTTON_THREE_NAME**:
+- **BUTTON_THREE_URL**:
+- **BUTTON_FOUR_NAME**:
+- **BUTTON_FOUR_URL**:
+- **BUTTON_FIVE_NAME**:
+- **BUTTON_FIVE_URL**:
 
 </details>
 
 ## Getting Google OAuth API credential file
-
 - Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)
 - Go to the OAuth Consent tab, fill it, and save.
 - Go to the Credentials tab and click Create Credentials -> OAuth Client ID
@@ -203,13 +211,45 @@ Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scrip
 Let us create only the Service Accounts that we need. 
 **Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 SAs allow you plenty of use, its also possible that over abuse might get your projects banned by Google. 
 
+`Note: 1 Service Account can copy around 750gb a day, 1 project can make 100 Service Accounts so that's 75tb a day, for most users this should easily suffice. `
 ```
-Note: 1 Service Account can copy around 750gb a day, 1 project can make 100 Service Accounts so that's 75tb a day, for most users this should easily suffice. 
+python3 gen_sa_accounts.py --quick-setup 1 --new-only
 ```
+A folder named accounts will be created which will contain keys for the Service Accounts.
 
-`python3 gen_sa_accounts.py --quick-setup 1 --new-only`
+Or you can create Service Accounts to current project, no need to create new one
 
-A folder named accounts will be created which will contain keys for the Service Accounts
+- List your projects ids
+```
+python3 gen_sa_accounts.py --list-projects
+```
+- Enable services automatically by this command
+```
+python3 gen_sa_accounts.py --enable-services $PROJECTID
+```
+- Create Sevice Accounts to current project
+```
+python3 gen_sa_accounts.py --create-sas $PROJECTID
+```
+- Download Sevice Accounts as accounts folder
+```
+python3 gen_sa_accounts.py --download-keys $PROJECTID
+```
+If you want to add Service Accounts to Google Group, follow these steps
+
+- Mount accounts folder
+```
+cd accounts
+```
+- Grab emails form all accounts to emails.txt file that would be created in accounts folder
+```
+grep -oPh '"client_email": "\K[^"]+' *.json > emails.txt
+```
+- Unmount acounts folder
+```
+cd -
+```
+Then add emails from emails.txt to Google Group, after that add Google Group to your Shared Drive and promote it to manager.
 
 **NOTE**: If you have created SAs in past from this script, you can also just re download the keys by running:
 ```
@@ -223,9 +263,13 @@ python3 add_to_team_drive.py -d SharedTeamDriveSrcID
 ```
 
 # Youtube-dl authentication using .netrc file
-For using your premium accounts in Youtube-dl, edit the netrc file according to following format:
+For using your premium accounts in Youtube-dl or for protected index links, edit the netrc file according to following format:
 ```
 machine host login username password my_youtube_password
+```
+For Index Link with only password without username, even http auth will not work, so this is the solution.
+```
+machine example.workers.dev password index_password
 ```
 Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of different hosts can be added each separated by a new line.
 

@@ -155,6 +155,10 @@ class GoogleDriveHelper:
             'description': 'Uploaded by Slam Mirror Bot',
             'mimeType': mime_type,
         }
+        try:
+            self.typee = file_metadata['mimeType']
+        except:
+            self.typee = 'File' 
         if parent_id is not None:
             file_metadata['parents'] = [parent_id]
 
@@ -206,6 +210,8 @@ class GoogleDriveHelper:
         return download_url
 
     def upload(self, file_name: str):
+        self.total_files = 0
+        self.total_folders = 0
         if USE_SERVICE_ACCOUNTS:
             self.service_account_count = len(os.listdir("accounts"))
         self.__listener.onUploadStarted()
@@ -253,7 +259,10 @@ class GoogleDriveHelper:
             finally:
                 self.updater.cancel()
         LOGGER.info(download_dict)
-        self.__listener.onUploadComplete(link, size)
+        files = self.total_files
+        folders = self.total_folders
+        typ = self.typee
+        self.__listener.onUploadComplete(link, size, files, folders, typ)
         LOGGER.info("Deleting downloaded file/folder..")
         return link
 
@@ -447,11 +456,13 @@ class GoogleDriveHelper:
             if os.path.isdir(current_file_name):
                 current_dir_id = self.create_directory(item, parent_id)
                 new_id = self.upload_dir(current_file_name, current_dir_id)
+                self.total_folders += 1
             else:
                 mime_type = get_mime_type(current_file_name)
                 file_name = current_file_name.split("/")[-1]
                 # current_file_name will have the full path
                 self.upload_file(current_file_name, file_name, mime_type, parent_id)
+                self.total_files += 1
                 new_id = parent_id
         return new_id
 

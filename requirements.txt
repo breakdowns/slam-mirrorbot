@@ -10,12 +10,14 @@ google-auth-oauthlib
 heroku3
 html-telegraph-poster
 js2py
+lk21
 lxml
 messages
 natsort
 Pillow
 psutil
 psycopg2-binary
+pybase64
 pyrogram
 python-dotenv
 python-magic

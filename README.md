@@ -283,7 +283,7 @@ Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of 
 # Credits
 
 Thanks to:
-- [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS
+- [out386](https://github.com/out386) heavily inspired from Telegram Bot which is written in JS
 - [Izzy12](https://github.com/lzzy12/) for original repo
 - [Dank-del](https://github.com/Dank-del/) for base repo
 - [magneto261290](https://github.com/magneto261290/) for some features

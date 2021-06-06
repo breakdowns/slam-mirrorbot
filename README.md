@@ -32,7 +32,7 @@
 - Direct links supported:
 ```
 Racaty, Hxfile, Anonfiles, femax20, layarkacaxxi,
-Onedrive (Only works for file not folder)
+Onedrive (Only works for file not folder and busines)
 ```
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive

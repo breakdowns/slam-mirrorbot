@@ -31,7 +31,7 @@
 - View Link button (Not all Index support, recommended using [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
 - Direct links supported:
 ```
-Racaty, Hxfile, Anonfiles, femax20, layarkacaxxi,
+Racaty, Hxfile, Anonfiles, Femax20, Layarkacaxxi,
 Onedrive (Only works for file not folder and busines)
 ```
 ## From Original Repos

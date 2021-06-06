@@ -192,7 +192,7 @@ except KeyError:
     BUTTON_FOUR_URL = None
 try:
     BUTTON_FIVE_NAME = getConfig('BUTTON_FIVE_NAME')
-    BUTTON_FIVE_URL = getConfig('BUTTON_FIVR_URL')
+    BUTTON_FIVE_URL = getConfig('BUTTON_FIVE_URL')
     if len(BUTTON_FIVE_NAME) == 0 or len(BUTTON_FIVE_URL) == 0:
         raise KeyError
 except KeyError:

@@ -28,7 +28,7 @@
 - Counting file/folder
 - Shell and Executor
 - Stickers module
-- View Link button (Not all Index support, recommended use [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
+- View Link button (Not all Index support, recommended using [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
 - Direct links supported:
 ```
 Racaty, Hxfile, Anonfiles, femax20, layarkacaxxi,

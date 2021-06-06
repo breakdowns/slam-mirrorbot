@@ -17,7 +17,6 @@
 # Features supported:
 
 ## Additional Features
-- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Get detailed info about replied media
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
@@ -27,15 +26,20 @@
 - Check Heroku dynos stats
 - Custom image support
 - Counting file/folder
-- Racaty.net support
 - Shell and Executor
 - Stickers module
-
+- View Link button (Not all Index support, recommended using [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
+- Direct links supported:
+```
+Racaty, Hxfile, Anonfiles, Femax20, Layarkacaxxi,
+Onedrive (Only works for file not folder and busines)
+```
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 4-5gb/day)
+- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Copy files from someone's Drive to your Drive (Using Autorclone)
-- Download/upload progress, speeds and ETAs
+- Download/Upload progress, Speeds and ETAs
 - Mirror all Youtube-dl supported links
 - Docker support
 - Uploading to Team Drive
@@ -43,8 +47,8 @@
 - Service Account support
 - Delete files from Drive
 - Shortener support
-- Custom Filename (Only for url, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
-- Extracting password protected files, using custom filename and download from password protected index links see these examples:
+- Custom Filename (Only for URL, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
+- Extracting password protected files, using custom filename and download from password protected Index Links see these examples:
 <p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
 - Extract these filetypes and uploads to Google Drive
@@ -127,7 +131,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **IS_TEAM_DRIVE**: (Optional field) Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
 - **USE_SERVICE_ACCOUNTS**: (Optional field) (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using service accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.
-- **INDEX_URL**: (Optional field) Refer to https://github.com/maple3142/GDIndex/ The URL should not have any trailing '/'
+- **INDEX_URL**: (Optional field) Refer to https://github.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'
 - **MEGA_API_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account
@@ -150,13 +154,13 @@ Above are the supported url Shorteners. Except these only some url Shorteners ar
 
 **Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
 ### Add more buttons (Optional)
-Two buttons are already added of Drive Link and Index Link, you can add extra buttons, these are optional, if you don't know what are below entries, simply leave them, don't fill anything in them.
-- **BUTTON_THREE_NAME**:
-- **BUTTON_THREE_URL**:
+Three buttons are already added of Drive Link, Index Link, and View Link, you can add extra buttons, these are optional, if you don't know what are below entries, simply leave them, don't fill anything in them.
 - **BUTTON_FOUR_NAME**:
 - **BUTTON_FOUR_URL**:
 - **BUTTON_FIVE_NAME**:
 - **BUTTON_FIVE_URL**:
+- **BUTTON_SIX_NAME**:
+- **BUTTON_SIX_URL**:
 
 </details>
 
@@ -207,11 +211,13 @@ Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scrip
 **NOTE**: Using Service Accounts is only recommended while uploading to a Team Drive.
 
 ## Generate Service Accounts. [What is Service Account](https://cloud.google.com/iam/docs/service-accounts)
+<details>
+    <summary><b>Click here for more details</b></summary>
 
 Let us create only the Service Accounts that we need. 
 **Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 SAs allow you plenty of use, its also possible that over abuse might get your projects banned by Google. 
 
-`Note: 1 Service Account can copy around 750gb a day, 1 project can make 100 Service Accounts so that's 75tb a day, for most users this should easily suffice. `
+**NOTE:** 1 Service Account can copy around 750gb a day, 1 project can make 100 Service Accounts so that's 75tb a day, for most users this should easily suffice.
 ```
 python3 gen_sa_accounts.py --quick-setup 1 --new-only
 ```
@@ -256,6 +262,8 @@ Then add emails from emails.txt to Google Group, after that add Google Group to 
 python3 gen_sa_accounts.py --download-keys project_id
 ```
 
+</details>
+
 ## Add all the Service Accounts to the Team Drive
 - Run:
 ```
@@ -263,7 +271,7 @@ python3 add_to_team_drive.py -d SharedTeamDriveSrcID
 ```
 
 # Youtube-dl authentication using .netrc file
-For using your premium accounts in Youtube-dl or for protected index links, edit the netrc file according to following format:
+For using your premium accounts in Youtube-dl or for protected Index Links, edit the netrc file according to following format:
 ```
 machine host login username password my_youtube_password
 ```
@@ -276,7 +284,7 @@ Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of 
 # Credits
 
 Thanks to:
-- [out386](https://github.com/out386) heavily inspired from telegram bot which is written in JS
+- [out386](https://github.com/out386) heavily inspired from Telegram Bot which is written in JS
 - [Izzy12](https://github.com/lzzy12/) for original repo
 - [Dank-del](https://github.com/Dank-del/) for base repo
 - [magneto261290](https://github.com/magneto261290/) for some features

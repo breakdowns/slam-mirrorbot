@@ -129,11 +129,10 @@ app = Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_t
 
 #Generate Telegraph Token
 sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))
-LOGGER.info("Generating Telegraph Token using '" + sname + "' name")
+LOGGER.info("Generating TELEGRAPH_TOKEN using '" + sname + "' name")
 telegraph = Telegraph()
 telegraph.create_account(short_name=sname)
 telegraph_token = telegraph.get_access_token()
-LOGGER.info("Telegraph Token Generated: '" + telegraph_token + "'")
 
 try:
     MEGA_API_KEY = getConfig('MEGA_API_KEY')

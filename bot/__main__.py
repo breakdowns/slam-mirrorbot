@@ -141,7 +141,7 @@ def bot_help(update, context):
 
 /shell: Run commands in Shell (Terminal).
 
-/mediainfo: Get detailed info about replied media.
+/mediainfo: Get detailed info about replied media (Only for Telegram file).
 
 /tshelp: Get help for Torrent search module.
 
@@ -177,7 +177,7 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/mediainfo: Get detailed info about replied media.
+/mediainfo: Get detailed info about replied media (Only for Telegram file).
 
 /tshelp: Get help for Torrent search module.
 

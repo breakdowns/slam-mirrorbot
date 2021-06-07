@@ -104,8 +104,12 @@
         "required": false
       },
       "MAX_TORRENT_SIZE": {
-        "description": "To limit the torrent mirror size, Fill The amount you want to limit, examples: if you fill 15 it will limit 15gb.",
+        "description": "To limit the Torrent mirror size, Fill The amount you want to limit, examples: if you fill 15 it will limit 15gb.",
         "value": "15",
+        "required": false
+      },
+      "CLONE_LIMIT": {
+        "description": "To limit cloning Google Drive (leave space between number and unit (tb or gb only)), examples: if you fill 1 gb it will limit 1gb.",
         "required": false
       },
       "STOP_DUPLICATE_MIRROR": {

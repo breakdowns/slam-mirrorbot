@@ -17,9 +17,10 @@
 # Features supported:
 
 ## Additional Features
-- Get detailed info about replied media
+- Get detailed info about replied media (Only for Telegram file)
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
+- Limiting cloning Google Drive support
 - Limiting Torrent size support
 - Sudo with Database support
 - Multiple Trackers support
@@ -31,13 +32,13 @@
 - View Link button (Not all Index support, recommended using [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
 - Direct links supported:
 ```
-Racaty, Hxfile, Anonfiles, Femax20, Layarkacaxxi,
-Onedrive (Only works for file not folder and busines)
+Racaty, Hxfile, Anonfiles, Fembed, Femax20, Layarkacaxxi,
+Uptobox (Uptobox account must be premium),
+Onedrive (Only works for file not folder or busines account)
 ```
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 4-5gb/day)
-- Mirroring Uptobox.com links to Google Drive (Uptobox account must be premium)
 - Copy files from someone's Drive to your Drive (Using Autorclone)
 - Download/Upload progress, Speeds and ETAs
 - Mirror all Youtube-dl supported links
@@ -138,6 +139,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **BLOCK_MEGA_FOLDER**: (Optional field) If you want to remove mega.nz folder support, set it to `True`.
 - **BLOCK_MEGA_LINKS**: (Optional field) If you want to remove mega.nz mirror support, set it to `True`.
 - **STOP_DUPLICATE_MIRROR**: (Optional field) (Leave empty if unsure) if this field is set to `True`, bot will check file in drive, if it is present in Drive, downloading will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
+- **CLONE_LIMIT**: To limit cloning Google Drive (leave space between number and unit (tb or gb only)), examples: if you fill `1 gb` it will limit `1gb`.
 - **ENABLE_FILESIZE_LIMIT**: Set it to `True` if you want to use `MAX_TORRENT_SIZE`.
 - **MAX_TORRENT_SIZE**: To limit the Torrent mirror size, Fill The amount you want to limit, examples: if you fill `15` it will limit `15gb`.
 - **IMAGE_URL**: (Optional field) Show Image/Logo in /start message. Fill value of image your link image, use telegra.ph or any direct link image.
@@ -289,5 +291,6 @@ Thanks to:
 - [Dank-del](https://github.com/Dank-del/) for base repo
 - [magneto261290](https://github.com/magneto261290/) for some features
 - [SVR666](https://github.com/SVR666/) for some features & fixes
+- [anasty17](https://github.com/anasty17) for some features & help
 
 And many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

@@ -19,7 +19,7 @@ def cloneNode(update, context):
             limitint = int(limit[0])
             res, clonesizelimit = gd.count(link)
             if clonesizelimit != "":
-                msgg = f'Failed, clone limit is {CLONE_LIMIT}'
+                msgg = f'Failed, Clone limit is {CLONE_LIMIT}'
                 if 'GB' in limit or 'gb' in limit:
                     if clonesizelimit > limitint * 1024**3:
                         deleteMessage(context.bot, mssg)

@@ -619,7 +619,7 @@ class GoogleDriveHelper:
             file_id = self.getIdFromUrl(link)
         except (KeyError,IndexError):
             msg = "Google drive ID could not be found in the provided link"
-            return msg
+            return msg, ""
         msg = ""
         LOGGER.info(f"File ID: {file_id}")
         try:
@@ -634,6 +634,7 @@ class GoogleDriveHelper:
                 msg += f'\n<b>Type: </b>Folder'
                 msg += f'\n<b>SubFolders: </b>{self.total_folders}'
                 msg += f'\n<b>Files: </b>{self.total_files}'
+                clonesizelimit = self.total_bytes
             else:
                 msg += f'<b>Filename: </b><code>{name}</code>'
                 try:
@@ -646,6 +647,7 @@ class GoogleDriveHelper:
                     msg += f'\n<b>Size: </b><code>{get_readable_file_size(self.total_bytes)}</code>'
                     msg += f'\n<b>Type: </b>{typee}'
                     msg += f'\n<b>Files: </b>{self.total_files}'
+                    clonesizelimit = self.total_bytes
                 except TypeError:
                     pass
         except Exception as err:
@@ -654,8 +656,12 @@ class GoogleDriveHelper:
                 err = err.last_attempt.exception()
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
-            return err
-        return msg
+            if "File not found" in str(err):
+                msg = "File not found."
+            else:
+                msg = f"Error.\n{err}"
+            return msg, ""
+        return msg, clonesizelimit
 
     def gDrive_file(self, **kwargs):
         try:

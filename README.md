@@ -33,6 +33,7 @@
 - Direct links supported:
 ```
 Racaty, Hxfile, Anonfiles, Fembed, Femax20, Layarkacaxxi,
+naniplay.com, sbembed, streamsb,
 Uptobox (Uptobox account must be premium),
 Onedrive (Only works for file not folder or busines account)
 ```

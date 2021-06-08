@@ -32,10 +32,10 @@
 - View Link button (Not all Index support, recommended using [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
 - Direct links supported:
 ```
-Racaty, Hxfile, Anonfiles, Fembed, Femax20, Layarkacaxxi,
-naniplay.com, sbembed, streamsb,
-Uptobox (Uptobox account must be premium),
-Onedrive (Only works for file not folder or busines account)
+Racaty.net, Hxfile.co, Anonfiles.com, Fembed.com, Femax20.com,
+Layarkacaxxi.icu, naniplay.com, sbembed.com, streamsb.net,
+Uptobox.com (Uptobox account must be premium),
+Onedrive/1drv.ms (Only works for file not folder or busines account)
 ```
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive

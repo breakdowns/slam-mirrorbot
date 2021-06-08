@@ -24,8 +24,8 @@
 - Limiting Torrent size support
 - Sudo with Database support
 - Multiple Trackers support
-- Extracting **tar.xz** support
 - Check Heroku dynos stats
+- Extracting **tar.xz** support
 - Custom image support
 - Counting file/folder
 - Shell and Executor

@@ -52,7 +52,7 @@ def stats(update, context):
 @run_async
 def start(update, context):
     start_string = f'''
-This bot can mirror all your links to Google drive!
+This bot can mirror all your links to Google Drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     buttons = button_build.ButtonMaker()
@@ -141,7 +141,7 @@ def bot_help(update, context):
 
 /shell: Run commands in Shell (Terminal).
 
-/mediainfo: Get detailed info about replied media.
+/mediainfo: Get detailed info about replied media (Only for Telegram file).
 
 /tshelp: Get help for Torrent search module.
 
@@ -177,7 +177,7 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/mediainfo: Get detailed info about replied media.
+/mediainfo: Get detailed info about replied media (Only for Telegram file).
 
 /tshelp: Get help for Torrent search module.
 
@@ -220,7 +220,6 @@ def main():
             chat_id, msg_id = map(int, f)
         bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
         os.remove(".restartmsg")
-
     bot.set_my_commands(botcmds)
 
     start_handler = CommandHandler(BotCommands.StartCommand, start)

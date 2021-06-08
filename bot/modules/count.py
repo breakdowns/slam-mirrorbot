@@ -5,18 +5,25 @@ from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot import dispatcher
 
+
 @run_async
-def countNode(update,context):
-    args = update.message.text.split(" ",maxsplit=1)
+def countNode(update, context):
+    args = update.message.text.split(" ", maxsplit=1)
     if len(args) > 1:
         link = args[1]
-        msg = sendMessage(f"Counting: <code>{link}</code>",context.bot,update)
+        msg = sendMessage(f"Counting: <code>{link}</code>", context.bot, update)
         gd = GoogleDriveHelper()
-        result = gd.count(link)
-        deleteMessage(context.bot,msg)
-        sendMessage(result,context.bot,update)
+        result, empty = gd.count(link)
+        deleteMessage(context.bot, msg)
+        if update.message.from_user.username:
+            uname = f'@{update.message.from_user.username}'
+        else:
+            uname = f'<a href="tg://user?id={update.message.from_user.id}">{update.message.from_user.first_name}</a>'
+        if uname is not None:
+            cc = f'\n\ncc: {uname}'
+        sendMessage(result + cc, context.bot, update)
     else:
-        sendMessage("Provide G-Drive Shareable Link to Count.",context.bot,update)
+        sendMessage("Provide G-Drive Shareable Link to Count.", context.bot, update)
 
-count_handler = CommandHandler(BotCommands.CountCommand,countNode,filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
+count_handler = CommandHandler(BotCommands.CountCommand, countNode, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
 dispatcher.add_handler(count_handler)

@@ -26,7 +26,7 @@
       },
       "DOWNLOAD_DIR": {
         "description": "The path to the local folder where the downloads should be downloaded to.",
-        "value": "/home/slam/mirror-bot/downloads",
+        "value": "/usr/src/app/downloads",
         "required": false
       },
       "DOWNLOAD_STATUS_UPDATE_INTERVAL": {
@@ -104,8 +104,12 @@
         "required": false
       },
       "MAX_TORRENT_SIZE": {
-        "description": "To limit the torrent mirror size, Fill The amount you want to limit, examples: if you fill 15 it will limit 15gb.",
+        "description": "To limit the Torrent mirror size, Fill The amount you want to limit, examples: if you fill 15 it will limit 15gb.",
         "value": "15",
+        "required": false
+      },
+      "CLONE_LIMIT": {
+        "description": "To limit cloning Google Drive (leave space between number and unit (tb or gb only)), examples: if you fill 1 gb it will limit 1gb.",
         "required": false
       },
       "STOP_DUPLICATE_MIRROR": {
@@ -125,14 +129,6 @@
         "value": "https://telegra.ph/file/db03910496f06094f1f7a.jpg",
         "required": false
        },
-      "BUTTON_THREE_NAME": {
-        "description": "Extra buttons (optional).",
-        "required": false
-      },
-      "BUTTON_THREE_URL": {
-        "description": "Fill your URL if you are using extra buttons.",
-        "required": false
-      },
       "BUTTON_FOUR_NAME": {
         "description": "Extra buttons (optional).",
         "required": false
@@ -146,6 +142,14 @@
         "required": false
       },
       "BUTTON_FIVE_URL": {
+        "description": "Fill your URL if you are using extra buttons.",
+        "required": false
+      },
+      "BUTTON_SIX_NAME": {
+        "description": "Extra buttons (optional).",
+        "required": false
+      },
+      "BUTTON_SIX_URL": {
         "description": "Fill your URL if you are using extra buttons.",
         "required": false
       }

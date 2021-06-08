@@ -10,7 +10,7 @@ from bot.helper.ext_utils.db_handler import DbManger
 
 
 @run_async
-def authorize(update,context):
+def authorize(update, context):
     reply_message = None
     message_ = None
     reply_message = update.message.reply_to_message
@@ -41,7 +41,7 @@ def authorize(update,context):
 
 
 @run_async
-def unauthorize(update,context):
+def unauthorize(update, context):
     reply_message = None
     message_ = None
     reply_message = update.message.reply_to_message
@@ -71,7 +71,7 @@ def unauthorize(update,context):
 
 
 @run_async
-def addSudo(update,context):
+def addSudo(update, context):
     reply_message = None
     message_ = None
     reply_message = update.message.reply_to_message
@@ -96,7 +96,7 @@ def addSudo(update,context):
 
 
 @run_async
-def removeSudo(update,context):
+def removeSudo(update, context):
     reply_message = None
     message_ = None
     reply_message = update.message.reply_to_message
@@ -120,7 +120,7 @@ def removeSudo(update,context):
 
 
 @run_async
-def sendAuthChats(update,context):
+def sendAuthChats(update, context):
     user = sudo = ''
     user += '\n'.join(str(id) for id in AUTHORIZED_CHATS)
     sudo += '\n'.join(str(id) for id in SUDO_USERS)

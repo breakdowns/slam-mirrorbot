@@ -63,6 +63,8 @@ class MegaAppListener(MegaListener):
                     .format(request, error))
         if str(error).lower() != "no error":
             self.error = error.copy()
+            self.is_cancelled = True
+            self.listener.onDownloadError("\nMEGA Link you are trying to download is no longer available.")
             return
         request_type = request.getType()
         if request_type == MegaRequest.TYPE_LOGIN:
@@ -165,8 +167,7 @@ class MegaDownloadHelper:
             folder_api.addListener(mega_listener)
             executor.do(folder_api.loginToFolder, (mega_link,))
             node = folder_api.authorizeNode(mega_listener.node)
-        if mega_listener.error is not None:
-            return listener.onDownloadError(str(mega_listener.error))
+        
         gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=8))
         mega_listener.setValues(node.getName(), api.getSize(node), gid)
         executor.do(api.startDownload,(node,path))

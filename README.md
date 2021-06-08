@@ -35,8 +35,8 @@
 - View Link button (Not all Index support, recommended using [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
 - Direct links supported:
 ```
-Racaty.net, Hxfile.co, Anonfiles.com, Fembed.com, Femax20.com,
-Layarkacaxxi.icu, naniplay.com, sbembed.com, streamsb.net,
+Racaty.net, Hxfile.co, Anonfiles.com, Fembed.com, Femax20.com, Layarkacaxxi.icu,
+Naniplay.com, Naniplay.nanime.in, Naniplay.nanime.biz, Sbembed.com, Streamsb.net,
 Uptobox.com (Uptobox account must be premium),
 Onedrive/1drv.ms (Only works for file not folder or busines account)
 ```

@@ -15,9 +15,6 @@
 **Slam Mirror Bot** is a multipurpose Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
-<details>
-    <summary><b>Click here for more details</b></summary>
-
 ## Additional Features
 - Get detailed info about replied media (Only for Telegram file)
 - Nyaa.si and Sukebei Torrent search
@@ -63,8 +60,6 @@ APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT,
 HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
-
-</details>
 
 # How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:

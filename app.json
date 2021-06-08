@@ -109,7 +109,7 @@
         "required": false
       },
       "CLONE_LIMIT": {
-        "description": "To limit cloning Google Drive (leave space between number and unit (tb or gb only)), examples: if you fill 1 gb it will limit 1gb.",
+        "description": "To limit cloning Google Drive (leave space between number and unit, tb or gb only), examples: if you fill 1 gb it will limit 1gb.",
         "required": false
       },
       "STOP_DUPLICATE_MIRROR": {

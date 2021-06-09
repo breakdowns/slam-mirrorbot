@@ -15,26 +15,28 @@
 **Slam Mirror Bot** is a multipurpose Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
-
 ## Additional Features
 - Get detailed info about replied media (Only for Telegram file)
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
+- Stop duplicate clone Google Drive support
 - Limiting cloning Google Drive support
 - Limiting Torrent size support
 - Sudo with Database support
 - Multiple Trackers support
 - Check Heroku dynos stats
+- Extracting **tar.xz** support
 - Custom image support
 - Counting file/folder
 - Shell and Executor
 - Stickers module
-- View Link button (Not all Index support, recommended using [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
+- View Link button
 - Direct links supported:
 ```
-Racaty, Hxfile, Anonfiles, Fembed, Femax20, Layarkacaxxi,
-Uptobox (Uptobox account must be premium),
-Onedrive (Only works for file not folder or busines account)
+Racaty.net, Hxfile.co, Anonfiles.com, Fembed.com, Femax20.com, Layarkacaxxi.icu,
+Naniplay.com, Naniplay.nanime.in, Naniplay.nanime.biz, Sbembed.com, Streamsb.net,
+Uptobox.com (Uptobox account must be premium),
+Onedrive/1drv.ms (Only works for file not folder or busines account)
 ```
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
@@ -130,24 +132,26 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
 ### Optional Field
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
-- **IS_TEAM_DRIVE**: (Optional field) Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
-- **USE_SERVICE_ACCOUNTS**: (Optional field) (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using service accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.
-- **INDEX_URL**: (Optional field) Refer to https://github.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'
+- **IS_TEAM_DRIVE**: Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
+- **USE_SERVICE_ACCOUNTS**: (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using service accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.
+- **INDEX_URL**: Refer to https://github.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'
 - **MEGA_API_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
 - **MEGA_PASSWORD**: Your password for your mega.nz account
-- **BLOCK_MEGA_FOLDER**: (Optional field) If you want to remove mega.nz folder support, set it to `True`.
-- **BLOCK_MEGA_LINKS**: (Optional field) If you want to remove mega.nz mirror support, set it to `True`.
-- **STOP_DUPLICATE_MIRROR**: (Optional field) (Leave empty if unsure) if this field is set to `True`, bot will check file in drive, if it is present in Drive, downloading will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
-- **CLONE_LIMIT**: To limit cloning Google Drive (leave space between number and unit (tb or gb only)), examples: if you fill `1 gb` it will limit `1gb`.
+- **BLOCK_MEGA_FOLDER**: If you want to remove mega.nz folder support, set it to `True`.
+- **BLOCK_MEGA_LINKS**: If you want to remove mega.nz mirror support, set it to `True`.
+- **STOP_DUPLICATE_MIRROR**: (Leave empty if unsure) if this field is set to `True`, bot will check file in drive, if it is present in Drive, downloading will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
+- **STOP_DUPLICATE_CLONE**: (Leave empty if unsure) if this field is set to `True`, bot will check file in drive, if it is present in Drive, cloning will be stopped.
+- **CLONE_LIMIT**: To limit cloning Google Drive (leave space between number and unit, **TB or GB only**), examples: if you fill `1 GB` it will limit `1GB`.
 - **ENABLE_FILESIZE_LIMIT**: Set it to `True` if you want to use `MAX_TORRENT_SIZE`.
 - **MAX_TORRENT_SIZE**: To limit the Torrent mirror size, Fill The amount you want to limit, examples: if you fill `15` it will limit `15gb`.
-- **IMAGE_URL**: (Optional field) Show Image/Logo in /start message. Fill value of image your link image, use telegra.ph or any direct link image.
+- **IMAGE_URL**: Show Image/Logo in /start message. Fill value of image your link image, use telegra.ph or any direct link image.
+- **VIEW_LINK**: View Link button to open file Index Link in browser instead of direct download link, you can figure out if it's compatible with your Index code or not, open any video from you Index and check if the END of link from browser link bar is `?a=view`, if yes make it `True` it will work (Compatible with [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index) Code)
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
 - **HEROKU_API_KEY**: (Only if you deploying on Heroku) Your Heroku API key, get it from https://dashboard.heroku.com/account.
 - **HEROKU_APP_NAME**: (Only if you deploying on Heroku) Your Heroku app name.
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
-- **SHORTENER**: (Optional field) if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
+- **SHORTENER**: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
 ```
 exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
@@ -155,7 +159,7 @@ exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 Above are the supported url Shorteners. Except these only some url Shorteners are supported.
 
 **Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
-### Add more buttons (Optional)
+### Add more buttons (Optional Field)
 Three buttons are already added of Drive Link, Index Link, and View Link, you can add extra buttons, these are optional, if you don't know what are below entries, simply leave them, don't fill anything in them.
 - **BUTTON_FOUR_NAME**:
 - **BUTTON_FOUR_URL**:

@@ -19,6 +19,7 @@
 - Get detailed info about replied media (Only for Telegram file)
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
+- Stop duplicate clone Google Drive support
 - Limiting cloning Google Drive support
 - Limiting Torrent size support
 - Sudo with Database support

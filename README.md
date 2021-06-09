@@ -30,7 +30,7 @@
 - Counting file/folder
 - Shell and Executor
 - Stickers module
-- View Link button (Not all Index support, recommended using [Bhadoo Index](https://github.com/ParveenBhadooOfficial/Google-Drive-Index))
+- View Link button
 - Direct links supported:
 ```
 Racaty.net, Hxfile.co, Anonfiles.com, Fembed.com, Femax20.com, Layarkacaxxi.icu,

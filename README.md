@@ -142,7 +142,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **BLOCK_MEGA_LINKS**: If you want to remove mega.nz mirror support, set it to `True`.
 - **STOP_DUPLICATE_MIRROR**: (Leave empty if unsure) if this field is set to `True`, bot will check file in drive, if it is present in Drive, downloading will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
 - **STOP_DUPLICATE_CLONE**: (Leave empty if unsure) if this field is set to `True`, bot will check file in drive, if it is present in Drive, cloning will be stopped.
-- **CLONE_LIMIT**: To limit cloning Google Drive (leave space between number and unit, **TB or GB only**), examples: if you fill `1 gb` it will limit `1gb`.
+- **CLONE_LIMIT**: To limit cloning Google Drive (leave space between number and unit, **TB or GB only**), examples: if you fill `1 GB` it will limit `1GB`.
 - **ENABLE_FILESIZE_LIMIT**: Set it to `True` if you want to use `MAX_TORRENT_SIZE`.
 - **MAX_TORRENT_SIZE**: To limit the Torrent mirror size, Fill The amount you want to limit, examples: if you fill `15` it will limit `15gb`.
 - **IMAGE_URL**: Show Image/Logo in /start message. Fill value of image your link image, use telegra.ph or any direct link image.

@@ -1,7 +1,7 @@
 from bot import LOGGER, MEGA_API_KEY, download_dict_lock, download_dict, MEGA_EMAIL_ID, MEGA_PASSWORD
 import threading
 from mega import (MegaApi, MegaListener, MegaRequest, MegaTransfer, MegaError)
-from bot.helper.telegram_helper.message_utils import update_all_messages, sendMarkup, deleteMessage, sendMessage
+from bot.helper.telegram_helper.message_utils import *
 import os
 from bot.helper.ext_utils.bot_utils import new_thread, get_mega_link_type, get_readable_file_size
 from bot.helper.mirror_utils.status_utils.mega_download_status import MegaDownloadStatus
@@ -168,6 +168,7 @@ class MegaDownloadHelper:
             node = folder_api.authorizeNode(mega_listener.node)
         if STOP_DUPLICATE_MEGA:
             msg = sendMessage('Check the File/Folder if already in drive...', listener.bot, listener.update)
+            LOGGER.info(f'Check the File/Folder if already in drive')
             mname = node.getName()
             if listener.isTar == True:
                 mname = mname + ".tar"
@@ -185,6 +186,7 @@ class MegaDownloadHelper:
                 deleteMessage(listener.bot, msg)
         if MEGA_LIMIT is not None:
             msg2 = sendMessage('Check the File/Folder size...', listener.bot, listener.update)
+            LOGGER.info(f'Check the File/Folder size')
             limit = MEGA_LIMIT
             limit = limit.split(' ', maxsplit=1)
             limitint = int(limit[0])
@@ -203,6 +205,7 @@ class MegaDownloadHelper:
                     return
                 else:
                     deleteMessage(listener.bot, msg2)
+        sendStatusMessage(listener.update, listener.bot)
         with download_dict_lock:
             download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
         os.makedirs(path)

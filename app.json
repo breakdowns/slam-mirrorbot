@@ -140,10 +140,6 @@
         "description": "Show Image/Logo in /start message, Use telegra.ph or any direct link image.",
         "value": "https://telegra.ph/file/db03910496f06094f1f7a.jpg",
         "required": false
-      },
-      "IGNORE_PENDING_REQUESTS": {
-        "description": "If you want the bot to ignorepending requests after it restarts, set this to True.",
-        "required": false
        },
       "VIEW_LINK": {
         "description": "View Link button to open file Index Link in browser instead of direct download link, you can figure out if it's compatible with your Index code or not, open any video from you Index and check if the END of link from browser link bar is ?a=view, if yes make it True it will work (Compatible with Bhadoo Index Code).",

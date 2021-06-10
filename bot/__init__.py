@@ -188,6 +188,12 @@ try:
 except KeyError:
     CLONE_LIMIT = None
 try:
+    MEGA_LIMIT = getConfig('MEGA_LIMIT')
+    if len(MEGA_LIMIT) == 0:
+        MEGA_LIMIT = None
+except KeyError:
+    MEGA_LIMIT = None
+try:
     BUTTON_FOUR_NAME = getConfig('BUTTON_FOUR_NAME')
     BUTTON_FOUR_URL = getConfig('BUTTON_FOUR_URL')
     if len(BUTTON_FOUR_NAME) == 0 or len(BUTTON_FOUR_URL) == 0:
@@ -219,6 +225,14 @@ try:
         STOP_DUPLICATE_MIRROR = False
 except KeyError:
     STOP_DUPLICATE_MIRROR = False
+try:
+    STOP_DUPLICATE_MEGA = getConfig('STOP_DUPLICATE_MEGA')
+    if STOP_DUPLICATE_MEGA.lower() == 'true':
+        STOP_DUPLICATE_MEGA = True
+    else:
+        STOP_DUPLICATE_MEGA = False
+except KeyError:
+    STOP_DUPLICATE_MEGA = False
 try:
     VIEW_LINK = getConfig('VIEW_LINK')
     if VIEW_LINK.lower() == 'true':

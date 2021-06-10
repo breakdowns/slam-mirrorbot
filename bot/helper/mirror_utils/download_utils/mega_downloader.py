@@ -1,10 +1,12 @@
 from bot import LOGGER, MEGA_API_KEY, download_dict_lock, download_dict, MEGA_EMAIL_ID, MEGA_PASSWORD
 import threading
 from mega import (MegaApi, MegaListener, MegaRequest, MegaTransfer, MegaError)
-from bot.helper.telegram_helper.message_utils import update_all_messages
+from bot.helper.telegram_helper.message_utils import update_all_messages, sendMarkup, deleteMessage, sendMessage
 import os
-from bot.helper.ext_utils.bot_utils import new_thread, get_mega_link_type
+from bot.helper.ext_utils.bot_utils import new_thread, get_mega_link_type, get_readable_file_size
 from bot.helper.mirror_utils.status_utils.mega_download_status import MegaDownloadStatus
+from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
+from bot import MEGA_LIMIT, STOP_DUPLICATE_MEGA
 import random
 import string
 
@@ -151,9 +153,6 @@ class MegaDownloadHelper:
         global listeners
         mega_listener = MegaAppListener(executor.continue_event, listener)
         listeners.append(mega_listener)
-        with download_dict_lock:
-            download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
-        os.makedirs(path)
         api.addListener(mega_listener)
         if MEGA_EMAIL_ID is not None and MEGA_PASSWORD is not None:
             executor.do(api.login, (MEGA_EMAIL_ID, MEGA_PASSWORD))
@@ -167,7 +166,46 @@ class MegaDownloadHelper:
             folder_api.addListener(mega_listener)
             executor.do(folder_api.loginToFolder, (mega_link,))
             node = folder_api.authorizeNode(mega_listener.node)
-        
+        if STOP_DUPLICATE_MEGA:
+            msg = sendMessage('Check the File/Folder if already in drive...', listener.bot, listener.update)
+            mname = node.getName()
+            if listener.isTar == True:
+                mname = mname + ".tar"
+            if listener.extract == True:
+                smsg = None
+            else:
+                gd = GoogleDriveHelper()
+                smsg, button = gd.drive_list(mname)
+            if smsg:
+                deleteMessage(listener.bot, msg)
+                msg1 = "File/Folder is already available in Drive.\nHere are the search results:"
+                sendMarkup(msg1, listener.bot, listener.update, button)
+                return
+            else:
+                deleteMessage(listener.bot, msg)
+        if MEGA_LIMIT is not None:
+            msg2 = sendMessage('Check the File/Folder size...', listener.bot, listener.update)
+            limit = MEGA_LIMIT
+            limit = limit.split(' ', maxsplit=1)
+            limitint = int(limit[0])
+            msg3 = f'Failed, Mega limit is {MEGA_LIMIT}.\nYour File/Folder size is {get_readable_file_size(api.getSize(node))}.'
+            if 'GB' in limit or 'gb' in limit:
+                if api.getSize(node) > limitint * 1024**3:
+                    deleteMessage(listener.bot, msg2)
+                    sendMessage(msg3, listener.bot, listener.update)
+                    return
+                else:
+                    deleteMessage(listener.bot, msg2)
+            elif 'TB' in limit or 'tb' in limit:
+                if api.getSize(node) > limitint * 1024**4:
+                    deleteMessage(listener.bot, msg2)
+                    sendMessage(msg3, listener.bot, listener.update)
+                    return
+                else:
+                    deleteMessage(listener.bot, msg2)
+        with download_dict_lock:
+            download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
+        os.makedirs(path)
         gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=8))
         mega_listener.setValues(node.getName(), api.getSize(node), gid)
         executor.do(api.startDownload,(node,path))

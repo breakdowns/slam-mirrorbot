@@ -27,6 +27,9 @@ def cloneNode(update, context):
                 msg3 = "<b>File/Folder is already available in Drive</b>.\n<b>Here are the search results:</b>"
                 sendMarkup(msg3, context.bot, update, button)
                 return
+            else:
+                if CLONE_LIMIT is None:
+                    deleteMessage(context.bot, msg1)
         if CLONE_LIMIT is not None:
             limit = CLONE_LIMIT
             limit = limit.split(' ', maxsplit=1)

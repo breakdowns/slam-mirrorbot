@@ -168,6 +168,7 @@ class MegaDownloadHelper:
             node = folder_api.authorizeNode(mega_listener.node)
         if STOP_DUPLICATE_MEGA:
             msg = sendMessage('Check the File/Folder if already in drive...', listener.bot, listener.update)
+            LOGGER.info(f'Check the File/Folder if already in drive')
             mname = node.getName()
             if listener.isTar == True:
                 mname = mname + ".tar"
@@ -185,6 +186,7 @@ class MegaDownloadHelper:
                 deleteMessage(listener.bot, msg)
         if MEGA_LIMIT is not None:
             msg2 = sendMessage('Check the File/Folder size...', listener.bot, listener.update)
+            LOGGER.info(f'Check the File/Folder size')
             limit = MEGA_LIMIT
             limit = limit.split(' ', maxsplit=1)
             limitint = int(limit[0])
@@ -203,10 +205,10 @@ class MegaDownloadHelper:
                     return
                 else:
                     deleteMessage(listener.bot, msg2)
+        sendStatusMessage(listener.update, listener.bot)
         with download_dict_lock:
             download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
         os.makedirs(path)
         gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=8))
         mega_listener.setValues(node.getName(), api.getSize(node), gid)
         executor.do(api.startDownload,(node,path))
-        sendStatusMessage(listener.update, listener.bot)

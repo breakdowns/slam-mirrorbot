@@ -296,12 +296,6 @@ try:
 except KeyError:
     IMAGE_URL = 'https://telegra.ph/file/db03910496f06094f1f7a.jpg'
 
-IGNORE_PENDING_REQUESTS = False
-try:
-    if getConfig("IGNORE_PENDING_REQUESTS").lower() == "true":
-        IGNORE_PENDING_REQUESTS = True
-except KeyError:
-    pass
 
 updater = tg.Updater(token=BOT_TOKEN, use_context=True)
 bot = updater.bot

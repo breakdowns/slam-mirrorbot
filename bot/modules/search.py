@@ -3,7 +3,7 @@ import html
 import asyncio
 import aiohttp
 import feedparser
-from telegram.ext import run_async, CommandHandler
+from telegram.ext import CommandHandler
 from telegram import ParseMode
 from bot import dispatcher, IMAGE_URL
 from urllib.parse import quote as urlencode, urlsplit
@@ -135,7 +135,7 @@ async def nyaa_callback(client, callback_query):
             ignore.add(message_identifier)
     await callback_query.answer()
 
-@run_async
+
 def searchhelp(update, context):
     help_string = '''
 • /ts <i>[search query]</i>
@@ -148,5 +148,5 @@ def searchhelp(update, context):
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.HTML)
     
     
-SEARCHHELP_HANDLER = CommandHandler("tshelp", searchhelp)
+SEARCHHELP_HANDLER = CommandHandler("tshelp", searchhelp, run_async=True)
 dispatcher.add_handler(SEARCHHELP_HANDLER)

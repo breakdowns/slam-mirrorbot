@@ -6,13 +6,12 @@ from html import escape
 
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError, Update
-from telegram.ext import run_async, CallbackContext, CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
 from telegram.utils.helpers import mention_html
 
 from bot import dispatcher, IMAGE_URL
 
 
-@run_async
 def stickerid(update: Update, context: CallbackContext):
     msg = update.effective_message
     if msg.reply_to_message and msg.reply_to_message.sticker:
@@ -47,7 +46,6 @@ def getsticker(update: Update, context: CallbackContext):
             "Please reply to a sticker for me to upload its PNG.")
 
 
-@run_async
 def kang(update: Update, context: CallbackContext):
     msg = update.effective_message
     user = update.effective_user
@@ -397,7 +395,6 @@ def makepack_internal(
             "Failed to create sticker pack. Possibly due to blek mejik.")
 
 
-@run_async
 def delsticker(update, context):
     msg = update.effective_message
     if msg.reply_to_message and msg.reply_to_message.sticker:
@@ -412,7 +409,6 @@ def delsticker(update, context):
         )
 
 
-@run_async
 def stickhelp(update, context):
     help_string = '''
 • `/stickerid`*:* Reply to a Sticker to me to tell you its file ID.
@@ -422,11 +418,11 @@ def stickhelp(update, context):
 '''
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.MARKDOWN)
 
-STICKERID_HANDLER = CommandHandler("stickerid", stickerid)
-GETSTICKER_HANDLER = CommandHandler("getsticker", getsticker)
-KANG_HANDLER = CommandHandler("kang", kang)
-DEL_HANDLER = CommandHandler("remove", delsticker)
-STICKHELP_HANDLER = CommandHandler("stickerhelp", stickhelp)
+STICKERID_HANDLER = CommandHandler("stickerid", stickerid, run_async=True)
+GETSTICKER_HANDLER = CommandHandler("getsticker", getsticker, run_async=True)
+KANG_HANDLER = CommandHandler("kang", kang, run_async=True)
+DEL_HANDLER = CommandHandler("remove", delsticker, run_async=True)
+STICKHELP_HANDLER = CommandHandler("stickerhelp", stickhelp, run_async=True)
 
 
 dispatcher.add_handler(STICKERID_HANDLER)

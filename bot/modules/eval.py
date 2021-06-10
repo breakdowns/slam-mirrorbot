@@ -8,7 +8,7 @@ from contextlib import redirect_stdout
 
 from bot import LOGGER, dispatcher, OWNER_ID
 from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, CommandHandler, run_async
+from telegram.ext import CallbackContext, CommandHandler
 
 namespaces = {}
 
@@ -47,6 +47,7 @@ def send(msg, bot, update):
             text=f"`{msg}`",
             parse_mode=ParseMode.MARKDOWN)
 
+# just add in custom filter , but why it's here , isn't make sense
 def dev_plus(func):
     
     @wraps(func)
@@ -65,15 +66,15 @@ def dev_plus(func):
                 " You do not have permissions to run this.")
 
     return is_dev_plus_func
+
+
 @dev_plus
-@run_async
 def evaluate(update: Update, context: CallbackContext):
     bot = context.bot
     send(do(eval, bot, update), bot, update)
 
 
 @dev_plus
-@run_async
 def execute(update: Update, context: CallbackContext):
     bot = context.bot
     send(do(exec, bot, update), bot, update)
@@ -133,7 +134,6 @@ def do(func, bot, update):
 
 
 @dev_plus
-@run_async
 def clear(update: Update, context: CallbackContext):
     bot = context.bot
     log_input(update)
@@ -143,9 +143,9 @@ def clear(update: Update, context: CallbackContext):
     send("Cleared locals.", bot, update)
 
 
-EVAL_HANDLER = CommandHandler(('e', 'ev', 'eva', 'eval'), evaluate)
-EXEC_HANDLER = CommandHandler(('x', 'ex', 'exe', 'exec', 'py'), execute)
-CLEAR_HANDLER = CommandHandler('clearlocals', clear)
+EVAL_HANDLER = CommandHandler(('e', 'ev', 'eva', 'eval'), evaluate, run_async=True)
+EXEC_HANDLER = CommandHandler(('x', 'ex', 'exe', 'exec', 'py'), execute, run_async=True)
+CLEAR_HANDLER = CommandHandler('clearlocals', clear, run_async=True)
 
 dispatcher.add_handler(EVAL_HANDLER)
 dispatcher.add_handler(EXEC_HANDLER)

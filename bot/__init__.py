@@ -188,6 +188,12 @@ try:
 except KeyError:
     CLONE_LIMIT = None
 try:
+    MEGA_LIMIT = getConfig('MEGA_LIMIT')
+    if len(MEGA_LIMIT) == 0:
+        MEGA_LIMIT = None
+except KeyError:
+    MEGA_LIMIT = None
+try:
     BUTTON_FOUR_NAME = getConfig('BUTTON_FOUR_NAME')
     BUTTON_FOUR_URL = getConfig('BUTTON_FOUR_URL')
     if len(BUTTON_FOUR_NAME) == 0 or len(BUTTON_FOUR_URL) == 0:
@@ -219,6 +225,30 @@ try:
         STOP_DUPLICATE_MIRROR = False
 except KeyError:
     STOP_DUPLICATE_MIRROR = False
+try:
+    STOP_DUPLICATE_MEGA = getConfig('STOP_DUPLICATE_MEGA')
+    if STOP_DUPLICATE_MEGA.lower() == 'true':
+        STOP_DUPLICATE_MEGA = True
+    else:
+        STOP_DUPLICATE_MEGA = False
+except KeyError:
+    STOP_DUPLICATE_MEGA = False
+try:
+    VIEW_LINK = getConfig('VIEW_LINK')
+    if VIEW_LINK.lower() == 'true':
+        VIEW_LINK = True
+    else:
+        VIEW_LINK = False
+except KeyError:
+    VIEW_LINK = False
+try:
+    STOP_DUPLICATE_CLONE = getConfig('STOP_DUPLICATE_CLONE')
+    if STOP_DUPLICATE_CLONE.lower() == 'true':
+        STOP_DUPLICATE_CLONE = True
+    else:
+        STOP_DUPLICATE_CLONE = False
+except KeyError:
+    STOP_DUPLICATE_CLONE = False
 try:
     IS_TEAM_DRIVE = getConfig('IS_TEAM_DRIVE')
     if IS_TEAM_DRIVE.lower() == 'true':
@@ -265,6 +295,13 @@ try:
         IMAGE_URL = 'https://telegra.ph/file/db03910496f06094f1f7a.jpg'
 except KeyError:
     IMAGE_URL = 'https://telegra.ph/file/db03910496f06094f1f7a.jpg'
+
+IGNORE_PENDING_REQUESTS = False
+try:
+    if getConfig("IGNORE_PENDING_REQUESTS").lower() == "true":
+        IGNORE_PENDING_REQUESTS = True
+except KeyError:
+    pass
 
 updater = tg.Updater(token=BOT_TOKEN, use_context=True)
 bot = updater.bot

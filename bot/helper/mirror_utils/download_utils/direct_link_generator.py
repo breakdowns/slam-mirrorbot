@@ -52,10 +52,22 @@ def direct_link_generator(link: str):
         return hxfile(link)
     elif 'anonfiles.com' in link:
         return anon(link)
+    elif 'fembed.com' in link:
+        return fembed(link)
     elif 'femax20.com' in link:
-        return femax20(link)
+        return fembed(link)
+    elif 'naniplay.nanime.in' in link:
+        return fembed(link)
+    elif 'naniplay.nanime.biz' in link:
+        return fembed(link)
+    elif 'naniplay.com' in link:
+        return fembed(link)
     elif 'layarkacaxxi.icu' in link:
-        return layarkacaxxi(link)
+        return fembed(link)
+    elif 'sbembed.com' in link:
+        return sbembed(link)
+    elif 'streamsb.net' in link:
+        return sbembed(link)
     elif '1drv.ms' in link:
         return onedrive(link)
     else:
@@ -235,14 +247,9 @@ def anon(url: str) -> str:
     return dl_url
 
 
-def femax20(url: str) -> str:
-    """ Fembed direct links generator
-    based on https://github.com/breakdowns/slam-mirrorbot """
-    dl_url = ''
-    try:
-        link = re.findall(r'\bhttps?://.*femax20\.com\S+', url)[0]
-    except IndexError:
-        raise DirectDownloadLinkException("`No Fembed links found`\n")
+def fembed(link: str) -> str:
+    """ Fembed direct link generator
+    Based on https://github.com/breakdowns/slam-mirrorbot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_fembed(link)
     lst_link = []
@@ -252,16 +259,11 @@ def femax20(url: str) -> str:
     return lst_link[count-1]
 
 
-def layarkacaxxi(url: str) -> str:
-    """ Fembed direct links generator
-    based on https://github.com/breakdowns/slam-mirrorbot """
-    dl_url = ''
-    try:
-        link = re.findall(r'\bhttps?://.*layarkacaxxi\.icu\S+', url)[0]
-    except IndexError:
-        raise DirectDownloadLinkException("No Fembed links found\n")
+def sbembed(link: str) -> str:
+    """ Sbembed direct link generator
+    Based on https://github.com/breakdowns/slam-mirrorbot """
     bypasser = lk21.Bypass()
-    dl_url=bypasser.bypass_fembed(link)
+    dl_url=bypasser.bypass_sbembed(link)
     lst_link = []
     count = len(dl_url)
     for i in dl_url:

@@ -205,10 +205,10 @@ class MegaDownloadHelper:
                     return
                 else:
                     deleteMessage(listener.bot, msg2)
-        sendStatusMessage(listener.update, listener.bot)
         with download_dict_lock:
             download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
         os.makedirs(path)
         gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=8))
         mega_listener.setValues(node.getName(), api.getSize(node), gid)
+        sendStatusMessage(listener.update, listener.bot)
         executor.do(api.startDownload,(node,path))

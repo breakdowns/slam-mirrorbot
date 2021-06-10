@@ -10,11 +10,15 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=flat)
 ![GitHub repo size](https://img.shields.io/github/repo-size/breakdowns/slam-mirrorbot?color=red)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-mirrorbot)
+![GitHub](https://img.shields.io/github/license/breakdowns/slam-mirrorbot)
 [![Slam Mirror Support](https://img.shields.io/badge/slam%20mirror%20bot-support%20group-blue)](https://t.me/SlamMirrorSupport)
 
 **Slam Mirror Bot** is a multipurpose Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
+<details>
+    <summary><b>Click here for more details</b></summary>
+
 ## Additional Features
 - Get detailed info about replied media (Only for Telegram file)
 - Nyaa.si and Sukebei Torrent search
@@ -61,6 +65,7 @@ APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT,
 HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
+</details>
 
 # How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:

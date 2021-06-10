@@ -1,7 +1,7 @@
 from bot import LOGGER, MEGA_API_KEY, download_dict_lock, download_dict, MEGA_EMAIL_ID, MEGA_PASSWORD
 import threading
 from mega import (MegaApi, MegaListener, MegaRequest, MegaTransfer, MegaError)
-from bot.helper.telegram_helper.message_utils import update_all_messages, sendMarkup, deleteMessage, sendMessage
+from bot.helper.telegram_helper.message_utils import *
 import os
 from bot.helper.ext_utils.bot_utils import new_thread, get_mega_link_type, get_readable_file_size
 from bot.helper.mirror_utils.status_utils.mega_download_status import MegaDownloadStatus
@@ -209,3 +209,4 @@ class MegaDownloadHelper:
         gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=8))
         mega_listener.setValues(node.getName(), api.getSize(node), gid)
         executor.do(api.startDownload,(node,path))
+        sendStatusMessage(listener.update, listener.bot)

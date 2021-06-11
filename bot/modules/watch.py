@@ -16,6 +16,9 @@ def _watch(bot: Bot, update, isTar=False):
     name_args = mssg.split('|')
     try:
         link = message_args[1]
+        
+        if "orbitguard" in link
+            link = "--proxy "+name_args[2]+" "+link
     except IndexError:
         msg = f"/{BotCommands.WatchCommand} [youtube-dl supported link] [quality] |[CustomName] to mirror with youtube-dl.\n\n"
         msg += "<b>Note: Quality and custom name are optional</b>\n\nExample of quality: audio, 144, 240, 360, 480, 720, 1080, 2160."

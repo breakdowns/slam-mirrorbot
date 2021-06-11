@@ -58,11 +58,9 @@ class MegaAppListener(MegaListener):
         return self.__bytes_transferred
 
     def onRequestStart(self, api, request):
-        LOGGER.info('Request start ({})'.format(request))
+        pass
 
     def onRequestFinish(self, api, request, error):
-        LOGGER.info('Mega Request finished ({}); Result: {}'
-                    .format(request, error))
         if str(error).lower() != "no error":
             self.error = error.copy()
             return
@@ -87,7 +85,7 @@ class MegaAppListener(MegaListener):
         self.continue_event.set()
 
     def onTransferStart(self, api: MegaApi, transfer: MegaTransfer):
-        LOGGER.info(f"Transfer Started: {transfer.getFileName()}")
+        pass
 
     def onTransferUpdate(self, api: MegaApi, transfer: MegaTransfer):
         if self.is_cancelled:
@@ -97,7 +95,6 @@ class MegaAppListener(MegaListener):
 
     def onTransferFinish(self, api: MegaApi, transfer: MegaTransfer, error):
         try:
-            LOGGER.info(f'Transfer finished ({transfer}); Result: {transfer.getFileName()}')
             if transfer.isFolderTransfer() and transfer.isFinished() or transfer.getFileName() == self.name and not self.is_cancelled:
                 self.listener.onDownloadComplete()
                 self.continue_event.set()
@@ -205,10 +202,10 @@ class MegaDownloadHelper:
                     return
                 else:
                     deleteMessage(listener.bot, msg2)
-        sendStatusMessage(listener.update, listener.bot)
         with download_dict_lock:
             download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
         os.makedirs(path)
         gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=8))
         mega_listener.setValues(node.getName(), api.getSize(node), gid)
+        sendStatusMessage(listener.update, listener.bot)
         executor.do(api.startDownload,(node,path))

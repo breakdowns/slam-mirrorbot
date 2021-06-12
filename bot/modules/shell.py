@@ -1,33 +1,11 @@
 import subprocess
-from functools import wraps
 from bot import LOGGER, dispatcher
-from bot import OWNER_ID
-from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, CommandHandler
-from telegram.ext.dispatcher import run_async
+from telegram import ParseMode
+from telegram.ext import CommandHandler
+from bot.helper.telegram_helper.filters import CustomFilters
 
-def dev_plus(func):
-    
-    @wraps(func)
-    def is_dev_plus_func(update: Update, context: CallbackContext, *args,
-                         **kwargs):
-        bot = context.bot
-        user = update.effective_user
 
-        if user.id == OWNER_ID:
-            return func(update, context, *args, **kwargs)
-        elif not user:
-            pass
-        else:
-            update.effective_message.reply_text(
-                "This is a developer restricted command."
-                " You do not have permissions to run this.")
-
-    return is_dev_plus_func
-
-@dev_plus
-@run_async
-def shell(update: Update, context: CallbackContext):
+def shell(update, context):
     message = update.effective_message
     cmd = message.text.split(' ', 1)
     if len(cmd) == 1:
@@ -59,5 +37,5 @@ def shell(update: Update, context: CallbackContext):
         message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
 
 
-SHELL_HANDLER = CommandHandler(['sh', 'shell', 'term', 'terminal'], shell)
+SHELL_HANDLER = CommandHandler(('sh', 'shell', 'term', 'terminal'), shell, filters=CustomFilters.owner_filter, run_async=True)
 dispatcher.add_handler(SHELL_HANDLER)

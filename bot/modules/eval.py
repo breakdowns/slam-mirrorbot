@@ -1,14 +1,13 @@
 import io
 import os
-from functools import wraps
 # Common imports for eval
 import textwrap
 import traceback
 from contextlib import redirect_stdout
-
-from bot import LOGGER, dispatcher, OWNER_ID
-from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, CommandHandler, run_async
+from bot.helper.telegram_helper.filters import CustomFilters
+from bot import LOGGER, dispatcher
+from telegram import ParseMode
+from telegram.ext import CommandHandler
 
 namespaces = {}
 
@@ -47,34 +46,13 @@ def send(msg, bot, update):
             text=f"`{msg}`",
             parse_mode=ParseMode.MARKDOWN)
 
-def dev_plus(func):
-    
-    @wraps(func)
-    def is_dev_plus_func(update: Update, context: CallbackContext, *args,
-                         **kwargs):
-        bot = context.bot
-        user = update.effective_user
 
-        if user.id == OWNER_ID:
-            return func(update, context, *args, **kwargs)
-        elif not user:
-            pass
-        else:
-            update.effective_message.reply_text(
-                "This is a developer restricted command."
-                " You do not have permissions to run this.")
-
-    return is_dev_plus_func
-@dev_plus
-@run_async
-def evaluate(update: Update, context: CallbackContext):
+def evaluate(update, context):
     bot = context.bot
     send(do(eval, bot, update), bot, update)
 
 
-@dev_plus
-@run_async
-def execute(update: Update, context: CallbackContext):
+def execute(update, context):
     bot = context.bot
     send(do(exec, bot, update), bot, update)
 
@@ -132,9 +110,7 @@ def do(func, bot, update):
             return result
 
 
-@dev_plus
-@run_async
-def clear(update: Update, context: CallbackContext):
+def clear(update, context):
     bot = context.bot
     log_input(update)
     global namespaces
@@ -143,9 +119,9 @@ def clear(update: Update, context: CallbackContext):
     send("Cleared locals.", bot, update)
 
 
-EVAL_HANDLER = CommandHandler(('e', 'ev', 'eva', 'eval'), evaluate)
-EXEC_HANDLER = CommandHandler(('x', 'ex', 'exe', 'exec', 'py'), execute)
-CLEAR_HANDLER = CommandHandler('clearlocals', clear)
+EVAL_HANDLER = CommandHandler(('e', 'ev', 'eva', 'eval'), evaluate, filters=CustomFilters.owner_filter, run_async=True)
+EXEC_HANDLER = CommandHandler(('x', 'ex', 'exe', 'exec', 'py'), execute, filters=CustomFilters.owner_filter, run_async=True)
+CLEAR_HANDLER = CommandHandler('clearlocals', clear, filters=CustomFilters.owner_filter, run_async=True)
 
 dispatcher.add_handler(EVAL_HANDLER)
 dispatcher.add_handler(EXEC_HANDLER)

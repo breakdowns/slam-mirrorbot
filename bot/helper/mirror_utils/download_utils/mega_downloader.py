@@ -167,9 +167,9 @@ class MegaDownloadHelper:
             msg = sendMessage('Check the File/Folder if already in Drive...', listener.bot, listener.update)
             LOGGER.info(f'Check the File/Folder if already in Drive')
             mname = node.getName()
-            if listener.isTar == True:
+            if listener.isTar:
                 mname = mname + ".tar"
-            if listener.extract == True:
+            if listener.extract:
                 smsg = None
             else:
                 gd = GoogleDriveHelper()

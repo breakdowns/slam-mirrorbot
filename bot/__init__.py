@@ -297,6 +297,6 @@ except KeyError:
     IMAGE_URL = 'https://telegra.ph/file/db03910496f06094f1f7a.jpg'
 
 
-updater = tg.Updater(token=BOT_TOKEN, use_context=True)
+updater = tg.Updater(token=BOT_TOKEN)
 bot = updater.bot
 dispatcher = updater.dispatcher

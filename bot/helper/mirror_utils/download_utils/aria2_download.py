@@ -23,9 +23,9 @@ class AriaDownloadHelper(DownloadHelper):
         self.name = download.name
         sname = download.name
         if STOP_DUPLICATE_MIRROR:
-          if dl.getListener().isTar == True:
+          if self.listener.isTar:
             sname = sname + ".tar"
-          if dl.getListener().extract == True:
+          if self.listener.extract:
             smsg = None
           else:
             gdrive = GoogleDriveHelper(None)
@@ -102,3 +102,4 @@ class AriaDownloadHelper(DownloadHelper):
         with download_dict_lock:
             download_dict[listener.uid] = AriaDownloadStatus(download.gid, listener)
             LOGGER.info(f"Started: {download.gid} DIR:{download.dir} ")
+        self.listener = listener

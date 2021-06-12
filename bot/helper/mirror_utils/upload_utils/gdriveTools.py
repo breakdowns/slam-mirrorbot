@@ -322,6 +322,8 @@ class GoogleDriveHelper:
 
     def clone(self, link):
         self.transferred_size = 0
+        self.total_files = 0
+        self.total_folders = 0
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError,IndexError):

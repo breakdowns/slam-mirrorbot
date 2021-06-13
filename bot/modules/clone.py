@@ -5,6 +5,7 @@ from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot import dispatcher, LOGGER, CLONE_LIMIT, STOP_DUPLICATE_CLONE
 from bot.helper.ext_utils.bot_utils import get_readable_file_size
+from bot import LOGGER
 
 
 def cloneNode(update, context):

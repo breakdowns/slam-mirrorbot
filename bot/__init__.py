@@ -159,18 +159,6 @@ except KeyError:
     logging.warning('HEROKU APP NAME not provided!')
     HEROKU_APP_NAME = None
 try:
-    MAX_TORRENT_SIZE = int(getConfig("MAX_TORRENT_SIZE"))
-except KeyError:
-    MAX_TORRENT_SIZE = None
-try:
-   ENABLE_FILESIZE_LIMIT = getConfig('ENABLE_FILESIZE_LIMIT')
-   if ENABLE_FILESIZE_LIMIT.lower() == 'true':
-       ENABLE_FILESIZE_LIMIT = True
-   else:
-       ENABLE_FILESIZE_LIMIT = False
-except KeyError:
-    ENABLE_FILESIZE_LIMIT = False
-try:
     UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
 except KeyError:
     logging.info('UPTOBOX_TOKEN not provided!')
@@ -181,6 +169,12 @@ try:
         INDEX_URL = None
 except KeyError:
     INDEX_URL = None
+try:
+    TORRENT_DIRECT_LIMIT = getConfig('TORRENT_DIRECT_LIMIT')
+    if len(TORRENT_DIRECT_LIMIT) == 0:
+        TORRENT_DIRECT_LIMIT = None
+except KeyError:
+    TORRENT_DIRECT_LIMIT = None
 try:
     CLONE_LIMIT = getConfig('CLONE_LIMIT')
     if len(CLONE_LIMIT) == 0:
@@ -296,6 +290,12 @@ try:
 except KeyError:
     IMAGE_URL = 'https://telegra.ph/file/db03910496f06094f1f7a.jpg'
 
+IGNORE_PENDING_REQUESTS = False
+try:
+    if getConfig("IGNORE_PENDING_REQUESTS").lower() == "true":
+        IGNORE_PENDING_REQUESTS = True
+except KeyError:
+    pass
 
 updater = tg.Updater(token=BOT_TOKEN)
 bot = updater.bot

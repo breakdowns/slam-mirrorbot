@@ -123,6 +123,10 @@
         "description": "If this field is set to True, bot will check file in Drive, if it is present in Drive, cloning will be stopped.",
         "required": false
       },
+      "IGNORE_PENDING_REQUESTS": {
+        "description": "If you want the bot to ignore pending requests after it restarts, set this to True.",
+        "required": false
+      },
       "SHORTENER": {
         "description": "If you want to use shortener in Gdrive and index link.",
         "required": false

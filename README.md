@@ -217,6 +217,8 @@ sudo docker run mirrorbot
 ## Video tutorial
 ![YouTube Video Views](https://img.shields.io/youtube/views/WIhL0TrisfQ?color=black&label=See%20On%20Youtube&style=for-the-badge)
 
+<p><a href="https://www.youtube.com/watch?v=WIhL0TrisfQ&t=1s"> <img src="https://img.shields.io/badge/See%20On%20Youtube-red?style=for-the-badge&logo=youtube" width="200""/></a></p>
+
 **NOTE**: Recommended to generate **token.pickle** manually
 
 # Using Service Accounts for uploading to avoid user rate limit

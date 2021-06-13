@@ -35,7 +35,7 @@
 ```
 racaty.net, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
 naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamsb.net,
-letsupload.io, uptobox.com (Uptobox account must be premium),
+uptobox.com (Uptobox account must be premium),
 1drv.ms (Only works for file not folder or busines account)
 ```
 ## From Original Repos
@@ -214,7 +214,7 @@ sudo docker run mirrorbot
 ## Deploying on Heroku with heroku-cli and Goorm IDE
 <p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
-## Video tutorial
+## Video Tutorial
 <p><a href="https://www.youtube.com/watch?v=WIhL0TrisfQ&t=1s"> <img src="https://img.shields.io/badge/See%20On%20Youtube-black?style=for-the-badge&logo=youtube" width="200""/></a></p>
 
 **NOTE**: Recommended to generate **token.pickle** manually. [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)

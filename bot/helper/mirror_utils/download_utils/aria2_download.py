@@ -40,10 +40,8 @@ class AriaDownloadHelper(DownloadHelper):
 
             if TORRENT_DIRECT_LIMIT is not None:
                 LOGGER.info(f"Checking File/Folder Size...")
-                with download_dict_lock:
-                    for down in list(download_dict.values()):
-                        sleep(1)
-                        size = down.size_raw()
+                sleep(1.5)
+                size = aria2.get_download(gid).total_length
                 limit = TORRENT_DIRECT_LIMIT
                 limit = limit.split(' ', maxsplit=1)
                 limitint = int(limit[0])

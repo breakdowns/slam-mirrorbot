@@ -3,7 +3,7 @@ from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.telegram_helper.message_utils import sendMarkup, deleteMessage, sendMessage
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
-from bot import dispatcher, CLONE_LIMIT, STOP_DUPLICATE_CLONE
+from bot import dispatcher, LOGGER, CLONE_LIMIT, STOP_DUPLICATE_CLONE
 from bot.helper.ext_utils.bot_utils import get_readable_file_size
 
 

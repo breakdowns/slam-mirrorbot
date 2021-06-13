@@ -33,10 +33,10 @@
 - View Link button
 - Direct links supported:
 ```
-Racaty.net, Hxfile.co, Anonfiles.com, Fembed.com, Femax20.com, Layarkacaxxi.icu,
-Naniplay.com, Naniplay.nanime.in, Naniplay.nanime.biz, Sbembed.com, Streamsb.net,
-Uptobox.com (Uptobox account must be premium),
-Onedrive/1drv.ms (Only works for file not folder or busines account)
+racaty.net, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
+naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamsb.net,
+letsupload.io, uptobox.com (Uptobox account must be premium),
+1drv.ms (Only works for file not folder or busines account)
 ```
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
@@ -206,12 +206,18 @@ sudo docker run mirrorbot
 
 - Give stars and Fork this repo then upload **token.pickle** to your forks
 - Hit the **DEPLOY TO HEROKU** button and follow the further instructions in the screen
+- **NOTE**: If you didn't upload **token.pickle**, uploading will not work. How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
+- Recommended to use 1 App in 1 Heroku accounts
 
-**NOTE**: If you didn't upload **token.pickle**, uploading will not work. How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 ## Deploying on Heroku with heroku-cli and Goorm IDE
 <p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
+
+## Video tutorial
+![YouTube Video Views](https://img.shields.io/youtube/views/WIhL0TrisfQ?color=black&label=See%20On%20Youtube&style=for-the-badge)
+
+**NOTE**: Recommended to generate **token.pickle** manually
 
 # Using Service Accounts for uploading to avoid user rate limit
 For Service Account to work, you must set **USE_SERVICE_ACCOUNTS=**"True" in config file or environment variables, 

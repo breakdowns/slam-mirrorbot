@@ -100,7 +100,6 @@
       },
       "TORRENT_DIRECT_LIMIT": {
         "description": "To limit the Torrent/Direct mirror size, Leave space between number and unit. Available units is (gb or GB, tb or TB).",
-        "value": "15",
         "required": false
       },
       "CLONE_LIMIT": {

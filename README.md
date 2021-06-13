@@ -21,7 +21,7 @@
 - Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
 - Stop duplicate cloning Google Drive & mirroring Mega support
-- Limiting size Torrent, Mega, cloning Google Drive support
+- Limiting size Torrent/Direct, Mega, cloning Google Drive support
 - Sudo with Database support
 - Multiple Trackers support
 - Check Heroku dynos stats

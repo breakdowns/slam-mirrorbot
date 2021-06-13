@@ -19,35 +19,37 @@ def cloneNode(update, context):
                deleteMessage(context.bot, msg1)
                sendMessage(res, context.bot, update)
                return
-        if STOP_DUPLICATE_CLONE:
-            smsg, button = gd.drive_list(name)
-            if smsg:
-                deleteMessage(context.bot, msg1)
-                msg3 = "<b>File/Folder is already available in Drive</b>.\n<b>Here are the search results:</b>"
-                sendMarkup(msg3, context.bot, update, button)
-                return
-            else:
-                if CLONE_LIMIT is None:
+            if STOP_DUPLICATE_CLONE:
+                LOGGER.info(f"Checking File/Folder if already in Drive...")
+                smsg, button = gd.drive_list(name)
+                if smsg:
                     deleteMessage(context.bot, msg1)
-        if CLONE_LIMIT is not None:
-            limit = CLONE_LIMIT
-            limit = limit.split(' ', maxsplit=1)
-            limitint = int(limit[0])
-            msg2 = f'Failed, Clone limit is {CLONE_LIMIT}.\nYour File/Folder size is {get_readable_file_size(clonesize)}.'
-            if 'GB' in limit or 'gb' in limit:
-                if clonesize > limitint * 1024**3:
-                    deleteMessage(context.bot, msg1)
-                    sendMessage(msg2, context.bot, update)
+                    msg3 = "<b>File/Folder is already available in Drive</b>.\n<b>Here are the search results:</b>"
+                    sendMarkup(msg3, context.bot, update, button)
                     return
                 else:
-                    deleteMessage(context.bot, msg1)
-            elif 'TB' in limit or 'tb' in limit:
-                if clonesize > limitint * 1024**4:
-                    deleteMessage(context.bot, msg1)
-                    sendMessage(msg2, context.bot, update)
-                    return
-                else:
-                    deleteMessage(context.bot, msg1)                
+                    if CLONE_LIMIT is None:
+                        deleteMessage(context.bot, msg1)
+            if CLONE_LIMIT is not None:
+                LOGGER.info(f"Checking File/Folder Size...")
+                limit = CLONE_LIMIT
+                limit = limit.split(' ', maxsplit=1)
+                limitint = int(limit[0])
+                msg2 = f'Failed, Clone limit is {CLONE_LIMIT}.\nYour File/Folder size is {get_readable_file_size(clonesize)}.'
+                if 'GB' in limit or 'gb' in limit:
+                    if clonesize > limitint * 1024**3:
+                        deleteMessage(context.bot, msg1)
+                        sendMessage(msg2, context.bot, update)
+                        return
+                    else:
+                        deleteMessage(context.bot, msg1)
+                elif 'TB' in limit or 'tb' in limit:
+                    if clonesize > limitint * 1024**4:
+                        deleteMessage(context.bot, msg1)
+                        sendMessage(msg2, context.bot, update)
+                        return
+                    else:
+                        deleteMessage(context.bot, msg1)                
         msg = sendMessage(f"Cloning: <code>{link}</code>", context.bot, update)
         result, button = gd.clone(link)
         deleteMessage(context.bot, msg)

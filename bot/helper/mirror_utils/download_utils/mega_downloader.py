@@ -143,6 +143,8 @@ class MegaDownloadHelper:
     def add_download(mega_link: str, path: str, listener):
         if MEGA_API_KEY is None:
             raise MegaDownloaderException('Mega API KEY not provided! Cannot mirror Mega links')
+        if STOP_DUPLICATE_MEGA or MEGA_LIMIT is not None:
+            msg = sendMessage('Checking Your Link...', listener.bot, listener.update)
         executor = AsyncExecutor()
         api = MegaApi(MEGA_API_KEY, None, None, 'telegram-mirror-bot')
         global listeners
@@ -164,8 +166,7 @@ class MegaDownloadHelper:
         if mega_listener.error is not None:
             return listener.onDownloadError(str(mega_listener.error))
         if STOP_DUPLICATE_MEGA:
-            msg = sendMessage('Check the File/Folder if already in Drive...', listener.bot, listener.update)
-            LOGGER.info(f'Check the File/Folder if already in Drive')
+            LOGGER.info(f'Checking File/Folder if already in Drive')
             mname = node.getName()
             if listener.isTar:
                 mname = mname + ".tar"
@@ -180,28 +181,29 @@ class MegaDownloadHelper:
                 sendMarkup(msg1, listener.bot, listener.update, button)
                 return
             else:
-                deleteMessage(listener.bot, msg)
+                if MEGA_LIMIT is None:
+                    deleteMessage(listener.bot, msg)
+
         if MEGA_LIMIT is not None:
-            msg2 = sendMessage('Check the File/Folder size...', listener.bot, listener.update)
-            LOGGER.info(f'Check the File/Folder size')
+            LOGGER.info(f'Checking File/Folder Size')
             limit = MEGA_LIMIT
             limit = limit.split(' ', maxsplit=1)
             limitint = int(limit[0])
             msg3 = f'<b>Failed, Mega limit is {MEGA_LIMIT}.</b>\n<b>Your File/Folder size is {get_readable_file_size(api.getSize(node))}.</b>'
             if 'GB' in limit or 'gb' in limit:
                 if api.getSize(node) > limitint * 1024**3:
-                    deleteMessage(listener.bot, msg2)
+                    deleteMessage(listener.bot, msg)
                     sendMessage(msg3, listener.bot, listener.update)
                     return
                 else:
-                    deleteMessage(listener.bot, msg2)
+                    deleteMessage(listener.bot, msg)
             elif 'TB' in limit or 'tb' in limit:
                 if api.getSize(node) > limitint * 1024**4:
-                    deleteMessage(listener.bot, msg2)
+                    deleteMessage(listener.bot, msg)
                     sendMessage(msg3, listener.bot, listener.update)
                     return
                 else:
-                    deleteMessage(listener.bot, msg2)
+                    deleteMessage(listener.bot, msg)
         with download_dict_lock:
             download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
         os.makedirs(path)

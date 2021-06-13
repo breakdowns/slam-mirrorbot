@@ -24,7 +24,7 @@ def cloneNode(update, context):
                 smsg, button = gd.drive_list(name)
                 if smsg:
                     deleteMessage(context.bot, msg1)
-                    msg3 = "<b>File/Folder is already available in Drive</b>.\n<b>Here are the search results:</b>"
+                    msg3 = "File/Folder is already available in Drive.\nHere are the search results:"
                     sendMarkup(msg3, context.bot, update, button)
                     return
                 else:

@@ -262,8 +262,6 @@ def fembed(link: str) -> str:
     for i in dl_url:
         lst_link.append(dl_url[i])
     return lst_link[count-1]
-    except:
-        raise DirectDownloadLinkException("ERROR: Can't download file, double check your Fembed link.")
 
 
 def sbembed(link: str) -> str:
@@ -276,8 +274,6 @@ def sbembed(link: str) -> str:
     for i in dl_url:
         lst_link.append(dl_url[i])
     return lst_link[count-1]
-    except:
-        raise DirectDownloadLinkException("ERROR: Can't download file, double check your Sbembed/Streamsb link.")
 
 
 def onedrive(link: str) -> str:

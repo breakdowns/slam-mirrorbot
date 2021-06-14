@@ -32,9 +32,9 @@
 - View Link button
 - Direct links supported:
 ```
-racaty.net, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
+letsupload.io, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
 naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamsb.net,
-letsupload.io, pixeldrain.com, feurl.com, uptobox.com (Uptobox account must be premium),
+feurl.com, pixeldrain.com, uptobox.com (Uptobox account must be premium),
 1drv.ms (Only works for file not folder or busines account)
 ```
 ## From Original Repos

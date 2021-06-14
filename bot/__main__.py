@@ -70,7 +70,6 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 
 def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
-    LOGGER.info(f'Restarting the Bot...')
     # Save restart message object in order to reply to it after restarting
     with open(".restartmsg", "w") as f:
         f.truncate(0)

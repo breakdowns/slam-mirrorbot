@@ -35,7 +35,7 @@
 ```
 racaty.net, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
 naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamsb.net,
-uptobox.com (Uptobox account must be premium),
+letsupload.io, uptobox.com (Uptobox account must be premium),
 1drv.ms (Only works for file not folder or busines account)
 ```
 ## From Original Repos

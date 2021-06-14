@@ -287,7 +287,16 @@ def _mirror(bot, update, isTar=False, extract=False):
     try:
         link = direct_link_generator(link)
     except DirectDownloadLinkException as e:
-        LOGGER.info(f'{link}: {e}')
+        LOGGER.info(f'{e}')
+        if "ERROR:" in str(e):
+            sendMessage(f"{e}", bot, update)
+            return
+        if "G-Drive" in str(e):
+            sendMessage(f"ERROR: {e}", bot, update)
+            return
+        if "Youtube" in str(e):
+            sendMessage(f"ERROR: {e}", bot, update)
+            return
     listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
     if bot_utils.is_mega_link(link):
         link_type = get_mega_link_type(link)

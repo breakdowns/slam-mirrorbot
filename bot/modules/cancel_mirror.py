@@ -30,7 +30,7 @@ def cancel_mirror(update, context):
                     keys = list(download_dict.keys())
                     dl = download_dict[mirror_message.message_id]
                 except:
-                    sendMessage("It's not your msg, reply to your mirrror msg which was used to start the download to cancel.", context.bot, update)
+                    sendMessage("It's not your msg, reply to your mirror msg which was used to start the download to cancel.", context.bot, update)
                     return
         if not update.message.reply_to_message:
             pass
@@ -46,7 +46,6 @@ def cancel_mirror(update, context):
             sendMessage("Extract in progress, can't cancel.", context.bot, update)
             return
         else:
-            sendMessage("Download canceled.", context.bot, update)
             dl.download().cancel_download()
             sleep(1)  # Wait a Second For Aria2 To free Resources.
             clean_download(f'{DOWNLOAD_DIR}{mirror_message.message_id}/')

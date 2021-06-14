@@ -29,7 +29,6 @@
 - Custom image support
 - Counting file/folder
 - Shell and Executor
-- Stickers module
 - View Link button
 - Direct links supported:
 ```

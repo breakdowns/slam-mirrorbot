@@ -2,7 +2,6 @@ aiohttp
 aria2p
 appdirs
 beautifulsoup4
-bs4
 feedparser
 google-api-python-client
 google-auth-httplib2
@@ -13,15 +12,13 @@ js2py
 lk21
 lxml
 messages
-natsort
-Pillow
 psutil
 psycopg2-binary
 pybase64
 pyrogram
 python-dotenv
 python-magic
-python-telegram-bot==12.6.1
+python-telegram-bot
 pytz
 requests
 speedtest-cli

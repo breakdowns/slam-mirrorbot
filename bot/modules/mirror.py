@@ -291,7 +291,7 @@ def _mirror(bot, update, isTar=False, extract=False):
         if "ERROR:" in str(e):
             sendMessage(f"{e}", bot, update)
             return
-        if "G-Drive" in str(e):
+        if "Google Drive" in str(e):
             sendMessage(f"ERROR: {e}", bot, update)
             return
         if "Youtube" in str(e):

@@ -18,9 +18,9 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, search, delete, speedtest, usage, mediainfo, count
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, anime, stickers, search, delete, speedtest, usage, mediainfo, count
 
-now=datetime.now(pytz.timezone('Asia/Jakarta'))
+now=datetime.now(pytz.timezone('Asia/Kolkata'))
 
 
 def stats(update, context):
@@ -138,6 +138,10 @@ def bot_help(update, context):
 /mediainfo: Get detailed info about replied media (Only for Telegram file).
 
 /tshelp: Get help for Torrent search module.
+
+/weebhelp: get help fir anime, manga and character module.
+
+/stickerhelp: get help fir sticker module.
 '''
 
     help_string = f'''
@@ -170,6 +174,14 @@ def bot_help(update, context):
 /mediainfo: Get detailed info about replied media (Only for Telegram file).
 
 /tshelp: Get help for Torrent search module.
+
+
+
+
+
+/weebhelp: get help fir anime, manga and character module.
+
+/stickerhelp: get help fir sticker module.
 '''
 
     if CustomFilters.sudo_user(update) or CustomFilters.owner_filter(update):

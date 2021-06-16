@@ -8,10 +8,9 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.message_utils import sendMessage
 from telegram import update
-from telegram.ext import run_async, CommandHandler
+from telegram.ext import CommandHandler
 
 
-@run_async
 def dyno_usage(update, context):
     heroku_api = "https://api.heroku.com"
     if HEROKU_API_KEY is not None and HEROKU_APP_NAME is not None:
@@ -77,6 +76,6 @@ def dyno_usage(update, context):
 
 
 dyno_usage_handler = CommandHandler(command=BotCommands.UsageCommand, callback=dyno_usage,
-                                    filters=CustomFilters.owner_filter | CustomFilters.sudo_user)
+                                    filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
                                     
 dispatcher.add_handler(dyno_usage_handler)

@@ -27,7 +27,7 @@ from bot.helper.ext_utils.fs_utils import get_mime_type, get_path_size
 LOGGER = logging.getLogger(__name__)
 logging.getLogger('googleapiclient.discovery').setLevel(logging.ERROR)
 SERVICE_ACCOUNT_INDEX = 0
-TELEGRAPHLIMIT = 95
+TELEGRAPHLIMIT = 80
 
 class GoogleDriveHelper:
     def __init__(self, name=None, listener=None):
@@ -322,6 +322,8 @@ class GoogleDriveHelper:
 
     def clone(self, link):
         self.transferred_size = 0
+        self.total_files = 0
+        self.total_folders = 0
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError,IndexError):

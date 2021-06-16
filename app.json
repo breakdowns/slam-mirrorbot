@@ -98,22 +98,16 @@
         "description": "If you want to remove mega.nz mirror support, set it to True.",
         "required": false
       },
-      "ENABLE_FILESIZE_LIMIT": {
-        "description": "Set it to True if you want to use MAX_TORRENT_SIZE.",
-        "value": "False",
-        "required": false
-      },
-      "MAX_TORRENT_SIZE": {
-        "description": "To limit the Torrent mirror size, Fill The amount you want to limit, examples: if you fill 15 it will limit 15gb.",
-        "value": "15",
+      "TORRENT_DIRECT_LIMIT": {
+        "description": "To limit the Torrent/Direct mirror size, Leave space between number and unit. Available units is (gb or GB, tb or TB).",
         "required": false
       },
       "CLONE_LIMIT": {
-        "description": "To limit cloning Google Drive (leave space between number and unit, TB or GB only), examples: if you fill 1 GB it will limit 1GB.",
+        "description": "To limit cloning Google Drive (leave space between number and unit, Available units is (gb or GB, tb or TB).",
         "required": false
       },
       "MEGA_LIMIT": {
-        "description": "To limit mirroring Mega (leave space between number and unit, TB or GB only), examples: if you fill 1 GB it will limit 1GB.",
+        "description": "To limit downloading Mega (leave space between number and unit, Available units is (gb or GB, tb or TB).",
         "required": false
       },
       "STOP_DUPLICATE_MIRROR": {
@@ -126,6 +120,10 @@
       },
       "STOP_DUPLICATE_CLONE": {
         "description": "If this field is set to True, bot will check file in Drive, if it is present in Drive, cloning will be stopped.",
+        "required": false
+      },
+      "IGNORE_PENDING_REQUESTS": {
+        "description": "If you want the bot to ignore pending requests after it restarts, set this to True.",
         "required": false
       },
       "SHORTENER": {
@@ -175,5 +173,11 @@
       {
         "plan": "heroku-postgresql"
       }
-    ]
+    ],
+    "formation": {
+            "worker": {
+                "quantity": 1,
+                "size": "free"
+            }
+      }
 }

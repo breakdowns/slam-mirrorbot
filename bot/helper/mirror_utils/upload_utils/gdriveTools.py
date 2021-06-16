@@ -728,3 +728,169 @@ class GoogleDriveHelper:
             return msg, "", ""
         return "", clonesize, name
 
+
+    def targd(self, link):
+        try:
+            file_id = self.getIdFromUrl(link)
+            LOGGER.info(f"File ID: {file_id}")
+        except (KeyError,IndexError):
+            msg = "Google drive ID could not be found in the provided link"
+            return msg, ""
+
+        try:
+            meta = self.getFileMetadata(file_id)
+            if meta.get("mimeType") == self.__G_DRIVE_DIR_MIME_TYPE:
+                self.download_folder(file_id, DOWNLOAD_DIR, meta.get('name'))
+                up_path, tsize, up_name = self.on_downcomplete(meta.get('name'))
+                try:
+                    mime_type = get_mime_type(up_path)
+                    link = self.upload_file(up_path, up_name, mime_type, parent_id)
+                    if link is None:
+                        raise Exception('Upload has been manually cancelled')
+                        LOGGER.info("Uploaded To G-Drive: " + up_path)
+                except Exception as e:
+                    if isinstance(e, RetryError):
+                        LOGGER.info(f"Total Attempts: {e.last_attempt.attempt_number}")
+                        err = e.last_attempt.exception()
+                    else:
+                        err = e
+                    LOGGER.error(err)
+                    raise err
+                msg = f'<b>Filename : </b><code>{up_name}</code>'
+                msg += f'\n\n<b>Size : </b><code>{get_readable_file_size(tsize)}</code>'
+                buttons = button_build.ButtonMaker()
+                if SHORTENER is not None and SHORTENER_API is not None:
+                    surl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={link}&format=text').text
+                    buttons.buildbutton("⚡Drive Link⚡", surl)
+                else:
+                    buttons.buildbutton("⚡Drive Link⚡", link)
+                LOGGER.info(f'Done Uploading {up_name}')
+                if INDEX_URL is not None:
+                    url_path = requests.utils.quote(f'{up_name}')
+                    share_url = f'{INDEX_URL}/{url_path}'
+                    if SHORTENER is not None and SHORTENER_API is not None:
+                        siurl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={share_url}&format=text').text
+                        buttons.buildbutton("💥Index Link💥", siurl)
+                    else:
+                        buttons.buildbutton("💥Index Link💥", share_url)
+                if BUTTON_THREE_NAME is not None and BUTTON_THREE_URL is not None:
+                    buttons.buildbutton(f"{BUTTON_THREE_NAME}", f"{BUTTON_THREE_URL}")
+                if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
+                    buttons.buildbutton(f"{BUTTON_FOUR_NAME}", f"{BUTTON_FOUR_URL}")
+                if BUTTON_FIVE_NAME is not None and BUTTON_FIVE_URL is not None:
+                    buttons.buildbutton(f"{BUTTON_FIVE_NAME}", f"{BUTTON_FIVE_URL}")
+                try:
+                    if os.path.exists(up_path):
+                        LOGGER.info(f"Cleaning download: {up_path}")
+                        os.remove(up_path)
+                except FileNotFoundError:
+                    pass
+            else:
+                msg = "Send Folder Link Only"
+                return msg, ""
+        except Exception as err:
+            if isinstance(err, RetryError):
+                LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
+                err = err.last_attempt.exception()
+            err = str(err).replace('>', '').replace('<', '')
+            LOGGER.error(err)
+            if "User rate limit exceeded." in str(err):
+                msg = "User rate limit exceeded."
+            if "File not found" in str(err):
+                msg = "File not found."
+            else:
+                msg = f"Error.\n{err}"
+            return msg, ""
+        return msg, InlineKeyboardMarkup(buttons.build_menu(2))
+
+
+    def download_folder(self, folder_id, path, folder_name):
+
+        if not os.path.exists(path + folder_name):
+            os.makedirs(path + folder_name)
+        path += folder_name + '/'
+        result = []
+        page_token = None
+        while True:
+            files = self.__service.files().list(
+                    supportsTeamDrives=True,
+                    includeTeamDriveItems=True,
+                    q=f"'{folder_id}' in parents",
+                    fields='nextPageToken, files(id, name, mimeType, size, shortcutDetails)',
+                    pageToken=page_token,
+                    pageSize=1000).execute()
+            result.extend(files['files'])
+            page_token = files.get("nextPageToken")
+            if not page_token:
+                LOGGER.info(f'rabe3')
+                break
+
+        result = sorted(result, key=lambda k: k['name'])
+        total = len(result)
+        current = 1
+        for item in result:
+            file_id = item['id']
+            filename = item['name']
+            mime_type = item['mimeType']
+            shortcut_details = item.get('shortcutDetails', None)
+            if shortcut_details != None:
+                file_id = shortcut_details['targetId']
+                mime_type = shortcut_details['targetMimeType']
+            LOGGER.info(f'{file_id} {filename} {mime_type} ({current}/{total})')
+            if mime_type == 'application/vnd.google-apps.folder':
+                self.download_folder(file_id, path, filename)
+            elif not os.path.isfile(path + filename):
+                self.download_file(file_id, path, filename, mime_type)
+            current += 1
+
+
+    def download_file(self, file_id, path, filename, mime_type):
+
+        request = self.__service.files().get_media(fileId=file_id)
+        fh = io.FileIO('{}{}'.format(path, filename), 'wb')
+        downloader = MediaIoBaseDownload(fh, request, chunksize = 50 * 1024 * 1024)
+        done = False
+        while done is False:
+            try:
+                status, done = downloader.next_chunk()
+            except HttpError as err:
+                if err.resp.get('content-type', '').startswith('application/json'):
+                    reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
+                    if reason == 'userRateLimitExceeded' or reason == 'dailyLimitExceeded':
+                        if USE_SERVICE_ACCOUNTS:
+                            if not self.switchServiceAccount():
+                                raise err
+                            LOGGER.info(f"Got: {reason}, Trying Again.")
+                            return self.download_file(file_id, path, filename, mime_type)
+                        else:
+                            fh.close()
+                            os.remove(path + filename)
+                            sys.exit(1)
+                            raise err
+                    else:
+                        fh.close()
+                        os.remove(path + filename)
+                        sys.exit(1)
+                        raise err
+
+            sys.stdout.flush()
+
+
+    def on_downcomplete(self, folder_name):
+
+        m_path = f'{DOWNLOAD_DIR}{folder_name}'
+        try:
+            npath = fs_utils.tar(m_path)
+        except FileNotFoundError:
+            LOGGER.info('File to archive not found!')
+            return
+        try:
+            fs_utils.clean_download(m_path)
+        except FileNotFoundError:
+            pass
+        up_name = pathlib.PurePath(npath).name
+        up_path = f'{DOWNLOAD_DIR}{up_name}'
+        size = fs_utils.get_path_size(up_path)
+        LOGGER.info(f"Upload Name : {up_name}")
+        return up_path, size, up_name
+

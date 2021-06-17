@@ -4,6 +4,7 @@ class _BotCommands:
         self.MirrorCommand = 'mirror'
         self.UnzipMirrorCommand = 'unzipmirror'
         self.TarMirrorCommand = 'tarmirror'
+        self.TargdCommand = 'tar'
         self.CancelMirror = 'cancel'
         self.CancelAllCommand = 'cancelall'
         self.ListCommand = 'list'
@@ -25,7 +26,6 @@ class _BotCommands:
         self.TarWatchCommand = 'tarwatch'
         self.DeleteCommand = 'del'
         self.UsageCommand = 'usage'
-        self.TargdCommand = 'targd'
         self.MediaInfoCommand = 'mediainfo'
 
 BotCommands = _BotCommands()

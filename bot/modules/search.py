@@ -15,6 +15,7 @@ from urllib.parse import quote as urlencode, urlsplit
 from pyrogram import Client, filters, emoji
 from pyrogram.parser import html as pyrogram_html
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.handlers import MessageHandler, CallbackQueryHandler
 
 from bot import app, dispatcher, IMAGE_URL
 from bot.helper import custom_filters
@@ -145,475 +146,124 @@ async def nyaa_callback(client, callback_query):
             ignore.add(message_identifier)
     await callback_query.answer()
 
-# Using https://api.torrent.cloudns.cl/api based on: https://github.com/Ryuk-me/Torrents-Api
+# Using https://api.torrent.cloudns.cl and https://www.jaybeetgx.cf API based on this repo https://github.com/Ryuk-me/Torrents-Api
 # Implemented by https://github.com/jusidama18
 
-m = None
-i = 0
-a = None
-query = None
-
-#====== 1337x =======#
-
-@app.on_message(filters.command(["1337x"]))
-async def find_1337x(_, message):
-    global m
-    global i
-    global a
-    global query
-    if len(message.command) < 2:
-        await message.reply_text("Usage: /1337x query")
-        return
-    query = message.text.split(None, 1)[1].replace(" ", "%20")
-    m = await message.reply_text("Searching")
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://api.torrent.cloudns.cl/api/1337x/{query}") \
-                    as resp:
-                a = json.loads(await resp.text())
-    except:
-        await m.edit("Found Nothing.")
-        return
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n"
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Seeds: {a[i]['Seeders']} & "
-        f"➲Leeches: {a[i]['Leechers']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="1337x_next"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete")
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-
-@app.on_callback_query(filters.regex("1337x_next"))
-async def callback_query_next_1337x(_, message):
-    global i
-    global m
-    global a
-    global query
-    i += 1
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n"
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Seeds: {a[i]['Seeders']} & "
-        f"➲Leeches: {a[i]['Leechers']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Prev",
-                                         callback_data="1337x_previous"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete"),
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="1337x_next")
-                    
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-
-@app.on_callback_query(filters.regex("1337x_previous"))
-async def callback_query_previous_1337x(_, message):
-    global i
-    global m
-    global a
-    global query
-    i -= 1
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n"
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Seeds: {a[i]['Seeders']} & "
-        f"➲Leeches: {a[i]['Leechers']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Prev",
-                                         callback_data="previous"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete"),
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="next")
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-#====== 1337x =======#
-
-#====== piratebay =======#
-
-@app.on_message(filters.command(["ptb"]))
-async def find_piratebay(_, message):
-    global m
-    global i
-    global a
-    global query
-    if len(message.command) < 2:
-        await message.reply_text("Usage: /ptb query")
-        return
-    query = message.text.split(None, 1)[1].replace(" ", "%20")
-    m = await message.reply_text("Searching")
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://api.torrent.cloudns.cl/api/piratebay/{query}") \
-                    as resp:
-                a = json.loads(await resp.text())
-    except:
-        await m.edit("Found Nothing.")
-        return
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n" 
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} & "
-        f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="piratebay_next"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete")
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-
-@app.on_callback_query(filters.regex("piratebay_next"))
-async def callback_query_next_piratebay(_, message):
-    global i
-    global m
-    global a
-    global query
-    i += 1
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n" 
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} & "
-        f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Prev",
-                                         callback_data="piratebay_previous"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete"),
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="piratebay_next")
-                    
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-
-@app.on_callback_query(filters.regex("piratebay_previous"))
-async def callback_query_previous_piratebay(_, message):
-    global i
-    global m
-    global a
-    global query
-    i -= 1
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n" 
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} & "
-        f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Prev",
-                                         callback_data="piratebay_previous"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete"),
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="piratebay_next")
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-#====== piratebay =======#
-
-#====== tgx =======#
-
-@app.on_message(filters.command(["tgx"]))
-async def find_tgx(_, message):
-    global m
-    global i
-    global a
-    global query
-    if len(message.command) < 2:
-        await message.reply_text("Usage: /tgx query")
-        return
-    query = message.text.split(None, 1)[1].replace(" ", "%20")
-    m = await message.reply_text("Searching")
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://api.torrent.cloudns.cl/api/tgx/{query}") \
-                    as resp:
-                a = json.loads(await resp.text())
-    except:
-        await m.edit("Found Nothing.")
-        return
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n" 
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} & "
-        f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="tgx_next"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete")
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-
-@app.on_callback_query(filters.regex("tgx_next"))
-async def callback_query_next_tgx(_, message):
-    global i
-    global m
-    global a
-    global query
-    i += 1
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n" 
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} & "
-        f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Prev",
-                                         callback_data="tgx_previous"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete"),
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="tgx_next")
-                    
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-
-@app.on_callback_query(filters.regex("tgx_previous"))
-async def callback_query_previous_tgx(_, message):
-    global i
-    global m
-    global a
-    global query
-    i -= 1
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: `{a[i]['Name']}`\n" 
-        f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} & "
-        f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Prev",
-                                         callback_data="tgx_previous"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete"),
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="tgx_next")
-                ]
-            ]
-        ),
-        parse_mode="markdown",
-    )
-
-#====== tgx =======#
-
-#====== yts =======#
-
-@app.on_message(filters.command(["yts"]))
-async def find_yts(_, message):
-    global m
-    global i
-    global a
-    global query
-    if len(message.command) < 2:
-        await message.reply_text("Usage: /yts query")
-        return
-    query = message.text.split(None, 1)[1].replace(" ", "%20")
-    m = await message.reply_text("Searching")
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://api.torrent.cloudns.cl/api/yts/{query}") \
-                    as resp:
-                a = json.loads(await resp.text())
-    except:
-        await m.edit("Found Nothing.")
-        return
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: [{a[i]['Name']}]({a[i]['Url']})\n"
-        f"➲Language: {a[i]['Language']}\n"
-        f"➲First Link: `{a[i]['Dwnload1']}`\n"
-        f"➲Second Link: `{a[i]['Download2']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="yts_next"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete")
-                ]
-            ]
-        ),
-        parse_mode="markdown", disable_web_page_preview=True,
-    )
-
-
-@app.on_callback_query(filters.regex("yts_next"))
-async def callback_query_next_yts(_, message):
-    global i
-    global m
-    global a
-    global query
-    i += 1
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: [{a[i]['Name']}]({a[i]['Url']})\n"
-        f"➲Language: {a[i]['Language']}\n"
-        f"➲First Link: `{a[i]['Dwnload1']}`\n"
-        f"➲Second Link: `{a[i]['Download2']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Prev",
-                                         callback_data="yts_previous"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete"),
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="yts_next")
-                    
-                ]
-            ]
-        ),
-        parse_mode="markdown", disable_web_page_preview=True,
-    )
-
-
-@app.on_callback_query(filters.regex("yts_previous"))
-async def callback_query_previous_yts(_, message):
-    global i
-    global m
-    global a
-    global query
-    i -= 1
-    result = (
-        f"**Page - {i+1}**\n\n"
-        f"➲Name: [{a[i]['Name']}]({a[i]['Url']})\n"
-        f"➲Language: {a[i]['Language']}\n"
-        f"➲First Link: `{a[i]['Dwnload1']}`\n"
-        f"➲Second Link: `{a[i]['Download2']}`\n"
-    )
-    await m.edit(
-        result,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(f"Prev",
-                                         callback_data="yts_previous"),
-                    InlineKeyboardButton(f"{emoji.CROSS_MARK}",
-                                         callback_data="delete"),
-                    InlineKeyboardButton(f"Next",
-                                         callback_data="yts_next")
-                ]
-            ]
-        ),
-        parse_mode="markdown", disable_web_page_preview=True,
-    )
-
-#====== yts =======#
-
-@app.on_callback_query(filters.regex("delete"))
-async def callback_query_delete(_, message):
-    global m
-    global i
-    global a
-    global query
-    await m.delete()
-    m = None
-    i = 0
-    a = None
+class TorrentSearch:
+    index = 0
     query = None
+    message = None
+    response = None
+    response_range = None
 
+    RESULT_LIMIT = 3
+    RESULT_STR = None
+
+    def __init__(self, command: str, source: str, result_str: str):
+        self.command = command
+        self.source = source.rstrip('/')
+        self.RESULT_STR = result_str
+
+        app.add_handler(MessageHandler(self.find, filters.command([command])))
+        app.add_handler(CallbackQueryHandler(self.previous, filters.regex(f"{self.command}_previous")))
+        app.add_handler(CallbackQueryHandler(self.delete, filters.regex(f"{self.command}_delete")))
+        app.add_handler(CallbackQueryHandler(self.next, filters.regex(f"{self.command}_next")))
+
+    def get_formatted_string(self, values):
+        string = self.RESULT_STR.format(**values)
+        magnet = values.get('magnet', values.get('Magnet'))  # Avoid updating source dict
+        if (magnet):
+            string += f"➲Magnet: `{magnet.split('&tr', 1)[0]}`"
+        return string
+
+    async def update_message(self):
+        prevBtn = InlineKeyboardButton(f"Prev", callback_data=f"{self.command}_previous")
+        delBtn = InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data="delete")
+        nextBtn = InlineKeyboardButton(f"Next", callback_data=f"{self.command}_next")
+
+        inline = []
+        if (self.index != 0):
+            inline.append(prevBtn)
+        inline.append(delBtn)
+        if (self.index != len(self.response_range) - 1):
+            inline.append(nextBtn)
+
+        result = f"**Page - {self.index+1}**\n\n"
+        result += "\n\n=======================\n\n".join(
+            self.get_formatted_string(self.response[self.response_range[self.index]+i])
+            for i in range(self.RESULT_LIMIT)
+        )
+
+        await self.message.edit(
+            result,
+            reply_markup=InlineKeyboardMarkup([inline]),
+            parse_mode="markdown",
+        )
+
+    async def find(self, client, message):
+        if len(message.command) < 2:
+            await message.reply_text(f"Usage: /{self.command} query")
+            return
+
+        query = urlencode(message.text.split(None, 1)[1])
+        self.message = await message.reply_text("Searching")
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"{self.source}/{query}") \
+                        as resp:
+                    self.response = await resp.json()
+                    self.response_range = range(0, len(self.response), self.RESULT_LIMIT)
+        except Exception as exc:
+            await self.message.edit(f"Found Nothing.")
+            return
+        await self.update_message()
+
+    async def delete(self, client, message):
+        index = 0
+        query = None
+        message = None
+        response = None
+        response_range = None
+
+    async def previous(self, client, message):
+        self.index -= 1
+        await self.update_message()
+
+    async def next(self, client, message):
+        self.index += 1
+        await self.update_message()
+
+RESULT_STR_1337 = (
+    "➲Name: `{Name}`\n"
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n\n"
+)
+RESULT_STR_TPB = (
+    "➲Name: `{Name}`\n"
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n\n"
+)
+RESULT_STR_TGX = (
+    "➲Name: `{Name}`\n" 
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n\n"
+)
+RESULT_STR_YTS = (
+    "➲Name: `{Name}`\n\n"
+    "➲First Link: `{Dwnload1}`\n\n"
+    "➲Second Link: `{Download2}`"
+)
+
+torrents_dict = {
+    '1337x': {'source': "https://api.torrent.cloudns.cl/api/1337x/", 'result_str': RESULT_STR_1337},
+    'tpb': {'source': "https://api.torrent.cloudns.cl/api/piratebay/", 'result_str': RESULT_STR_TPB},
+    'yts': {'source': "https://api.torrent.cloudns.cl/api/yts/", 'result_str': RESULT_STR_YTS},
+    'tgx': {'source': "https://api.torrent.cloudns.cl/api/tgx/", 'result_str': RESULT_STR_TGX}
+}
+
+torrent_handlers = []
+for command, value in torrents_dict.items():
+    torrent_handlers.append(TorrentSearch(command, value['source'], value['result_str']))
 
 def searchhelp(update, context):
     help_string = '''
@@ -632,5 +282,5 @@ def searchhelp(update, context):
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.HTML)
     
     
-SEARCHHELP_HANDLER = CommandHandler("tshelp", searchhelp, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+SEARCHHELP_HANDLER = CommandHandler("dtshelp", searchhelp, filters=(CustomFilters.authorized_chat | CustomFilters.authorized_user) & CustomFilters.mirror_owner_filter, run_async=True)
 dispatcher.add_handler(SEARCHHELP_HANDLER)

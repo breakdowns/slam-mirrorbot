@@ -27,5 +27,6 @@ class _BotCommands:
         self.DeleteCommand = 'del'
         self.UsageCommand = 'usage'
         self.MediaInfoCommand = 'mediainfo'
+        self.ConfigMenuCommand = 'config'
 
 BotCommands = _BotCommands()

@@ -70,14 +70,14 @@ async def return_search(query, page=1, sukebei=False):
 message_info = dict()
 ignore = set()
 
-@app.on_message(filters.command(['ts', 'nyaa', 'nyaasi']))
+@app.on_message(filters.command(['nyaa']))
 async def nyaa_search(client, message):
     text = message.text.split(' ')
     text.pop(0)
     query = ' '.join(text)
     await init_search(client, message, query, False)
 
-@app.on_message(filters.command(['sts', 'sukebei']))
+@app.on_message(filters.command(['sukebei']))
 async def nyaa_search_sukebei(client, message):
     text = message.text.split(' ')
     text.pop(0)
@@ -238,7 +238,7 @@ RESULT_STR_1337 = (
     "➲Size: {Size}\n"
     "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n"
 )
-RESULT_STR_PTB = (
+RESULT_STR_PIRATEBAY = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
     "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n"
@@ -256,7 +256,7 @@ RESULT_STR_YTS = (
 
 torrents_dict = {
     '1337x': {'source': "https://api.torrent.cloudns.cl/api/1337x/", 'result_str': RESULT_STR_1337},
-    'ptb': {'source': "https://api.torrent.cloudns.cl/api/piratebay/", 'result_str': RESULT_STR_PTB},
+    'piratebay': {'source': "https://api.torrent.cloudns.cl/api/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
     'yts': {'source': "https://api.torrent.cloudns.cl/api/yts/", 'result_str': RESULT_STR_YTS},
     'tgx': {'source': "https://api.torrent.cloudns.cl/api/tgx/", 'result_str': RESULT_STR_TGX}
 }
@@ -267,17 +267,12 @@ for command, value in torrents_dict.items():
 
 def searchhelp(update, context):
     help_string = '''
-• /ts <i>[search query]</i>
 • /nyaa <i>[search query]</i>
-• /nyaasi <i>[search query]</i>
-
-• /sts <i>[search query]</i>
 • /sukebei <i>[search query]</i>
-
 • /1337x <i>[search query]</i>
 • /tgx <i>[search query]</i>
 • /yts <i>[search query]</i>
-• /ptb <i>[search query]</i>
+• /piratebay <i>[search query]</i>
 '''
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.HTML)
     

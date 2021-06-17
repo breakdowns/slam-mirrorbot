@@ -137,6 +137,8 @@ def bot_help(update, context):
 
 /{BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file).
 
+/{BotCommands.ConfigMenuCommand}: Get Info Menu about bot config (Owner Only).
+
 /shell: Run commands in Shell (Terminal).
 
 /tshelp: Get help for Torrent search module.

@@ -18,10 +18,6 @@
 # Features supported:
 ## Additional Features
 - Get detailed info about replied media (Only for Telegram file)
-- Torrent search support for:
-```
-nyaa.si, sukebei, tgx, yts, piratebay, 1337x (Sometimes Work XD)
-```
 - Speedtest with picture results
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Limiting size Torrent/Direct, Mega, cloning Google Drive support
@@ -29,10 +25,15 @@ nyaa.si, sukebei, tgx, yts, piratebay, 1337x (Sometimes Work XD)
 - Multiple Trackers support
 - Check Heroku dynos stats
 - Extracting **tar.xz** support
+- Make Tar Google Drive folder
 - Custom image support
 - Counting file/folder
 - Shell and Executor
 - View Link button
+- Torrent search support for:
+```
+nyaa.si, sukebei, tgx, yts, piratebay, 1337x (Sometimes Work XD)
+```
 - Direct links supported:
 ```
 letsupload.io, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,

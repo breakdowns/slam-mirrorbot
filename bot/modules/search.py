@@ -256,7 +256,7 @@ RESULT_STR_YTS = (
 
 torrents_dict = {
     '1337x': {'source': "https://api.torrent.cloudns.cl/api/1337x/", 'result_str': RESULT_STR_1337},
-    'ptb': {'source': "https://api.torrent.cloudns.cl/api/piratebay/", 'result_str': RESULT_STR_TPB},
+    'ptb': {'source': "https://api.torrent.cloudns.cl/api/piratebay/", 'result_str': RESULT_STR_PTB},
     'yts': {'source': "https://api.torrent.cloudns.cl/api/yts/", 'result_str': RESULT_STR_YTS},
     'tgx': {'source': "https://api.torrent.cloudns.cl/api/tgx/", 'result_str': RESULT_STR_TGX}
 }

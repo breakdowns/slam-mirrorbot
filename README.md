@@ -18,7 +18,10 @@
 # Features supported:
 ## Additional Features
 - Get detailed info about replied media (Only for Telegram file)
-- Nyaa.si and Sukebei Torrent search
+- Torrent search support for:
+```
+nyaa.si, sukebei, tgx, yts, piratebay, 1337x (Sometimes Work XD)
+```
 - Speedtest with picture results
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Limiting size Torrent/Direct, Mega, cloning Google Drive support

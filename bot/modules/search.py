@@ -145,7 +145,7 @@ async def nyaa_callback(client, callback_query):
             ignore.add(message_identifier)
     await callback_query.answer()
 
-# Using https://api.api-zero.workers.dev, https://torrenter-api.herokuapp.com/api/ API and https://www.jaybeetgx.cf API based on this repo https://github.com/devillD/Torrent-Searcher
+# Using https://api.torrent.cloudns.cl/api based on: https://github.com/Ryuk-me/Torrents-Api
 # Implemented by https://github.com/jusidama18
 
 m = None
@@ -168,7 +168,7 @@ async def find_1337x(_, message):
     m = await message.reply_text("Searching")
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://torrenter-api.herokuapp.com/api/1337x/{query}") \
+            async with session.get(f"https://api.torrent.cloudns.cl/api/1337x/{query}") \
                     as resp:
                 a = json.loads(await resp.text())
     except:
@@ -177,15 +177,10 @@ async def find_1337x(_, message):
     result = (
         f"**Page - {i+1}**\n\n"
         f"➲Name: `{a[i]['Name']}`\n"
-        f"➲By {a[i]['UploadedBy']} "
-        f"{a[i]['DateUploaded']}\n" 
-        f"➲{a[i]['Type']} "
-        f"{a[i]['Category']}\n"
-        f"➲Language: {a[i]['Language']} || "
-        f"➲Checked: {a[i]['LastChecked']}\n"
+        f"➲Size: {a[i]['Size']}\n"
         f"➲Seeds: {a[i]['Seeders']} & "
-        f"➲Leeches: {a[i]['Leechers']}\n\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n\n\n"
+        f"➲Leeches: {a[i]['Leechers']}\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -213,15 +208,10 @@ async def callback_query_next_1337x(_, message):
     result = (
         f"**Page - {i+1}**\n\n"
         f"➲Name: `{a[i]['Name']}`\n"
-        f"➲By {a[i]['UploadedBy']} "
-        f"{a[i]['DateUploaded']}\n" 
-        f"➲{a[i]['Type']} "
-        f"{a[i]['Category']}\n"
-        f"➲Language: {a[i]['Language']} || "
-        f"➲Checked: {a[i]['LastChecked']}\n"
+        f"➲Size: {a[i]['Size']}\n"
         f"➲Seeds: {a[i]['Seeders']} & "
-        f"➲Leeches: {a[i]['Leechers']}\n\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n\n\n"
+        f"➲Leeches: {a[i]['Leechers']}\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -252,15 +242,10 @@ async def callback_query_previous_1337x(_, message):
     result = (
         f"**Page - {i+1}**\n\n"
         f"➲Name: `{a[i]['Name']}`\n"
-        f"➲By {a[i]['UploadedBy']} "
-        f"{a[i]['DateUploaded']}\n" 
-        f"➲{a[i]['Type']} "
-        f"{a[i]['Category']}\n"
-        f"➲Language: {a[i]['Language']} || "
-        f"➲Checked: {a[i]['LastChecked']}\n"
+        f"➲Size: {a[i]['Size']}\n"
         f"➲Seeds: {a[i]['Seeders']} & "
-        f"➲Leeches: {a[i]['Leechers']}\n\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n\n\n"
+        f"➲Leeches: {a[i]['Leechers']}\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -283,20 +268,20 @@ async def callback_query_previous_1337x(_, message):
 
 #====== piratebay =======#
 
-@app.on_message(filters.command(["piratebay"]))
+@app.on_message(filters.command(["ptb"]))
 async def find_piratebay(_, message):
     global m
     global i
     global a
     global query
     if len(message.command) < 2:
-        await message.reply_text("Usage: /piratebay query")
+        await message.reply_text("Usage: /ptb query")
         return
     query = message.text.split(None, 1)[1].replace(" ", "%20")
     m = await message.reply_text("Searching")
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://api.api-zero.workers.dev/piratebay/{query}") \
+            async with session.get(f"https://api.torrent.cloudns.cl/api/piratebay/{query}") \
                     as resp:
                 a = json.loads(await resp.text())
     except:
@@ -304,14 +289,11 @@ async def find_piratebay(_, message):
         return
     result = (
         f"**Page - {i+1}**\n\n"
-        f"➲Name: {a[i]['Name']}\n"
-        f"➲{a[i]['Uploader']} on "
-        f"{a[i]['Date']}\n" 
+        f"➲Name: `{a[i]['Name']}`\n" 
         f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} || "
+        f"➲Leechers: {a[i]['Leechers']} & "
         f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Type: {a[i]['Category']}\n\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n\n\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -338,14 +320,11 @@ async def callback_query_next_piratebay(_, message):
     i += 1
     result = (
         f"**Page - {i+1}**\n\n"
-        f"➲Name: {a[i]['Name']}\n"
-        f"➲{a[i]['Uploader']} on "
-        f"{a[i]['Date']}\n" 
+        f"➲Name: `{a[i]['Name']}`\n" 
         f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} || "
+        f"➲Leechers: {a[i]['Leechers']} & "
         f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Type: {a[i]['Category']}\n\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n\n\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -375,14 +354,11 @@ async def callback_query_previous_piratebay(_, message):
     i -= 1
     result = (
         f"**Page - {i+1}**\n\n"
-        f"➲Name: {a[i]['Name']}\n"
-        f"➲{a[i]['Uploader']} on "
-        f"{a[i]['Date']}\n" 
+        f"➲Name: `{a[i]['Name']}`\n" 
         f"➲Size: {a[i]['Size']}\n"
-        f"➲Leechers: {a[i]['Leechers']} || "
+        f"➲Leechers: {a[i]['Leechers']} & "
         f"➲Seeders: {a[i]['Seeders']}\n"
-        f"➲Type: {a[i]['Category']}\n\n"
-        f"➲Magnet: `{a[i]['Magnet']}`\n\n\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -418,7 +394,7 @@ async def find_tgx(_, message):
     m = await message.reply_text("Searching")
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://www.jaybeetgx.cf/tor/{query}") \
+            async with session.get(f"https://api.torrent.cloudns.cl/api/tgx/{query}") \
                     as resp:
                 a = json.loads(await resp.text())
     except:
@@ -426,13 +402,11 @@ async def find_tgx(_, message):
         return
     result = (
         f"**Page - {i+1}**\n\n"
-        f"➲Name: {a[i]['name']}\n"
-        f"➲{a[i]['uploader']} on "
-        f"{a[i]['date']}\n" 
-        f"➲Size: {a[i]['size']}\n"
-        f"➲Leechers: {a[i]['peers']} || "
-        f"➲Seeders: {a[i]['seeders']}\n\n"
-        f"➲Magnet: `{a[i]['magnet']}`\n\n\n"
+        f"➲Name: `{a[i]['Name']}`\n" 
+        f"➲Size: {a[i]['Size']}\n"
+        f"➲Leechers: {a[i]['Leechers']} & "
+        f"➲Seeders: {a[i]['Seeders']}\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -459,13 +433,11 @@ async def callback_query_next_tgx(_, message):
     i += 1
     result = (
         f"**Page - {i+1}**\n\n"
-        f"➲Name: {a[i]['name']}\n"
-        f"➲{a[i]['uploader']} on "
-        f"{a[i]['date']}\n" 
-        f"➲Size: {a[i]['size']}\n"
-        f"➲Leechers: {a[i]['peers']} || "
-        f"➲Seeders: {a[i]['seeders']}\n\n"
-        f"➲Magnet: `{a[i]['magnet']}`\n\n\n"
+        f"➲Name: `{a[i]['Name']}`\n" 
+        f"➲Size: {a[i]['Size']}\n"
+        f"➲Leechers: {a[i]['Leechers']} & "
+        f"➲Seeders: {a[i]['Seeders']}\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -495,13 +467,11 @@ async def callback_query_previous_tgx(_, message):
     i -= 1
     result = (
         f"**Page - {i+1}**\n\n"
-        f"➲Name: {a[i]['name']}\n"
-        f"➲{a[i]['uploader']} on "
-        f"{a[i]['date']}\n" 
-        f"➲Size: {a[i]['size']}\n"
-        f"➲Leechers: {a[i]['peers']} || "
-        f"➲Seeders: {a[i]['seeders']}\n\n"
-        f"➲Magnet: `{a[i]['magnet']}`\n\n\n"
+        f"➲Name: `{a[i]['Name']}`\n" 
+        f"➲Size: {a[i]['Size']}\n"
+        f"➲Leechers: {a[i]['Leechers']} & "
+        f"➲Seeders: {a[i]['Seeders']}\n"
+        f"➲Magnet: `{a[i]['Magnet']}`\n"
     )
     await m.edit(
         result,
@@ -537,7 +507,7 @@ async def find_yts(_, message):
     m = await message.reply_text("Searching")
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://api.api-zero.workers.dev/yts/{query}") \
+            async with session.get(f"https://api.torrent.cloudns.cl/api/yts/{query}") \
                     as resp:
                 a = json.loads(await resp.text())
     except:
@@ -546,14 +516,9 @@ async def find_yts(_, message):
     result = (
         f"**Page - {i+1}**\n\n"
         f"➲Name: [{a[i]['Name']}]({a[i]['Url']})\n"
-        f"➲Released on: {a[i]['ReleasedDate']}\n"
-        f"➲Genre: {a[i]['Genre']}\n" 
-        f"➲Rating: {a[i]['Rating']}\n"
-        f"➲Likes: {a[i]['Likes']}\n"
-        f"➲Duration: {a[i]['Runtime']}\n"
-        f"➲Language: {a[i]['Language']}\n\n"
-        f"➲First Link `{a[i]['Dwnload1']}`\n\n"
-        f"➲Second Link: `{a[i]['Download2']}`\n\n\n"
+        f"➲Language: {a[i]['Language']}\n"
+        f"➲First Link: `{a[i]['Dwnload1']}`\n"
+        f"➲Second Link: `{a[i]['Download2']}`\n"
     )
     await m.edit(
         result,
@@ -581,14 +546,9 @@ async def callback_query_next_yts(_, message):
     result = (
         f"**Page - {i+1}**\n\n"
         f"➲Name: [{a[i]['Name']}]({a[i]['Url']})\n"
-        f"➲Released on: {a[i]['ReleasedDate']}\n"
-        f"➲Genre: {a[i]['Genre']}\n" 
-        f"➲Rating: {a[i]['Rating']}\n"
-        f"➲Likes: {a[i]['Likes']}\n"
-        f"➲Duration: {a[i]['Runtime']}\n"
-        f"➲Language: {a[i]['Language']}\n\n"
-        f"➲First Link: `{a[i]['Dwnload1']}`\n\n"
-        f"➲Second Link: `{a[i]['Download2']}`\n\n\n"
+        f"➲Language: {a[i]['Language']}\n"
+        f"➲First Link: `{a[i]['Dwnload1']}`\n"
+        f"➲Second Link: `{a[i]['Download2']}`\n"
     )
     await m.edit(
         result,
@@ -619,14 +579,9 @@ async def callback_query_previous_yts(_, message):
     result = (
         f"**Page - {i+1}**\n\n"
         f"➲Name: [{a[i]['Name']}]({a[i]['Url']})\n"
-        f"➲Released on: {a[i]['ReleasedDate']}\n"
-        f"➲Genre: {a[i]['Genre']}\n" 
-        f"➲Rating: {a[i]['Rating']}\n"
-        f"➲Likes: {a[i]['Likes']}\n"
-        f"➲Duration: {a[i]['Runtime']}\n"
-        f"➲Language: {a[i]['Language']}\n\n"
-        f"➲First Link: `{a[i]['Dwnload1']}`\n\n"
-        f"➲Second Link: `{a[i]['Download2']}`\n\n\n"
+        f"➲Language: {a[i]['Language']}\n"
+        f"➲First Link: `{a[i]['Dwnload1']}`\n"
+        f"➲Second Link: `{a[i]['Download2']}`\n"
     )
     await m.edit(
         result,
@@ -672,7 +627,7 @@ def searchhelp(update, context):
 • /1337x <i>[search query]</i>
 • /tgx <i>[search query]</i>
 • /yts <i>[search query]</i>
-• /piratebay <i>[search query]</i>
+• /ptb <i>[search query]</i>
 '''
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.HTML)
     

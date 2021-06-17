@@ -31,7 +31,7 @@
 - Counting file/folder
 - Shell and Executor
 - View Link button
-- Torrent search support for:
+- Torrent search supported:
 ```
 nyaa.si, sukebei, 1337x, tgx, yts, piratebay
 ```

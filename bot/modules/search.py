@@ -145,7 +145,7 @@ async def nyaa_callback(client, callback_query):
             ignore.add(message_identifier)
     await callback_query.answer()
 
-# Using https://api.api-zero.workers.dev API and https://www.jaybeetgx.cf API based on this repo https://github.com/devillD/Torrent-Searcher
+# Using https://api.api-zero.workers.dev API, https://torrenter-api.herokuapp.com/api and https://www.jaybeetgx.cf API based on this repo https://github.com/devillD/Torrent-Searcher
 # Implemented by https://github.com/jusidama18
 
 m = None
@@ -168,7 +168,7 @@ async def find_1337x(_, message):
     m = await message.reply_text("Searching")
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://api.api-zero.workers.dev/yts/{query}") \
+            async with session.get(f"https://torrenter-api.herokuapp.com/api/1337x/{query}") \
                     as resp:
                 a = json.loads(await resp.text())
     except:
@@ -181,7 +181,6 @@ async def find_1337x(_, message):
         f"{a[i]['DateUploaded']}\n" 
         f"➲{a[i]['Type']} "
         f"{a[i]['Category']}\n"
-        f"➲Poster: {a[i]['Poster']}\n"
         f"➲Language: {a[i]['Language']} || "
         f"➲Checked: {a[i]['LastChecked']}\n"
         f"➲Seeds: {a[i]['Seeders']} & "
@@ -218,7 +217,6 @@ async def callback_query_next_1337x(_, message):
         f"{a[i]['DateUploaded']}\n" 
         f"➲{a[i]['Type']} "
         f"{a[i]['Category']}\n"
-        f"➲Poster: {a[i]['Poster']}\n"
         f"➲Language: {a[i]['Language']} || "
         f"➲Checked: {a[i]['LastChecked']}\n"
         f"➲Seeds: {a[i]['Seeders']} & "
@@ -258,7 +256,6 @@ async def callback_query_previous_1337x(_, message):
         f"{a[i]['DateUploaded']}\n" 
         f"➲{a[i]['Type']} "
         f"{a[i]['Category']}\n"
-        f"➲Poster: {a[i]['Poster']}\n"
         f"➲Language: {a[i]['Language']} || "
         f"➲Checked: {a[i]['LastChecked']}\n"
         f"➲Seeds: {a[i]['Seeders']} & "

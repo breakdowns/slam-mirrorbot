@@ -236,21 +236,21 @@ class TorrentSearch:
 RESULT_STR_1337 = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n\n"
+    "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n"
 )
-RESULT_STR_TPB = (
+RESULT_STR_PTB = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n\n"
+    "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n"
 )
 RESULT_STR_TGX = (
     "➲Name: `{Name}`\n" 
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
 )
 RESULT_STR_YTS = (
-    "➲Name: `{Name}`\n\n"
-    "➲First Link: `{Dwnload1}`\n\n"
+    "➲Name: `{Name}`\n"
+    "➲First Link: `{Dwnload1}`\n"
     "➲Second Link: `{Download2}`"
 )
 

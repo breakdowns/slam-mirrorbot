@@ -133,9 +133,9 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/shell: Run commands in Shell (Terminal).
+/{BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file).
 
-/mediainfo: Get detailed info about replied media (Only for Telegram file).
+/shell: Run commands in Shell (Terminal).
 
 /tshelp: Get help for Torrent search module.
 '''
@@ -167,7 +167,7 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/mediainfo: Get detailed info about replied media (Only for Telegram file).
+/{BotCommands.BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file).
 
 /tshelp: Get help for Torrent search module.
 '''
@@ -193,6 +193,7 @@ BotCommand(f'{BotCommands.ListCommand}',' [query] Searches files in Drive'),
 BotCommand(f'{BotCommands.StatusCommand}','Get Mirror Status message'),
 BotCommand(f'{BotCommands.StatsCommand}','Bot Usage Stats'),
 BotCommand(f'{BotCommands.HelpCommand}','Get Detailed Help'),
+BotCommand(f'{BotCommands.MediaInfoCommand}','Get detailed info about replied media'),
 BotCommand(f'{BotCommands.SpeedCommand}','Check Speed of the host'),
 BotCommand(f'{BotCommands.LogCommand}','Bot Log [owner/sudo only]'),
 BotCommand(f'{BotCommands.RestartCommand}','Restart bot [owner/sudo only]')]

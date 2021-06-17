@@ -24,6 +24,7 @@
 - Sudo with Database support
 - Multiple Trackers support
 - Check Heroku dynos stats
+- Heroku config support
 - Extracting **tar.xz** support
 - Create Tar Google Drive folder
 - Custom image support

@@ -10,6 +10,7 @@ from functools import wraps
 from pyrogram import Client, filters, types, emoji
 from pyrogram.types import Message, ChatPermissions
 from bot import app, HEROKU_API_KEY, HEROKU_APP_NAME, OWNER_ID
+from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot import *
 
 # Setting Message
@@ -94,7 +95,7 @@ async def del_varr(client, message, app_):
 
 __header__='📕 **Page** **{}**\n\n'
 
-@app.on_message(filters.command("config") & filters.user(OWNER_ID))
+@app.on_message(filters.command(BotCommands.ConfigMenuCommand) & filters.user(OWNER_ID))
 async def config_menu(_, message):
     await message.reply(
         f"**Hello {message.from_user.mention}**,\n\n**If you want to add or set Variable in Heroku use** `/setvar`\n\n**If you want to delete Variable in Heroku use `/delvar`**\n\nHere's This is MirrorBot Current Configs",

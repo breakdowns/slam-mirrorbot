@@ -761,8 +761,8 @@ class GoogleDriveHelper:
                         err = e
                     LOGGER.error(err)
                     raise err
-                msg = f'<b>Filename : </b><code>{up_name}</code>'
-                msg += f'\n<b>Size : </b><code>{get_readable_file_size(tsize)}</code>'
+                msg = f'<b>Filename: </b><code>{up_name}</code>'
+                msg += f'\n<b>Size: </b><code>{get_readable_file_size(tsize)}</code>'
                 buttons = button_build.ButtonMaker()
                 if SHORTENER is not None and SHORTENER_API is not None:
                     surl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={link}&format=text').text

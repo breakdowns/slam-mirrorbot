@@ -33,7 +33,7 @@
 - Torrent search support for:
 ```
 nyaa.si, sukebei, tgx,
-yts, piratebay, 1337x (Sometimes Work XD)
+yts, piratebay, 1337x
 ```
 - Direct links supported:
 ```

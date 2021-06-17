@@ -146,7 +146,7 @@ async def nyaa_callback(client, callback_query):
             ignore.add(message_identifier)
     await callback_query.answer()
 
-# Using https://api.torrent.cloudns.cl and https://www.jaybeetgx.cf API based on this repo https://github.com/Ryuk-me/Torrents-Api
+# Using https://api.torrent.cloudns.cl API based on: https://github.com/Ryuk-me/Torrents-Api
 # Implemented by https://github.com/jusidama18
 
 class TorrentSearch:

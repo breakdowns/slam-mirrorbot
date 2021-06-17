@@ -25,7 +25,7 @@
 - Multiple Trackers support
 - Check Heroku dynos stats
 - Extracting **tar.xz** support
-- Make Tar Google Drive folder
+- Create Tar Google Drive folder
 - Custom image support
 - Counting file/folder
 - Shell and Executor

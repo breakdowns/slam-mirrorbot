@@ -214,7 +214,7 @@ class TorrentSearch:
                     self.response = await resp.json()
                     self.response_range = range(0, len(self.response), self.RESULT_LIMIT)
         except Exception as exc:
-            await self.message.edit(f"Found Nothing.")
+            await self.message.edit(f"Found Nothing.\n\nError: `{exc}`")
             return
         await self.update_message()
 

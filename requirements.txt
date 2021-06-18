@@ -26,3 +26,4 @@ telegraph
 tenacity
 TgCrypto
 youtube_dl
+gitpython

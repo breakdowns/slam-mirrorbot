@@ -79,4 +79,4 @@ async def update_it(client, message):
         except BaseException as error:
             await msg_.edit(f"**Updater Error** \nTraceBack : `{error}`")
             return repo.__del__()
-        await msg_.edit(f"`Updated Sucessfully! Check your config with` `/{BotCommands.ConfigMenuCommand}`")
+        await msg_.edit(f"`Updated Sucessfully! \n\nCheck your config with` `/{BotCommands.ConfigMenuCommand}`")

@@ -1,6 +1,7 @@
 import shutil, psutil
 import signal
 import os
+import importlib
 
 from pyrogram import idle
 from bot import app
@@ -18,7 +19,11 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, search, delete, speedtest, usage, mediainfo, count, targd, config, updater
+from bot.modules import ALL_MODULES # Auto Load all modules without name problems
+
+for module in ALL_MODULES:
+    imported_module = importlib.import_module("bot.modules." + module)
+    importlib.reload(imported_module)
 
 now=datetime.now(pytz.timezone('Asia/Jakarta'))
 

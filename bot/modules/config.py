@@ -51,7 +51,7 @@ async def del_varr(client, message, app_):
 __header__='📕 **Page** **{}**\n\n'
 
 @app.on_message(filters.command(BotCommands.ConfigMenuCommand) & filters.user(OWNER_ID))
-async def config_menu_docs(_, message):
+async def config_menu(_, message):
     await message.reply(
         f"**Hello {message.from_user.mention}**,\n\n**If you want to add or set Variable in Heroku use** `/setvar`\n\n**If you want to delete Variable in Heroku use `/delvar`**\n\n**WARNING! Very Recommended to do this command in private since it's contain bot info.**\n\n**Here's This is Slam-MirrorBot Current Configs**",
         reply_markup=types.InlineKeyboardMarkup(
@@ -65,7 +65,7 @@ async def config_button(_, query):
     if data == '1':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Telegram Config ]**\n\n**Bot Token :** `{BOT_TOKEN}`\n\n**Telegram API :** `{TELEGRAM_API}`\n\n**Telegram HASH :** `{TELEGRAM_HASH}`\n\n**Telegraph Token** `{telegraph_token}`",
+            + f"**[ Telegram Config ]**\n\n**Bot Token:** `{BOT_TOKEN}`\n\n**Telegram API:** `{TELEGRAM_API}`\n\n**Telegram HASH:** `{TELEGRAM_HASH}`\n\n**Telegraph Token:** `{telegraph_token}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -79,7 +79,7 @@ async def config_button(_, query):
     elif data == '2':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Drive and Index Config ]**\n\n**Drive Folder :** `{parent_id}`\n\n**Using Team Drive :** `{IS_TEAM_DRIVE}`\n\n**Using Service Account :** `{USE_SERVICE_ACCOUNTS}`\n\n**Index Url :** `{INDEX_URL}`",
+            + f"**[ Drive and Index Config ]**\n**Drive Folder:** `{parent_id}`\n\n**Using Team Drive:** `{IS_TEAM_DRIVE}`\n\n**Using Service Account:** `{USE_SERVICE_ACCOUNTS}`\n\n**Index Url:** `{INDEX_URL}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -93,7 +93,7 @@ async def config_button(_, query):
     elif data == '3':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Mega and Uptobox Config ]**\n\n**Mega API :** `{MEGA_API_KEY}`\n\n**Mega Email :** `{MEGA_EMAIL_ID}`\n\n**Mega Password :** `{MEGA_PASSWORD}`\n\n**Uptobox Token :** `{UPTOBOX_TOKEN}`",
+            + f"**[ Mega and Uptobox Config ]**\n\n**Mega API:** `{MEGA_API_KEY}`\n\n**Mega Email:** `{MEGA_EMAIL_ID}`\n\n**Mega Password:** `{MEGA_PASSWORD}`\n\n**Uptobox Token:** `{UPTOBOX_TOKEN}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -107,7 +107,7 @@ async def config_button(_, query):
     elif data == '4':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Stop Duplicate Config ]**\n\n**Mirror :** `{STOP_DUPLICATE_MIRROR}`\n\n**Clone :** `{STOP_DUPLICATE_CLONE}`\n\n**Mega :** `{STOP_DUPLICATE_MEGA }`\n\n**[ Block Mega Config ]**\n\n**Folder :** `{BLOCK_MEGA_FOLDER}`\n\n**Link :** `{BLOCK_MEGA_LINKS}`\n\n",
+            + f"**[ Stop Duplicate Config ]**\n\n**Mirror:** `{STOP_DUPLICATE_MIRROR}`\n\n**Clone:** `{STOP_DUPLICATE_CLONE}`\n\n**Mega:** `{STOP_DUPLICATE_MEGA}`\n\n**[ Block Mega Config ]**\n\n**Folder:** `{BLOCK_MEGA_FOLDER}`\n\n**Link:** `{BLOCK_MEGA_LINKS}`\n\n",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -121,7 +121,7 @@ async def config_button(_, query):
     elif data == '5':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Limit Size Config ]**\n\n**Torrent and Direct :** `{TORRENT_DIRECT_LIMIT}`\n\n**Clone :** `{CLONE_LIMIT}`\n\n**Mega :** `{MEGA_LIMIT}`",
+            + f"**[ Limit Size Config ]**\n\n**Torrent and Direct:** `{TORRENT_DIRECT_LIMIT}`\n\n**Clone:** `{CLONE_LIMIT}`\n\n**Mega:** `{MEGA_LIMIT}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -138,7 +138,7 @@ async def config_button(_, query):
         sudo += '\n'.join(str(id) for id in SUDO_USERS)
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ User ID Config ]**\n\n**Owner ID :** `{OWNER_ID}`\n\n**Authorized Chat :**\n`{user}`\n\n**Sudo Users :**\n`{sudo}`",
+            + f"**[ User ID Config ]**\n\n**Owner ID:** `{OWNER_ID}`\n\n**Authorized Chat:**\n`{user}`\n\n**Sudo Users:**\n`{sudo}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -152,7 +152,7 @@ async def config_button(_, query):
     elif data == '7':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Button Config ]**\n\n**Button Four Name :** `{BUTTON_FOUR_NAME}`\n\n**Button Four Url :** `{BUTTON_FOUR_URL}`\n\n**Button Five Name :** `{BUTTON_FIVE_NAME}`\n\n**Button Five Url :** `{BUTTON_FIVE_URL}`\n\n**Button Six Name :** `{BUTTON_SIX_NAME}`\n\n**Button Six Url :** `{BUTTON_SIX_URL}`",
+            + f"**[ Button Config ]**\n\n**Button Four Name:** `{BUTTON_FOUR_NAME}`\n\n**Button Four Url:** `{BUTTON_FOUR_URL}`\n\n**Button Five Name:** `{BUTTON_FIVE_NAME}`\n\n**Button Five Url:** `{BUTTON_FIVE_URL}`\n\n**Button Six Name:** `{BUTTON_SIX_NAME}`\n\n**Button Six Url:** `{BUTTON_SIX_URL}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -166,7 +166,7 @@ async def config_button(_, query):
     elif data == '8':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Heroku Config ]**\n\n**Heroku Name :** `{HEROKU_APP_NAME}`\n\n**Heroku API :** `{HEROKU_API_KEY}`\n\n**[ Shortener Config ]**\n\n**Shortener Name :** `{SHORTENER}`\n\n**Shortener API :** `{SHORTENER_API}`",
+            + f"**[ Heroku Config ]**\n\n**Heroku Name:** `{HEROKU_APP_NAME}`\n\n**Heroku API:** `{HEROKU_API_KEY}`\n\n**[ Shortener Config ]**\n\n**Shortener Name:** `{SHORTENER}`\n\n**Shortener API:** `{SHORTENER_API}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -180,7 +180,7 @@ async def config_button(_, query):
     elif data == '9':
         return await query.message.edit(
             __header__.format(data)
-            + f" **[ Others Config ]**\n\n**Ignore Pending Request :** `{IGNORE_PENDING_REQUESTS}`\n\n**Image Url :** `{IMAGE_URL}`\n\n**Directory :** `{DOWNLOAD_DIR}`\n\n**Status Interval :** `{DOWNLOAD_STATUS_UPDATE_INTERVAL}`\n\n**View Link :** `{VIEW_LINK}`\n\n**Database Url :** `{DB_URI}`\n\n**Delete Message Duration :** `{AUTO_DELETE_MESSAGE_DURATION}`",
+            + f" **[ Others Config ]**\n\n**Ignore Pending Request:** `{IGNORE_PENDING_REQUESTS}`\n\n**Image Url:** `{IMAGE_URL}`\n\n**Directory:** `{DOWNLOAD_DIR}`\n\n**Status Interval:** `{DOWNLOAD_STATUS_UPDATE_INTERVAL}`\n\n**View Link:** `{VIEW_LINK}`\n\n**Database Url:** `{DB_URI}`\n\n**Delete Message Duration:** `{AUTO_DELETE_MESSAGE_DURATION}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [

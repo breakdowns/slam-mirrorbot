@@ -195,7 +195,7 @@ async def config_button(_, query):
     elif data == '10':
         return await query.message.edit(
             __header__.format(data)
-            + f" **[ Module Config ]**\n\n**All Module :** \n`{ALL_MODULES}`\n\n\n",
+            + f" **[ Module Config ]**\n\n**All Module:** \n`{ALL_MODULES}`\n\n\n",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [

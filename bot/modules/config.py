@@ -5,6 +5,7 @@ from pyrogram import filters, types, emoji
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot import app, OWNER_ID
 from bot.helper import get_text, check_heroku
+from bot.modules import ALL_MODULES
 from bot import *
 
 # Add Variable
@@ -69,7 +70,7 @@ async def config_button(_, query):
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
-                        types.InlineKeyboardButton(f"{emoji.LEFT_ARROW}", callback_data='docs_9'),
+                        types.InlineKeyboardButton(f"{emoji.LEFT_ARROW}", callback_data='docs_10'),
                         types.InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data='docs_end'),
                         types.InlineKeyboardButton(f"{emoji.RIGHT_ARROW}", callback_data='docs_2')
                     ]
@@ -185,6 +186,20 @@ async def config_button(_, query):
                 [
                     [
                         types.InlineKeyboardButton(f"{emoji.LEFT_ARROW}", callback_data='docs_8'),
+                        types.InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data='docs_end'),
+                        types.InlineKeyboardButton(f"{emoji.RIGHT_ARROW}", callback_data='docs_10')
+                    ]
+                ]
+            )
+        )
+    elif data == '10':
+        return await query.message.edit(
+            __header__.format(data)
+            + f" **[ Module Config ]**\n\n**All Module :** \n`{ALL_MODULES}`",
+            reply_markup=types.InlineKeyboardMarkup(
+                [
+                    [
+                        types.InlineKeyboardButton(f"{emoji.LEFT_ARROW}", callback_data='docs_9'),
                         types.InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data='docs_end'),
                         types.InlineKeyboardButton(f"{emoji.RIGHT_ARROW}", callback_data='docs_1')
                     ]

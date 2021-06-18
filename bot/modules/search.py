@@ -179,7 +179,7 @@ class TorrentSearch:
 
     async def update_message(self):
         prevBtn = InlineKeyboardButton(f"Prev", callback_data=f"{self.command}_previous")
-        delBtn = InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data="delete")
+        delBtn = InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data=f"{self.command}_delete")
         nextBtn = InlineKeyboardButton(f"Next", callback_data=f"{self.command}_next")
 
         inline = []
@@ -229,6 +229,7 @@ class TorrentSearch:
         message = None
         response = None
         response_range = None
+        await self.message.delete()
 
     async def previous(self, client, message):
         self.index -= 1

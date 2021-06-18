@@ -23,17 +23,15 @@
 - Limiting size Torrent/Direct, Mega, cloning Google Drive support
 - Sudo with Database support
 - Multiple Trackers support
+- Check Heroku dynos stats
+- Heroku config support
+- Updater (Only for Heroku)
 - Extracting **tar.xz** support
 - Create Tar Google Drive folder
 - Custom image support
 - Counting file/folder
 - Shell and Executor
 - View Link button
-- Heroku features
-```
-Check Heroku dynos stats,
-Heroku config support, Updater
-```
 - Torrent search supported:
 ```
 nyaa, sukebei, 1337x, tgx, yts, piratebay

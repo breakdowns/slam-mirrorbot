@@ -1,74 +1,29 @@
 # Implement by https://github.com/jusidama18
 # Based on this https://github.com/DevsExpo/FridayUserbot/blob/master/plugins/heroku_helpers.py
 
-import os
-import time
-import heroku3
-
-from functools import wraps
-
-from pyrogram import Client, filters, types, emoji
-from pyrogram.types import Message
-from bot import app, HEROKU_API_KEY, HEROKU_APP_NAME, OWNER_ID
+from pyrogram import filters, types, emoji
 from bot.helper.telegram_helper.bot_commands import BotCommands
+from bot import app, OWNER_ID
+from bot.helper import get_text, check_heroku
 from bot import *
-
-# Setting Message
-
-def get_text(message: Message) -> [None, str]:
-    """Extract Text From Commands"""
-    text_to_return = message.text
-    if message.text is None:
-        return None
-    if " " in text_to_return:
-        try:
-            return message.text.split(None, 1)[1]
-        except IndexError:
-            return None
-    else:
-        return None
-
-# Preparing
-
-heroku_client = None
-if HEROKU_API_KEY:
-    heroku_client = heroku3.from_key(HEROKU_API_KEY)
-
-def _check_heroku(func):
-    @wraps(func)
-    async def heroku_cli(client, message):
-        heroku_app = None
-        if not heroku_client:
-            await message.reply_text("`Please Add HEROKU_API_KEY Key For This To Function To Work!`", parse_mode="markdown")
-        elif not HEROKU_APP_NAME:
-            await message.reply_text("`Please Add HEROKU_APP_NAME For This To Function To Work!`", parse_mode="markdown")
-        if HEROKU_APP_NAME and heroku_client:
-            try:
-                heroku_app = heroku_client.app(HEROKU_APP_NAME)
-            except:
-                await message.reply_text(message, "`Heroku Api Key And App Name Doesn't Match!`", parse_mode="markdown")
-            if heroku_app:
-                await func(client, message, heroku_app)
-
-    return heroku_cli
 
 # Add Variable
 
 @app.on_message(filters.command('setvar') & filters.user(OWNER_ID))
-@_check_heroku
+@check_heroku
 async def set_varr(client, message, app_):
     msg_ = await message.reply_text("`Please Wait!`")
     heroku_var = app_.config()
     _var = get_text(message)
     if not _var:
-        await msg_.edit("`Here is Usage Syntax: .setvar KEY VALUE`", parse_mode="markdown")
+        await msg_.edit("`Here is Usage Syntax: /setvar KEY VALUE`", parse_mode="markdown")
         return
     if not " " in _var:
-        await msg_.edit("`Here is Usage Syntax: .setvar KEY VALUE`", parse_mode="markdown")
+        await msg_.edit("`Variable VALUE needed !`", parse_mode="markdown")
         return
     var_ = _var.split(" ", 1)
     if len(var_) > 2:
-        await msg_.edit("`Here is Usage Syntax: .setvar KEY VALUE`", parse_mode="markdown")
+        await msg_.edit("`Here is Usage Syntax: /setvar KEY VALUE`", parse_mode="markdown")
         return
     _varname, _varvalue = var_
     await msg_.edit(f"`Variable {_varname} Added With Value {_varvalue}!`")
@@ -77,7 +32,7 @@ async def set_varr(client, message, app_):
 # Delete Variable
         
 @app.on_message(filters.command('delvar') & filters.user(OWNER_ID))
-@_check_heroku
+@check_heroku
 async def del_varr(client, message, app_):
     msg_ = await message.reply_text("`Please Wait!`", parse_mode="markdown")
     heroku_var = app_.config()
@@ -104,7 +59,7 @@ async def config_menu(_, message):
         )
     )
 
-@app.on_callback_query(filters.regex('^docs_'))
+@app.on_callback_query(filters.regex('^docs_') & filters.user(OWNER_ID))
 async def config_button(_, query):
     data = query.data.split('_')[1]
     if data == '1':

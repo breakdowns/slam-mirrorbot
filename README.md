@@ -34,7 +34,8 @@
 - View Link button
 - Torrent search supported:
 ```
-nyaa, sukebei, 1337x, tgx, yts, piratebay
+nyaa, sukebei, 1337x, piratebay, tgx,
+yts, eztv, torlock, rarbg
 ```
 - Direct links supported:
 ```

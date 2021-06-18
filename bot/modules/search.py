@@ -255,7 +255,6 @@ RESULT_STR_TGX = (
 )
 RESULT_STR_YTS = (
     "➲Name: `{Name}`\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
     "➲1st Link: `{Dwnload1}`\n"
     "➲2nd Link: `{Download2}`"
 )

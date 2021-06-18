@@ -146,7 +146,7 @@ async def nyaa_callback(client, callback_query):
             ignore.add(message_identifier)
     await callback_query.answer()
 
-# Using https://api.torrent.cloudns.cl API based on: https://github.com/Ryuk-me/Torrents-Api
+# Using upstream API based on: https://github.com/Ryuk-me/Torrents-Api
 # Implemented by https://github.com/jusidama18
 
 class TorrentSearch:
@@ -156,7 +156,7 @@ class TorrentSearch:
     response = None
     response_range = None
 
-    RESULT_LIMIT = 3
+    RESULT_LIMIT = 4
     RESULT_STR = None
 
     def __init__(self, command: str, source: str, result_str: str):
@@ -211,10 +211,10 @@ class TorrentSearch:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f"{self.source}/{query}") \
                         as resp:
-                    self.response = await resp.json()
+                    self.response = await resp.json(content_type=None)
                     self.response_range = range(0, len(self.response), self.RESULT_LIMIT)
         except Exception as exc:
-            await self.message.edit(f"Found Nothing.\n\nError: `{exc}`")
+            await self.message.edit(f"No Results Found.")
             return
         await self.update_message()
 
@@ -236,12 +236,12 @@ class TorrentSearch:
 RESULT_STR_1337 = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
 )
 RESULT_STR_PIRATEBAY = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} & ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
 )
 RESULT_STR_TGX = (
     "➲Name: `{Name}`\n" 
@@ -250,15 +250,41 @@ RESULT_STR_TGX = (
 )
 RESULT_STR_YTS = (
     "➲Name: `{Name}`\n"
-    "➲First Link: `{Dwnload1}`\n"
-    "➲Second Link: `{Download2}`"
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲1st Link: `{Dwnload1}`\n"
+    "➲2nd Link: `{Download2}`"
+)
+RESULT_STR_EZTV = (
+    "➲Name: `{Name}`\n"
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+)
+RESULT_STR_TORLOCK = (
+    "➲Name: `{Name}`\n"
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+)
+RESULT_STR_RARBG = (
+    "➲Name: `{Name}`\n"
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+)
+RESULT_STR_ALL = (
+    "➲Name: `{Name}`\n"
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
 )
 
 torrents_dict = {
-    '1337x': {'source': "https://api.torrent.cloudns.cl/api/1337x/", 'result_str': RESULT_STR_1337},
-    'piratebay': {'source': "https://api.torrent.cloudns.cl/api/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
-    'yts': {'source': "https://api.torrent.cloudns.cl/api/yts/", 'result_str': RESULT_STR_YTS},
-    'tgx': {'source': "https://api.torrent.cloudns.cl/api/tgx/", 'result_str': RESULT_STR_TGX}
+    '1337x': {'source': "https://torrenter-api.herokuapp.com/api/1337x/", 'result_str': RESULT_STR_1337},
+    'piratebay': {'source': "https://torrenter-api.herokuapp.com/api/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
+    'tgx': {'source': "https://torrenter-api.herokuapp.com/api/tgx/", 'result_str': RESULT_STR_TGX},
+    'yts': {'source': "https://torrenter-api.herokuapp.com/api/yts/", 'result_str': RESULT_STR_YTS},
+    'eztv': {'source': "https://torrenter-api.herokuapp.com/api/eztv/", 'result_str': RESULT_STR_EZTV},
+    'torlock': {'source': "https://torrenter-api.herokuapp.com/api/torlock/", 'result_str': RESULT_STR_TORLOCK},
+    'rarbg': {'source': "https://torrenter-api.herokuapp.com/api/rarbg/", 'result_str': RESULT_STR_RARBG},
+    'ts': {'source': "https://torrenter-api.herokuapp.com/api/all/", 'result_str': RESULT_STR_ALL}
 }
 
 torrent_handlers = []
@@ -270,9 +296,13 @@ def searchhelp(update, context):
 • /nyaa <i>[search query]</i>
 • /sukebei <i>[search query]</i>
 • /1337x <i>[search query]</i>
+• /piratebay <i>[search query]</i>
 • /tgx <i>[search query]</i>
 • /yts <i>[search query]</i>
-• /piratebay <i>[search query]</i>
+• /eztv <i>[search query]</i>
+• /torlock <i>[search query]</i>
+• /rarbg <i>[search query]</i>
+• /ts <i>[search query]</i>
 '''
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.HTML)
     

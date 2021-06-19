@@ -136,6 +136,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
 - **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)  
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
+- **UPSTREAM_REPO**: To use your **Slam-MirrorBot** as default with all regular Updates and Patches also without customizing or modifying as your own choice this must be filled with Slam-MirrorBot Main Repository URL in value.
+- **UPSTREAM_BRANCH**: Recommended using master branch
 ### Optional Field
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **IS_TEAM_DRIVE**: Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
@@ -158,8 +160,6 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **HEROKU_API_KEY**: (Only if you deploying on Heroku) Your Heroku API key, get it from https://dashboard.heroku.com/account.
 - **HEROKU_APP_NAME**: (Only if you deploying on Heroku) Your Heroku app name.
 - **IGNORE_PENDING_REQUESTS**: (Optional field) If you want the bot to ignore pending requests after it restarts, set this to `True`.
-- **UPSTREAM_REPO**: To use your **Slam-MirrorBot** as default with all regular Updates and Patches also without customizing or modifying as your own choice this must be filled with Slam-MirrorBot Main Repository URL in value.
-- **UPSTREAM_BRANCH**: Recommended using master branch
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
 - **SHORTENER**: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
 ```

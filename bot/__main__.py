@@ -104,8 +104,6 @@ def bot_help(update, context):
 
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
 
-/{BotCommands.TargdCommand} [drivefolder_url]: Create Tar of Google Drive folder
-
 /{BotCommands.CloneCommand}: Copy file/folder to Google Drive
 
 /{BotCommands.CountCommand}: Count file/folder of Google Drive Links
@@ -160,8 +158,6 @@ def bot_help(update, context):
 
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
 
-/{BotCommands.TargdCommand} [drivefolder_url]: Create Tar of Google Drive folder
-
 /{BotCommands.CloneCommand}: Copy file/folder to Google Drive
 
 /{BotCommands.CountCommand}: Count file/folder of Google Drive Links
@@ -194,7 +190,6 @@ def bot_help(update, context):
 botcmds = [
 BotCommand(f'{BotCommands.MirrorCommand}', 'Start Mirroring'),
 BotCommand(f'{BotCommands.TarMirrorCommand}','Upload tar (zipped) file'),
-BotCommand(f'{BotCommands.TargdCommand}','Create Tar of Google Drive folder'),
 BotCommand(f'{BotCommands.UnzipMirrorCommand}','Extract files'),
 BotCommand(f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
 BotCommand(f'{BotCommands.CountCommand}','Count file/folder of Drive link'),

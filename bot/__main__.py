@@ -1,6 +1,7 @@
 import shutil, psutil
 import signal
 import os
+import importlib
 
 from pyrogram import idle
 from bot import app
@@ -18,7 +19,11 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, search, delete, speedtest, usage, mediainfo, count
+from bot.modules import ALL_MODULES # Auto Load all modules without name problems
+
+for module in ALL_MODULES:
+    imported_module = importlib.import_module("bot.modules." + module)
+    importlib.reload(imported_module)
 
 now=datetime.now(pytz.timezone('Asia/Jakarta'))
 
@@ -129,13 +134,17 @@ def bot_help(update, context):
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
+/{BotCommands.ConfigMenuCommand}: Get Info Menu about bot config (Owner Only).
+
+/{BotCommands.UpdateCommand}: Update Bot from Upstream Repo. (Owner Only).
+
 /{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner & Sudo only).
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/shell: Run commands in Shell (Terminal).
+/{BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file).
 
-/mediainfo: Get detailed info about replied media (Only for Telegram file).
+/{BotCommands.ShellCommand}: Run commands in Shell (Terminal).
 
 /tshelp: Get help for Torrent search module.
 '''
@@ -167,7 +176,7 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-/mediainfo: Get detailed info about replied media (Only for Telegram file).
+/{BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file).
 
 /tshelp: Get help for Torrent search module.
 '''
@@ -193,6 +202,7 @@ BotCommand(f'{BotCommands.ListCommand}',' [query] Searches files in Drive'),
 BotCommand(f'{BotCommands.StatusCommand}','Get Mirror Status message'),
 BotCommand(f'{BotCommands.StatsCommand}','Bot Usage Stats'),
 BotCommand(f'{BotCommands.HelpCommand}','Get Detailed Help'),
+BotCommand(f'{BotCommands.MediaInfoCommand}','Get detailed info about replied media'),
 BotCommand(f'{BotCommands.SpeedCommand}','Check Speed of the host'),
 BotCommand(f'{BotCommands.LogCommand}','Bot Log [owner/sudo only]'),
 BotCommand(f'{BotCommands.RestartCommand}','Restart bot [owner/sudo only]')]

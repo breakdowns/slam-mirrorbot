@@ -256,19 +256,19 @@ RESULT_STR_TGX = (
 )
 RESULT_STR_YTS = (
     "➲Name: `{Name}`\n"
-    "➲1st Link: `{Dwnload1}`\n"
-    "➲2nd Link: `{Download2}`"
+    "➲Quality: `{Quality}`\n"
+    "➲Torrent: `{Torrent}`\n"
 )
 RESULT_STR_EZTV = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders}\n"
+    "➲Seeders: {Seeds}\n"
     "➲Torrent: `{Torrent}`\n"
 )
 RESULT_STR_TORLOCK = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Peers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
     "➲Torrent: `{Torrent}`\n"
 )
 RESULT_STR_RARBG = (

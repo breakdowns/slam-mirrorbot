@@ -42,7 +42,7 @@ yts, eztv, torlock, rarbg
 letsupload.io, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
 naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamsb.net,
 feurl.com, pixeldrain.com, uptobox.com (Uptobox account must be premium),
-1drv.ms (Only works for file not folder or busines account)
+1drv.ms (Only works for file not folder or business account)
 ```
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
@@ -110,7 +110,7 @@ pip3 install -r requirements-cli.txt
 **2. Using Heroku PostgreSQL**
 <p><a href="https://dev.to/prisma/how-to-setup-a-free-postgresql-database-on-heroku-1dc1"> <img src="https://img.shields.io/badge/see%20on%20dev.to-black?style=for-the-badge&logo=dev-dot-to" width="190""/></a></p>
 
-**NOTE**: If you deploying on Heroku using Heroku button, no need to generate database manually, because it will automatic generate database when first deploying
+**NOTE**: If you are deploying on Heroku using Heroku button, no need to generate database manually, because it will automatic generate database when first deploying
 
 </details>
 

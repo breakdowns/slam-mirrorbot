@@ -262,13 +262,13 @@ RESULT_STR_YTS = (
 RESULT_STR_EZTV = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeds}\n"
+    "➲Seeders: {Seeders}\n"
     "➲Torrent: `{Torrent}`\n"
 )
 RESULT_STR_TORLOCK = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeds} || ➲Leechers: {Peers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Peers}\n"
     "➲Torrent: `{Torrent}`\n"
 )
 RESULT_STR_RARBG = (

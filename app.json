@@ -75,12 +75,12 @@
         "required": true
       },
       "UPSTREAM_REPO": {
-        "description": "Link for Bot Upstream Repo.",
+        "description": "Link for Bot Upstream Repo, If you want default update, Fill https://github.com/breakdowns/slam-mirrorbot.",
         "value": "https://github.com/breakdowns/slam-mirrorbot",
         "required": true
       },
       "UPSTREAM_BRANCH": {
-        "description": "Branch name for Upstream Repo.",
+        "description": "Branch name for Upstream Repo (Recommended using master branch).",
         "value": "master",
         "required": true
       },

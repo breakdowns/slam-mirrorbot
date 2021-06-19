@@ -256,8 +256,8 @@ RESULT_STR_TGX = (
 )
 RESULT_STR_YTS = (
     "➲Name: `{Name}`\n"
-    "➲1st Link: `{Dwnload1}`\n"
-    "➲2nd Link: `{Download2}`"
+    "➲Quality: `{Quality}`\n"
+    "➲Torrent: `{Torrent}`\n"
 )
 RESULT_STR_EZTV = (
     "➲Name: `{Name}`\n"

@@ -1,7 +1,6 @@
 import os
 import io
 import pickle
-import sys
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
 
@@ -21,13 +20,10 @@ from tenacity import *
 from telegram import InlineKeyboardMarkup
 from bot.helper.telegram_helper import button_build
 from telegraph import Telegraph
-
 from bot import parent_id, DOWNLOAD_DIR, IS_TEAM_DRIVE, INDEX_URL, \
     USE_SERVICE_ACCOUNTS, download_dict, telegraph_token, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, SHORTENER, SHORTENER_API, IMAGE_URL, VIEW_LINK
 from bot.helper.ext_utils.bot_utils import *
 from bot.helper.ext_utils.fs_utils import get_mime_type, get_path_size
-from bot.helper.ext_utils import fs_utils
-import pathlib
 
 LOGGER = logging.getLogger(__name__)
 logging.getLogger('googleapiclient.discovery').setLevel(logging.ERROR)
@@ -48,14 +44,18 @@ class GoogleDriveHelper:
         self.__service = self.authorize()
         self.__listener = listener
         self._file_uploaded_bytes = 0
+        self._file_downloaded_bytes = 0
         self.uploaded_bytes = 0
+        self.downloaded_bytes = 0
         self.UPDATE_INTERVAL = 5
         self.start_time = 0
         self.total_time = 0
+        self.dtotal_time = 0
         self._should_update = True
         self.is_uploading = True
         self.is_cancelled = False
         self.status = None
+        self.dstatus = None
         self.updater = None
         self.name = name
         self.update_interval = 3
@@ -78,6 +78,12 @@ class GoogleDriveHelper:
             return self.uploaded_bytes / self.total_time
         except ZeroDivisionError:
             return 0
+
+    def dspeed(self):
+        try:
+            return self.downloaded_bytes / self.dtotal_time
+        except ZeroDivisionError:
+            return 0   
 
     @staticmethod
     def getIdFromUrl(link: str):
@@ -733,84 +739,37 @@ class GoogleDriveHelper:
             return msg, "", ""
         return "", clonesize, name
 
-
-    def targd(self, link):
-        try:
-            file_id = self.getIdFromUrl(link)
-            LOGGER.info(f"File ID: {file_id}")
-        except (KeyError,IndexError):
-            msg = "Google drive ID could not be found in the provided link"
-            return msg, ""
-
+    def download(self, link):
+        self.is_downloading = True
+        file_id = self.getIdFromUrl(link)
+        if USE_SERVICE_ACCOUNTS:
+            self.service_account_count = len(os.listdir("accounts"))
+        self.start_time = time.time()
+        self.updater = setInterval(self.update_interval, self._on_download_progress)
         try:
             meta = self.getFileMetadata(file_id)
+            path = f"{DOWNLOAD_DIR}{self.__listener.uid}/"
             if meta.get("mimeType") == self.__G_DRIVE_DIR_MIME_TYPE:
-                self.download_folder(file_id, DOWNLOAD_DIR, meta.get('name'))
-                up_path, tsize, up_name = self.on_downcomplete(meta.get('name'))
-                try:
-                    mime_type = get_mime_type(up_path)
-                    link = self.upload_file(up_path, up_name, mime_type, parent_id)
-                    if link is None:
-                        raise Exception('Upload has been manually cancelled')
-                        LOGGER.info("Uploaded To G-Drive: " + up_path)
-                except Exception as e:
-                    if isinstance(e, RetryError):
-                        LOGGER.info(f"Total Attempts: {e.last_attempt.attempt_number}")
-                        err = e.last_attempt.exception()
-                    else:
-                        err = e
-                    LOGGER.error(err)
-                    raise err
-                msg = f'<b>Filename: </b><code>{up_name}</code>'
-                msg += f'\n<b>Size: </b><code>{get_readable_file_size(tsize)}</code>'
-                buttons = button_build.ButtonMaker()
-                if SHORTENER is not None and SHORTENER_API is not None:
-                    surl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={link}&format=text').text
-                    buttons.buildbutton("☁️ Drive Link", surl)
-                else:
-                    buttons.buildbutton("☁️ Drive Link", link)
-                LOGGER.info(f'Done Uploading {up_name}')
-                if INDEX_URL is not None:
-                    url_path = requests.utils.quote(f'{up_name}')
-                    share_url = f'{INDEX_URL}/{url_path}'
-                    if SHORTENER is not None and SHORTENER_API is not None:
-                        siurl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={share_url}&format=text').text
-                        buttons.buildbutton("⚡ Index Link", siurl)
-                    else:
-                        buttons.buildbutton("⚡ Index Link", share_url)
-                if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
-                    buttons.buildbutton(f"{BUTTON_FOUR_NAME}", f"{BUTTON_FOUR_URL}")
-                if BUTTON_FIVE_NAME is not None and BUTTON_FIVE_URL is not None:
-                    buttons.buildbutton(f"{BUTTON_FIVE_NAME}", f"{BUTTON_FIVE_URL}")
-                if BUTTON_SIX_NAME is not None and BUTTON_SIX_URL is not None:
-                    buttons.buildbutton(f"{BUTTON_SIX_NAME}", f"{BUTTON_SIX_URL}")
-                try:
-                    if os.path.exists(up_path):
-                        LOGGER.info(f"Cleaning download: {up_path}")
-                        os.remove(up_path)
-                except FileNotFoundError:
-                    pass
+                self.download_folder(file_id, path, meta.get('name'))
             else:
-                msg = "Send Folder Link Only"
-                return msg, ""
+                os.makedirs(path)
+                self.download_file(file_id, path, meta.get('name'), meta.get('mimeType'))
         except Exception as err:
             if isinstance(err, RetryError):
                 LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
                 err = err.last_attempt.exception()
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
-            if "User rate limit exceeded." in str(err):
-                msg = "User rate limit exceeded."
-            if "File not found" in str(err):
-                msg = "File not found."
-            else:
-                msg = f"Error.\n{err}"
-            return msg, ""
-        return msg, InlineKeyboardMarkup(buttons.build_menu(2))
-
+            self.is_cancelled = True
+            self.__listener.onDownloadError(err)
+            return
+        finally:
+            self.updater.cancel()
+            if self.is_cancelled:
+                return
+        self.__listener.onDownloadComplete()
 
     def download_folder(self, folder_id, path, folder_name):
-
         if not os.path.exists(path + folder_name):
             os.makedirs(path + folder_name)
         path += folder_name + '/'
@@ -827,12 +786,9 @@ class GoogleDriveHelper:
             result.extend(files['files'])
             page_token = files.get("nextPageToken")
             if not page_token:
-                LOGGER.info(f'rabe3')
                 break
 
         result = sorted(result, key=lambda k: k['name'])
-        total = len(result)
-        current = 1
         for item in result:
             file_id = item['id']
             filename = item['name']
@@ -841,23 +797,26 @@ class GoogleDriveHelper:
             if shortcut_details != None:
                 file_id = shortcut_details['targetId']
                 mime_type = shortcut_details['targetMimeType']
-            LOGGER.info(f'{file_id} {filename} {mime_type} ({current}/{total})')
             if mime_type == 'application/vnd.google-apps.folder':
                 self.download_folder(file_id, path, filename)
             elif not os.path.isfile(path + filename):
                 self.download_file(file_id, path, filename, mime_type)
-            current += 1
-
+            if self.is_cancelled:
+                break
+                return
 
     def download_file(self, file_id, path, filename, mime_type):
-
         request = self.__service.files().get_media(fileId=file_id)
         fh = io.FileIO('{}{}'.format(path, filename), 'wb')
         downloader = MediaIoBaseDownload(fh, request, chunksize = 50 * 1024 * 1024)
         done = False
         while done is False:
+            if self.is_cancelled:
+                fh.close()
+                break
+                return
             try:
-                status, done = downloader.next_chunk()
+                self.dstatus, done = downloader.next_chunk()
             except HttpError as err:
                 if err.resp.get('content-type', '').startswith('application/json'):
                     reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
@@ -865,36 +824,21 @@ class GoogleDriveHelper:
                         if USE_SERVICE_ACCOUNTS:
                             if not self.switchServiceAccount():
                                 raise err
-                            LOGGER.info(f"Got: {reason}, Trying Again.")
+                            LOGGER.info(f"Got: {reason}, Trying Again...")
                             return self.download_file(file_id, path, filename, mime_type)
                         else:
-                            fh.close()
-                            os.remove(path + filename)
-                            sys.exit(1)
                             raise err
                     else:
-                        fh.close()
-                        os.remove(path + filename)
-                        sys.exit(1)
                         raise err
-
-            sys.stdout.flush()
-
-
-    def on_downcomplete(self, folder_name):
-
-        m_path = f'{DOWNLOAD_DIR}{folder_name}'
-        try:
-            npath = fs_utils.tar(m_path)
-        except FileNotFoundError:
-            LOGGER.info('File to archive not found!')
-            return
-        try:
-            fs_utils.clean_download(m_path)
-        except FileNotFoundError:
-            pass
-        up_name = pathlib.PurePath(npath).name
-        up_path = f'{DOWNLOAD_DIR}{up_name}'
-        size = fs_utils.get_path_size(up_path)
-        LOGGER.info(f"Upload Name : {up_name}")
-        return up_path, size, up_name
+            self._file_downloaded_bytes = 0
+    
+    def _on_download_progress(self):
+        if self.dstatus is not None:
+            chunk_size = self.dstatus.total_size * self.dstatus.progress() - self._file_downloaded_bytes
+            self._file_downloaded_bytes = self.dstatus.total_size * self.dstatus.progress()
+            self.downloaded_bytes += chunk_size
+            self.dtotal_time += self.update_interval
+    
+    def cancel_download(self):
+        self.is_cancelled = True
+        self.__listener.onDownloadError('Download stopped by user!')

@@ -35,7 +35,7 @@ def direct_link_generator(link: str):
     elif 'youtube.com' in link or 'youtu.be' in link:
         raise DirectDownloadLinkException(f"Youtube Link use /{BotCommands.WatchCommand} or /{BotCommands.TarWatchCommand}")
     elif 'drive.google.com' in link:
-        raise DirectDownloadLinkException(f"G-Drive Link use /{BotCommands.CloneCommand}")
+        raise DirectDownloadLinkException(f"Google Drive Link use /{BotCommands.CloneCommand}")
     elif 'zippyshare.com' in link:
         return zippy_share(link)
     elif 'yadi.sk' in link:

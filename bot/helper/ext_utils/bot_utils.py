@@ -139,6 +139,8 @@ def is_url(url: str):
         return True
     return False
 
+def is_gdrive_link(url: str):
+    return "drive.google.com" in url
 
 def is_mega_link(url: str):
     return "mega.nz" in url

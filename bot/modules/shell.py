@@ -3,6 +3,7 @@ from bot import LOGGER, dispatcher
 from telegram import ParseMode
 from telegram.ext import CommandHandler
 from bot.helper.telegram_helper.filters import CustomFilters
+from bot.helper.telegram_helper.bot_commands import BotCommands
 
 
 def shell(update, context):
@@ -37,5 +38,6 @@ def shell(update, context):
         message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
 
 
-SHELL_HANDLER = CommandHandler(('sh', 'shell', 'term', 'terminal'), shell, filters=CustomFilters.owner_filter, run_async=True)
+SHELL_HANDLER = CommandHandler(BotCommands.ShellCommand, shell, 
+                                                  filters=CustomFilters.owner_filter, run_async=True)
 dispatcher.add_handler(SHELL_HANDLER)

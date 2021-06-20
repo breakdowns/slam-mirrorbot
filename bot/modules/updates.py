@@ -1,4 +1,4 @@
-# Implement by https://github.com/jusidama18
+# Implement By https://github.com/jusidama18
 # Based on this https://github.com/DevsExpo/FridayUserbot/blob/master/plugins/updater.py
 
 import sys

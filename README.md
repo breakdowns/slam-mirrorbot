@@ -18,25 +18,31 @@
 # Features supported:
 ## Additional Features
 - Get detailed info about replied media (Only for Telegram file)
-- Nyaa.si and Sukebei Torrent search
 - Speedtest with picture results
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Limiting size Torrent/Direct, Mega, cloning Google Drive support
 - Sudo with Database support
 - Multiple Trackers support
 - Check Heroku dynos stats
+- Heroku config support
+- Updater (Only for Heroku)
 - Extracting **tar.xz** support
+- Create Tar Google Drive folder
 - Custom image support
 - Counting file/folder
 - Shell and Executor
-- Stickers module
 - View Link button
+- Torrent search supported:
+```
+nyaa, sukebei, 1337x, piratebay, tgx,
+yts, eztv, torlock, rarbg
+```
 - Direct links supported:
 ```
-racaty.net, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
+letsupload.io, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
 naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamsb.net,
-uptobox.com (Uptobox account must be premium),
-1drv.ms (Only works for file not folder or busines account)
+feurl.com, pixeldrain.com, uptobox.com (Uptobox account must be premium),
+1drv.ms (Only works for file not folder or business account)
 ```
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
@@ -104,7 +110,7 @@ pip3 install -r requirements-cli.txt
 **2. Using Heroku PostgreSQL**
 <p><a href="https://dev.to/prisma/how-to-setup-a-free-postgresql-database-on-heroku-1dc1"> <img src="https://img.shields.io/badge/see%20on%20dev.to-black?style=for-the-badge&logo=dev-dot-to" width="190""/></a></p>
 
-**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database when first deploying
+**NOTE**: If you are deploying on Heroku using Heroku button, no need to generate database manually, because it will automatic generate database when first deploying
 
 </details>
 
@@ -125,11 +131,13 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **TELEGRAM_API**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
 - **TELEGRAM_HASH**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org
 - **OWNER_ID**: The Telegram user ID (not username) of the Owner of the bot
-- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database when first deploying)
+- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: If you deploying on Heroku using Heroku button, no need to generate database manually, because it will automatic generate database when first deploying)
 - **GDRIVE_FOLDER_ID**: This is the folder ID of the Google Drive Folder to which you want to upload all the mirrors.
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
 - **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)  
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
+- **UPSTREAM_REPO**: Link for Bot Upstream Repo, if you want default update, fill ```https://github.com/breakdowns/slam-mirrorbot```.
+- **UPSTREAM_BRANCH**: Branch name for Bot Upstream Repo (Recommended using master branch)
 ### Optional Field
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **IS_TEAM_DRIVE**: Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
@@ -214,7 +222,7 @@ sudo docker run mirrorbot
 ## Deploying on Heroku with heroku-cli and Goorm IDE
 <p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
 
-## Video Tutorial
+## Video Tutorial deploying slam-mirrorbot on Heroku
 <p><a href="https://www.youtube.com/watch?v=WIhL0TrisfQ&t=1s"> <img src="https://img.shields.io/badge/See%20On%20Youtube-black?style=for-the-badge&logo=youtube" width="200""/></a></p>
 
 **NOTE**: Recommended to generate **token.pickle** manually. [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
@@ -304,5 +312,6 @@ Thanks to:
 - [magneto261290](https://github.com/magneto261290/) for some features
 - [SVR666](https://github.com/SVR666/) for some features & fixes
 - [anasty17](https://github.com/anasty17) for some features & help
+- [breakdowns](https://github.com/breakdowns) for Slam
 
 And many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

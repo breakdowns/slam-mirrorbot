@@ -2,8 +2,8 @@ aiohttp
 aria2p
 appdirs
 beautifulsoup4
-bs4
 feedparser
+gitpython
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
@@ -13,8 +13,6 @@ js2py
 lk21
 lxml
 messages
-natsort
-Pillow
 psutil
 psycopg2-binary
 pybase64

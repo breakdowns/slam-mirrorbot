@@ -120,14 +120,11 @@ class MirrorListener(listeners.MirrorListeners):
     def onDownloadError(self, error):
         error = error.replace('<', ' ')
         error = error.replace('>', ' ')
-        LOGGER.info(self.update.effective_chat.id)
         with download_dict_lock:
             try:
                 download = download_dict[self.uid]
                 del download_dict[self.uid]
-                LOGGER.info(f"Deleting folder: {download.path()}")
                 fs_utils.clean_download(download.path())
-                LOGGER.info(str(download_dict))
             except Exception as e:
                 LOGGER.error(str(e))
                 pass

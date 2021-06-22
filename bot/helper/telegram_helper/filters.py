@@ -43,6 +43,8 @@ class CustomFilters:
                             return True
                     else:
                         return False
+            if not message.reply_to_message and len(args) == 1:
+                return True
             # Cancelling by replying to original mirror message
             reply_user = message.reply_to_message.from_user.id
             return bool(reply_user == user_id)

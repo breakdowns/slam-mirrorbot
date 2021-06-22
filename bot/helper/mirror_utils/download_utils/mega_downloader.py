@@ -143,8 +143,6 @@ class MegaDownloadHelper:
     def add_download(mega_link: str, path: str, listener):
         if MEGA_API_KEY is None:
             raise MegaDownloaderException('Mega API KEY not provided! Cannot mirror Mega links')
-        if STOP_DUPLICATE_MEGA or MEGA_LIMIT is not None:
-            msg = sendMessage('Checking Your Link...', listener.bot, listener.update)
         executor = AsyncExecutor()
         api = MegaApi(MEGA_API_KEY, None, None, 'telegram-mirror-bot')
         global listeners
@@ -155,16 +153,19 @@ class MegaDownloadHelper:
             executor.do(api.login, (MEGA_EMAIL_ID, MEGA_PASSWORD))
         link_type = get_mega_link_type(mega_link)
         if link_type == "file":
+            LOGGER.info("File. If your download didn't start, then check your link if it's avialable to download")
             executor.do(api.getPublicNode, (mega_link,))
             node = mega_listener.public_node
         else:
-            LOGGER.info("Logging into Mega folder")
+            LOGGER.info("Folder. If your download didn't start, then check your link if it's avialable to download")
             folder_api = MegaApi(MEGA_API_KEY,None,None,'TgBot')
             folder_api.addListener(mega_listener)
             executor.do(folder_api.loginToFolder, (mega_link,))
             node = folder_api.authorizeNode(mega_listener.node)
         if mega_listener.error is not None:
             return listener.onDownloadError(str(mega_listener.error))
+        if STOP_DUPLICATE_MEGA or MEGA_LIMIT is not None:
+            msg = sendMessage('Checking Your Link...', listener.bot, listener.update)
         if STOP_DUPLICATE_MEGA:
             LOGGER.info(f'Checking File/Folder if already in Drive')
             mname = node.getName()

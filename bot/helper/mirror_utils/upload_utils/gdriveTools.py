@@ -760,7 +760,8 @@ class GoogleDriveHelper:
                 err = err.last_attempt.exception()
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
-            self.is_cancelled = True
+            if "downloadQuotaExceeded" in str(err):
+                err = "Download Quota Exceeded."
             self.__listener.onDownloadError(err)
             return
         finally:
@@ -803,32 +804,33 @@ class GoogleDriveHelper:
                 self.download_file(file_id, path, filename, mime_type)
             if self.is_cancelled:
                 break
-                return
 
     def download_file(self, file_id, path, filename, mime_type):
         request = self.__service.files().get_media(fileId=file_id)
         fh = io.FileIO('{}{}'.format(path, filename), 'wb')
-        downloader = MediaIoBaseDownload(fh, request, chunksize = 100 * 1024 * 1024)
+        downloader = MediaIoBaseDownload(fh, request, chunksize = 65 * 1024 * 1024)
         done = False
         while done is False:
             if self.is_cancelled:
                 fh.close()
                 break
-                return
             try:
                 self.dstatus, done = downloader.next_chunk()
             except HttpError as err:
                 if err.resp.get('content-type', '').startswith('application/json'):
                     reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
-                    if reason == 'userRateLimitExceeded' or reason == 'dailyLimitExceeded':
+                    if reason == 'downloadQuotaExceeded' or reason == 'dailyLimitExceeded':
                         if USE_SERVICE_ACCOUNTS:
                             if not self.switchServiceAccount():
+                                self.is_cancelled = True
                                 raise err
                             LOGGER.info(f"Got: {reason}, Trying Again...")
                             return self.download_file(file_id, path, filename, mime_type)
                         else:
+                            self.is_cancelled = True
                             raise err
                     else:
+                        self.is_cancelled = True
                         raise err
         self._file_downloaded_bytes = 0
     
@@ -841,4 +843,5 @@ class GoogleDriveHelper:
     
     def cancel_download(self):
         self.is_cancelled = True
+        LOGGER.info(f"Cancelling Download: {self.name}")
         self.__listener.onDownloadError('Download stopped by user!')

@@ -8,6 +8,7 @@ import re
 import json
 import requests
 import logging
+import time
 
 from google.auth.transport.requests import Request
 from google.oauth2 import service_account
@@ -547,6 +548,7 @@ class GoogleDriveHelper:
         return str	
 
     def drive_list(self, fileName):
+        s_time = time.time()
         msg = ""
         fileName = self.escapes(str(fileName))
         # Create Search Query for API request.
@@ -629,7 +631,8 @@ class GoogleDriveHelper:
             if self.num_of_path > 1:
                 self.edit_telegraph()
 
-            msg = f"<b>Found {len(response['files'])} results for <i>{fileName}</i></b>"
+            e_time = int(time.time() - s_time)
+            msg = f"<b>Found <code>{len(response['files'])}</code> results for <code>{fileName}</code> in (<code>{get_readable_time(e_time)}</code>)</b>"
             buttons = button_build.ButtonMaker()   
             buttons.buildbutton("🔎 VIEW", f"https://telegra.ph/{self.path[0]}")
 
@@ -645,6 +648,7 @@ class GoogleDriveHelper:
         except (KeyError,IndexError):
             msg = "Google drive ID could not be found in the provided link"
             return msg
+        s_time = time.time()
         msg = ""
         LOGGER.info(f"File ID: {file_id}")
         try:
@@ -654,11 +658,13 @@ class GoogleDriveHelper:
             LOGGER.info(f"Counting: {name}")
             if drive_file['mimeType'] == self.__G_DRIVE_DIR_MIME_TYPE:
                 self.gDrive_directory(**drive_file)
+                e_time = int(time.time() - s_time)
                 msg += f'<b>Filename: </b><code>{name}</code>'
                 msg += f'\n<b>Size: </b><code>{get_readable_file_size(self.total_bytes)}</code>'
                 msg += f'\n<b>Type: </b><code>Folder</code>'
                 msg += f'\n<b>SubFolders: </b><code>{self.total_folders}</code>'
                 msg += f'\n<b>Files: </b><code>{self.total_files}</code>'
+                msg += f'\n<b>Elapsed time: </b><code>{get_readable_time(e_time)}</code>'
             else:
                 msg += f'<b>Filename: </b><code>{name}</code>'
                 try:
@@ -668,9 +674,11 @@ class GoogleDriveHelper:
                 try:
                     self.total_files += 1
                     self.gDrive_file(**drive_file)
+                    e_ftime = int(time.time() - s_time)
                     msg += f'\n<b>Size: </b><code>{get_readable_file_size(self.total_bytes)}</code>'
                     msg += f'\n<b>Type: </b><code>{typee}</code>'
                     msg += f'\n<b>Files: </b><code>{self.total_files}</code>'
+                    msg += f'\n<b>Elapsed time: </b><code>{get_readable_time(e_ftime)}</code>'
                 except TypeError:
                     pass
         except Exception as err:

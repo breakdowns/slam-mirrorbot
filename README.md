@@ -139,6 +139,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **UPSTREAM_REPO**: Link for Bot Upstream Repo, if you want default update, fill ```https://github.com/breakdowns/slam-mirrorbot```.
 - **UPSTREAM_BRANCH**: Branch name for Bot Upstream Repo (Recommended using master branch)
 ### Optional Field
+- **ACCOUNTS_ZIP_URL**: (Optional) Only if you want to load your service accs externally from an index link. Archive your service accs json files to a zip file directly (don't archive the accounts folder. Select all the jsons inside and zip them only instead. Name the zip file with whatever you want, it doesn't matter). Fill this with the direct link of that file.
+- **TOKEN_PICKLE_URL**: (Optional) Only if you want to load your token.pickle externally from an index link. Fill this with the direct link of that file.
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **IS_TEAM_DRIVE**: Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
 - **USE_SERVICE_ACCOUNTS**: (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using service accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.
@@ -214,18 +216,13 @@ sudo docker run mirrorbot
 
 - Give stars and Fork this repo then upload **token.pickle** to your forks
 - Hit the **DEPLOY TO HEROKU** button and follow the further instructions in the screen
-- **NOTE**: If you didn't upload **token.pickle**, uploading will not work. How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
+- **NOTE**: If you didn't upload **token.pickle**, uploading will not work, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL**. How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
 - Recommended to use 1 App in 1 Heroku accounts
 
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 ## Deploying on Heroku with heroku-cli and Goorm IDE
 <p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
-
-## Video Tutorial deploying slam-mirrorbot on Heroku
-<p><a href="https://www.youtube.com/watch?v=WIhL0TrisfQ&t=1s"> <img src="https://img.shields.io/badge/See%20On%20Youtube-black?style=for-the-badge&logo=youtube" width="200""/></a></p>
-
-**NOTE**: Recommended to generate **token.pickle** manually. [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
 
 # Using Service Accounts for uploading to avoid user rate limit
 For Service Account to work, you must set **USE_SERVICE_ACCOUNTS=**"True" in config file or environment variables, 

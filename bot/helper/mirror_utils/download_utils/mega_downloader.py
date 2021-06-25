@@ -153,11 +153,11 @@ class MegaDownloadHelper:
             executor.do(api.login, (MEGA_EMAIL_ID, MEGA_PASSWORD))
         link_type = get_mega_link_type(mega_link)
         if link_type == "file":
-            LOGGER.info("File. If your download didn't start, then check your link if it's avialable to download")
+            LOGGER.info("File. If your download didn't start, then check your link if it's available to download")
             executor.do(api.getPublicNode, (mega_link,))
             node = mega_listener.public_node
         else:
-            LOGGER.info("Folder. If your download didn't start, then check your link if it's avialable to download")
+            LOGGER.info("Folder. If your download didn't start, then check your link if it's available to download")
             folder_api = MegaApi(MEGA_API_KEY,None,None,'TgBot')
             folder_api.addListener(mega_listener)
             executor.do(folder_api.loginToFolder, (mega_link,))

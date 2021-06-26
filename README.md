@@ -25,7 +25,7 @@
 - Multiple Trackers support
 - Check Heroku dynos stats
 - Heroku config support
-- Updater (Recommended to upload your **token.pickle** to index, and fill your **token.pickle** to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update.) 
+- Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update.) 
 - Extracting **tar.xz** support
 - Create Tar Google Drive folder
 - Custom image support

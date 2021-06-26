@@ -25,7 +25,7 @@
 - Multiple Trackers support
 - Check Heroku dynos stats
 - Heroku config support
-- Updater (Only for Heroku)
+- Updater (Recommended to upload your **token.pickle** to index, and fill your **token.pickle** to **TOKEN_PICKLE_URL**) 
 - Extracting **tar.xz** support
 - Create Tar Google Drive folder
 - Custom image support
@@ -214,9 +214,8 @@ sudo docker run mirrorbot
 
 ## Deploying on Heroku
 
-- Give stars and Fork this repo then upload **token.pickle** to your forks
+- Give stars and Fork this repo then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL**. How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
 - Hit the **DEPLOY TO HEROKU** button and follow the further instructions in the screen
-- **NOTE**: If you didn't upload **token.pickle**, uploading will not work, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL**. How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-mirrorbot#getting-google-oauth-api-credential-file)
 - Recommended to use 1 App in 1 Heroku accounts
 
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>

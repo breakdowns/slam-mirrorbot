@@ -169,12 +169,28 @@ class TorrentSearch:
         app.add_handler(CallbackQueryHandler(self.previous, filters.regex(f"{self.command}_previous")))
         app.add_handler(CallbackQueryHandler(self.delete, filters.regex(f"{self.command}_delete")))
         app.add_handler(CallbackQueryHandler(self.next, filters.regex(f"{self.command}_next")))
+        
+    @staticmethod
+    def format_magnet(string: str):
+        if not string:
+            return ""
+        return string.split('&tr', 1)[0]
 
     def get_formatted_string(self, values):
         string = self.RESULT_STR.format(**values)
-        magnet = values.get('magnet', values.get('Magnet'))  # Avoid updating source dict
-        if (magnet):
-            string += f"➲Magnet: `{magnet.split('&tr', 1)[0]}`"
+        extra = ""
+        if "Files" in values:
+            tmp_str = "➲[{Quality} - {Type} ({Size})]({Torrent}): `{magnet}`"
+            extra += "\n".join(
+                tmp_str.format(**f, magnet=self.format_magnet(f['Magnet']))
+                for f in values['Files']
+            )
+        else:
+            magnet = values.get('magnet', values.get('Magnet'))  # Avoid updating source dict
+            if magnet:
+                extra += f"➲Magnet: `{self.format_magnet(magnet)}`"
+        if (extra):
+            string += "\n" + extra
         return string
 
     async def update_message(self):
@@ -189,10 +205,11 @@ class TorrentSearch:
         if (self.index != len(self.response_range) - 1):
             inline.append(nextBtn)
 
+        res_lim = min(self.RESULT_LIMIT, len(self.response) - self.RESULT_LIMIT*self.index)
         result = f"**Page - {self.index+1}**\n\n"
         result += "\n\n=======================\n\n".join(
             self.get_formatted_string(self.response[self.response_range[self.index]+i])
-            for i in range(self.RESULT_LIMIT)
+            for i in range(res_lim)
         )
 
         await self.message.edit(
@@ -242,55 +259,51 @@ class TorrentSearch:
 RESULT_STR_1337 = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_PIRATEBAY = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_TGX = (
     "➲Name: `{Name}`\n" 
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_YTS = (
-    "➲Name: `{Name}`\n"
-    "➲1st Link: `{Dwnload1}`\n"
-    "➲2nd Link: `{Download2}`"
+    "➲Name: `{Name}`"
 )
 RESULT_STR_EZTV = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeds}\n"
-    "➲Torrent: `{Torrent}`\n"
+    "➲Seeders: {Seeders}"
 )
 RESULT_STR_TORLOCK = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeds} || ➲Leechers: {Peers}\n"
-    "➲Torrent: `{Torrent}`\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_RARBG = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_ALL = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 
 torrents_dict = {
-    '1337x': {'source': "https://torrenter-api.herokuapp.com/api/1337x/", 'result_str': RESULT_STR_1337},
-    'piratebay': {'source': "https://torrenter-api.herokuapp.com/api/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
-    'tgx': {'source': "https://torrenter-api.herokuapp.com/api/tgx/", 'result_str': RESULT_STR_TGX},
-    'yts': {'source': "https://torrenter-api.herokuapp.com/api/yts/", 'result_str': RESULT_STR_YTS},
-    'eztv': {'source': "https://torrenter-api.herokuapp.com/api/eztv/", 'result_str': RESULT_STR_EZTV},
-    'torlock': {'source': "https://torrenter-api.herokuapp.com/api/torlock/", 'result_str': RESULT_STR_TORLOCK},
-    'rarbg': {'source': "https://torrenter-api.herokuapp.com/api/rarbg/", 'result_str': RESULT_STR_RARBG},
-    'ts': {'source': "https://torrenter-api.herokuapp.com/api/all/", 'result_str': RESULT_STR_ALL}
+    '1337x': {'source': "https://slam-api.herokuapp.com/api/1337x/", 'result_str': RESULT_STR_1337},
+    'piratebay': {'source': "https://slam-api.herokuapp.com/api/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
+    'tgx': {'source': "https://slam-api.herokuapp.com/api/tgx/", 'result_str': RESULT_STR_TGX},
+    'yts': {'source': "https://slam-api.herokuapp.com/api/yts/", 'result_str': RESULT_STR_YTS},
+    'eztv': {'source': "https://slam-api.herokuapp.com/api/eztv/", 'result_str': RESULT_STR_EZTV},
+    'torlock': {'source': "https://slam-api.herokuapp.com/api/torlock/", 'result_str': RESULT_STR_TORLOCK},
+    'rarbg': {'source': "https://slam-api.herokuapp.com/api/rarbg/", 'result_str': RESULT_STR_RARBG},
+    'ts': {'source': "https://slam-api.herokuapp.com/api/all/", 'result_str': RESULT_STR_ALL}
 }
 
 torrent_handlers = []

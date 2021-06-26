@@ -15,6 +15,7 @@ from bot.helper.mirror_utils.status_utils import listeners
 from bot.helper.mirror_utils.status_utils.extract_status import ExtractStatus
 from bot.helper.mirror_utils.status_utils.tar_status import TarStatus
 from bot.helper.mirror_utils.status_utils.upload_status import UploadStatus
+from bot.helper.mirror_utils.status_utils.gdownload_status import DownloadStatus
 from bot.helper.mirror_utils.upload_utils import gdriveTools
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
@@ -26,6 +27,8 @@ import os
 import subprocess
 import threading
 import re
+import random
+import string
 
 ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()
@@ -117,14 +120,11 @@ class MirrorListener(listeners.MirrorListeners):
     def onDownloadError(self, error):
         error = error.replace('<', ' ')
         error = error.replace('>', ' ')
-        LOGGER.info(self.update.effective_chat.id)
         with download_dict_lock:
             try:
                 download = download_dict[self.uid]
                 del download_dict[self.uid]
-                LOGGER.info(f"Deleting folder: {download.path()}")
                 fs_utils.clean_download(download.path())
-                LOGGER.info(str(download_dict))
             except Exception as e:
                 LOGGER.error(str(e))
                 pass
@@ -291,14 +291,32 @@ def _mirror(bot, update, isTar=False, extract=False):
         if "ERROR:" in str(e):
             sendMessage(f"{e}", bot, update)
             return
-        if "G-Drive" in str(e):
-            sendMessage(f"ERROR: {e}", bot, update)
-            return
         if "Youtube" in str(e):
             sendMessage(f"ERROR: {e}", bot, update)
             return
+
     listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
-    if bot_utils.is_mega_link(link):
+
+    if bot_utils.is_gdrive_link(link):
+        if not isTar and not extract:
+            sendMessage(f"Use /{BotCommands.CloneCommand} To Copy Google Drive File/Folder", bot, update)
+            return
+        res, size, name = gdriveTools.GoogleDriveHelper().clonehelper(link)
+        if res != "":
+            sendMessage(res, bot, update)
+            return
+        LOGGER.info(f"Download Name : {name}")
+        drive = gdriveTools.GoogleDriveHelper(name, listener)
+        gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=12))
+        download_status = DownloadStatus(drive, size, listener, gid)
+        with download_dict_lock:
+            download_dict[listener.uid] = download_status
+        if len(Interval) == 0:
+            Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
+        sendStatusMessage(update, bot)
+        drive.download(link)
+
+    elif bot_utils.is_mega_link(link):
         link_type = get_mega_link_type(link)
         if link_type == "folder" and BLOCK_MEGA_FOLDER:
             sendMessage("Mega folder are blocked!", bot, update)

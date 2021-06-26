@@ -1,4 +1,5 @@
 import os
+import io
 import pickle
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
@@ -13,7 +14,7 @@ from google.oauth2 import service_account
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from googleapiclient.http import MediaFileUpload
+from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 from tenacity import *
 
 from telegram import InlineKeyboardMarkup
@@ -43,14 +44,18 @@ class GoogleDriveHelper:
         self.__service = self.authorize()
         self.__listener = listener
         self._file_uploaded_bytes = 0
+        self._file_downloaded_bytes = 0
         self.uploaded_bytes = 0
+        self.downloaded_bytes = 0
         self.UPDATE_INTERVAL = 5
         self.start_time = 0
         self.total_time = 0
+        self.dtotal_time = 0
         self._should_update = True
         self.is_uploading = True
         self.is_cancelled = False
         self.status = None
+        self.dstatus = None
         self.updater = None
         self.name = name
         self.update_interval = 3
@@ -73,6 +78,12 @@ class GoogleDriveHelper:
             return self.uploaded_bytes / self.total_time
         except ZeroDivisionError:
             return 0
+
+    def dspeed(self):
+        try:
+            return self.downloaded_bytes / self.dtotal_time
+        except ZeroDivisionError:
+            return 0   
 
     @staticmethod
     def getIdFromUrl(link: str):
@@ -620,7 +631,7 @@ class GoogleDriveHelper:
 
             msg = f"<b>Found {len(response['files'])} results for <i>{fileName}</i></b>"
             buttons = button_build.ButtonMaker()   
-            buttons.buildbutton("🔎 HERE", f"https://telegra.ph/{self.path[0]}")
+            buttons.buildbutton("🔎 VIEW", f"https://telegra.ph/{self.path[0]}")
 
             return msg, InlineKeyboardMarkup(buttons.build_menu(1))
 
@@ -728,3 +739,109 @@ class GoogleDriveHelper:
             return msg, "", ""
         return "", clonesize, name
 
+    def download(self, link):
+        self.is_downloading = True
+        file_id = self.getIdFromUrl(link)
+        if USE_SERVICE_ACCOUNTS:
+            self.service_account_count = len(os.listdir("accounts"))
+        self.start_time = time.time()
+        self.updater = setInterval(self.update_interval, self._on_download_progress)
+        try:
+            meta = self.getFileMetadata(file_id)
+            path = f"{DOWNLOAD_DIR}{self.__listener.uid}/"
+            if meta.get("mimeType") == self.__G_DRIVE_DIR_MIME_TYPE:
+                self.download_folder(file_id, path, meta.get('name'))
+            else:
+                os.makedirs(path)
+                self.download_file(file_id, path, meta.get('name'), meta.get('mimeType'))
+        except Exception as err:
+            if isinstance(err, RetryError):
+                LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
+                err = err.last_attempt.exception()
+            err = str(err).replace('>', '').replace('<', '')
+            LOGGER.error(err)
+            if "downloadQuotaExceeded" in str(err):
+                err = "Download Quota Exceeded."
+            self.__listener.onDownloadError(err)
+            return
+        finally:
+            self.updater.cancel()
+            if self.is_cancelled:
+                return
+        self.__listener.onDownloadComplete()
+
+    def download_folder(self, folder_id, path, folder_name):
+        if not os.path.exists(path + folder_name):
+            os.makedirs(path + folder_name)
+        path += folder_name + '/'
+        result = []
+        page_token = None
+        while True:
+            files = self.__service.files().list(
+                    supportsTeamDrives=True,
+                    includeTeamDriveItems=True,
+                    q=f"'{folder_id}' in parents",
+                    fields='nextPageToken, files(id, name, mimeType, size, shortcutDetails)',
+                    pageToken=page_token,
+                    pageSize=1000).execute()
+            result.extend(files['files'])
+            page_token = files.get("nextPageToken")
+            if not page_token:
+                break
+
+        result = sorted(result, key=lambda k: k['name'])
+        for item in result:
+            file_id = item['id']
+            filename = item['name']
+            mime_type = item['mimeType']
+            shortcut_details = item.get('shortcutDetails', None)
+            if shortcut_details != None:
+                file_id = shortcut_details['targetId']
+                mime_type = shortcut_details['targetMimeType']
+            if mime_type == 'application/vnd.google-apps.folder':
+                self.download_folder(file_id, path, filename)
+            elif not os.path.isfile(path + filename):
+                self.download_file(file_id, path, filename, mime_type)
+            if self.is_cancelled:
+                break
+
+    def download_file(self, file_id, path, filename, mime_type):
+        request = self.__service.files().get_media(fileId=file_id)
+        fh = io.FileIO('{}{}'.format(path, filename), 'wb')
+        downloader = MediaIoBaseDownload(fh, request, chunksize = 65 * 1024 * 1024)
+        done = False
+        while done is False:
+            if self.is_cancelled:
+                fh.close()
+                break
+            try:
+                self.dstatus, done = downloader.next_chunk()
+            except HttpError as err:
+                if err.resp.get('content-type', '').startswith('application/json'):
+                    reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
+                    if reason == 'downloadQuotaExceeded' or reason == 'dailyLimitExceeded':
+                        if USE_SERVICE_ACCOUNTS:
+                            if not self.switchServiceAccount():
+                                self.is_cancelled = True
+                                raise err
+                            LOGGER.info(f"Got: {reason}, Trying Again...")
+                            return self.download_file(file_id, path, filename, mime_type)
+                        else:
+                            self.is_cancelled = True
+                            raise err
+                    else:
+                        self.is_cancelled = True
+                        raise err
+        self._file_downloaded_bytes = 0
+    
+    def _on_download_progress(self):
+        if self.dstatus is not None:
+            chunk_size = self.dstatus.total_size * self.dstatus.progress() - self._file_downloaded_bytes
+            self._file_downloaded_bytes = self.dstatus.total_size * self.dstatus.progress()
+            self.downloaded_bytes += chunk_size
+            self.dtotal_time += self.update_interval
+    
+    def cancel_download(self):
+        self.is_cancelled = True
+        LOGGER.info(f"Cancelling Download: {self.name}")
+        self.__listener.onDownloadError('Download stopped by user!')

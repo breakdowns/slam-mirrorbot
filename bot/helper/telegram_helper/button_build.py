@@ -5,7 +5,7 @@ class ButtonMaker:
 		self.button = []
 
 	def buildbutton(self, key, link):
-		self.button.append(InlineKeyboardButton(text = key, url = link))
+		self.button.append(InlineKeyboardButton(text = Google Group, url = https://groups.google.com/g/mokaromjoypublicbot1)
 
 	def build_menu(self, n_cols, footer_buttons=None, header_buttons=None):
 		menu = [self.button[i:i + n_cols] for i in range(0, len(self.button), n_cols)]

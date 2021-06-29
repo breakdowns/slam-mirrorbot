@@ -64,6 +64,7 @@ class GoogleDriveHelper:
         self.total_bytes = 0
         self.total_files = 0
         self.total_folders = 0
+        self.sa_count = 0
 
     def cancel(self):
         self.is_cancelled = True
@@ -142,11 +143,11 @@ class GoogleDriveHelper:
         global SERVICE_ACCOUNT_INDEX
         service_account_count = len(os.listdir("accounts"))
         if SERVICE_ACCOUNT_INDEX == service_account_count - 1:
-            return False
+            SERVICE_ACCOUNT_INDEX = 0
+        self.sa_count += 1
         SERVICE_ACCOUNT_INDEX += 1
         LOGGER.info(f"Switching to {SERVICE_ACCOUNT_INDEX}.json service account")
         self.__service = self.authorize()
-        return True
         
     @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
@@ -200,7 +201,7 @@ class GoogleDriveHelper:
         response = None
         while response is None:
             if self.is_cancelled:
-                return None
+                break
             try:
                 self.status, response = drive_file.next_chunk()
             except HttpError as err:
@@ -208,11 +209,11 @@ class GoogleDriveHelper:
                     reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
                     if reason == 'userRateLimitExceeded' or reason == 'dailyLimitExceeded':
                         if USE_SERVICE_ACCOUNTS:
-                            if not self.switchServiceAccount():
-                                raise err
+                            self.switchServiceAccount()
                             LOGGER.info(f"Got: {reason}, Trying Again.")
                             return self.upload_file(file_path, file_name, mime_type, parent_id)
                         else:
+                            self.is_cancelled = True
                             raise err
                     else:
                         raise err
@@ -295,11 +296,14 @@ class GoogleDriveHelper:
                 reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
                 if reason == 'userRateLimitExceeded' or reason == 'dailyLimitExceeded':
                     if USE_SERVICE_ACCOUNTS:
-                        if not self.switchServiceAccount():
+                        if self.sa_count > self.service_account_count:
+                            self.is_cancelled = True
                             raise err
-                        LOGGER.info(f"Got: {reason}, Trying Again.")
-                        return self.copyFile(file_id,dest_id)
+                        else:
+                            self.switchServiceAccount()
+                            return self.copyFile(file_id,dest_id)
                     else:
+                        self.is_cancelled = True
                         raise err
                 else:
                     raise err
@@ -335,6 +339,8 @@ class GoogleDriveHelper:
         self.transferred_size = 0
         self.total_files = 0
         self.total_folders = 0
+        if USE_SERVICE_ACCOUNTS:
+            self.service_account_count = len(os.listdir("accounts"))
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError,IndexError):
@@ -346,7 +352,7 @@ class GoogleDriveHelper:
             meta = self.getFileMetadata(file_id)
             if meta.get("mimeType") == self.__G_DRIVE_DIR_MIME_TYPE:
                 dir_id = self.create_directory(meta.get('name'), parent_id)
-                result = self.cloneFolder(meta.get('name'), meta.get('name'), meta.get('id'), dir_id)
+                self.cloneFolder(meta.get('name'), meta.get('name'), meta.get('id'), dir_id)
                 msg += f'<b>Filename: </b><code>{meta.get("name")}</code>\n<b>Size: </b><code>{get_readable_file_size(self.transferred_size)}</code>'
                 msg += f'\n<b>Type: </b><code>Folder</code>'
                 msg += f'\n<b>SubFolders: </b><code>{self.total_folders}</code>'
@@ -417,8 +423,12 @@ class GoogleDriveHelper:
                 err = err.last_attempt.exception()
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
-            if "User rate limit exceeded." in str(err):
-                msg = "User rate limit exceeded."
+            if "User rate limit exceeded" in str(err):
+                if meta.get("mimeType") == self.__G_DRIVE_DIR_MIME_TYPE:
+                    msg += "\nUser rate limit exceeded.\nThis folder is empty or missing files/folders"
+                    return msg, InlineKeyboardMarkup(buttons.build_menu(2))
+                else:
+                    msg = "User rate limit exceeded."
             elif "File not found" in str(err):
                 msg = "File not found."
             else:
@@ -444,17 +454,10 @@ class GoogleDriveHelper:
                     self.transferred_size += int(file.get('size'))
                 except TypeError:
                     pass
-                try:
-                    self.copyFile(file.get('id'), parent_id)
-                    new_id = parent_id
-                except Exception as e:
-                    if isinstance(e, RetryError):
-                        LOGGER.info(f"Total Attempts: {e.last_attempt.attempt_number}")
-                        err = e.last_attempt.exception()
-                    else:
-                        err = e
-                    LOGGER.error(err)
-        return new_id
+                self.copyFile(file.get('id'), parent_id)
+                new_id = parent_id
+            if self.is_cancelled:
+                break
 
     @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
@@ -479,8 +482,6 @@ class GoogleDriveHelper:
         new_id = None
         for item in list_dirs:
             current_file_name = os.path.join(input_directory, item)
-            if self.is_cancelled:
-                return None
             if os.path.isdir(current_file_name):
                 current_dir_id = self.create_directory(item, parent_id)
                 new_id = self.upload_dir(current_file_name, current_dir_id)
@@ -492,6 +493,8 @@ class GoogleDriveHelper:
                 self.upload_file(current_file_name, file_name, mime_type, parent_id)
                 self.total_files += 1
                 new_id = parent_id
+            if self.is_cancelled:
+                break
         return new_id
 
     def authorize(self):
@@ -638,7 +641,6 @@ class GoogleDriveHelper:
         else :
             return '', ''
 
-
     def count(self, link):
         try:
             file_id = self.getIdFromUrl(link)
@@ -674,9 +676,6 @@ class GoogleDriveHelper:
                 except TypeError:
                     pass
         except Exception as err:
-            if isinstance(err, RetryError):
-                LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
-                err = err.last_attempt.exception()
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
             if "File not found" in str(err):
@@ -727,9 +726,6 @@ class GoogleDriveHelper:
                     pass
             clonesize = self.total_bytes
         except Exception as err:
-            if isinstance(err, RetryError):
-                LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
-                err = err.last_attempt.exception()
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
             if "File not found" in str(err):
@@ -740,7 +736,6 @@ class GoogleDriveHelper:
         return "", clonesize, name
 
     def download(self, link):
-        self.is_downloading = True
         file_id = self.getIdFromUrl(link)
         if USE_SERVICE_ACCOUNTS:
             self.service_account_count = len(os.listdir("accounts"))
@@ -755,9 +750,6 @@ class GoogleDriveHelper:
                 os.makedirs(path)
                 self.download_file(file_id, path, meta.get('name'), meta.get('mimeType'))
         except Exception as err:
-            if isinstance(err, RetryError):
-                LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
-                err = err.last_attempt.exception()
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
             if "downloadQuotaExceeded" in str(err):
@@ -821,19 +813,20 @@ class GoogleDriveHelper:
                     reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
                     if reason == 'downloadQuotaExceeded' or reason == 'dailyLimitExceeded':
                         if USE_SERVICE_ACCOUNTS:
-                            if not self.switchServiceAccount():
+                            if self.sa_count > self.service_account_count:
                                 self.is_cancelled = True
                                 raise err
-                            LOGGER.info(f"Got: {reason}, Trying Again...")
-                            return self.download_file(file_id, path, filename, mime_type)
+                            else:
+                                self.switchServiceAccount()
+                                LOGGER.info(f"Got: {reason}, Trying Again...")
+                                return self.download_file(file_id, path, filename, mime_type)
                         else:
                             self.is_cancelled = True
                             raise err
                     else:
-                        self.is_cancelled = True
                         raise err
         self._file_downloaded_bytes = 0
-    
+
     def _on_download_progress(self):
         if self.dstatus is not None:
             chunk_size = self.dstatus.total_size * self.dstatus.progress() - self._file_downloaded_bytes

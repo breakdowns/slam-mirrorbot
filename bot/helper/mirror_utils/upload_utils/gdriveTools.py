@@ -8,6 +8,7 @@ import re
 import json
 import requests
 import logging
+from random import randrange
 
 from google.auth.transport.requests import Request
 from google.oauth2 import service_account
@@ -27,7 +28,8 @@ from bot.helper.ext_utils.fs_utils import get_mime_type, get_path_size
 
 LOGGER = logging.getLogger(__name__)
 logging.getLogger('googleapiclient.discovery').setLevel(logging.ERROR)
-SERVICE_ACCOUNT_INDEX = 0
+if USE_SERVICE_ACCOUNTS:
+    SERVICE_ACCOUNT_INDEX = randrange(len(os.listdir("accounts")))
 TELEGRAPHLIMIT = 80
 
 class GoogleDriveHelper:

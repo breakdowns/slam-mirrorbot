@@ -112,6 +112,10 @@
         "description": "To limit the Torrent/Direct mirror size, Leave space between number and unit. Available units is (gb or GB, tb or TB).",
         "required": false
       },
+      "TAR_UNZIP_LIMIT": {
+        "description": "To limit mirroring as Tar or unzipmirror. Available units is (gb or GB, tb or TB).",
+        "required": false
+      },
       "CLONE_LIMIT": {
         "description": "To limit cloning Google Drive (leave space between number and unit, Available units is (gb or GB, tb or TB).",
         "required": false

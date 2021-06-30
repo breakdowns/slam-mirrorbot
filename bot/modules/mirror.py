@@ -3,7 +3,7 @@ from telegram.ext import CommandHandler
 from telegram import InlineKeyboardMarkup
 
 from bot import Interval, INDEX_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, BLOCK_MEGA_FOLDER, BLOCK_MEGA_LINKS, VIEW_LINK
-from bot import dispatcher, DOWNLOAD_DIR, DOWNLOAD_STATUS_UPDATE_INTERVAL, download_dict, download_dict_lock, SHORTENER, SHORTENER_API
+from bot import dispatcher, DOWNLOAD_DIR, DOWNLOAD_STATUS_UPDATE_INTERVAL, download_dict, download_dict_lock, SHORTENER, SHORTENER_API, TAR_UNZIP_LIMIT
 from bot.helper.ext_utils import fs_utils, bot_utils
 from bot.helper.ext_utils.bot_utils import setInterval, get_mega_link_type
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException, NotSupportedExtractionArchive
@@ -305,6 +305,20 @@ def _mirror(bot, update, isTar=False, extract=False):
         if res != "":
             sendMessage(res, bot, update)
             return
+        if TAR_UNZIP_LIMIT is not None:
+            LOGGER.info(f'Checking File/Folder Size')
+            limit = TAR_UNZIP_LIMIT
+            limit = limit.split(' ', maxsplit=1)
+            limitint = int(limit[0])
+            msg = f'Failed, Tar/Unzip limit is {TAR_UNZIP_LIMIT}.\nYour File/Folder size is {get_readable_file_size(size)}.'
+            if 'G' in limit[1] or 'g' in limit[1]:
+                if size > limitint * 1024**3:
+                    sendMessage(msg, listener.bot, listener.update)
+                    return
+            elif 'T' in limit[1] or 't' in limit[1]:
+                if size > limitint * 1024**4:
+                    sendMessage(msg, listener.bot, listener.update)
+                    return
         LOGGER.info(f"Download Name : {name}")
         drive = gdriveTools.GoogleDriveHelper(name, listener)
         gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=12))

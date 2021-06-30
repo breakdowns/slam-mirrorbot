@@ -1,4 +1,4 @@
-from bot import aria2, download_dict_lock, STOP_DUPLICATE_MIRROR, TORRENT_DIRECT_LIMIT
+from bot import aria2, download_dict_lock, STOP_DUPLICATE_MIRROR, TORRENT_DIRECT_LIMIT, TAR_UNZIP_LIMIT
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.ext_utils.bot_utils import *
 from .download_helper import DownloadHelper
@@ -16,7 +16,7 @@ class AriaDownloadHelper(DownloadHelper):
 
     @new_thread
     def __onDownloadStarted(self, api, gid):
-        if STOP_DUPLICATE_MIRROR or TORRENT_DIRECT_LIMIT is not None:
+        if STOP_DUPLICATE_MIRROR or TORRENT_DIRECT_LIMIT is not None or TAR_UNZIP_LIMIT is not None:
             sleep(0.5)
             dl = getDownloadByGid(gid)
             download = api.get_download(gid)
@@ -38,23 +38,31 @@ class AriaDownloadHelper(DownloadHelper):
                     sendMarkup("Here are the search results:", dl.getListener().bot, dl.getListener().update, button)
                     return
 
-            if TORRENT_DIRECT_LIMIT is not None:
-                LOGGER.info(f"Checking File/Folder Size...")
-                sleep(1.5)
-                size = aria2.get_download(gid).total_length
-                limit = TORRENT_DIRECT_LIMIT
-                limit = limit.split(' ', maxsplit=1)
-                limitint = int(limit[0])
-                if 'GB' in limit or 'gb' in limit:
-                    if size > limitint * 1024**3:
-                        aria2.remove([download])
-                        dl.getListener().onDownloadError(f'Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}.\nYour File/Folder size is {get_readable_file_size(size)}')
-                        return
-                elif 'TB' in limit or 'tb' in limit:
-                    if size > limitint * 1024**4:
-                        aria2.remove([download])
-                        dl.getListener().onDownloadError(f'Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}.\nYour File/Folder size is {get_readable_file_size(size)}')
-                        return
+            if TORRENT_DIRECT_LIMIT is not None or TAR_UNZIP_LIMIT is not None:
+                limit = None
+                if TAR_UNZIP_LIMIT is not None and (self.listener.isTar or self.listener.extract):
+                    LOGGER.info(f"Checking File/Folder Size...")
+                    limit = TAR_UNZIP_LIMIT
+                    mssg = f'Tar/Unzip limit is {TAR_UNZIP_LIMIT}'
+                elif TORRENT_DIRECT_LIMIT is not None and limit is None:
+                    LOGGER.info(f"Checking File/Folder Size...")
+                    limit = TORRENT_DIRECT_LIMIT
+                    mssg = f'Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}'
+                if limit is not None:
+                    sleep(1.5)
+                    size = aria2.get_download(gid).total_length
+                    limit = limit.split(' ', maxsplit=1)
+                    limitint = int(limit[0])
+                    if 'G' in limit[1] or 'g' in limit[1]:
+                        if size > limitint * 1024**3:
+                            aria2.remove([download])
+                            dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
+                            return
+                    elif 'T' in limit[1] or 't' in limit[1]:
+                        if size > limitint * 1024**4:
+                            aria2.remove([download])
+                            dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
+                            return
         update_all_messages()
 
     def __onDownloadComplete(self, api: API, gid):

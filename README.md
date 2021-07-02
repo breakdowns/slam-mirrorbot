@@ -152,7 +152,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **BLOCK_MEGA_LINKS**: If you want to remove mega.nz mirror support, set it to `True`.
 - **STOP_DUPLICATE_MIRROR**: (Leave empty if unsure) if this field is set to `True`, bot will check file in Drive, if it is present in Drive, downloading will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
 - **STOP_DUPLICATE_MEGA**: (Leave empty if unsure) if this field is set to `True`, bot will check file in Drive, if it is present in Drive, downloading Mega will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
-- **STOP_DUPLICATE_CLONE**: (Leave empty if unsure) if this field is set to `True`, bot will check file in Drive, if it is present in Drive, cloning will be stopped..(**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
+- **STOP_DUPLICATE_CLONE**: (Leave empty if unsure) if this field is set to `True`, bot will check file in Drive, if it is present in Drive, cloning will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
 - **CLONE_LIMIT**: To limit cloning Google Drive (leave space between number and unit, Available units is (gb or GB, tb or TB).
 - **MEGA_LIMIT**: To limit downloading Mega (leave space between number and unit, Available units is (gb or GB, tb or TB).
 - **TORRENT_DIRECT_LIMIT**: To limit the Torrent/Direct mirror size, Leave space between number and unit. Available units is (gb or GB, tb or TB).

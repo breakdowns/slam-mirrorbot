@@ -71,7 +71,7 @@ async def return_search(query, page=1, sukebei=False):
 message_info = dict()
 ignore = set()
 
-@app.on_message(filters.command(['nyaa']))
+@app.on_message(filters.command(['nyaasi']))
 async def nyaa_search(client, message):
     text = message.text.split(' ')
     text.pop(0)
@@ -272,7 +272,13 @@ RESULT_STR_TGX = (
     "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_YTS = (
-    "➲Name: `{Name}`"
+    "➲Name: `{Name}`\n"
+    "➲Released on: {ReleasedDate}\n"
+    "➲Genre: {Genre}\n"
+    "➲Rating: {Rating}\n"
+    "➲Likes: {Likes}\n"
+    "➲Duration: {Runtime}\n"
+    "➲Language: {Language}"
 )
 RESULT_STR_EZTV = (
     "➲Name: `{Name}`\n"
@@ -312,7 +318,7 @@ for command, value in torrents_dict.items():
 
 def searchhelp(update, context):
     help_string = '''
-• /nyaa <i>[search query]</i>
+• /nyaasi <i>[search query]</i>
 • /sukebei <i>[search query]</i>
 • /1337x <i>[search query]</i>
 • /piratebay <i>[search query]</i>

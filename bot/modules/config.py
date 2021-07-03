@@ -53,7 +53,7 @@ __header__='📕 **Page** **{}**\n\n'
 @app.on_message(filters.command(BotCommands.ConfigMenuCommand) & filters.user(OWNER_ID))
 async def config_menu(_, message):
     await message.reply(
-        f"**Hello {message.from_user.mention}**,\n\n**If you want to add or set Variable in Heroku use** `/setvar`\n\n**If you want to delete Variable in Heroku use `/delvar`**\n\n**WARNING! Very Recommended to do this command in private since it's contain bot info.**\n\n**Here's This is Slam-MirrorBot Current Configs**",
+        f"**Hello {message.from_user.mention}**,\n\n**If you want to add or set Variable in Heroku use** `/setvar`\n\n**If you want to delete Variable in Heroku use `/delvar`**\n\n**WARNING! Very Recommended to do this command in private since it's contain Bot info.**\n\n**Here's This is Slam-MirrorBot Current Configs**",
         reply_markup=types.InlineKeyboardMarkup(
             [[types.InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data='docs_end'), types.InlineKeyboardButton(f"BOT CONFIG", callback_data='docs_1')]]
         )
@@ -79,7 +79,7 @@ async def config_button(_, query):
     elif data == '2':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Drive and Index Config ]**\n**Drive Folder:** `{parent_id}`\n\n**Using Team Drive:** `{IS_TEAM_DRIVE}`\n\n**Using Service Account:** `{USE_SERVICE_ACCOUNTS}`\n\n**Index Url:** `{INDEX_URL}`",
+            + f"**[ Drive and Index Config ]**\n\n**Drive Folder:** `{parent_id}`\n\n**Using Team Drive:** `{IS_TEAM_DRIVE}`\n\n**Using Service Account:** `{USE_SERVICE_ACCOUNTS}`\n\n**Index Url:** `{INDEX_URL}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -121,7 +121,7 @@ async def config_button(_, query):
     elif data == '5':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Limit Size Config ]**\n\n**Torrent and Direct:** `{TORRENT_DIRECT_LIMIT}`\n\n**Clone:** `{CLONE_LIMIT}`\n\n**Mega:** `{MEGA_LIMIT}`",
+            + f"**[ Limit Size Config ]**\n\n**Torrent and Direct:** `{TORRENT_DIRECT_LIMIT}`\n\n**Tar and Unzip:** `{TAR_UNZIP_LIMIT}`\n\n**Clone:** `{CLONE_LIMIT}`\n\n**Mega:** `{MEGA_LIMIT}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
@@ -180,7 +180,7 @@ async def config_button(_, query):
     elif data == '9':
         return await query.message.edit(
             __header__.format(data)
-            + f" **[ Others Config ]**\n\n**Ignore Pending Request:** `{IGNORE_PENDING_REQUESTS}`\n\n**Image Url:** `{IMAGE_URL}`\n\n**Directory:** `{DOWNLOAD_DIR}`\n\n**Status Interval:** `{DOWNLOAD_STATUS_UPDATE_INTERVAL}`\n\n**View Link:** `{VIEW_LINK}`\n\n**Database Url:** `{DB_URI}`\n\n**Delete Message Duration:** `{AUTO_DELETE_MESSAGE_DURATION}`",
+            + f" **[ Others Config ]**\n\n**View Link:** `{VIEW_LINK}`\n\n**Status Interval:** `{DOWNLOAD_STATUS_UPDATE_INTERVAL}`\n\n**Ignore Pending Request:** `{IGNORE_PENDING_REQUESTS}`\n\n**Delete Message Duration:** `{AUTO_DELETE_MESSAGE_DURATION}`\n\n**Directory:** `{DOWNLOAD_DIR}`\n\n**Image Url:** `{IMAGE_URL}`\n\n**Database Url:** `{DB_URI}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [

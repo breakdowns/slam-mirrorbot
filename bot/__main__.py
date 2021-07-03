@@ -207,8 +207,8 @@ BotCommand(f'{BotCommands.StatsCommand}','Bot Usage Stats'),
 BotCommand(f'{BotCommands.PingCommand}','Ping the Bot'),
 BotCommand(f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
 BotCommand(f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
-BotCommand(f'{BotCommands.SpeedCommand}','Check Speed of the host'),
-BotCommand(f'{BotCommands.MediaInfoCommand}','Get detailed info about replied media')]
+BotCommand(f'{BotCommands.MediaInfoCommand}','Get detailed info about replied media'),
+BotCommand(f'/tshelp','Get help for Torrent search module')]
 
 
 def main():

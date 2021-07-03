@@ -18,17 +18,17 @@
 # Features supported:
 ## Additional Features
 - Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update)
-- Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive Support
+- Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
 - Get detailed info about replied media (Only for Telegram file)
-- Stop duplicate cloning Google Drive & mirroring Mega Support
-- Tar/Unzip Google Drive link Support
+- Stop duplicate cloning Google Drive & mirroring Mega support
+- Tar/Unzip Google Drive link support
 - Speedtest with picture results
-- Sudo with Database Support
-- Multiple Trackers Support
+- Sudo with Database support
+- Multiple Trackers support
 - Check Heroku dynos stats
-- Extracting **tar.xz** Support
-- Heroku config Support
-- Custom Image Support
+- Extracting **tar.xz** support
+- Heroku config support
+- Custom Image support
 - Counting file/folder
 - View Link button
 - Shell and Executor
@@ -49,13 +49,13 @@ feurl.com, pixeldrain.com, uptobox.com (Uptobox account must be premium),
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 5GB/6 hours)
 - Copy files from someone's Drive to your Drive (Using Autorclone)
 - Download/Upload progress, Speeds and ETAs
-- Mirror all Youtube-dl Supported links
-- Docker Support
+- Mirror all Youtube-dl supported links
+- Docker support
 - Uploading to Team Drive
-- Index Link Support
-- Service Account Support
+- Index Link support
+- Service Account support
 - Delete files from Drive
-- Shortener Support
+- Shortener support
 - Custom Filename (Only for URL, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
 - Extracting password protected files, using custom filename and download from password protected Index Links see these examples:
 <p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>

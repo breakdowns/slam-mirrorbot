@@ -34,7 +34,7 @@
 - Shell and Executor
 - Torrent search supported:
 ```
-nyaasi, sukebei, 1337x, piratebay, tgx,
+nyaa.si, sukebei, 1337x, piratebay, tgx,
 yts, eztv, torlock, rarbg
 ```
 - Direct links supported:

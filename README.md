@@ -18,26 +18,26 @@
 # Features supported:
 ## Additional Features
 - Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update)
-- Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive
+- Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive Support
 - Get detailed info about replied media (Only for Telegram file)
-- Stop duplicate cloning Google Drive & mirroring Mega
-- Tar/Unzip Google Drive link
+- Stop duplicate cloning Google Drive & mirroring Mega Support
+- Tar/Unzip Google Drive link Support
 - Speedtest with picture results
-- Sudo with Database
-- Multiple Trackers
+- Sudo with Database Support
+- Multiple Trackers Support
 - Check Heroku dynos stats
-- Extracting **tar.xz**
-- Heroku config
-- Custom Image
+- Extracting **tar.xz** Support
+- Heroku config Support
+- Custom Image Support
 - Counting file/folder
 - View Link button
 - Shell and Executor
-- Torrent search supported:
+- Torrent search Supported:
 ```
 nyaa.si, sukebei, 1337x, piratebay,
 tgx, yts, eztv, torlock, rarbg
 ```
-- Direct links supported:
+- Direct links Supported:
 ```
 letsupload.io, hxfile.co, anonfiles.com, fembed.com, femax20.com, layarkacaxxi.icu,
 naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com, streamsb.net,
@@ -49,13 +49,13 @@ feurl.com, pixeldrain.com, uptobox.com (Uptobox account must be premium),
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 5GB/6 hours)
 - Copy files from someone's Drive to your Drive (Using Autorclone)
 - Download/Upload progress, Speeds and ETAs
-- Mirror all Youtube-dl supported links
-- Docker support
+- Mirror all Youtube-dl Supported links
+- Docker Support
 - Uploading to Team Drive
-- Index Link support
-- Service Account support
+- Index Link Support
+- Service Account Support
 - Delete files from Drive
-- Shortener support
+- Shortener Support
 - Custom Filename (Only for URL, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
 - Extracting password protected files, using custom filename and download from password protected Index Links see these examples:
 <p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>

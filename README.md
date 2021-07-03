@@ -18,17 +18,17 @@
 # Features supported:
 ## Additional Features
 - Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update)
-- Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
+- Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive
 - Get detailed info about replied media (Only for Telegram file)
-- Stop duplicate cloning Google Drive & mirroring Mega support
-- Tar/Unzip Google Drive link support
+- Stop duplicate cloning Google Drive & mirroring Mega
+- Tar/Unzip Google Drive link
 - Speedtest with picture results
-- Sudo with Database support
-- Multiple Trackers support
+- Sudo with Database
+- Multiple Trackers
 - Check Heroku dynos stats
-- Extracting **tar.xz** support
-- Heroku config support
-- Custom Image support
+- Extracting **tar.xz**
+- Heroku config
+- Custom Image
 - Counting file/folder
 - View Link button
 - Shell and Executor

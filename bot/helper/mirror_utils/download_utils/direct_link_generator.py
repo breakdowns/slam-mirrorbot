@@ -54,6 +54,8 @@ def direct_link_generator(link: str):
         return anon(link)
     elif 'letsupload.io' in link:
         return letsupload(link)
+     elif 'fcdn.stream' in link:
+        return fembed(link)
     elif 'fembed.com' in link:
         return fembed(link)
     elif 'femax20.com' in link:
@@ -69,6 +71,8 @@ def direct_link_generator(link: str):
     elif 'layarkacaxxi.icu' in link:
         return fembed(link)
     elif 'sbembed.com' in link:
+        return sbembed(link)
+     elif 'sbplay.org' in link:
         return sbembed(link)
     elif 'streamsb.net' in link:
         return sbembed(link)

@@ -149,7 +149,7 @@ def is_gdrive_link(url: str):
     return "drive.google.com" in url
 
 def is_mega_link(url: str):
-    return "mega.nz" in url
+    return "mega.nz" in url or "mega.co.nz" in url
 
 def get_mega_link_type(url: str):
     if "folder" in url:

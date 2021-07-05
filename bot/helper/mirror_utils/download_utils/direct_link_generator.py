@@ -33,7 +33,7 @@ def direct_link_generator(link: str):
     if not link:
         raise DirectDownloadLinkException("`No links found!`")
     elif 'youtube.com' in link or 'youtu.be' in link:
-        raise DirectDownloadLinkException(f"Youtube Link use /{BotCommands.WatchCommand} or /{BotCommands.TarWatchCommand}")
+        raise DirectDownloadLinkException(f"Use /{BotCommands.WatchCommand} to mirror Youtube link\nUse /{BotCommands.TarWatchCommand} to make tar of Youtube playlist")
     elif 'zippyshare.com' in link:
         return zippy_share(link)
     elif 'yadi.sk' in link:

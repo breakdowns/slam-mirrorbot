@@ -299,7 +299,7 @@ def _mirror(bot, update, isTar=False, extract=False):
 
     if bot_utils.is_gdrive_link(link):
         if not isTar and not extract:
-            sendMessage(f"Use /{BotCommands.CloneCommand} to clone Google Drive File/Folder\nUse /{BotCommands.TarMirrorCommand} to make tar of Google Drive folder\nUse /{BotCommands.UnzipMirrorCommand} to extracts archive Google Drive file", bot, update)
+            sendMessage(f"Use /{BotCommands.CloneCommand} to clone Google Drive file/folder\nUse /{BotCommands.TarMirrorCommand} to make tar of Google Drive folder\nUse /{BotCommands.UnzipMirrorCommand} to extracts archive Google Drive file", bot, update)
             return
         res, size, name = gdriveTools.GoogleDriveHelper().clonehelper(link)
         if res != "":

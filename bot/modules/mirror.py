@@ -292,14 +292,14 @@ def _mirror(bot, update, isTar=False, extract=False):
             sendMessage(f"{e}", bot, update)
             return
         if "Youtube" in str(e):
-            sendMessage(f"ERROR: {e}", bot, update)
+            sendMessage(f"{e}", bot, update)
             return
 
     listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
 
     if bot_utils.is_gdrive_link(link):
         if not isTar and not extract:
-            sendMessage(f"Use /{BotCommands.CloneCommand} To Copy Google Drive File/Folder", bot, update)
+            sendMessage(f"Use /{BotCommands.CloneCommand} to clone Google Drive file/folder\nUse /{BotCommands.TarMirrorCommand} to make tar of Google Drive folder\nUse /{BotCommands.UnzipMirrorCommand} to extracts archive Google Drive file", bot, update)
             return
         res, size, name = gdriveTools.GoogleDriveHelper().clonehelper(link)
         if res != "":

@@ -557,7 +557,7 @@ class GoogleDriveHelper:
                                                q=query,
                                                spaces='drive',
                                                pageSize=200,
-                                               fields='files(id, name, mimeType, size)',
+                                               fields='files(id, name, mimeType, size, md5Checksum)',
                                                orderBy='name asc').execute()
         content_count = 0
         if response["files"]:
@@ -605,6 +605,7 @@ class GoogleDriveHelper:
                             msg += f' <b>| <a href="{url}">Index Link</a></b>'
                             if VIEW_LINK:
                                 msg += f' <b>| <a href="{urls}">View Link</a></b>'
+                    msg += f"<br>MD5:</b> <code>{file.get('md5Checksum')}</code>"
                 msg += '<br><br>'
                 content_count += 1
                 if content_count == TELEGRAPHLIMIT :

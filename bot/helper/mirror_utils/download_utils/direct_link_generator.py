@@ -87,8 +87,7 @@ def direct_link_generator(link: str):
 
 
 def zippy_share(url: str) -> str:
-    """ ZippyShare direct links generator
-    Based on https://github.com/KenHV/Mirror-Bot """
+    """ ZippyShare direct links generator """
     link = re.findall("https:/.(.*?).zippyshare", url)[0]
     response_content = (requests.get(url)).content
     bs_obj = BeautifulSoup(response_content, "lxml")
@@ -114,8 +113,7 @@ def zippy_share(url: str) -> str:
 
 
 def yandex_disk(url: str) -> str:
-    """ Yandex.Disk direct links generator
-    Based on https://github.com/wldhx/yadisk-direct """
+    """ Yandex.Disk direct links generator """
     try:
         link = re.findall(r'\bhttps?://.*yadi\.sk\S+', url)[0]
     except IndexError:
@@ -149,8 +147,7 @@ def cm_ru(url: str) -> str:
 
 
 def uptobox(url: str) -> str:
-    """ Uptobox direct links generator
-    based on https://github.com/jovanzers/WinTenCermin """
+    """ Uptobox direct links generator """
     try:
         link = re.findall(r'\bhttps?://.*uptobox\.com\S+', url)[0]
     except IndexError:
@@ -218,8 +215,7 @@ def github(url: str) -> str:
 
 
 def hxfile(url: str) -> str:
-    """ Hxfile direct links generator
-    based on https://github.com/breakdowns/slam-mirrorbot """
+    """ Hxfile direct links generator """
     dl_url = ''
     try:
         link = re.findall(r'\bhttps?://.*hxfile\.co\S+', url)[0]
@@ -231,8 +227,7 @@ def hxfile(url: str) -> str:
 
 
 def anon(url: str) -> str:
-    """ Anonfiles direct links generator
-    based on https://github.com/breakdowns/slam-mirrorbot """
+    """ Anonfiles direct links generator """
     dl_url = ''
     try:
         link = re.findall(r'\bhttps?://.*anonfiles\.com\S+', url)[0]
@@ -244,8 +239,7 @@ def anon(url: str) -> str:
 
 
 def letsupload(url: str) -> str:
-    """ Letsupload direct link generator
-    Based on https://github.com/breakdowns/slam-mirrorbot """
+    """ Letsupload direct link generator """
     dl_url = ''
     try:
         link = re.findall(r'\bhttps?://.*letsupload\.io\S+', url)[0]
@@ -257,8 +251,7 @@ def letsupload(url: str) -> str:
 
 
 def fembed(link: str) -> str:
-    """ Fembed direct link generator
-    Based on https://github.com/breakdowns/slam-mirrorbot """
+    """ Fembed direct link generator """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_fembed(link)
     lst_link = []
@@ -269,8 +262,7 @@ def fembed(link: str) -> str:
 
 
 def sbembed(link: str) -> str:
-    """ Sbembed direct link generator
-    Based on https://github.com/breakdowns/slam-mirrorbot """
+    """ Sbembed direct link generator """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_sbembed(link)
     lst_link = []
@@ -281,8 +273,7 @@ def sbembed(link: str) -> str:
 
 
 def onedrive(link: str) -> str:
-    """ Onedrive direct link generator
-    Based on https://github.com/UsergeTeam/Userge """
+    """ Onedrive direct link generator """
     link_without_query = urlparse(link)._replace(query=None).geturl()
     direct_link_encoded = str(standard_b64encode(bytes(link_without_query, "utf-8")), "utf-8")
     direct_link1 = f"https://api.onedrive.com/v1.0/shares/u!{direct_link_encoded}/root/content"
@@ -296,7 +287,6 @@ def onedrive(link: str) -> str:
 
 
 def pixeldrain(url: str) -> str:
-    """ Based on https://github.com/yash-dk/TorToolkit-Telegram """
     url = url.strip("/ ")
     file_id = url.split("/")[-1]
     info_link = f"https://pixeldrain.com/api/file/{file_id}/info"

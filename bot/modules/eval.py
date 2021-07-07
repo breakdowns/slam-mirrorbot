@@ -120,7 +120,7 @@ def clear(update, context):
     send("Cleared locals.", bot, update)
 
 
-def evalhelp(update, context):
+def exechelp(update, context):
     help_string = '''
 • /eval <i>Run Python Code Line | Lines</i>
 • /exec <i>Run Commands In Exec</i>
@@ -132,9 +132,9 @@ def evalhelp(update, context):
 EVAL_HANDLER = CommandHandler(('eval'), evaluate, filters=CustomFilters.owner_filter, run_async=True)
 EXEC_HANDLER = CommandHandler(('exec'), execute, filters=CustomFilters.owner_filter, run_async=True)
 CLEAR_HANDLER = CommandHandler('clearlocals', clear, filters=CustomFilters.owner_filter, run_async=True)
-EVALHELP_HANDLER = CommandHandler(BotCommands.EvalHelpCommand, evalhelp, filters=CustomFilters.owner_filter, run_async=True)
+EXECHELP_HANDLER = CommandHandler(BotCommands.ExecHelpCommand, exechelp, filters=CustomFilters.owner_filter, run_async=True)
 
 dispatcher.add_handler(EVAL_HANDLER)
 dispatcher.add_handler(EXEC_HANDLER)
 dispatcher.add_handler(CLEAR_HANDLER)
-dispatcher.add_handler(EVALHELP_HANDLER)
+dispatcher.add_handler(EXECHELP_HANDLER)

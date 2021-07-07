@@ -29,7 +29,7 @@ async def update_it(client, message):
         repo = Repo()
     except GitCommandError:
         return await msg_.edit(
-            "**Invalid Git Command. Please Report This Bug To [Support Group](https://t.me/SlamMirrorSupport)**"
+            "**Invalid Git Command.**"
         )
     except InvalidGitRepositoryError:
         repo = Repo.init()

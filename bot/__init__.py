@@ -294,9 +294,9 @@ except KeyError:
 try:
     IMAGE_URL = getConfig('IMAGE_URL')
     if len(IMAGE_URL) == 0:
-        IMAGE_URL = ''
+        IMAGE_URL = 'https://i.ibb.co/Rzpx76n/17973665-1884056605142385-5153089103125390665-o.jpg'
 except KeyError:
-    IMAGE_URL = ''
+    IMAGE_URL = 'https://i.ibb.co/Rzpx76n/17973665-1884056605142385-5153089103125390665-o.jpg'
 
 IGNORE_PENDING_REQUESTS = False
 try:

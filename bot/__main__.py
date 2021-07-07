@@ -147,7 +147,7 @@ def bot_help(update, context):
 
 /{BotCommands.ShellCommand}: Run commands in Shell (Terminal)
 
-/{BotCommands.EvalHelpCommand}: Get help for Eval module
+/{BotCommands.ExecHelpCommand}: Get help for Executor module
 
 /{BotCommands.TsHelpCommand}: Get help for Torrent search module
 '''

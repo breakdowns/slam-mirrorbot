@@ -20,6 +20,7 @@ from pyrogram.handlers import MessageHandler, CallbackQueryHandler
 
 from bot import app, dispatcher, IMAGE_URL
 from bot.helper import custom_filters
+from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
 
 search_lock = asyncio.Lock()
@@ -71,7 +72,7 @@ async def return_search(query, page=1, sukebei=False):
 message_info = dict()
 ignore = set()
 
-@app.on_message(filters.command(['nyaa']))
+@app.on_message(filters.command(['nyaasi']))
 async def nyaa_search(client, message):
     text = message.text.split(' ')
     text.pop(0)
@@ -169,12 +170,28 @@ class TorrentSearch:
         app.add_handler(CallbackQueryHandler(self.previous, filters.regex(f"{self.command}_previous")))
         app.add_handler(CallbackQueryHandler(self.delete, filters.regex(f"{self.command}_delete")))
         app.add_handler(CallbackQueryHandler(self.next, filters.regex(f"{self.command}_next")))
+        
+    @staticmethod
+    def format_magnet(string: str):
+        if not string:
+            return ""
+        return string.split('&tr', 1)[0]
 
     def get_formatted_string(self, values):
         string = self.RESULT_STR.format(**values)
-        magnet = values.get('magnet', values.get('Magnet'))  # Avoid updating source dict
-        if (magnet):
-            string += f"➲Magnet: `{magnet.split('&tr', 1)[0]}`"
+        extra = ""
+        if "Files" in values:
+            tmp_str = "➲[{Quality} - {Type} ({Size})]({Torrent}): `{magnet}`"
+            extra += "\n".join(
+                tmp_str.format(**f, magnet=self.format_magnet(f['Magnet']))
+                for f in values['Files']
+            )
+        else:
+            magnet = values.get('magnet', values.get('Magnet'))  # Avoid updating source dict
+            if magnet:
+                extra += f"➲Magnet: `{self.format_magnet(magnet)}`"
+        if (extra):
+            string += "\n" + extra
         return string
 
     async def update_message(self):
@@ -189,10 +206,11 @@ class TorrentSearch:
         if (self.index != len(self.response_range) - 1):
             inline.append(nextBtn)
 
+        res_lim = min(self.RESULT_LIMIT, len(self.response) - self.RESULT_LIMIT*self.index)
         result = f"**Page - {self.index+1}**\n\n"
         result += "\n\n=======================\n\n".join(
             self.get_formatted_string(self.response[self.response_range[self.index]+i])
-            for i in range(self.RESULT_LIMIT)
+            for i in range(res_lim)
         )
 
         await self.message.edit(
@@ -242,55 +260,57 @@ class TorrentSearch:
 RESULT_STR_1337 = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_PIRATEBAY = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_TGX = (
     "➲Name: `{Name}`\n" 
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_YTS = (
     "➲Name: `{Name}`\n"
-    "➲1st Link: `{Dwnload1}`\n"
-    "➲2nd Link: `{Download2}`"
+    "➲Released on: {ReleasedDate}\n"
+    "➲Genre: {Genre}\n"
+    "➲Rating: {Rating}\n"
+    "➲Likes: {Likes}\n"
+    "➲Duration: {Runtime}\n"
+    "➲Language: {Language}"
 )
 RESULT_STR_EZTV = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders}\n"
-    "➲Torrent: `{Torrent}`\n"
+    "➲Seeders: {Seeders}"
 )
 RESULT_STR_TORLOCK = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
-    "➲Torrent: `{Torrent}`\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_RARBG = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 RESULT_STR_ALL = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
-    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 
 torrents_dict = {
-    '1337x': {'source': "https://torrenter-api.herokuapp.com/api/1337x/", 'result_str': RESULT_STR_1337},
-    'piratebay': {'source': "https://torrenter-api.herokuapp.com/api/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
-    'tgx': {'source': "https://torrenter-api.herokuapp.com/api/tgx/", 'result_str': RESULT_STR_TGX},
-    'yts': {'source': "https://torrenter-api.herokuapp.com/api/yts/", 'result_str': RESULT_STR_YTS},
-    'eztv': {'source': "https://torrenter-api.herokuapp.com/api/eztv/", 'result_str': RESULT_STR_EZTV},
-    'torlock': {'source': "https://torrenter-api.herokuapp.com/api/torlock/", 'result_str': RESULT_STR_TORLOCK},
-    'rarbg': {'source': "https://torrenter-api.herokuapp.com/api/rarbg/", 'result_str': RESULT_STR_RARBG},
-    'ts': {'source': "https://torrenter-api.herokuapp.com/api/all/", 'result_str': RESULT_STR_ALL}
+    '1337x': {'source': "https://slam-api.herokuapp.com/api/1337x/", 'result_str': RESULT_STR_1337},
+    'piratebay': {'source': "https://slam-api.herokuapp.com/api/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
+    'tgx': {'source': "https://slam-api.herokuapp.com/api/tgx/", 'result_str': RESULT_STR_TGX},
+    'yts': {'source': "https://slam-api.herokuapp.com/api/yts/", 'result_str': RESULT_STR_YTS},
+    'eztv': {'source': "https://slam-api.herokuapp.com/api/eztv/", 'result_str': RESULT_STR_EZTV},
+    'torlock': {'source': "https://slam-api.herokuapp.com/api/torlock/", 'result_str': RESULT_STR_TORLOCK},
+    'rarbg': {'source': "https://slam-api.herokuapp.com/api/rarbg/", 'result_str': RESULT_STR_RARBG},
+    'ts': {'source': "https://slam-api.herokuapp.com/api/all/", 'result_str': RESULT_STR_ALL}
 }
 
 torrent_handlers = []
@@ -299,7 +319,7 @@ for command, value in torrents_dict.items():
 
 def searchhelp(update, context):
     help_string = '''
-• /nyaa <i>[search query]</i>
+• /nyaasi <i>[search query]</i>
 • /sukebei <i>[search query]</i>
 • /1337x <i>[search query]</i>
 • /piratebay <i>[search query]</i>
@@ -313,5 +333,5 @@ def searchhelp(update, context):
     update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.HTML)
     
     
-SEARCHHELP_HANDLER = CommandHandler("tshelp", searchhelp, filters=(CustomFilters.authorized_chat | CustomFilters.authorized_user) & CustomFilters.mirror_owner_filter, run_async=True)
+SEARCHHELP_HANDLER = CommandHandler(BotCommands.TsHelpCommand, searchhelp, filters=(CustomFilters.authorized_chat | CustomFilters.authorized_user) & CustomFilters.mirror_owner_filter, run_async=True)
 dispatcher.add_handler(SEARCHHELP_HANDLER)

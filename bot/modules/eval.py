@@ -5,7 +5,8 @@ import textwrap
 import traceback
 from contextlib import redirect_stdout
 from bot.helper.telegram_helper.filters import CustomFilters
-from bot import LOGGER, dispatcher
+from bot.helper.telegram_helper.bot_commands import BotCommands
+from bot import LOGGER, dispatcher, IMAGE_URL
 from telegram import ParseMode
 from telegram.ext import CommandHandler
 
@@ -119,11 +120,21 @@ def clear(update, context):
     send("Cleared locals.", bot, update)
 
 
-EVAL_HANDLER = CommandHandler(('e', 'ev', 'eva', 'eval'), evaluate, filters=CustomFilters.owner_filter, run_async=True)
-EXEC_HANDLER = CommandHandler(('x', 'ex', 'exe', 'exec', 'py'), execute, filters=CustomFilters.owner_filter, run_async=True)
+def exechelp(update, context):
+    help_string = '''
+• /eval <i>Run Python Code Line | Lines</i>
+• /exec <i>Run Commands In Exec</i>
+• /clearlocals <i>Cleared locals</i>
+'''
+    update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.HTML)
+ 
+
+EVAL_HANDLER = CommandHandler(('eval'), evaluate, filters=CustomFilters.owner_filter, run_async=True)
+EXEC_HANDLER = CommandHandler(('exec'), execute, filters=CustomFilters.owner_filter, run_async=True)
 CLEAR_HANDLER = CommandHandler('clearlocals', clear, filters=CustomFilters.owner_filter, run_async=True)
+EXECHELP_HANDLER = CommandHandler(BotCommands.ExecHelpCommand, exechelp, filters=CustomFilters.owner_filter, run_async=True)
 
 dispatcher.add_handler(EVAL_HANDLER)
 dispatcher.add_handler(EXEC_HANDLER)
 dispatcher.add_handler(CLEAR_HANDLER)
-
+dispatcher.add_handler(EXECHELP_HANDLER)

@@ -62,8 +62,6 @@ class AriaDownloadStatus(Status):
         download = self.aria_download()
         if download.is_waiting:
             status = MirrorStatus.STATUS_WAITING
-        elif download.is_paused:
-            status = MirrorStatus.STATUS_CANCELLED
         elif download.has_failed:
             status = MirrorStatus.STATUS_FAILED
         else:
@@ -102,6 +100,6 @@ class AriaDownloadStatus(Status):
             return
         if len(download.followed_by_ids) != 0:
             downloads = aria2.get_downloads(download.followed_by_ids)
-            aria2.pause(downloads)
-        aria2.pause([download])
-
+            aria2.remove(downloads)
+        self.__listener.onDownloadError("Download stopped by user!")
+        aria2.remove([download])

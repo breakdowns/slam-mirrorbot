@@ -21,12 +21,13 @@ def speedtest(update, context):
 <b>Name:</b> <code>{result['server']['name']}</code>
 <b>Country:</b> <code>{result['server']['country']}, {result['server']['cc']}</code>
 <b>Sponsor:</b> <code>{result['server']['sponsor']}</code>
-    
+<b>ISP:</b> <code>{result['client']['isp']}</code>
+
 <b>SpeedTest Results</b>
 <b>Upload:</b> <code>{speed_convert(result['upload'] / 8)}</code>
 <b>Download:</b>  <code>{speed_convert(result['download'] / 8)}</code>
 <b>Ping:</b> <code>{result['ping']} ms</code>
-<b>ISP:</b> <code>{result['client']['isp']}</code>
+<b>ISP Rating:</b> <code>{result['client']['isprating']}</code>
 '''
     ed_msg.delete()
     try:

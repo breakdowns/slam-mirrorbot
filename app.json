@@ -7,9 +7,9 @@
       "telegram",
       "python"
     ],
-    "repository": "https://github.com/breakdowns/slam-mirrorbot",
-    "website": "https://github.com/breakdowns/slam-mirrorbot",
-    "success_url": "https://t.me/SlamMirrorSupport",
+    "repository": "https://github.com/hyPnOtICDo0g/hishirobot",
+    "website": "https://github.com/hyPnOtICDo0g/hishirobot",
+    "success_url": "",
     "stack": "container",
     "env": {
       "ENV": {
@@ -75,8 +75,8 @@
         "required": true
       },
       "UPSTREAM_REPO": {
-        "description": "Link for Bot Upstream Repo, If you want default update, Fill https://github.com/breakdowns/slam-mirrorbot.",
-        "value": "https://github.com/breakdowns/slam-mirrorbot",
+        "description": "Link for Bot Upstream Repo, If you want default update, Fill https://github.com/hyPnOtICDo0g/hishirobot.",
+        "value": "https://github.com/hyPnOtICDo0g/hishirobot",
         "required": true
       },
       "UPSTREAM_BRANCH": {

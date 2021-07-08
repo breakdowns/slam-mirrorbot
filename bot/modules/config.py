@@ -46,6 +46,12 @@ async def del_varr(client, message, app_):
     await msg_.edit(f"`Sucessfully Deleted {_var} Var!`", parse_mode="markdown")
     del heroku_var[_var]
 
+@app.on_message(filters.command(['reboot']) & filters.user(OWNER_ID))
+@check_heroku
+async def gib_restart(client, message, hap):
+    msg_ = await message.reply_text("[HEROKU] - Restarting")
+    hap.restart()
+
 # CONFIG LIST #
 
 __header__='📕 **Page** **{}**\n\n'

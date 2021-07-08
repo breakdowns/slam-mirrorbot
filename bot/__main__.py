@@ -185,12 +185,13 @@ def bot_help(update, context):
 
 /{BotCommands.TsHelpCommand}: Get help for Torrent search module
 '''
-
+    button = button_build.ButtonMaker()
+    button.buildbutton("𝗖𝗨𝗦𝗧𝗢𝗠 𝗙𝗜𝗟𝗘𝗡𝗔𝗠𝗘 𝗘𝗫𝗔𝗠𝗣𝗟𝗘𝗦", "https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20")
+    reply_markup = InlineKeyboardMarkup(button.build_menu(1))
     if CustomFilters.sudo_user(update) or CustomFilters.owner_filter(update):
-        sendMessage(help_string_adm, context.bot, update)
+        update.effective_message.reply_text(help_string_adm, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
     else:
-        sendMessage(help_string, context.bot, update)
-
+        update.effective_message.reply_text(help_string, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
 
 botcmds = [
 BotCommand(f'{BotCommands.HelpCommand}','Get Detailed Help'),

@@ -93,7 +93,7 @@ def update_all_messages():
                 if len(msg) == 0:
                     msg = "Starting DL"
                 try:
-                    keyboard = [[InlineKeyboardButton("  𝗦𝗧𝗔𝗧𝗦  ", callback_data=str(THREE))]]
+                    keyboard = [[InlineKeyboardButton("  𝗦𝗧𝗔𝗧𝗦  ", callback_data=str(STATS))]]
                     editMessage(msg, status_reply_dict[chat_id], reply_markup=InlineKeyboardMarkup(keyboard))
                 except Exception as e:
                     LOGGER.error(str(e))

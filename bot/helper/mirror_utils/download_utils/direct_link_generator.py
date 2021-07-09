@@ -36,7 +36,7 @@ def direct_link_generator(link: str):
         raise DirectDownloadLinkException(f"Use /{BotCommands.WatchCommand} to mirror Youtube link\nUse /{BotCommands.TarWatchCommand} to make tar of Youtube playlist")
     elif 'zippyshare.com' in link:
         return zippy_share(link)
-    elif 'yadi.sk' or 'disk.yandex.com.tr' or 'disk.yandex.com' in link:
+    elif 'yadi.sk' or 'disk.yandex.com.tr' or 'disk.yandex.com' or 'disk.yandex.ru' in link:
         return yandex_disk(link)
     elif 'cloud.mail.ru' in link:
         return cm_ru(link)
@@ -119,7 +119,9 @@ def yandex_disk(url: str) -> str:
     if "disk.yandex.com.tr" in url:
         url = url.replace("disk.yandex.com.tr", "yadi.sk")
     elif "disk.yandex.com" in url:
-        url = url.replace("disk.yandex.com", "yadi.sk") 
+        url = url.replace("disk.yandex.com", "yadi.sk")
+    elif "disk.yandex.ru" in url:
+        url = url.replace("disk.yandex.ru", "yadi.sk")
     try:
         link = re.findall(r'\bhttps?://.*yadi\.sk\S+', url)[0]
     except IndexError:

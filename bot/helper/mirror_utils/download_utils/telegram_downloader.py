@@ -110,8 +110,7 @@ class TelegramDownloadHelper(DownloadHelper):
                         gd = GoogleDriveHelper()
                         smsg, button = gd.drive_list(name)
                     if smsg:
-                        self.__onDownloadError('File/Folder is already available in Drive.\n\n')
-                        sendMarkup("Here are the search results:", self.__listener.bot, self.__listener.update, button)
+                        sendMarkup("File/Folder is already available in Drive.\nHere are the search results:", self.__listener.bot, self.__listener.update, button)
                         return
                 sendStatusMessage(self.__listener.update, self.__listener.bot)
                 self.__onDownloadStart(name, media.file_size, media.file_id)

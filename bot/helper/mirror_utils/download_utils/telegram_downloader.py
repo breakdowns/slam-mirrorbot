@@ -1,14 +1,14 @@
 import logging
 import threading
 import time
-
-from bot import LOGGER, download_dict, download_dict_lock, app
+from bot import LOGGER, download_dict, download_dict_lock, app, STOP_DUPLICATE_MIRROR
 from .download_helper import DownloadHelper
 from ..status_utils.telegram_download_status import TelegramDownloadStatus
+from bot.helper.telegram_helper.message_utils import sendMarkup, sendStatusMessage
+from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 
 global_lock = threading.Lock()
 GLOBAL_GID = set()
-
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
@@ -18,8 +18,8 @@ class TelegramDownloadHelper(DownloadHelper):
         self.__listener = listener
         self.__resource_lock = threading.RLock()
         self.__name = ""
-        self.__gid = ''
         self.__start_time = time.time()
+        self.__gid = ""
         self._bot = app
         self.__is_cancelled = False
 
@@ -70,8 +70,11 @@ class TelegramDownloadHelper(DownloadHelper):
         self.__listener.onDownloadComplete()
 
     def __download(self, message, path):
-        download = self._bot.download_media(message,
-                                                  progress=self.__onDownloadProgress, file_name=path)
+        download = self._bot.download_media(
+            message,
+            progress = self.__onDownloadProgress,
+            file_name = path
+        )
         if download is not None:
             self.__onDownloadComplete()
         else:
@@ -95,9 +98,24 @@ class TelegramDownloadHelper(DownloadHelper):
             else:
                 name = filename
                 path = path + name
+            
             if download:
+                if STOP_DUPLICATE_MIRROR:
+                    LOGGER.info(f"Checking File/Folder if already in Drive...")
+                    if self.__listener.isTar:
+                        name = name + ".tar"
+                    if self.__listener.extract:           
+                        smsg = None
+                    else:
+                        gd = GoogleDriveHelper()
+                        smsg, button = gd.drive_list(name)
+                    if smsg:
+                        self.__onDownloadError('File/Folder is already available in Drive.\n\n')
+                        sendMarkup("Here are the search results:", self.__listener.bot, self.__listener.update, button)
+                        return
+                sendStatusMessage(self.__listener.update, self.__listener.bot)
                 self.__onDownloadStart(name, media.file_size, media.file_id)
-                LOGGER.info(f'Downloading telegram file with id: {media.file_id}')
+                LOGGER.info(f'Downloading Telegram file with id: {media.file_id}')
                 threading.Thread(target=self.__download, args=(_message, path)).start()
             else:
                 self.__onDownloadError('File already being downloaded!')

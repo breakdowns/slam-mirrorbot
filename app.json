@@ -189,6 +189,16 @@
       "BUTTON_SIX_URL": {
         "description": "Fill your URL if you are using extra buttons.",
         "required": false
+      },
+      "FINISHED_PROGRESS_STR": {
+        "description": "Single character for finished progress",
+        "value": "●",
+        "required": false
+      },
+      "UNFINISHED_PROGRESS_STR": {
+        "description": "Single character for unfinished progress",
+        "value": "○",
+        "required": false
       }
     },
     "addons": [

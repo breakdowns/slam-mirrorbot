@@ -1,14 +1,9 @@
 import requests
 from telegram.ext import CommandHandler
-from telegram.error import BadRequest
 from telegram import InlineKeyboardMarkup
 
-from bot import(
-    Interval, INDEX_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL,
-    BUTTON_SIX_NAME, BUTTON_SIX_URL, BLOCK_MEGA_FOLDER, BLOCK_MEGA_LINKS, VIEW_LINK,
-    dispatcher, DOWNLOAD_DIR, DOWNLOAD_STATUS_UPDATE_INTERVAL, download_dict, download_dict_lock,
-    SHORTENER, SHORTENER_API, TAR_UNZIP_LIMIT
-)
+from bot import Interval, INDEX_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, BLOCK_MEGA_FOLDER, BLOCK_MEGA_LINKS, VIEW_LINK
+from bot import dispatcher, DOWNLOAD_DIR, DOWNLOAD_STATUS_UPDATE_INTERVAL, download_dict, download_dict_lock, SHORTENER, SHORTENER_API, TAR_UNZIP_LIMIT
 from bot.helper.ext_utils import fs_utils, bot_utils
 from bot.helper.ext_utils.bot_utils import setInterval, get_mega_link_type
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException, NotSupportedExtractionArchive
@@ -207,10 +202,7 @@ class MirrorListener(listeners.MirrorListeners):
                 pass
             del download_dict[self.uid]
             count = len(download_dict)
-        try:
-            sendMarkup(msg, self.bot, self.update, InlineKeyboardMarkup(buttons.build_menu(2)))
-        except BadRequest as e:
-            LOGGER.warning(e.message)
+        sendMarkup(msg, self.bot, self.update, InlineKeyboardMarkup(buttons.build_menu(2)))
         if count == 0:
             self.clean()
         else:
@@ -347,14 +339,6 @@ def _mirror(bot, update, isTar=False, extract=False):
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener)
     else:
-        if link.startswith("https"):
-           resp = requests.head(link, allow_redirects=True)
-           if resp.headers["content-type"].startswith("text/html") and not resp.url.endswith(".torrent"):
-               sendMessage(
-                   "Provided link returned to a webpage, download aborted.",
-                   bot, update
-               )
-               return
         ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener, name)
         sendStatusMessage(update, bot)
     if len(Interval) == 0:
@@ -373,24 +357,12 @@ def unzip_mirror(update, context):
     _mirror(context.bot, update, extract=True)
 
 
-mirror_handler = CommandHandler(
-    BotCommands.MirrorCommand,
-    mirror,
-    filters = CustomFilters.authorized_chat | CustomFilters.authorized_user,
-    run_async = True
-)
-tar_mirror_handler = CommandHandler(
-    BotCommands.TarMirrorCommand,
-    tar_mirror,
-    filters = CustomFilters.authorized_chat | CustomFilters.authorized_user,
-    run_async = True
-)
-unzip_mirror_handler = CommandHandler(
-    BotCommands.UnzipMirrorCommand,
-    unzip_mirror,
-    filters = CustomFilters.authorized_chat | CustomFilters.authorized_user,
-    run_async = True
-)
+mirror_handler = CommandHandler(BotCommands.MirrorCommand, mirror,
+                                filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+tar_mirror_handler = CommandHandler(BotCommands.TarMirrorCommand, tar_mirror,
+                                    filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+unzip_mirror_handler = CommandHandler(BotCommands.UnzipMirrorCommand, unzip_mirror,
+                                      filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 dispatcher.add_handler(mirror_handler)
 dispatcher.add_handler(tar_mirror_handler)
 dispatcher.add_handler(unzip_mirror_handler)

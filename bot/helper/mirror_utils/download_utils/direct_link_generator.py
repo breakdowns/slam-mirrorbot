@@ -8,8 +8,7 @@ from https://github.com/AvinashReddy3108/PaperplaneExtended . I hereby take no c
 than the modifications. See https://github.com/AvinashReddy3108/PaperplaneExtended/commits/master/userbot/modules/direct_links.py
 for original authorship. """
 
-from bot import UPTOBOX_TOKEN
-import logging
+from bot import LOGGER, UPTOBOX_TOKEN
 import json
 import math
 import re
@@ -153,13 +152,12 @@ def uptobox(url: str) -> str:
     except IndexError:
         raise DirectDownloadLinkException("`No Uptobox links found`\n")
     if UPTOBOX_TOKEN is None:
-        logging.error('UPTOBOX_TOKEN not provided!')
-        dl_url = url
+        LOGGER.error('UPTOBOX_TOKEN not provided!')
+        dl_url = link
     else:
         try:
             link = re.findall(r'\bhttp?://.*uptobox\.com/dl\S+', url)[0]
-            logging.info('Uptobox direct link')
-            dl_url = url
+            dl_url = link
         except:
             file_id = re.findall(r'\bhttps?://.*uptobox\.com/(\w+)', url)[0]
             file_link = 'https://uptobox.com/api/link?token=%s&file_code=%s' % (UPTOBOX_TOKEN, file_id)

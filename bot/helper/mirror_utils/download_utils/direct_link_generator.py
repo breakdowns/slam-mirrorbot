@@ -8,8 +8,7 @@ from https://github.com/AvinashReddy3108/PaperplaneExtended . I hereby take no c
 than the modifications. See https://github.com/AvinashReddy3108/PaperplaneExtended/commits/master/userbot/modules/direct_links.py
 for original authorship. """
 
-from bot import UPTOBOX_TOKEN
-import logging
+from bot import LOGGER, UPTOBOX_TOKEN
 import json
 import math
 import re
@@ -36,7 +35,7 @@ def direct_link_generator(link: str):
         raise DirectDownloadLinkException(f"Use /{BotCommands.WatchCommand} to mirror Youtube link\nUse /{BotCommands.TarWatchCommand} to make tar of Youtube playlist")
     elif 'zippyshare.com' in link:
         return zippy_share(link)
-    elif 'yadi.sk' or 'disk.yandex.com.tr' or 'disk.yandex.com' or 'disk.yandex.ru' in link:
+    elif 'yadi.sk' in link:
         return yandex_disk(link)
     elif 'cloud.mail.ru' in link:
         return cm_ru(link)
@@ -116,12 +115,6 @@ def zippy_share(url: str) -> str:
 def yandex_disk(url: str) -> str:
     """ Yandex.Disk direct links generator
     Based on https://github.com/wldhx/yadisk-direct """
-    if "disk.yandex.com.tr" in url:
-        url = url.replace("disk.yandex.com.tr", "yadi.sk")
-    elif "disk.yandex.com" in url:
-        url = url.replace("disk.yandex.com", "yadi.sk")
-    elif "disk.yandex.ru" in url:
-        url = url.replace("disk.yandex.ru", "yadi.sk")
     try:
         link = re.findall(r'\bhttps?://.*yadi\.sk\S+', url)[0]
     except IndexError:
@@ -162,13 +155,12 @@ def uptobox(url: str) -> str:
     except IndexError:
         raise DirectDownloadLinkException("`No Uptobox links found`\n")
     if UPTOBOX_TOKEN is None:
-        logging.error('UPTOBOX_TOKEN not provided!')
-        dl_url = url
+        LOGGER.error('UPTOBOX_TOKEN not provided!')
+        dl_url = link
     else:
         try:
             link = re.findall(r'\bhttp?://.*uptobox\.com/dl\S+', url)[0]
-            logging.info('Uptobox direct link')
-            dl_url = url
+            dl_url = link
         except:
             file_id = re.findall(r'\bhttps?://.*uptobox\.com/(\w+)', url)[0]
             file_link = 'https://uptobox.com/api/link?token=%s&file_code=%s' % (UPTOBOX_TOKEN, file_id)

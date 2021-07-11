@@ -12,7 +12,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-mirrorbot)
 ![GitHub](https://img.shields.io/github/license/breakdowns/slam-mirrorbot)
 ![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
-[![Slam Mirror Updates](https://img.shields.io/badge/slam%20mirror%20bot-channel-blue)](https://t.me/SlamMirrorUpdates)
+[![Slam Mirror Updates](https://img.shields.io/badge/channel-blue)](https://t.me/SlamMirrorUpdates)
 
 **Slam Mirror Bot** is a _multipurpose_ Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 

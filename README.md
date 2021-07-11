@@ -4,20 +4,22 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=blue&style=flat)
 ![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=flat)
 ![GitHub issues](https://img.shields.io/github/issues/breakdowns/slam-mirrorbot)
-![GitHub closed issues](https://img.shields.io/github/issues-closed/breakdowns/slam-mirrorbot)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/breakdowns/slam-mirrorbot)
-![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/breakdowns/slam-mirrorbot)
 ![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=flat)
 ![GitHub repo size](https://img.shields.io/github/repo-size/breakdowns/slam-mirrorbot?color=red)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-mirrorbot)
 ![GitHub](https://img.shields.io/github/license/breakdowns/slam-mirrorbot)
-[![Slam Mirror Updates](https://img.shields.io/badge/slam%20mirror%20bot-channel-blue)](https://t.me/SlamMirrorUpdates)
+![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
+[![Channel](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/SlamMirrorUpdates)
 
 **Slam Mirror Bot** is a _multipurpose_ Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
+<details>
+    <summary><b>Click Here For More Details</b></summary>
+
 ## Additional Features
-- Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update)
+- Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update, for more info please check [Setting up config file](https://github.com/breakdowns/slam-mirrorbot/tree/master#setting-up-config-file))
 - Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
 - Get detailed info about replied media (Only for Telegram file)
 - Stop duplicate cloning Google Drive & mirroring Mega support
@@ -29,6 +31,7 @@
 - Extracting **tar.xz** support
 - Heroku config support
 - Custom Image support
+- Custom Progress bar
 - Counting file/folder
 - View Link button
 - Shell and Executor
@@ -68,6 +71,8 @@ APM, ARJ, CHM, CPIO, CramFS, DEB, DMG, FAT,
 HFS, LZH, LZMA, LZMA2, MBR, MSI, MSLZ, NSIS, 
 NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 ```
+
+</details>
 
 # How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:

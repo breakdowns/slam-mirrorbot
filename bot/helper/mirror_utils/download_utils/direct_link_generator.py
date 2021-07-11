@@ -30,7 +30,7 @@ from bot.helper.ext_utils.exceptions import DirectDownloadLinkException
 def direct_link_generator(link: str):
     """ direct links generator """
     if not link:
-        raise DirectDownloadLinkException("`No links found!`")
+        raise DirectDownloadLinkException("No links found!")
     elif 'youtube.com' in link or 'youtu.be' in link:
         raise DirectDownloadLinkException(f"Use /{BotCommands.WatchCommand} to mirror Youtube link\nUse /{BotCommands.TarWatchCommand} to make tar of Youtube playlist")
     elif 'zippyshare.com' in link:
@@ -87,29 +87,29 @@ def direct_link_generator(link: str):
 
 def zippy_share(url: str) -> str:
     """ ZippyShare direct links generator
-    Based on https://github.com/KenHV/Mirror-Bot """
-    link = re.findall("https:/.(.*?).zippyshare", url)[0]
-    response_content = (requests.get(url)).content
-    bs_obj = BeautifulSoup(response_content, "lxml")
-
+    Based on https://github.com/KenHV/Mirror-Bot
+             https://github.com/jovanzers/WinTenCermin """
     try:
-        js_script = bs_obj.find("div", {"class": "center",}).find_all(
-            "script"
-        )[1]
-    except:
-        js_script = bs_obj.find("div", {"class": "right",}).find_all(
-            "script"
-        )[0]
-
-    js_content = re.findall(r'\.href.=."/(.*?)";', str(js_script))
-    js_content = 'var x = "/' + js_content[0] + '"'
-
-    evaljs = EvalJs()
-    setattr(evaljs, "x", None)
-    evaljs.execute(js_content)
-    js_content = getattr(evaljs, "x")
-
-    return f"https://{link}.zippyshare.com{js_content}"
+        link = re.findall(r'\bhttps?://.*zippyshare\.com\S+', url)[0]
+    except IndexError:
+        raise DirectDownloadLinkException("No Zippyshare links found")
+    try:
+        base_url = re.search('http.+.zippyshare.com', link).group()
+        response = requests.get(link).content
+        pages = BeautifulSoup(response, "lxml")
+        try:
+            js_script = pages.find("div", {"class": "center"}).find_all("script")[1]
+        except IndexError:
+            js_script = pages.find("div", {"class": "right"}).find_all("script")[0]
+        js_content = re.findall(r'\.href.=."/(.*?)";', str(js_script))
+        js_content = 'var x = "/' + js_content[0] + '"'
+        evaljs = EvalJs()
+        setattr(evaljs, "x", None)
+        evaljs.execute(js_content)
+        js_content = getattr(evaljs, "x")
+        return base_url + js_content
+    except IndexError:
+        raise DirectDownloadLinkException("Can't find download button")
 
 
 def yandex_disk(url: str) -> str:
@@ -118,14 +118,14 @@ def yandex_disk(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*yadi\.sk\S+', url)[0]
     except IndexError:
-        reply = "`No Yandex.Disk links found`\n"
+        reply = "No Yandex.Disk links found\n"
         return reply
     api = 'https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key={}'
     try:
         dl_url = requests.get(api.format(link)).json()['href']
         return dl_url
     except KeyError:
-        raise DirectDownloadLinkException("`Error: File not found/Download limit reached`\n")
+        raise DirectDownloadLinkException("Error: File not found/Download limit reached\n")
 
 
 def cm_ru(url: str) -> str:
@@ -135,14 +135,14 @@ def cm_ru(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*cloud\.mail\.ru\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No cloud.mail.ru links found`\n")
+        raise DirectDownloadLinkException("No cloud.mail.ru links found\n")
     command = f'vendor/cmrudl.py/cmrudl -s {link}'
     result = popen(command).read()
     result = result.splitlines()[-1]
     try:
         data = json.loads(result)
     except json.decoder.JSONDecodeError:
-        raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
+        raise DirectDownloadLinkException("Error: Can't extract the link\n")
     dl_url = data['download']
     return dl_url
 
@@ -153,7 +153,7 @@ def uptobox(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*uptobox\.com\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No Uptobox links found`\n")
+        raise DirectDownloadLinkException("No Uptobox links found\n")
     if UPTOBOX_TOKEN is None:
         LOGGER.error('UPTOBOX_TOKEN not provided!')
         dl_url = link
@@ -175,7 +175,7 @@ def mediafire(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*mediafire\.com\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No MediaFire links found`\n")
+        raise DirectDownloadLinkException("No MediaFire links found\n")
     page = BeautifulSoup(requests.get(link).content, 'lxml')
     info = page.find('a', {'aria-label': 'Download file'})
     dl_url = info.get('href')
@@ -188,7 +188,7 @@ def osdn(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*osdn\.net\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No OSDN links found`\n")
+        raise DirectDownloadLinkException("No OSDN links found\n")
     page = BeautifulSoup(
         requests.get(link, allow_redirects=True).content, 'lxml')
     info = page.find('a', {'class': 'mirror_link'})
@@ -206,13 +206,13 @@ def github(url: str) -> str:
     try:
         re.findall(r'\bhttps?://.*github\.com.*releases\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No GitHub Releases links found`\n")
+        raise DirectDownloadLinkException("No GitHub Releases links found\n")
     download = requests.get(url, stream=True, allow_redirects=False)
     try:
         dl_url = download.headers["location"]
         return dl_url
     except KeyError:
-        raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
+        raise DirectDownloadLinkException("Error: Can't extract the link\n")
 
 
 def hxfile(url: str) -> str:
@@ -222,7 +222,7 @@ def hxfile(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*hxfile\.co\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No Hxfile links found`\n")
+        raise DirectDownloadLinkException("No Hxfile links found\n")
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_url(link)
     return dl_url
@@ -235,7 +235,7 @@ def anon(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*anonfiles\.com\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No Anonfiles links found`\n")
+        raise DirectDownloadLinkException("No Anonfiles links found\n")
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_url(link)
     return dl_url
@@ -248,7 +248,7 @@ def letsupload(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*letsupload\.io\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No Letsupload links found`\n")
+        raise DirectDownloadLinkException("No Letsupload links found\n")
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_url(link)
     return dl_url
@@ -286,7 +286,7 @@ def onedrive(link: str) -> str:
     direct_link1 = f"https://api.onedrive.com/v1.0/shares/u!{direct_link_encoded}/root/content"
     resp = requests.head(direct_link1)
     if resp.status_code != 302:
-        return "`Error: Unauthorized link, the link may be private`"
+        return "Error: Unauthorized link, the link may be private"
     dl_link = resp.next.url
     file_name = dl_link.rsplit("/", 1)[1]
     resp2 = requests.head(dl_link)

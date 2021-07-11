@@ -1,5 +1,5 @@
 {
-    "name": "ShinoAki",
+    "name": "hishirobot",
     "description": "Well, nothing here. Go away.",
     "logo": "",
     "keywords": [
@@ -75,7 +75,7 @@
         "required": true
       },
       "UPSTREAM_REPO": {
-        "description": "Link for Bot Upstream Repo, If you want default update, Fill https://github.com/hyPnOtICDo0g/hishirobot.",
+        "description": "Link for Bot Upstream Repo",
         "value": "https://github.com/hyPnOtICDo0g/hishirobot",
         "required": true
       },

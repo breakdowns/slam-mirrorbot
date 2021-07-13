@@ -1,0 +1,59 @@
+#Remove this line before deploying
+_____REMOVE_THIS_LINE_____=True
+
+# ENTER BOT TOKEN (Get your BOT_TOKEN by talking to @botfather)
+BOT_TOKEN = "1789576062:AAGCjkndVitGwEweX5Rh1vewYkYIOBwoars"
+GDRIVE_FOLDER_ID = "1pAAHl-byLHo1jq8dd02XZJKHwf4NHXu0"
+OWNER_ID = 1132978532
+DOWNLOAD_DIR = "/usr/src/app/downloads"
+DOWNLOAD_STATUS_UPDATE_INTERVAL = 5
+AUTO_DELETE_MESSAGE_DURATION = 20
+IS_TEAM_DRIVE = "True"
+TELEGRAM_API = 4075477
+TELEGRAM_HASH = "ad71aa7a5826b462edcb4356be9ad580"
+DATABASE_URL = "postgres://rbwovwacvvuzpp:89785940ee210d8f4695630436efd5516444bb668e1d1a0ae13e7689fa493fc3@ec2-3-218-71-191.compute-1.amazonaws.com:5432/delf095ic337lo"
+UPSTREAM_REPO = "https://github.com/breakdowns/slam-mirrorbot"
+UPSTREAM_BRANCH = "master"
+# OPTIONAL CONFIG
+AUTHORIZED_CHATS = "1132978532 -1001193921579"
+IGNORE_PENDING_REQUESTS = ""
+USE_SERVICE_ACCOUNTS = "True"
+INDEX_URL = "https://tdclone1.gdriveclone.workers.dev/0:"
+UPTOBOX_TOKEN = ""
+MEGA_API_KEY = ""
+MEGA_EMAIL_ID = ""
+MEGA_PASSWORD = ""
+BLOCK_MEGA_FOLDER = "False" 
+BLOCK_MEGA_LINKS = "False"
+STOP_DUPLICATE_MIRROR = "True"
+STOP_DUPLICATE_CLONE = "True"
+STOP_DUPLICATE_MEGA = "True"
+SHORTENER = ""
+SHORTENER_API = ""
+IMAGE_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXR7C4CZgOhRsbph7-qarrvOh3vaBwhBJM4A&usqp=CAU"
+# If you want to use Credentials externally from Index Links, fill these vars with the direct links
+# These are optional, if you don't know, simply leave them, don't fill anything in them.
+ACCOUNTS_ZIP_URL = ""
+TOKEN_PICKLE_URL = ""
+# To use limit leave space between number and unit. Available units is (gb or GB, tb or TB)
+TORRENT_DIRECT_LIMIT = "130 GB"
+TAR_UNZIP_LIMIT = "130 GB"
+CLONE_LIMIT = ""  
+MEGA_LIMIT = ""
+# Fill only if you deploying with heroku-cli and Goorm IDE
+HEROKU_API_KEY = ""
+HEROKU_APP_NAME = ""
+# View Link button to open file Index Link in browser instead of direct download link, you can figure out if it's compatible with your Index code or not, open any video from you Index and check if the END of link from browser link bar is ?a=view, if yes make it "True" it will work (Compatible with Bhadoo Index Code)
+VIEW_LINK = "True"
+# Add more buttons (Three buttons are already added of Drive Link, Index Link, and View Link, you can add extra buttons too, these are optional)
+# If you don't know what are below entries, simply leave them, Don't fill anything in them.
+BUTTON_FOUR_NAME = ""
+BUTTON_FOUR_URL = ""
+BUTTON_FIVE_NAME = ""
+BUTTON_FIVE_URL = ""
+BUTTON_SIX_NAME = ""
+BUTTON_SIX_URL = ""
+# Single character for finished progress
+FINISHED_PROGRESS_STR = "●"
+# Single character for unfinished progress
+UNFINISHED_PROGRESS_STR = "○"

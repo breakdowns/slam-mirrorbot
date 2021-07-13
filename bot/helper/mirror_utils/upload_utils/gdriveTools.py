@@ -298,7 +298,7 @@ class GoogleDriveHelper:
                 reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
                 if reason == 'userRateLimitExceeded' or reason == 'dailyLimitExceeded':
                     if USE_SERVICE_ACCOUNTS:
-                        if self.sa_count > self.service_account_count:
+                        if self.sa_count == self.service_account_count:
                             self.is_cancelled = True
                             raise err
                         else:
@@ -811,7 +811,7 @@ class GoogleDriveHelper:
                     reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
                     if reason == 'downloadQuotaExceeded' or reason == 'dailyLimitExceeded':
                         if USE_SERVICE_ACCOUNTS:
-                            if self.sa_count > self.service_account_count:
+                            if self.sa_count == self.service_account_count:
                                 self.is_cancelled = True
                                 raise err
                             else:

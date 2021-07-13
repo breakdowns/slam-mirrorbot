@@ -49,7 +49,7 @@
       "USE_SERVICE_ACCOUNTS": {
         "description": "Whether to use Service Accounts or not. For this to work see 'Using Service Accounts' in repo.",
         "required": false
-     }'
+     },
       "DATABASE_URL": {
         "description": "Your Database URL. See in repo to generate database.",
         "required": false
@@ -57,11 +57,11 @@
       "AUTHORIZED_CHATS": {
         "description": "Fill User ID and Chat ID of you want to authorize, Seprate them with space.",
         "required": false
-      }'
+      },
       "SUDO_USERS": {
         "description": "Fill user_id (not username) of you want to sudoers, Seprate them with space.",
         "required": false
-      }'
+      },
       "INDEX_URL": {
         "description": "Refer to https://github.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'.",
         "required": false

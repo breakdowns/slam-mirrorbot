@@ -85,7 +85,6 @@ class AriaDownloadHelper(DownloadHelper):
         else:
             if dl:
                 threading.Thread(target=dl.getListener().onDownloadComplete).start()
-                aria2.purge()
 
     @new_thread
     def __onDownloadStopped(self, api, gid):

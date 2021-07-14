@@ -15,38 +15,34 @@ class AriaDownloadHelper(DownloadHelper):
         super().__init__()
 
     @new_thread
-    def __onDownloadStarted(self, api: API, gid):
+    def __onDownloadStarted(self, api, gid):
         if STOP_DUPLICATE_MIRROR or TORRENT_DIRECT_LIMIT is not None or TAR_UNZIP_LIMIT is not None:
             sleep(1)
             dl = getDownloadByGid(gid)
-            download = api.get_download(gid)
-            
+            download = aria2.get_download(gid)
             if STOP_DUPLICATE_MIRROR:
                 LOGGER.info(f"Checking File/Folder if already in Drive...")
                 sleep(1)
-                self.name = aria2.get_download(gid).name
-                sname = self.name
+                sname = aria2.get_download(gid).name
                 if self.listener.isTar:
                     sname = sname + ".tar"
-                if self.listener.extract:
+                elif self.listener.extract:
                     smsg = None
                 else:
                     gdrive = GoogleDriveHelper(None)
                     smsg, button = gdrive.drive_list(sname)
                 if smsg:
                     dl.getListener().onDownloadError(f'File/Folder already available in Drive.\n\n')
-                    aria2.remove([download], force = True)
-                    aria2.purge()
+                    aria2.remove([download], force=True)
                     sendMarkup("Here are the search results:", dl.getListener().bot, dl.getListener().update, button)
                     return
-
             if TORRENT_DIRECT_LIMIT is not None or TAR_UNZIP_LIMIT is not None:
                 limit = None
                 if TAR_UNZIP_LIMIT is not None and (self.listener.isTar or self.listener.extract):
                     LOGGER.info(f"Checking File/Folder Size...")
                     limit = TAR_UNZIP_LIMIT
                     mssg = f'Tar/Unzip limit is {TAR_UNZIP_LIMIT}'
-                if TORRENT_DIRECT_LIMIT is not None and limit is None:
+                elif TORRENT_DIRECT_LIMIT is not None and limit is None:
                     LOGGER.info(f"Checking File/Folder Size...")
                     limit = TORRENT_DIRECT_LIMIT
                     mssg = f'Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}'
@@ -58,24 +54,23 @@ class AriaDownloadHelper(DownloadHelper):
                     if 'G' in limit[1] or 'g' in limit[1]:
                         if size > limitint * 1024**3:
                             dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
-                            aria2.remove([download], force = True)
-                            aria2.purge()
+                            aria2.remove([download], force=True)
                             return
                     elif 'T' in limit[1] or 't' in limit[1]:
                         if size > limitint * 1024**4:
                             dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
-                            aria2.remove([download], force = True)
-                            aria2.purge()
+                            aria2.remove([download], force=True)
                             return
         update_all_messages()
 
     def __onDownloadComplete(self, api: API, gid):
-        LOGGER.info(f"onDownloadComplete: {gid}")
         dl = getDownloadByGid(gid)
-        download = api.get_download(gid)
+        download = aria2.get_download(gid)
         if download.followed_by_ids:
             new_gid = download.followed_by_ids[0]
-            new_download = api.get_download(new_gid)
+            new_download = aria2.get_download(new_gid)
+            if dl is None:
+                dl = getDownloadByGid(new_gid)
             with download_dict_lock:
                 download_dict[dl.uid()] = AriaDownloadStatus(new_gid, dl.getListener())
                 if new_download.is_torrent:
@@ -88,22 +83,20 @@ class AriaDownloadHelper(DownloadHelper):
 
     @new_thread
     def __onDownloadStopped(self, api, gid):
-        sleep(5)
+        sleep(0.5)
         dl = getDownloadByGid(gid)
         if dl: 
             dl.getListener().onDownloadError('Dead torrent!')
-        aria2.purge()
 
     @new_thread
     def __onDownloadError(self, api, gid):
         sleep(0.5)  # sleep for split second to ensure proper dl gid update from onDownloadComplete
         dl = getDownloadByGid(gid)
-        download = api.get_download(gid)
+        download = aria2.get_download(gid)
         error = download.error_message
         LOGGER.info(f"Download Error: {error}")
         if dl: 
             dl.getListener().onDownloadError(error)
-        aria2.purge()
 
     def start_listener(self):
         aria2.listen_to_notifications(threaded=True, on_download_start=self.__onDownloadStarted,

@@ -104,7 +104,7 @@ class TelegramDownloadHelper(DownloadHelper):
                     LOGGER.info(f"Checking File/Folder if already in Drive...")
                     if self.__listener.isTar:
                         name = name + ".tar"
-                    if self.__listener.extract:           
+                    elif self.__listener.extract:           
                         smsg = None
                     else:
                         gd = GoogleDriveHelper()

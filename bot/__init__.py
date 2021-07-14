@@ -99,7 +99,7 @@ except:
     pass
 try:
     schats = getConfig('SUDO_USERS')
-    schats = achats.split(" ")
+    schats = schats.split(" ")
     for chats in schats:
         SUDO_USERS.add(int(chats))
 except:

@@ -169,7 +169,7 @@ class MegaDownloadHelper:
             mname = node.getName()
             if listener.isTar:
                 mname = mname + ".tar"
-            elif listener.extract:
+            if listener.extract:
                 smsg = None
             else:
                 gd = GoogleDriveHelper()

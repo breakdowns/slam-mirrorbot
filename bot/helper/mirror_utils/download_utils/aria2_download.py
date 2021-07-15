@@ -26,7 +26,7 @@ class AriaDownloadHelper(DownloadHelper):
                 sname = aria2.get_download(gid).name
                 if self.listener.isTar:
                     sname = sname + ".tar"
-                elif self.listener.extract:
+                if self.listener.extract:
                     smsg = None
                 else:
                     gdrive = GoogleDriveHelper(None)

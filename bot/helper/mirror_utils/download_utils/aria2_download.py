@@ -61,7 +61,7 @@ class AriaDownloadHelper(DownloadHelper):
                             dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
                             aria2.remove([download], force=True)
                             return
-            update_all_messages()
+        update_all_messages()
 
     def __onDownloadComplete(self, api: API, gid):
         dl = getDownloadByGid(gid)

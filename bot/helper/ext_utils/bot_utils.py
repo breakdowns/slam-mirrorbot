@@ -138,18 +138,18 @@ def get_readable_message():
                     msg += f"\n<b>To Stop:</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
                 msg += "\n\n"
                 if STATUS_LIMIT is not None:
-                    limit = COUNT + STATUS_LIMIT
-                    if INDEX >= limit:
+                    if INDEX >= COUNT + STATUS_LIMIT:
                         break
         if STATUS_LIMIT is not None:
-            if INDEX > limit:
+            if INDEX > COUNT + STATUS_LIMIT:
                 return None, None
-            msg += f"Page: {PAGE_NO}/{pages} | Tasks: {dick_no}\n"
-            buttons = button_build.ButtonMaker()
-            buttons.sbutton("Previous", "pre")
-            buttons.sbutton("Next", "nex")
-            button = InlineKeyboardMarkup(buttons.build_menu(2))
-            return msg, button
+            if dick_no > STATUS_LIMIT:
+                msg += f"Page: {PAGE_NO}/{pages} | Tasks: {dick_no}\n"
+                buttons = button_build.ButtonMaker()
+                buttons.sbutton("Previous", "pre")
+                buttons.sbutton("Next", "nex")
+                button = InlineKeyboardMarkup(buttons.build_menu(2))
+                return msg, button
         return msg, ""
 
 def flip(update, context):

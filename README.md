@@ -46,9 +46,10 @@ tgx, yts, eztv, torlock, rarbg
 ```
 - Direct links Supported:
 ```
-letsupload.io, hxfile.co, anonfiles.com, fembed.com, fembed.net, femax20.com,
-layarkacaxxi.icu, fcdn.stream, sbplay.org, naniplay.com, naniplay.nanime.in,
-naniplay.nanime.biz, sbembed.com, streamsb.net, feurl.com, pixeldrain.com,
+letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles,
+fembed.com, fembed.net, femax20.com, layarkacaxxi.icu, fcdn.stream,
+sbplay.org, naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com,
+streamtape.com, streamsb.net, feurl.com, pixeldrain.com, racaty.net,
 1drv.ms (Only works for file not folder or business account),
 uptobox.com (Uptobox account must be premium)
 ```
@@ -174,6 +175,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **IGNORE_PENDING_REQUESTS**: If you want the bot to ignore pending requests after it restarts, set this to `True`.
 - **FINISHED_PROGRESS_STR**: Single character for finished progress. Example: ```Uploading ●●●●○○○○ %50```. This value sets: `●`. You can Select any character from these listed sites: https://coolsymbol.com, https://changaco.oy.lc/unicode-progress-bars/, https://text-symbols.com/
 - **UNFINISHED_PROGRESS_STR**: Single character for finished progress. Example: ```Uploading ●●●●○○○○ %50```. This value sets: `○`. You can Select any character from these listed sites: https://coolsymbol.com, https://changaco.oy.lc/unicode-progress-bars/, https://text-symbols.com/
+- **STATUS_LIMIT**: Status limit with buttons (**NOTE**: Recommend limit status to ```4``` tasks max).
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
 - **SHORTENER**: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
 ```

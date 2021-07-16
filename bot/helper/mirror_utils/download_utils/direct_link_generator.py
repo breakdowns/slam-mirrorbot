@@ -48,7 +48,7 @@ def direct_link_generator(link: str):
     elif 'github.com' in link:
         return github(link)
     elif 'hxfile.co' in link:
-        return hxfile(link)
+        return racaty(link)
     elif 'anonfiles.com' in link:
         return anonfiles(link)
     elif 'letsupload.io' in link:
@@ -87,6 +87,8 @@ def direct_link_generator(link: str):
         return streamtape(link)
     elif 'bayfiles.com' in link:
         return anonfiles(link)
+    elif 'racaty.net' in link:
+        return racaty(link)
     else:
         raise DirectDownloadLinkException(f'No Direct link function found for {link}')
 
@@ -221,16 +223,11 @@ def github(url: str) -> str:
         raise DirectDownloadLinkException("Error: Can't extract the link\n")
 
 
-def hxfile(url: str) -> str:
-    """ Hxfile direct links generator
-    based on https://github.com/breakdowns/slam-mirrorbot """
-    dl_url = ''
-    try:
-        link = re.findall(r'\bhttps?://.*hxfile\.co\S+', url)[0]
-    except IndexError:
-        raise DirectDownloadLinkException("No Hxfile links found\n")
+def racaty(url: str) -> str:
+    """ Racaty direct link generator
+    Based on https://github.com/breakdowns/slam-mirrorbot """
     bypasser = lk21.Bypass()
-    dl_url=bypasser.bypass_url(link)
+    dl_url=bypasser.bypass_filesIm(url)
     return dl_url
 
 

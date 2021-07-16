@@ -50,7 +50,7 @@ def direct_link_generator(link: str):
     elif 'hxfile.co' in link:
         return hxfile(link)
     elif 'anonfiles.com' in link:
-        return anon(link)
+        return anonfiles(link)
     elif 'letsupload.io' in link:
         return letsupload(link)
     elif 'fembed.net' in link:
@@ -81,6 +81,12 @@ def direct_link_generator(link: str):
         return onedrive(link)
     elif 'pixeldrain.com' in link:
         return pixeldrain(link)
+    elif 'antfiles.com' in link:
+        return antfiles(link)
+    elif 'streamtape.com' in link:
+        return streamtape(link)
+    elif 'bayfiles.com' in link:
+        return anonfiles(link)
     else:
         raise DirectDownloadLinkException(f'No Direct link function found for {link}')
 
@@ -228,16 +234,11 @@ def hxfile(url: str) -> str:
     return dl_url
 
 
-def anon(url: str) -> str:
-    """ Anonfiles direct links generator
-    based on https://github.com/breakdowns/slam-mirrorbot """
-    dl_url = ''
-    try:
-        link = re.findall(r'\bhttps?://.*anonfiles\.com\S+', url)[0]
-    except IndexError:
-        raise DirectDownloadLinkException("No Anonfiles links found\n")
+def anonfiles(url: str) -> str:
+    """ Anonfiles direct link generator
+    Based on https://github.com/breakdowns/slam-mirrorbot """
     bypasser = lk21.Bypass()
-    dl_url=bypasser.bypass_url(link)
+    dl_url=bypasser.bypass_anonfiles(url)
     return dl_url
 
 
@@ -304,6 +305,22 @@ def pixeldrain(url: str) -> str:
         return dl_link
     else:
         raise DirectDownloadLinkException("ERROR: Cant't download due {}.".format(resp.text["value"]))
+
+
+def antfiles(url: str) -> str:
+    """ Antfiles direct link generator
+    Based on https://github.com/breakdowns/slam-mirrorbot """
+    bypasser = lk21.Bypass()
+    dl_url=bypasser.bypass_antfiles(url)
+    return dl_url
+
+
+def streamtape(url: str) -> str:
+    """ Streamtape direct link generator
+    Based on https://github.com/breakdowns/slam-mirrorbot """
+    bypasser = lk21.Bypass()
+    dl_url=bypasser.bypass_streamtape(url)
+    return dl_url
 
 
 def useragent():

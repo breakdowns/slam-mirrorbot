@@ -61,7 +61,7 @@ class AriaDownloadHelper(DownloadHelper):
                             dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
                             aria2.remove([download], force=True)
                             return
-        update_all_messages()
+            update_all_messages()
 
     def __onDownloadComplete(self, api: API, gid):
         dl = getDownloadByGid(gid)
@@ -83,13 +83,14 @@ class AriaDownloadHelper(DownloadHelper):
 
     @new_thread
     def __onDownloadStopped(self, api, gid):
-        sleep(0.5)
+        sleep(4)
         dl = getDownloadByGid(gid)
         if dl: 
             dl.getListener().onDownloadError('Dead torrent!')
 
     @new_thread
     def __onDownloadError(self, api, gid):
+        LOGGER.info(f"onDownloadError: {gid}")
         sleep(0.5)  # sleep for split second to ensure proper dl gid update from onDownloadComplete
         dl = getDownloadByGid(gid)
         download = aria2.get_download(gid)

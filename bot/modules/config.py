@@ -206,7 +206,7 @@ async def config_button(_, query):
     elif data == '10':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Visual Config ]**\n\n**FINISHED_PROGRESS_STR:** `{FINISHED_PROGRESS_STR}`\n\n**UNFINISHED_PROGRESS_STR:** `{UNFINISHED_PROGRESS_STR}`",
+            + f"**[ Visual Config ]**\n\n**FINISHED_PROGRESS_STR:** `{FINISHED_PROGRESS_STR}`\n\n**UNFINISHED_PROGRESS_STR:** `{UNFINISHED_PROGRESS_STR}`\n\n**PAGE_PREVIOUS_BUTTON_STR:** `{PAGE_PREVIOUS_BUTTON_STR}`\n\n**PAGE_NEXT_BUTTON_STR:** `{PAGE_NEXT_BUTTON_STR}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [

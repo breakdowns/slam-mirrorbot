@@ -208,6 +208,16 @@
         "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
         "value": "",
         "required": false
+      },
+      "PAGE_PREVIOUS_BUTTON_STR": {
+        "description": "Button text for previous page in status (Downloads) page.",
+        "value": "",
+        "required": false
+      },
+      "PAGE_NEXT_BUTTON_STR": {
+        "description": "Button text for next page in status (Downloads) page.",
+        "value": "",
+        "required": false
       }
     },
     "addons": [

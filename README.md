@@ -176,6 +176,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **FINISHED_PROGRESS_STR**: Single character for finished progress. Example: ```Uploading ●●●●○○○○ %50```. This value sets: `●`. You can Select any character from these listed sites: https://coolsymbol.com, https://changaco.oy.lc/unicode-progress-bars/, https://text-symbols.com/
 - **UNFINISHED_PROGRESS_STR**: Single character for finished progress. Example: ```Uploading ●●●●○○○○ %50```. This value sets: `○`. You can Select any character from these listed sites: https://coolsymbol.com, https://changaco.oy.lc/unicode-progress-bars/, https://text-symbols.com/
 - **STATUS_LIMIT**: Status limit with buttons (**NOTE**: Recommend limit status to ```4``` tasks max).
+- **PAGE_PREVIOUS_BUTTON_STR**: Button text for previous page in status (Downloads) page. Example emojis for PAGE_PREV: "⏪ - ⏮ - ◀️ - 🔺 - 🔼 - ⬆️ - ⬅️". Default string: "◀️ Previous"
+- **PAGE_NEXT_BUTTON_STR**: Button text for next page in status (Downloads) page. Example emojis for PAGE_NEXT: "⏩ - ⏭ - ▶️ - 🔻 - 🔽 - ⬇️ - ➡️". Default string: "Next ▶️"
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
 - **SHORTENER**: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
 ```

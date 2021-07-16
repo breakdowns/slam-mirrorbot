@@ -346,6 +346,18 @@ try:
         UNFINISHED_PROGRESS_STR = '○'
 except KeyError:
     UNFINISHED_PROGRESS_STR = '○'
+try:
+    PAGE_PREVIOUS_BUTTON_STR = getConfig('PAGE_PREVIOUS_BUTTON_STR')
+    if len(PAGE_PREVIOUS_BUTTON_STR) == 0:
+        PAGE_PREVIOUS_BUTTON_STR = '◀️ Previous'
+except KeyError:
+    PAGE_PREVIOUS_BUTTON_STR = '◀️ Previous'
+try:
+    PAGE_NEXT_BUTTON_STR = getConfig('PAGE_NEXT_BUTTON_STR')
+    if len(PAGE_NEXT_BUTTON_STR) == 0:
+        PAGE_NEXT_BUTTON_STR = 'Next ▶️'
+except KeyError:
+    PAGE_NEXT_BUTTON_STR = 'Next ▶️'
 updater = tg.Updater(token=BOT_TOKEN)
 bot = updater.bot
 dispatcher = updater.dispatcher

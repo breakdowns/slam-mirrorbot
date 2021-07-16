@@ -5,7 +5,11 @@ import time
 import math
 
 from bot.helper.telegram_helper.bot_commands import BotCommands
-from bot import dispatcher, download_dict, download_dict_lock, FINISHED_PROGRESS_STR, UNFINISHED_PROGRESS_STR, STATUS_LIMIT
+from bot import (
+    dispatcher, download_dict, download_dict_lock,
+    FINISHED_PROGRESS_STR, UNFINISHED_PROGRESS_STR, STATUS_LIMIT,
+    PAGE_PREVIOUS_BUTTON_STR, PAGE_NEXT_BUTTON_STR
+)
 from telegram import InlineKeyboardMarkup
 from telegram.ext import CallbackQueryHandler
 from bot.helper.telegram_helper import button_build, message_utils
@@ -144,10 +148,10 @@ def get_readable_message():
         if STATUS_LIMIT is not None:
             if INDEX > limit:
                 return None, None
-            msg += f"Page: {PAGE_NO}/{pages} | Tasks: {dick_no}\n"
+            msg += f"Page: {PAGE_NO}/{pages} | Total Tasks: {dick_no}\n"
             buttons = button_build.ButtonMaker()
-            buttons.sbutton("Previous", "pre")
-            buttons.sbutton("Next", "nex")
+            buttons.sbutton(PAGE_PREVIOUS_BUTTON_STR, "pre")
+            buttons.sbutton(PAGE_NEXT_BUTTON_STR, "nex")
             button = InlineKeyboardMarkup(buttons.build_menu(2))
             return msg, button
         return msg, ""

@@ -203,6 +203,11 @@
         "description": "Single character for unfinished progress",
         "value": "○",
         "required": false
+      },
+      "STATUS_LIMIT": {
+        "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
+        "value": "",
+        "required": false
       }
     },
     "addons": [

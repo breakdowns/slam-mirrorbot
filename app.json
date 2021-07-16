@@ -59,7 +59,7 @@
         "required": false
       },
       "INDEX_URL": {
-        "description": "Refer to https://github.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'.",
+        "description": "Refer to https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'.",
         "required": false
       },
       "TELEGRAM_API": {

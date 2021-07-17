@@ -112,6 +112,9 @@ def addSudo(update, context):
             if DB_URI is not None:
                 msg = DbManger().db_addsudo(user_id)
             else:
+                with open('authorized_chats.txt', 'a') as file:
+                    file.write(f'{user_id}\n')
+                    AUTHORIZED_CHATS.add(user_id)
                 with open('sudo_users.txt', 'a') as file:
                     file.write(f'{user_id}\n')
                     SUDO_USERS.add(user_id)
@@ -128,6 +131,9 @@ def addSudo(update, context):
                 if DB_URI is not None:
                     msg = DbManger().db_addsudo(user_id)
                 else:
+                    with open('authorized_chats.txt', 'a') as file:
+                        file.write(f'{user_id}\n')
+                        AUTHORIZED_CHATS.add(user_id)
                     with open('sudo_users.txt', 'a') as file:
                         file.write(f'{user_id}\n')
                         SUDO_USERS.add(user_id)
@@ -148,6 +154,7 @@ def removeSudo(update, context):
             if DB_URI is not None:
                 msg = DbManger().db_rmsudo(user_id)
             else:
+                AUTHORIZED_CHATS.remove(user_id)
                 SUDO_USERS.remove(user_id)
                 msg = 'Demoted'
         else:
@@ -161,11 +168,16 @@ def removeSudo(update, context):
                 if DB_URI is not None:
                     msg = DbManger().db_rmsudo(user_id)
                 else:
+                    AUTHORIZED_CHATS.remove(user_id)
                     SUDO_USERS.remove(user_id)
                     msg = 'Demoted'
             else:
                 msg = 'Not a Sudo'
     if DB_URI is None:
+        with open('authorized_chats.txt', 'a') as file:
+            file.truncate(0)
+            for i in AUTHORIZED_CHATS:
+                file.write(f'{i}\n')
         with open('sudo_users.txt', 'a') as file:
             file.truncate(0)
             for i in SUDO_USERS:

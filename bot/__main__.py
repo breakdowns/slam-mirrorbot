@@ -9,7 +9,7 @@ from datetime import datetime
 import pytz
 import time
 
-from telegram import ParseMode, BotCommand
+from telegram import ParseMode
 from telegram.ext import CommandHandler
 from bot import bot, dispatcher, updater, botStartTime, IMAGE_URL, IGNORE_PENDING_REQUESTS
 from bot.helper.ext_utils import fs_utils
@@ -193,25 +193,26 @@ def bot_help(update, context):
 
 
 botcmds = [
-BotCommand(f'{BotCommands.HelpCommand}','Get Detailed Help'),
-BotCommand(f'{BotCommands.MirrorCommand}', 'Start Mirroring'),
-BotCommand(f'{BotCommands.TarMirrorCommand}','Start mirroring and upload as .tar'),
-BotCommand(f'{BotCommands.UnzipMirrorCommand}','Extract files'),
-BotCommand(f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
-BotCommand(f'{BotCommands.CountCommand}','Count file/folder of Drive link'),
-BotCommand(f'{BotCommands.DeleteCommand}','Delete file from Drive'),
-BotCommand(f'{BotCommands.WatchCommand}','Mirror Youtube-dl support link'),
-BotCommand(f'{BotCommands.TarWatchCommand}','Mirror Youtube playlist link as .tar'),
-BotCommand(f'{BotCommands.CancelMirror}','Cancel a task'),
-BotCommand(f'{BotCommands.CancelAllCommand}','Cancel all tasks'),
-BotCommand(f'{BotCommands.ListCommand}','Searches files in Drive'),
-BotCommand(f'{BotCommands.StatusCommand}','Get Mirror Status message'),
-BotCommand(f'{BotCommands.StatsCommand}','Bot Usage Stats'),
-BotCommand(f'{BotCommands.PingCommand}','Ping the Bot'),
-BotCommand(f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
-BotCommand(f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
-BotCommand(f'{BotCommands.MediaInfoCommand}','Get detailed info about replied media'),
-BotCommand(f'{BotCommands.TsHelpCommand}','Get help for Torrent search module')]
+        (f'{BotCommands.HelpCommand}','Get Detailed Help'),
+        (f'{BotCommands.MirrorCommand}', 'Start Mirroring'),
+        (f'{BotCommands.TarMirrorCommand}','Start mirroring and upload as .tar'),
+        (f'{BotCommands.UnzipMirrorCommand}','Extract files'),
+        (f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
+        (f'{BotCommands.CountCommand}','Count file/folder of Drive link'),
+        (f'{BotCommands.DeleteCommand}','Delete file from Drive'),
+        (f'{BotCommands.WatchCommand}','Mirror Youtube-dl support link'),
+        (f'{BotCommands.TarWatchCommand}','Mirror Youtube playlist link as .tar'),
+        (f'{BotCommands.CancelMirror}','Cancel a task'),
+        (f'{BotCommands.CancelAllCommand}','Cancel all tasks'),
+        (f'{BotCommands.ListCommand}','Searches files in Drive'),
+        (f'{BotCommands.StatusCommand}','Get Mirror Status message'),
+        (f'{BotCommands.StatsCommand}','Bot Usage Stats'),
+        (f'{BotCommands.PingCommand}','Ping the Bot'),
+        (f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
+        (f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
+        (f'{BotCommands.MediaInfoCommand}','Get detailed info about replied media'),
+        (f'{BotCommands.TsHelpCommand}','Get help for Torrent search module')
+    ]
 
 
 def main():

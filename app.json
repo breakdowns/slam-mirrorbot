@@ -59,7 +59,7 @@
         "required": false
       },
       "INDEX_URL": {
-        "description": "Refer to https://github.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'.",
+        "description": "Refer to https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'.",
         "required": false
       },
       "TELEGRAM_API": {
@@ -202,6 +202,11 @@
       "UNFINISHED_PROGRESS_STR": {
         "description": "Single character for unfinished progress",
         "value": "○",
+        "required": false
+      },
+      "STATUS_LIMIT": {
+        "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
+        "value": "",
         "required": false
       }
     },

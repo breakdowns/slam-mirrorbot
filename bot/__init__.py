@@ -89,6 +89,7 @@ if os.path.exists('sudo_users.txt'):
     with open('sudo_users.txt', 'r+') as f:
         lines = f.readlines()
         for line in lines:
+            AUTHORIZED_CHATS.add(int(line.split()[0]))
             SUDO_USERS.add(int(line.split()[0]))
 try:
     achats = getConfig('AUTHORIZED_CHATS')
@@ -101,6 +102,7 @@ try:
     schats = getConfig('SUDO_USERS')
     schats = schats.split(" ")
     for chats in schats:
+        AUTHORIZED_CHATS.add(int(chats))
         SUDO_USERS.add(int(chats))
 except:
     pass

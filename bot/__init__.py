@@ -348,6 +348,13 @@ try:
         UNFINISHED_PROGRESS_STR = '○'
 except KeyError:
     UNFINISHED_PROGRESS_STR = '○'
+try:
+    TIMEZONE = getConfig('TIMEZONE')
+    if len(TIMEZONE) == 0:
+        TIMEZONE = 'Asia/Jakarta'
+except KeyError:
+    TIMEZONE = 'Asia/Jakarta'
+
 updater = tg.Updater(token=BOT_TOKEN)
 bot = updater.bot
 dispatcher = updater.dispatcher

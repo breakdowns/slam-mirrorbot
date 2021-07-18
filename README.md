@@ -49,7 +49,7 @@ tgx, yts, eztv, torlock, rarbg
 letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles,
 fembed.com, fembed.net, femax20.com, layarkacaxxi.icu, fcdn.stream,
 sbplay.org, naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com,
-streamtape.com, streamsb.net, feurl.com, pixeldrain.com,
+streamtape.com, streamsb.net, feurl.com, pixeldrain.com, racaty.net,
 1drv.ms (Only works for file not folder or business account),
 uptobox.com (Uptobox account must be premium)
 ```
@@ -167,6 +167,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **MEGA_LIMIT**: To limit downloading Mega (leave space between number and unit, Available units is (gb or GB, tb or TB), Examples: ```100 gb, 100 GB, 10 tb, 10 TB```
 - **TORRENT_DIRECT_LIMIT**: To limit the Torrent/Direct mirror size, Leave space between number and unit. Available units is (gb or GB, tb or TB), Examples: ```100 gb, 100 GB, 10 tb, 10 TB```
 - **TAR_UNZIP_LIMIT**: To limit mirroring as Tar or unzipmirror. Available units is (gb or GB, tb or TB), Examples: ```100 gb, 100 GB, 10 tb, 10 TB```
+- **TIMEZONE**: To change time zone in ```/stats``` command (**NOTE**: Default time zone using ```Asia/Jakarta```)
 - **IMAGE_URL**: Show Image/Logo in /start message. Fill value of image your link image, use telegra.ph or any direct link image.
 - **VIEW_LINK**: View Link button to open file Index Link in browser instead of direct download link, you can figure out if it's compatible with your Index code or not, open any video from you Index and check if the END of link from browser link bar is `?a=view`, if yes make it `True` it will work (Compatible with [Bhadoo Index](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index) Code)
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).

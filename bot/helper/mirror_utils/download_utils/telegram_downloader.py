@@ -82,7 +82,7 @@ class TelegramDownloadHelper(DownloadHelper):
                 self.__onDownloadError('Internal error occurred')
 
     def add_download(self, message, path, filename):
-        _message = self._bot.get_messages(message.chat.id, message.message_id)
+        _message = self._bot.get_messages(message.chat.id, reply_to_message_ids=message.message_id)
         media = None
         media_array = [_message.document, _message.video, _message.audio]
         for i in media_array:

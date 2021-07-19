@@ -40,7 +40,7 @@ def cloneNode(update, context):
                 if clonesize > limitint * 1024**4:
                     sendMessage(msg2, context.bot, update)
                     return              
-        if files < 15:
+        if files < 15 and clonesize < 15 * 1024**3:
             msg = sendMessage(f"Cloning: <code>{link}</code>", context.bot, update)
             result, button = gd.clone(link)
             deleteMessage(context.bot, msg)

@@ -72,7 +72,6 @@ def cancel_all(update, context):
                 count += 1
         else:
             break
-    delete_all_messages()
     sendMessage(f'{count} Download(s) has been Cancelled!', context.bot, update)
 
 

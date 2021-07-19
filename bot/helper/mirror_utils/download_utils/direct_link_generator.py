@@ -341,6 +341,9 @@ def racaty(url: str) -> str:
 
 
 def fichier(link: str) -> str:
+    """ 1Fichier direct links generator
+    Based on https://github.com/Maujar/updateref-16-7-21
+             https://github.com/breakdowns/slam-mirrorbot """
   regex = r"^([http:\/\/|https:\/\/]+)?.*1fichier\.com\/\?.+"
   gan = re.match(regex, link)
   if not gan:

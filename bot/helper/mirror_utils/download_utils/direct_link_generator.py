@@ -89,6 +89,8 @@ def direct_link_generator(link: str):
         return anonfiles(link)
     elif 'racaty.net' in link:
         return racaty(link)
+    elif '1fichier.com' in link:
+        return fichier(link)
     else:
         raise DirectDownloadLinkException(f'No Direct link function found for {link}')
 
@@ -336,6 +338,65 @@ def racaty(url: str) -> str:
     rsoup = BeautifulSoup(rpost.text, "lxml")
     dl_url = rsoup.find("a", {"id": "uniqueExpirylink"})["href"].replace(" ", "%20")
     return dl_url
+
+
+def fichier(link: str) -> str:
+  regex = r"^([http:\/\/|https:\/\/]+)?.*1fichier\.com\/\?.+"
+  gan = re.match(regex, link)
+  if not gan:
+    raise DirectDownloadLinkException("ERROR: The link you entered is wrong!")
+  if "::" in link:
+    pswd = link.split("::")[-1]
+    url = link.split("::")[-2]
+  else:
+    pswd = None
+    url = link
+  try:
+    if pswd is None:
+      req = requests.post(url)
+    else:
+      pw = {"pass": pswd}
+      req = requests.post(url, data=pe)
+  except:
+    raise DirectDownloadLinkException("ERROR: Unable to reach 1fichier server!")
+  if req.status_code == 404:
+    raise DirectDownloadLinkException("ERROR: File not found / The link you entered is wrong!")
+  soup = BeautifulSoup(req.content, 'lxml')
+  if soup.find("a", {"class": "ok btn-general btn-orange"}) is not None:
+    dl_url = soup.find("a", {"class": "ok btn-general btn-orange"})["href"]
+    if dl_url is None:
+      raise DirectDownloadLinkException("ERROR: Unable to generate Direct Link 1fichier!")
+    else:
+      return dl_url
+  else:
+    if len(soup.find_all("div", {"class": "ct_warn"})) == 2:
+      str_2 = soup.find_all("div", {"class": "ct_warn"})[-1]
+      if "you must wait" in str(str_2).lower():
+        numbers = [int(word) for word in str(str_2).split() if word.isdigit()]
+        if len(numbers) == 0:
+          raise DirectDownloadLinkException("ERROR: 1fichier is on a limit. Please wait a few minutes/hour.")
+        else:
+          raise DirectDownloadLinkException(f"ERROR: 1fichier is on a limit. Please wait {numbers[0]} minute.")
+      elif "protect access" in str(str_2).lower():
+        raise DirectDownloadLinkException("ERROR: This link requires a password!\n\n<b>This link requires a password!</b>\n- Insert sign <b>::</b> after the link and write the password after the sign.\n\n<b>Example:</b>\n<code>/mirror https://1fichier.com/?smmtd8twfpm66awbqz04::love you</code>\n\n* No spaces between the signs <b>::</b>\n* For the password, you can use a space!")
+      else:
+        raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
+    elif len(soup.find_all("div", {"class": "ct_warn"})) == 3:
+      str_1 = soup.find_all("div", {"class": "ct_warn"})[-2]
+      str_3 = soup.find_all("div", {"class": "ct_warn"})[-1]
+      if "you must wait" in str(str_1).lower():
+        numbers = [int(word) for word in str(str_1).split() if word.isdigit()]
+        if len(numbers) == 0:
+          raise DirectDownloadLinkException("ERROR: 1fichier is on a limit. Please wait a few minutes/hour.")
+        else:
+          raise DirectDownloadLinkException(f"ERROR: 1fichier is on a limit. Please wait {numbers[0]} minute.")
+      elif "bad password" in str(str_3).lower():
+        raise DirectDownloadLinkException("ERROR: The password you entered is wrong!")
+      else:
+        raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
+    else:
+      raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
+
 
 def useragent():
     """

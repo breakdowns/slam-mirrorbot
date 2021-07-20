@@ -23,6 +23,7 @@ PAGE_NO = 1
 class MirrorStatus:
     STATUS_UPLOADING = "Uploading...📤"
     STATUS_DOWNLOADING = "Downloading...📥"
+    STATUS_CLONING = "Cloning...♻️"
     STATUS_WAITING = "Queued...📝"
     STATUS_FAILED = "Failed 🚫. Cleaning Download..."
     STATUS_ARCHIVING = "Archiving...🔐"
@@ -70,8 +71,7 @@ def getDownloadByGid(gid):
     with download_dict_lock:
         for dl in download_dict.values():
             status = dl.status()
-            if status != MirrorStatus.STATUS_UPLOADING and status != MirrorStatus.STATUS_ARCHIVING \
-                    and status != MirrorStatus.STATUS_EXTRACTING:
+            if status != MirrorStatus.STATUS_ARCHIVING and status != MirrorStatus.STATUS_EXTRACTING:
                 if dl.gid() == gid:
                     return dl
     return None
@@ -79,10 +79,10 @@ def getDownloadByGid(gid):
 def getAllDownload():
     with download_dict_lock:
         for dlDetails in list(download_dict.values()):
-            if dlDetails.status() == MirrorStatus.STATUS_DOWNLOADING \
-                    or dlDetails.status() == MirrorStatus.STATUS_WAITING:
+            if dlDetails.status() == MirrorStatus.STATUS_DOWNLOADING or dlDetails.status() == MirrorStatus.STATUS_WAITING:
                 if dlDetails:
                     return dlDetails
+    return None
 
 def get_progress_bar_string(status):
     completed = status.processed_bytes() / 8
@@ -123,6 +123,8 @@ def get_readable_message():
                     msg += f"\n<code>{get_progress_bar_string(download)} {download.progress()}</code>"
                     if download.status() == MirrorStatus.STATUS_DOWNLOADING:
                         msg += f"\n<b>Downloaded:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
+                    elif download.status() == MirrorStatus.STATUS_CLONING:
+                        msg += f"\n<b>Cloned:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                     else:
                         msg += f"\n<b>Uploaded:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                     msg += f"\n<b>Speed:</b> {download.speed()}" \
@@ -134,7 +136,6 @@ def get_readable_message():
                     except:
                         pass
                     msg += f'\n<b>User:</b> <a href="tg://user?id={download.message.from_user.id}">{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)'
-                if download.status() == MirrorStatus.STATUS_DOWNLOADING:
                     msg += f"\n<b>To Stop:</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
                 msg += "\n\n"
                 if STATUS_LIMIT is not None:

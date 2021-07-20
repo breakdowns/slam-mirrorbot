@@ -2,6 +2,7 @@ aiohttp
 aria2p
 appdirs
 beautifulsoup4
+cloudscrape
 feedparser
 gitpython
 google-api-python-client

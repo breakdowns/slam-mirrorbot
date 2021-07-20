@@ -192,7 +192,7 @@ async def config_button(_, query):
     elif data == '9':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Others Config ]**\n\n**VIEW_LINK:** `{VIEW_LINK}`\n\n**STATUS_LIMIT:** `{STATUS_LIMIT}`\n\n**DOWNLOAD_STATUS_UPDATE_INTERVAL:** `{DOWNLOAD_STATUS_UPDATE_INTERVAL}`\n\n**IGNORE_PENDING_REQUESTS:** `{IGNORE_PENDING_REQUESTS}`\n\n**AUTO_DELETE_MESSAGE_DURATION:** `{AUTO_DELETE_MESSAGE_DURATION}`\n\n**DOWNLOAD_DIR:** `{DOWNLOAD_DIR}`\n\n**IMAGE_URL:** `{IMAGE_URL}`\n\n**DATABASE_URL:** `{DB_URI}`",
+            + f"**[ Others Config ]**\n\n**VIEW_LINK:** `{VIEW_LINK}`\n\n**STATUS_LIMIT:** `{STATUS_LIMIT}`\n\n**TIMEZONE:** `{TIMEZONE}`\n\n**DOWNLOAD_STATUS_UPDATE_INTERVAL:** `{DOWNLOAD_STATUS_UPDATE_INTERVAL}`\n\n**IGNORE_PENDING_REQUESTS:** `{IGNORE_PENDING_REQUESTS}`\n\n**AUTO_DELETE_MESSAGE_DURATION:** `{AUTO_DELETE_MESSAGE_DURATION}`\n\n**DOWNLOAD_DIR:** `{DOWNLOAD_DIR}`\n\n**IMAGE_URL:** `{IMAGE_URL}`\n\n**DATABASE_URL:** `{DB_URI}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [

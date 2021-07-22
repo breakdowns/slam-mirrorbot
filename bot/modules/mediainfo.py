@@ -49,7 +49,8 @@ async def mediainfo(client, message):
 <h2>DETAILS</h2>
 <pre>{out or 'Not Supported'}</pre>
 """
+    title = f"Slam Mirror Bot Mediainfo"
     text_ = media_type.split(".")[-1].upper()
-    link = post_to_telegraph(media_type, body_text)
+    link = post_to_telegraph(title, body_text)
     markup = InlineKeyboardMarkup([[InlineKeyboardButton(text=text_, url=link)]])
     await process.edit_text("ℹ️ <b>MEDIA INFO</b>", reply_markup=markup)

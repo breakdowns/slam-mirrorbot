@@ -321,6 +321,7 @@ def streamtape(url: str) -> str:
     dl_url=bypasser.bypass_streamtape(url)
     return dl_url
 
+
 def racaty(url: str) -> str:
     """ Racaty direct links generator
     based on https://github.com/breakdowns/slam-mirrorbot """

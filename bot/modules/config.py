@@ -3,13 +3,13 @@
 
 from pyrogram import filters, types, emoji
 from bot.helper.telegram_helper.bot_commands import BotCommands
-from bot import app, OWNER_ID
+from bot import app, OWNER_ID, bot
 from bot.helper import get_text, check_heroku
 from bot import *
 
 # Add Variable
 
-@app.on_message(filters.command('setvar') & filters.user(OWNER_ID))
+@app.on_message(filters.command(['setvar', f'setvar@{bot.username}']) & filters.user(OWNER_ID))
 @check_heroku
 async def set_varr(client, message, app_):
     msg_ = await message.reply_text("`Please Wait!`")
@@ -34,7 +34,7 @@ async def set_varr(client, message, app_):
 
 # Delete Variable
         
-@app.on_message(filters.command('delvar') & filters.user(OWNER_ID))
+@app.on_message(filters.command(['delvar', f'delvar@{bot.username}']) & filters.user(OWNER_ID))
 @check_heroku
 async def del_varr(client, message, app_):
     msg_ = await message.reply_text("`Please Wait!`", parse_mode="markdown")
@@ -52,7 +52,7 @@ async def del_varr(client, message, app_):
         parse_mode="markdown")
     del heroku_var[_var]
 
-@app.on_message(filters.command(['reboot']) & filters.user(OWNER_ID))
+@app.on_message(filters.command(['reboot', f'reboot@{bot.username}']) & filters.user(OWNER_ID))
 @check_heroku
 async def gib_restart(client, message, hap):
     msg_ = await message.reply_text("[HEROKU] - Restarting")
@@ -62,7 +62,7 @@ async def gib_restart(client, message, hap):
 
 __header__='📕 **Page** **{}**\n\n'
 
-@app.on_message(filters.command(BotCommands.ConfigMenuCommand) & filters.user(OWNER_ID))
+@app.on_message(filters.command([BotCommands.ConfigMenuCommand, f'{BotCommands.ConfigMenuCommand}@{bot.username}']) & filters.user(OWNER_ID))
 async def config_menu(_, message):
     await message.reply(
         f"**Hello {message.from_user.mention}**,\n\n**If you want to add or set Variable in Heroku use** `/setvar`\n\n**If you want to delete Variable in Heroku use `/delvar`**\n\n**WARNING! Very Recommended to do this command in private since it's contain Bot info.**\n\n**Here's This is Slam-MirrorBot Current Configs**",

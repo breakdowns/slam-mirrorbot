@@ -56,7 +56,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         if update.message.chat.type == "private" :
             sendMessage(f"Hey I'm Alive 🙂\nSince: <code>{uptime}</code>", context.bot, update)
         else :
-            update.effective_message.reply_text(start_string, reply_markup=reply_markup)
+            sendMarkup(start_string, context.bot, update, reply_markup)
     else :
         sendMessage(f"Oops! not a Authorized user.", context.bot, update)
 

@@ -6,6 +6,7 @@ import traceback
 from contextlib import redirect_stdout
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
+from bot.helper.telegram_helper.message_utils import sendMessage
 from bot import LOGGER, dispatcher
 from telegram import ParseMode
 from telegram.ext import CommandHandler
@@ -126,7 +127,7 @@ def exechelp(update, context):
 • <code>/exec</code> <i>Run Commands In Exec</i>
 • <code>/clearlocals</code> <i>Cleared locals</i>
 '''
-    update.effective_message.reply_text(help_string, parse_mode=ParseMode.HTML)
+    sendMessage(help_string, context.bot, update)
 
 
 EVAL_HANDLER = CommandHandler(('eval'), evaluate, filters=CustomFilters.owner_filter, run_async=True)

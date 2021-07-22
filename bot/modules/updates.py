@@ -13,7 +13,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
 from pyrogram import filters
 
-from bot import app, OWNER_ID, UPSTREAM_REPO, UPSTREAM_BRANCH
+from bot import app, OWNER_ID, UPSTREAM_REPO, UPSTREAM_BRANCH, bot
 from bot.helper import runcmd, get_text, HEROKU_URL
 from bot.helper.telegram_helper.bot_commands import BotCommands
 
@@ -22,7 +22,7 @@ BRANCH_ = UPSTREAM_BRANCH
 
 # Update Command
 
-@app.on_message(filters.command(BotCommands.UpdateCommand) & filters.user(OWNER_ID))
+@app.on_message(filters.command([BotCommands.UpdateCommand, f'{BotCommands.UpdateCommand}@{bot.username}']) & filters.user(OWNER_ID))
 async def update_it(client, message):
     msg_ = await message.reply_text("`Updating Please Wait!`")
     try:

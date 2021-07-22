@@ -8,7 +8,7 @@ from sys import executable
 
 from telegram import ParseMode
 from telegram.ext import CommandHandler
-from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, TIMEZONE
+from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *

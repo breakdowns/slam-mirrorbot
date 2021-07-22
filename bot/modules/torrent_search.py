@@ -18,7 +18,7 @@ from pyrogram.parser import html as pyrogram_html
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.handlers import MessageHandler, CallbackQueryHandler
 
-from bot import app, dispatcher, IMAGE_URL
+from bot import app, dispatcher
 from bot.helper import custom_filters
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
@@ -330,7 +330,7 @@ def searchhelp(update, context):
 • <code>/rarbg</code> <i>[search query]</i>
 • <code>/ts</code> <i>[search query]</i>
 '''
-    update.effective_message.reply_photo(IMAGE_URL, help_string, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_text(help_string, parse_mode=ParseMode.HTML)
     
     
 SEARCHHELP_HANDLER = CommandHandler(BotCommands.TsHelpCommand, searchhelp, filters=(CustomFilters.authorized_chat | CustomFilters.authorized_user) & CustomFilters.mirror_owner_filter, run_async=True)

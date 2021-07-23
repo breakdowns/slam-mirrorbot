@@ -15,7 +15,7 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, usage, mediainfo, count, config, updates
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, config, updates
 
 
 def stats(update, context):
@@ -132,11 +132,7 @@ def bot_help(update, context):
 
 /{BotCommands.UpdateCommand}: Update Bot from Upstream Repo (Owner Only)
 
-/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner & Sudo only)
-
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
-
-/{BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file)
 
 /{BotCommands.ShellCommand}: Run commands in Shell (Terminal)
 
@@ -172,10 +168,6 @@ def bot_help(update, context):
 
 /{BotCommands.PingCommand}: Check how long it takes to Ping the Bot
 
-/{BotCommands.SpeedCommand}: Check Internet Speed of the Host
-
-/{BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file)
-
 /{BotCommands.TsHelpCommand}: Get help for Torrent search module
 '''
 
@@ -203,7 +195,6 @@ botcmds = [
         (f'{BotCommands.PingCommand}','Ping the Bot'),
         (f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
         (f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
-        (f'{BotCommands.MediaInfoCommand}','Get detailed info about replied media'),
         (f'{BotCommands.TsHelpCommand}','Get help for Torrent search module')
     ]
 

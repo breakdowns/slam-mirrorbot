@@ -295,7 +295,7 @@ def _mirror(bot, update, isTar=False, extract=False):
     try:
         link = direct_link_generator(link)
     except DirectDownloadLinkException as e:
-        LOGGER.info(f'{link}: {e}')
+        LOGGER.info(e)
         if "ERROR:" in str(e):
             sendMessage(f"{e}", bot, update)
             return

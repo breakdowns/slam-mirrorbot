@@ -86,15 +86,17 @@ def gitpull(update, context):
     msg = update.effective_message.reply_text(
         "Pulling all changes from remote and then attempting to restart.",
     )
-    subprocess.Popen("git pull", stdout=subprocess.PIPE, shell=True)
+    proc = subprocess.Popen("git pull", stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    result = proc.communicate(PASS)
 
     sent_msg = msg.text + "\n\nChanges pulled... I guess..."
 
     for i in reversed(range(5)):
         msg.edit_text(sent_msg + str(i + 1))
         time.sleep(1)
-
-    msg.edit_text(f"Do Restart after you see this with /{BotCommands.RestartCommand}.")
+    if not result.stdout.read():
+        msg.edit_text(result.stderr.read(),....)
+       #msg.edit_text(f"Do Restart after you see this with /{BotCommands.RestartCommand}.")
 
 def bot_help(update, context):
     help_string_adm = f'''

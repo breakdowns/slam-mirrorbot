@@ -13,7 +13,6 @@ html-telegraph-poster
 js2py
 lk21
 lxml
-messages
 psutil
 psycopg2-binary
 pybase64

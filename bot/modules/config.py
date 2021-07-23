@@ -48,7 +48,7 @@ async def del_varr(client, message, app_):
         return
     await msg_.edit(
         f"`Sucessfully Deleted {_var} Var!`" \
-        f"\nYour heroku app will restart. Be patient.",
+        f"\nYour Heroku app will restart. Be patient.",
         parse_mode="markdown")
     del heroku_var[_var]
 

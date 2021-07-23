@@ -82,6 +82,19 @@ def ping(update, context):
 def log(update, context):
     sendLogFile(context.bot, update)
 
+def gitpull(update, context):
+    msg = update.effective_message.reply_text(
+        "Pulling all changes from remote and then attempting to restart.",
+    )
+    subprocess.Popen("git pull", stdout=subprocess.PIPE, shell=True)
+
+    sent_msg = msg.text + "\n\nChanges pulled...I guess.. Restarting in "
+
+    for i in reversed(range(5)):
+        msg.edit_text(sent_msg + str(i + 1))
+        time.sleep(1)
+
+    msg.edit_text(f"Do Restart after you see this with /{BotCommands.RestartCommand}.")
 
 def bot_help(update, context):
     help_string_adm = f'''
@@ -203,7 +216,6 @@ botcmds = [
 def main():
     fs_utils.start_cleanup()
     # Check if the bot is restarting
-    subprocess.Popen("git pull", stdout=subprocess.PIPE, shell=True)
     if os.path.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
@@ -221,6 +233,9 @@ def main():
     stats_handler = CommandHandler(BotCommands.StatsCommand,
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
+    GITPULL_HANDLER = CommandHandler(BotCommands.UpdateCommand, gitpull, filters=CustomFilters.owner_filter, run_async=True)
+    
+    dispatcher.add_handler(GITPULL_HANDLER)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)

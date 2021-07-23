@@ -25,18 +25,16 @@
 ## Additional Features
 - Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update, for more info please check [Setting up config file](https://github.com/breakdowns/slam-mirrorbot/tree/master#setting-up-config-file))
 - Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
-- Get detailed info about replied media (Only for Telegram file)
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Tar/Unzip Google Drive link support
-- Speedtest with picture results
 - Sudo with Database support
 - Multiple Trackers support
-- Check Heroku dynos stats
 - Extracting **tar.xz** support
 - Heroku config support
 - Counting file/folder
 - View Link button
 - Shell and Executor
+- Speedtest
 - Torrent search Supported:
 ```
 nyaa.si, sukebei, 1337x, piratebay,

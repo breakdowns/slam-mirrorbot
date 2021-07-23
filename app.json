@@ -199,16 +199,6 @@
         "description": "Fill your URL if you are using extra buttons.",
         "required": false
       },
-      "FINISHED_PROGRESS_STR": {
-        "description": "Single character for finished progress",
-        "value": "●",
-        "required": false
-      },
-      "UNFINISHED_PROGRESS_STR": {
-        "description": "Single character for unfinished progress",
-        "value": "○",
-        "required": false
-      },
       "STATUS_LIMIT": {
         "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
         "value": "",

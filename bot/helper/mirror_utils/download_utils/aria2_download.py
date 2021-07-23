@@ -1,4 +1,4 @@
-from bot import aria2, download_dict_lock, STOP_DUPLICATE_MIRROR, TORRENT_DIRECT_LIMIT, TAR_UNZIP_LIMIT
+from bot import aria2, download_dict_lock, STOP_DUPLICATE, TORRENT_DIRECT_LIMIT, TAR_UNZIP_LIMIT
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.ext_utils.bot_utils import *
 from .download_helper import DownloadHelper
@@ -16,11 +16,11 @@ class AriaDownloadHelper(DownloadHelper):
 
     @new_thread
     def __onDownloadStarted(self, api, gid):
-        if STOP_DUPLICATE_MIRROR or TORRENT_DIRECT_LIMIT is not None or TAR_UNZIP_LIMIT is not None:
+        if STOP_DUPLICATE or TORRENT_DIRECT_LIMIT is not None or TAR_UNZIP_LIMIT is not None:
             sleep(1)
             dl = getDownloadByGid(gid)
             download = aria2.get_download(gid)
-            if STOP_DUPLICATE_MIRROR:
+            if STOP_DUPLICATE:
                 LOGGER.info(f"Checking File/Folder if already in Drive...")
                 sleep(1)
                 sname = aria2.get_download(gid).name

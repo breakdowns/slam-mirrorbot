@@ -119,7 +119,7 @@ async def config_button(_, query):
     elif data == '4':
         return await query.message.edit(
             __header__.format(data)
-            + f"**[ Stop Duplicate Config ]**\n\n**STOP_DUPLICATE_MIRROR:** `{STOP_DUPLICATE_MIRROR}`\n\n**STOP_DUPLICATE_CLONE:** `{STOP_DUPLICATE_CLONE}`\n\n**STOP_DUPLICATE_MEGA:** `{STOP_DUPLICATE_MEGA}`\n\n**[ Block Mega Config ]**\n\n**BLOCK_MEGA_FOLDER:** `{BLOCK_MEGA_FOLDER}`\n\n**BLOCK_MEGA_LINKS:** `{BLOCK_MEGA_LINKS}`",
+            + f"**[ Stop/Block Config ]**\n\n**STOP_DUPLICATE** `{STOP_DUPLICATE}`\n\n**[ Block Mega Config ]**\n\n**BLOCK_MEGA_FOLDER:** `{BLOCK_MEGA_FOLDER}`\n\n**BLOCK_MEGA_LINKS:** `{BLOCK_MEGA_LINKS}`",
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [

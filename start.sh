@@ -8,4 +8,8 @@ if [[ -n $ACCOUNTS_ZIP_URL ]]; then
 	rm accounts.zip
 fi
 
+if [[ -n $GITHUB_TOKEN ]]; then
+	echo "https://$GITHUB_TOKEN@github.com" >> ~/.git-credentials
+fi
+
 ./aria.sh; python3 -m bot

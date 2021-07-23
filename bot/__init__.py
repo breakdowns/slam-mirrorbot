@@ -179,6 +179,11 @@ except KeyError:
     MEGA_EMAIL_ID = None
     MEGA_PASSWORD = None
 try:
+    GIT_PASS = getConfig('GIT_PASS')
+except KeyError:
+    logging.warning('GITHUB PASSWORD KEY not provided!')
+    GIT_PASS = None
+try:
     HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
 except KeyError:
     logging.warning('HEROKU API KEY not provided!')

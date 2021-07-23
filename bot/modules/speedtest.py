@@ -1,6 +1,6 @@
 from speedtest import Speedtest
 from bot.helper.telegram_helper.filters import CustomFilters
-from bot import dispatcher
+from bot import dispatcher, AUTHORIZED_CHATS
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import sendMessage, editMessage
 from telegram.ext import CommandHandler

@@ -9,7 +9,7 @@ from sys import executable
 
 from telegram import ParseMode
 from telegram.ext import CommandHandler
-from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS
+from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, GIT_PASS
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
@@ -87,7 +87,7 @@ def gitpull(update, context):
         "Pulling all changes from remote and then attempting to restart.",
     )
     proc = subprocess.Popen("git pull", stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-    result = proc.communicate(PASS)
+    result = proc.communicate(GIT_PASS)
 
     sent_msg = msg.text + "\n\nChanges pulled... I guess..."
 

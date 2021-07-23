@@ -160,7 +160,7 @@ class YoutubeDLHelper(DownloadHelper):
         self.__gid = f"{self.vid_id}{self.__listener.uid}"
         if qual == "audio":
           self.opts['format'] = 'bestaudio/best'
-          self.opts['postprocessors'] = [{'key': 'FFmpegExtractAudio','preferredcodec': 'mp3','preferredquality': '192',}]
+          self.opts['postprocessors'] = [{'key': 'FFmpegExtractAudio','preferredcodec': 'mp3','preferredquality': '320',}]
         else:
           self.opts['format'] = qual
         if not self.is_playlist:

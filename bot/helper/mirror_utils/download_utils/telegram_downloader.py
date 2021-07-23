@@ -1,7 +1,7 @@
 import logging
 import threading
 import time
-from bot import LOGGER, download_dict, download_dict_lock, app, STOP_DUPLICATE_MIRROR
+from bot import LOGGER, download_dict, download_dict_lock, app, STOP_DUPLICATE
 from .download_helper import DownloadHelper
 from ..status_utils.telegram_download_status import TelegramDownloadStatus
 from bot.helper.telegram_helper.message_utils import sendMarkup, sendStatusMessage
@@ -100,7 +100,7 @@ class TelegramDownloadHelper(DownloadHelper):
                 path = path + name
             
             if download:
-                if STOP_DUPLICATE_MIRROR:
+                if STOP_DUPLICATE:
                     LOGGER.info(f"Checking File/Folder if already in Drive...")
                     if self.__listener.isTar:
                         name = name + ".tar"

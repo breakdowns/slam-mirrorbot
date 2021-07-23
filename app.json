@@ -128,16 +128,8 @@
         "description": "To limit downloading Mega (leave space between number and unit, Available units is (gb or GB, tb or TB).",
         "required": false
       },
-      "STOP_DUPLICATE_MIRROR": {
+      "STOP_DUPLICATE": {
         "description": "If this field is set to True, bot will check file in Drive, if it is present in Drive, downloading will be stopped.",
-        "required": false
-      },
-      "STOP_DUPLICATE_MEGA": {
-        "description": "If this field is set to True, bot will check file in Drive, if it is present in Drive, downloading Mega will be stopped.",
-        "required": false
-      },
-      "STOP_DUPLICATE_CLONE": {
-        "description": "If this field is set to True, bot will check file in Drive, if it is present in Drive, cloning will be stopped.",
         "required": false
       },
       "IGNORE_PENDING_REQUESTS": {

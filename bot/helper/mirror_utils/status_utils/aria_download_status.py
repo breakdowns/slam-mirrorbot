@@ -77,12 +77,6 @@ class AriaDownloadStatus(Status):
     def download(self):
         return self
 
-    def updateName(self,name):
-        self.__name = name
-
-    def updateGid(self,gid):
-        self.__gid = gid
-
     def getListener(self):
         return self.__listener
     

@@ -40,8 +40,6 @@ class DbManger:
             self.conn.commit()
             self.disconnect()
             AUTHORIZED_CHATS.remove(chat_id)
-            if chat_id in SUDO_USERS:
-                SUDO_USERS.remove(chat_id)
             return 'Unauthorized successfully'
 
     def db_addsudo(self,chat_id: int):
@@ -61,7 +59,6 @@ class DbManger:
                 self.cur.execute(sql)
                 self.conn.commit()
                 self.disconnect()
-                AUTHORIZED_CHATS.add(chat_id)
                 SUDO_USERS.add(chat_id)
                 return 'Successfully Authorized and promoted as Sudo'
 

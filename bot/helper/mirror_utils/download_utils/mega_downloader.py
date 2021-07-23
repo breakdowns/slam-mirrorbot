@@ -6,7 +6,7 @@ import os
 from bot.helper.ext_utils.bot_utils import new_thread, get_mega_link_type, get_readable_file_size
 from bot.helper.mirror_utils.status_utils.mega_download_status import MegaDownloadStatus
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
-from bot import MEGA_LIMIT, STOP_DUPLICATE_MEGA, TAR_UNZIP_LIMIT
+from bot import MEGA_LIMIT, STOP_DUPLICATE, TAR_UNZIP_LIMIT
 import random
 import string
 
@@ -164,7 +164,7 @@ class MegaDownloadHelper:
             node = folder_api.authorizeNode(mega_listener.node)
         if mega_listener.error is not None:
             return listener.onDownloadError(str(mega_listener.error))
-        if STOP_DUPLICATE_MEGA:
+        if STOP_DUPLICATE:
             LOGGER.info(f'Checking File/Folder if already in Drive')
             mname = node.getName()
             if listener.isTar:

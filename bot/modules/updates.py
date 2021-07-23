@@ -14,7 +14,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from pyrogram import filters
 
 from bot import app, OWNER_ID, UPSTREAM_REPO, UPSTREAM_BRANCH, bot
-from bot.helper import runcmd, get_text, HEROKU_URL
+from bot.helper import get_text, HEROKU_URL
 from bot.helper.telegram_helper.bot_commands import BotCommands
 
 REPO_ = UPSTREAM_REPO
@@ -56,7 +56,6 @@ async def update_it(client, message):
             ups_rem.pull(UPSTREAM_BRANCH)
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
-        await runcmd("pip3 install --no-cache-dir -r requirements.txt")
         await msg_.edit("`Updated Sucessfully! Give Me Some Time To Restart!`")
         with open("./aria.sh", 'rb') as file:
             script = file.read()

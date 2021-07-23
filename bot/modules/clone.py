@@ -4,7 +4,7 @@ from bot.helper.telegram_helper.message_utils import *
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.mirror_utils.status_utils.clone_status import CloneStatus
-from bot import dispatcher, LOGGER, CLONE_LIMIT, STOP_DUPLICATE_CLONE, download_dict, download_dict_lock, Interval, DOWNLOAD_STATUS_UPDATE_INTERVAL
+from bot import dispatcher, LOGGER, CLONE_LIMIT, STOP_DUPLICATE, download_dict, download_dict_lock, Interval, DOWNLOAD_STATUS_UPDATE_INTERVAL
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, setInterval
 import random
 import string
@@ -19,7 +19,7 @@ def cloneNode(update, context):
         if res != "":
             sendMessage(res, context.bot, update)
             return
-        if STOP_DUPLICATE_CLONE:
+        if STOP_DUPLICATE:
             LOGGER.info(f"Checking File/Folder if already in Drive...")
             smsg, button = gd.drive_list(name)
             if smsg:

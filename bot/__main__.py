@@ -1,6 +1,7 @@
 import shutil, psutil
 import signal
 import os
+import subprocess
 
 from pyrogram import idle
 from bot import app
@@ -15,7 +16,7 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, config, updates
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, config
 
 
 def stats(update, context):
@@ -202,6 +203,7 @@ botcmds = [
 def main():
     fs_utils.start_cleanup()
     # Check if the bot is restarting
+    subprocess.Popen("git pull", stdout=subprocess.PIPE, shell=True)
     if os.path.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)

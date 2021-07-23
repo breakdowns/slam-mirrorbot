@@ -81,7 +81,7 @@ async def config_button(_, query):
             reply_markup=types.InlineKeyboardMarkup(
                 [
                     [
-                        types.InlineKeyboardButton(f"{emoji.LEFT_ARROW}", callback_data='docs_10'),
+                        types.InlineKeyboardButton(f"{emoji.LEFT_ARROW}", callback_data='docs_9'),
                         types.InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data='docs_end'),
                         types.InlineKeyboardButton(f"{emoji.RIGHT_ARROW}", callback_data='docs_2')
                     ]
@@ -197,20 +197,6 @@ async def config_button(_, query):
                 [
                     [
                         types.InlineKeyboardButton(f"{emoji.LEFT_ARROW}", callback_data='docs_8'),
-                        types.InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data='docs_end'),
-                        types.InlineKeyboardButton(f"{emoji.RIGHT_ARROW}", callback_data='docs_10')
-                    ]
-                ]
-            )
-        )
-    elif data == '10':
-        return await query.message.edit(
-            __header__.format(data)
-            + f"**[ Updater Config ]**\n\n**UPSTREAM_REPO:** `{UPSTREAM_REPO}`\n\n**UPSTREAM_BRANCH:** `{UPSTREAM_BRANCH}`",
-            reply_markup=types.InlineKeyboardMarkup(
-                [
-                    [
-                        types.InlineKeyboardButton(f"{emoji.LEFT_ARROW}", callback_data='docs_9'),
                         types.InlineKeyboardButton(f"{emoji.CROSS_MARK}", callback_data='docs_end'),
                         types.InlineKeyboardButton(f"{emoji.RIGHT_ARROW}", callback_data='docs_1')
                     ]

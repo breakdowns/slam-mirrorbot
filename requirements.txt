@@ -9,7 +9,6 @@ google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
 heroku3
-html-telegraph-poster
 js2py
 lk21
 lxml

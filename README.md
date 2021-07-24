@@ -156,9 +156,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **MEGA_PASSWORD**: Your password for your mega.nz account
 - **BLOCK_MEGA_FOLDER**: If you want to remove mega.nz folder support, set it to `True`.
 - **BLOCK_MEGA_LINKS**: If you want to remove mega.nz mirror support, set it to `True`.
-- **STOP_DUPLICATE_MIRROR**: (Leave empty if unsure) if this field is set to `True`, bot will check file in Drive, if it is present in Drive, downloading will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
-- **STOP_DUPLICATE_MEGA**: (Leave empty if unsure) if this field is set to `True`, bot will check file in Drive, if it is present in Drive, downloading Mega will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
-- **STOP_DUPLICATE_CLONE**: (Leave empty if unsure) if this field is set to `True`, bot will check file in Drive, if it is present in Drive, cloning will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
+- **STOP_DUPLICATE**: (Leave empty if unsure) if this field is set to `True`, bot will check file in Drive, if it is present in Drive, downloading or cloning will be stopped. (**Note**: File will be checked using filename, not using filehash, so this feature is not perfect yet)
 - **CLONE_LIMIT**: To limit cloning Google Drive (leave space between number and unit, Available units is (gb or GB, tb or TB), Examples: ```100 gb, 100 GB, 10 tb, 10 TB```
 - **MEGA_LIMIT**: To limit downloading Mega (leave space between number and unit, Available units is (gb or GB, tb or TB), Examples: ```100 gb, 100 GB, 10 tb, 10 TB```
 - **TORRENT_DIRECT_LIMIT**: To limit the Torrent/Direct mirror size, Leave space between number and unit. Available units is (gb or GB, tb or TB), Examples: ```100 gb, 100 GB, 10 tb, 10 TB```

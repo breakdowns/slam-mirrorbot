@@ -91,6 +91,8 @@ def direct_link_generator(link: str):
         return racaty(link)
     elif '1fichier.com' in link:
         return fichier(link)
+    elif 'solidfiles.com' in link:
+        return solidfiles(link)
     else:
         raise DirectDownloadLinkException(f'No Direct link function found for {link}')
 
@@ -398,6 +400,18 @@ def fichier(link: str) -> str:
           raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
       else:
         raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
+
+def solidfiles(url: str) -> str:
+    """ Solidfiles direct links generator
+    Based on https://github.com/Xonshiz/SolidFiles-Downloader
+    By https://github.com/Jusidama18 """
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36'
+    }
+    pageSource = requests.get(url, headers = headers).text
+    mainOptions = str(re.search(r'viewerOptions\'\,\ (.*?)\)\;', pageSource).group(1))
+    dl_url = json.loads(mainOptions)["downloadUrl"]
+    return dl_url
 
 
 def useragent():

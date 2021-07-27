@@ -1,17 +1,17 @@
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
 # Slam Aria Mirror Bot
-![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=blue&style=flat)
-![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=flat)
-![GitHub issues](https://img.shields.io/github/issues/breakdowns/slam-mirrorbot)
-![GitHub closed issues](https://img.shields.io/github/issues-closed/breakdowns/slam-mirrorbot)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/breakdowns/slam-mirrorbot)
-![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/breakdowns/slam-mirrorbot)
-![GitHub watchers](https://img.shields.io/github/watchers/breakdowns/slam-mirrorbot)
-![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=flat)
-![GitHub repo size](https://img.shields.io/github/repo-size/breakdowns/slam-mirrorbot?color=red)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-mirrorbot)
-![GitHub](https://img.shields.io/github/license/breakdowns/slam-mirrorbot)
+![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-aria-mirror-bot?color=blue&style=flat)
+![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-aria-mirror-bot?color=green&style=flat)
+![GitHub issues](https://img.shields.io/github/issues/breakdowns/slam-aria-mirror-bot)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/breakdowns/slam-aria-mirror-bot)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/breakdowns/slam-aria-mirror-bot)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/breakdowns/slam-aria-mirror-bot)
+![GitHub watchers](https://img.shields.io/github/watchers/breakdowns/slam-aria-mirror-bot)
+![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-aria-mirror-bot?style=flat)
+![GitHub repo size](https://img.shields.io/github/repo-size/breakdowns/slam-aria-mirror-bot?color=red)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-aria-mirror-bot)
+![GitHub](https://img.shields.io/github/license/breakdowns/slam-aria-mirror-bot)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
 [![Channel](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/SlamMirrorUpdates)
@@ -23,7 +23,7 @@
     <summary><b>Click Here For More Details</b></summary>
 
 ## Additional Features
-- Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update, for more info please check [Setting up config file](https://github.com/breakdowns/slam-mirrorbot/tree/master#setting-up-config-file))
+- Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update, for more info please check [Setting up config file](https://github.com/breakdowns/slam-aria-mirror-bot/tree/master#setting-up-config-file))
 - Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Tar/Unzip Google Drive link support

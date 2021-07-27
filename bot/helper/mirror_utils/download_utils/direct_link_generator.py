@@ -37,7 +37,7 @@ def direct_link_generator(link: str):
         return zippy_share(link)
     elif 'yadi.sk' in link:
         return yandex_disk(link)
-    elif 'cloud.mail.ru' in link:
+    elif "cloud.mail.ru" in link:
         return cm_ru(link)
     elif 'mediafire.com' in link:
         return mediafire(link)
@@ -119,7 +119,7 @@ def zippy_share(url: str) -> str:
         js_content = getattr(evaljs, "x")
         return base_url + js_content
     except IndexError:
-        raise DirectDownloadLinkException("Can't find download button")
+        raise DirectDownloadLinkException("ERROR: Can't find download button")
 
 
 def yandex_disk(url: str) -> str:
@@ -135,26 +135,24 @@ def yandex_disk(url: str) -> str:
         dl_url = requests.get(api.format(link)).json()['href']
         return dl_url
     except KeyError:
-        raise DirectDownloadLinkException("Error: File not found/Download limit reached\n")
+        raise DirectDownloadLinkException("ERROR: File not found/Download limit reached\n")
 
 
 def cm_ru(url: str) -> str:
-    """ cloud.mail.ru direct links generator
-    Using https://github.com/JrMasterModelBuilder/cmrudl.py """
-    reply = ''
+    """cloud.mail.ru direct links generator
+    Using https://github.com/JrMasterModelBuilder/cmrudl.py"""
     try:
-        link = re.findall(r'\bhttps?://.*cloud\.mail\.ru\S+', url)[0]
+        link = re.findall(r"\bhttps?://.*cloud\.mail\.ru\S+", url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("No cloud.mail.ru links found\n")
-    command = f'vendor/cmrudl.py/cmrudl -s {link}'
+        raise DirectDownloadLinkException("`No cloud.mail.ru links found`\n")
+    command = f"vendor/cmrudl/cmrudl -s {link}"
     result = popen(command).read()
     result = result.splitlines()[-1]
     try:
         data = json.loads(result)
     except json.decoder.JSONDecodeError:
-        raise DirectDownloadLinkException("Error: Can't extract the link\n")
-    dl_url = data['download']
-    return dl_url
+        raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
+    return data["download"]
 
 
 def uptobox(url: str) -> str:
@@ -222,7 +220,7 @@ def github(url: str) -> str:
         dl_url = download.headers["location"]
         return dl_url
     except KeyError:
-        raise DirectDownloadLinkException("Error: Can't extract the link\n")
+        raise DirectDownloadLinkException("ERROR: Can't extract the link\n")
 
 
 def hxfile(url: str) -> str:
@@ -286,7 +284,7 @@ def onedrive(link: str) -> str:
     direct_link1 = f"https://api.onedrive.com/v1.0/shares/u!{direct_link_encoded}/root/content"
     resp = requests.head(direct_link1)
     if resp.status_code != 302:
-        return "Error: Unauthorized link, the link may be private"
+        return "ERROR: Unauthorized link, the link may be private"
     dl_link = resp.next.url
     file_name = dl_link.rsplit("/", 1)[1]
     resp2 = requests.head(dl_link)
@@ -329,7 +327,7 @@ def racaty(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*racaty\.net\S+', url)[0]
     except IndexError:
-        raise DirectDownloadLinkException("`No Racaty links found`\n")
+        raise DirectDownloadLinkException("No Racaty links found\n")
     scraper = cfscrape.create_scraper()
     r = scraper.get(url)
     soup = BeautifulSoup(r.text, "lxml")
@@ -364,7 +362,7 @@ def fichier(link: str) -> str:
     except:
       raise DirectDownloadLinkException("ERROR: Unable to reach 1fichier server!")
     if req.status_code == 404:
-      raise DirectDownloadLinkException("ERROR: File not found / The link you entered is wrong!")
+      raise DirectDownloadLinkException("ERROR: File not found/The link you entered is wrong!")
     soup = BeautifulSoup(req.content, 'lxml')
     if soup.find("a", {"class": "ok btn-general btn-orange"}) is not None:
       dl_url = soup.find("a", {"class": "ok btn-general btn-orange"})["href"]

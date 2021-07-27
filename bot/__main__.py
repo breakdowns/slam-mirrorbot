@@ -47,7 +47,7 @@ This bot can mirror all your links to Google Drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     buttons = button_build.ButtonMaker()
-    buttons.buildbutton("Repo", "https://github.com/breakdowns/slam-mirrorbot")
+    buttons.buildbutton("Repo", "https://github.com/breakdowns/slam-aria-mirror-bot")
     buttons.buildbutton("Support Group", "https://t.me/SlamMirrorSupport")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     LOGGER.info('UID: {} - UN: {} - MSG: {}'.format(update.message.chat.id, update.message.chat.username, update.message.text))
@@ -58,7 +58,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         else :
             sendMarkup(start_string, context.bot, update, reply_markup)
     else :
-        sendMessage(f"Oops! not a Authorized user.", context.bot, update)
+        sendMarkup(f"Oops! not a Authorized user.\nPlease deploy your own <b>slam-aria-mirror-bot</b>.", context.bot, update, reply_markup)
 
 
 def restart(update, context):
@@ -136,7 +136,7 @@ def bot_help(update, context):
 
 /{BotCommands.ShellCommand}: Run commands in Shell (Terminal)
 
-/{BotCommands.ExecHelpCommand}: Get help for Executor module
+/{BotCommands.ExecHelpCommand}: Get help for Executor module (Only Owner)
 
 /{BotCommands.TsHelpCommand}: Get help for Torrent search module
 '''

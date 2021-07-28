@@ -58,7 +58,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         else :
             sendMarkup(start_string, context.bot, update, reply_markup)
     else :
-        sendMessage(f"Oops! not an authorized user.", context.bot, update)
+        sendMarkup(f"Oops! not a Authorized user.", context.bot, update, reply_markup)
 
 
 def restart(update, context):
@@ -136,7 +136,7 @@ def bot_help(update, context):
 
 /{BotCommands.ShellCommand}: Run commands in Shell (Terminal)
 
-/{BotCommands.ExecHelpCommand}: Get help for Executor module
+/{BotCommands.ExecHelpCommand}: Get help for Executor module (Only Owner)
 
 /{BotCommands.TsHelpCommand}: Get help for Torrent search module
 '''

@@ -1,7 +1,7 @@
 {
     "name": "hishirobot",
     "description": "Well, nothing here. Go away.",
-    "logo": "",
+    "logo": "https://i.ibb.co/Rzpx76n/17973665-1884056605142385-5153089103125390665-o.jpg",
     "keywords": [
       "bot",
       "telegram",
@@ -9,7 +9,7 @@
     ],
     "repository": "https://github.com/hyPnOtICDo0g/hishirobot",
     "website": "https://github.com/hyPnOtICDo0g/hishirobot",
-    "success_url": "",
+    "success_url": "https://github.com/hyPnOtICDo0g/hishirobot",
     "stack": "container",
     "env": {
       "ENV": {
@@ -79,12 +79,12 @@
         "required": true
       },
       "UPSTREAM_REPO": {
-        "description": "Link for Bot Upstream Repo",
+        "description": "Bot Upstream Repo",
         "value": "https://github.com/hyPnOtICDo0g/hishirobot",
         "required": true
       },
       "UPSTREAM_BRANCH": {
-        "description": "Branch name for Upstream Repo (Recommended using master branch).",
+        "description": "Branch name for Bot Upstream Repo, fill master.",
         "value": "master",
         "required": true
       },

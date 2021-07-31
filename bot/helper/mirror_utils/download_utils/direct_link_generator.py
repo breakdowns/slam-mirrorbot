@@ -227,7 +227,8 @@ def github(url: str) -> str:
 
 def hxfile(url: str) -> str:
     """ Hxfile direct link generator
-    Based on https://github.com/breakdowns/slam-aria-mirror-bot """
+    Based on https://github.com/zevtyardt/lk21
+             https://github.com/breakdowns/slam-aria-mirror-bot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_filesIm(url)
     return dl_url
@@ -235,7 +236,8 @@ def hxfile(url: str) -> str:
 
 def anonfiles(url: str) -> str:
     """ Anonfiles direct link generator
-    Based on https://github.com/breakdowns/slam-aria-mirror-bot """
+    Based on https://github.com/zevtyardt/lk21
+             https://github.com/breakdowns/slam-aria-mirror-bot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_anonfiles(url)
     return dl_url
@@ -243,7 +245,8 @@ def anonfiles(url: str) -> str:
 
 def letsupload(url: str) -> str:
     """ Letsupload direct link generator
-    Based on https://github.com/breakdowns/slam-aria-mirror-bot """
+    Based on https://github.com/zevtyardt/lk21
+             https://github.com/breakdowns/slam-aria-mirror-bot """
     dl_url = ''
     try:
         link = re.findall(r'\bhttps?://.*letsupload\.io\S+', url)[0]
@@ -256,7 +259,8 @@ def letsupload(url: str) -> str:
 
 def fembed(link: str) -> str:
     """ Fembed direct link generator
-    Based on https://github.com/breakdowns/slam-aria-mirror-bot """
+    Based on https://github.com/zevtyardt/lk21
+             https://github.com/breakdowns/slam-aria-mirror-bot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_fembed(link)
     lst_link = []
@@ -268,7 +272,8 @@ def fembed(link: str) -> str:
 
 def sbembed(link: str) -> str:
     """ Sbembed direct link generator
-    Based on https://github.com/breakdowns/slam-aria-mirror-bot """
+    Based on https://github.com/zevtyardt/lk21
+             https://github.com/breakdowns/slam-aria-mirror-bot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_sbembed(link)
     lst_link = []
@@ -308,7 +313,8 @@ def pixeldrain(url: str) -> str:
 
 def antfiles(url: str) -> str:
     """ Antfiles direct link generator
-    Based on https://github.com/breakdowns/slam-aria-mirror-bot """
+    Based on https://github.com/zevtyardt/lk21
+             https://github.com/breakdowns/slam-aria-mirror-bot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_antfiles(url)
     return dl_url
@@ -316,7 +322,8 @@ def antfiles(url: str) -> str:
 
 def streamtape(url: str) -> str:
     """ Streamtape direct link generator
-    Based on https://github.com/breakdowns/slam-aria-mirror-bot """
+    Based on https://github.com/zevtyardt/lk21
+             https://github.com/breakdowns/slam-aria-mirror-bot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_streamtape(url)
     return dl_url
@@ -343,7 +350,7 @@ def racaty(url: str) -> str:
 
 def fichier(link: str) -> str:
     """ 1Fichier direct links generator
-    Based on https://github.com/Maujar/updateref-16-7-21
+    Based on https://github.com/Maujar
              https://github.com/breakdowns/slam-aria-mirror-bot """
     regex = r"^([http:\/\/|https:\/\/]+)?.*1fichier\.com\/\?.+"
     gan = re.match(regex, link)
@@ -400,6 +407,7 @@ def fichier(link: str) -> str:
           raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
       else:
         raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
+
 
 def solidfiles(url: str) -> str:
     """ Solidfiles direct links generator

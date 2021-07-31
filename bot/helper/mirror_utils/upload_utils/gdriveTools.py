@@ -681,7 +681,6 @@ class GoogleDriveHelper:
                 msg += f'\n<b>Type: </b><code>Folder</code>'
                 msg += f'\n<b>SubFolders: </b><code>{self.total_folders}</code>'
                 msg += f'\n<b>Files: </b><code>{self.total_files}</code>'
-                msg += f'\n<b>Drive Link: </b><code>{link}</code>'
             else:
                 msg += f'<b>Filename: </b><code>{name}</code>'
                 try:
@@ -694,7 +693,6 @@ class GoogleDriveHelper:
                     msg += f'\n<b>Size: </b><code>{get_readable_file_size(self.total_bytes)}</code>'
                     msg += f'\n<b>Type: </b><code>{typee}</code>'
                     msg += f'\n<b>Files: </b><code>{self.total_files}</code>'
-                    msg += f'\n<b>Drive Link: </b><code>{link}</code>'
                 except TypeError:
                     pass
         except Exception as err:

@@ -274,6 +274,10 @@ def _mirror(bot, update, isTar=False, extract=False):
                 file = i
                 break
 
+        reply_text = reply_to.text.split('\n')[0]
+        if bot_utils.is_magnet(reply_text):
+            link = reply_text
+            
         if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) or len(link) == 0:
             if file is not None:
                 if file.mime_type != "application/x-bittorrent":

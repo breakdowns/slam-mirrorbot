@@ -13,7 +13,7 @@ def list_drive(update, context):
         LOGGER.info(f"Searching: {search}")
         reply = sendMessage('Searching..... Please wait!', context.bot, update)
         gdrive = GoogleDriveHelper(None)
-        msg, button = gdrive.drive_list(search)
+        msg, button = gdrive.search_recur(search)
 
         if button:
             editMessage(msg, reply, button)

@@ -151,6 +151,22 @@ if DB_URI is not None:
 LOGGER.info("Generating USER_SESSION_STRING")
 app = Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
 
+DRIVE_NAME = []
+DRIVE_ID = []
+INDEX_URLS = []
+
+if os.path.exists('drive_folder'):
+    with open('drive_folder', 'r+') as f:
+        lines = f.readlines()
+        for line in lines:
+            temp = line.strip().split()
+            DRIVE_NAME.append(temp[0].replace("_", " "))
+            DRIVE_ID.append(temp[1])
+            try:
+                INDEX_URLS.append(temp[2])
+            except IndexError as e:
+                INDEX_URLS.append(None)
+
 # Generate Telegraph Token
 sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))
 LOGGER.info("Generating TELEGRAPH_TOKEN using '" + sname + "' name")
@@ -312,6 +328,14 @@ try:
         IGNORE_PENDING_REQUESTS = True
 except KeyError:
     pass
+
+if DRIVE_ID :
+    pass
+else :
+    LOGGER.error("The README.md file there to be read! Exiting now!")
+    exit(1)
+
+telegra_ph = Telegraph(access_token=telegraph_token)
 
 updater = tg.Updater(token=BOT_TOKEN)
 bot = updater.bot

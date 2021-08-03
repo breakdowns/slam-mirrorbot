@@ -33,6 +33,11 @@ import string
 ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()
 
+URI_REGEX = \
+    r"(?i)\b((?:ftp|https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|" \
+    "(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|" \
+    "[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))|magnet:\?xt=urn:btih:[\w!@#$&-?=%.()\\-`.+,/\"]*"
+
 class MirrorListener(listeners.MirrorListeners):
     def __init__(self, bot, update, pswd, isTar=False, tag=None, extract=False):
         super().__init__(bot, update)
@@ -273,6 +278,12 @@ def _mirror(bot, update, isTar=False, extract=False):
             if i is not None:
                 file = i
                 break
+        try:
+            reply_text = re.search(URI_REGEX, reply_to.text)
+            LOGGER.info(f"URL extracted: {reply_text[0]}")
+            link = reply_text[0]
+        except TypeError:
+            pass
 
         if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) or len(link) == 0:
             if file is not None:

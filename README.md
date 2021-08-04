@@ -6,7 +6,19 @@
 
 > **Note**: I did **not** integrate the main repo's **Shortener** feature to the search module, since I personally don't like shortened links in my search results.
 * What're those extra features?
-> * I've made some tiny improvements to the search module, such as:  
+> * I've made some improvements to the search module, such as:  
+>   * Search filter to display (only) folders/files. It can be used by appending `-f` at the end of a search query.  
+
+> Format:
+```
+/find file_name -f
+```
+>Example:
+```
+/find Screenshot -f
+```
+The above example displays all the file(s) with the name **Screenshot**. Folders have been set as the default filter, meaning without the `-f` flag only the folder names matching the search query are displayed in search results.
+
 >   * Time taken to fetch the results
 >   * Number of results found  
 > * Added support to the `/mirror` command to automatically fetch & download an URL when replied to a certain message. Magnet, Torrent, Mega & Direct links are supported.

@@ -648,7 +648,7 @@ class GoogleDriveHelper:
                             msg += f' <b>| <a href="{siurl}">Index Link</a></b>'
                         else:
                             msg += f' <b>| <a href="{url}">Index Link</a></b>'
-                # Excluded shortcuts from index link as indexes can't download/open them            
+                # Excluded shortcuts from Index as indexes can't download/open them            
                 elif file.get('mimeType') == 'application/vnd.google-apps.shortcut':
                     msg += f"⁍<a href='https://drive.google.com/drive/folders/{file.get('id')}'>{file.get('name')}" \
                         f"</a> (shortcut)"
@@ -715,44 +715,55 @@ class GoogleDriveHelper:
         total_count = 0
         content_count = 0
         add_title_msg = True
+        file_check=re.search(" -f", fileName)
+        fileName=fileName.replace(" -f", "")
         for parent_id in DRIVE_ID :
             response = self.drive_query(parent_id, fileName)    
-            INDEX += 1          
+            INDEX += 1
             if response:
                 if add_title_msg == True:
                     msg = f'<h3>Search Results for : {fileName}</h3><br>'
                     add_title_msg = False
                 msg += f"╾────────────╼<br><b>{DRIVE_NAME[INDEX]}</b><br>╾────────────╼<br>"
-                for file in response:
-                    # Detect Whether Current Entity is a Folder or File
-                    if file.get('mimeType') == "application/vnd.google-apps.folder":
-                        msg += f"📁<code>{file.get('name')}</code> <b>(folder)</b><br>" \
-                               f"<b><a href='https://drive.google.com/drive/folders/{file.get('id')}'>Drive Link</a></b>"
-                        if INDEX_URLS[INDEX] is not None:
-                            url_path = "/".join([requests.utils.quote(n, safe='') for n in self.get_recursive_list(file, parent_id)])
-                            url = f'{INDEX_URLS[INDEX]}/{url_path}/'
-                            msg += f'<b> | <a href="{url}">Index Link</a></b>'
-                    
-                    # Excluded shortcuts from index link as indexes can't download/open them
-                    elif file.get('mimeType') == 'application/vnd.google-apps.shortcut':
-                        msg += f"⁍<a href='https://drive.google.com/drive/folders/{file.get('id')}'>{file.get('name')}" \
-                            f"</a> (shortcut)"
-                    
-                    else:
-                        msg += f"📄<code>{file.get('name')}</code> <b>({get_readable_file_size(int(file.get('size')))})</b><br>" \
-                               f"<b><a href='https://drive.google.com/uc?id={file.get('id')}&export=download'>Drive Link</a></b>"
-                        if INDEX_URLS[INDEX] is not None:
-                            url_path = "/".join([requests.utils.quote(n, safe ='') for n in self.get_recursive_list(file, parent_id)])
-                            url = f'{INDEX_URLS[INDEX]}/{url_path}'
-                            msg += f'<b> | <a href="{url}">Index Link</a></b>'
-                    
-                    msg += '<br><br>'
-                    content_count += 1
-                    total_count += 1
-                    if content_count == TELEGRAPHLIMIT :
-                       self.telegraph_content.append(msg)
-                       msg = ""
-                       content_count = 0
+                if file_check == None:
+                    for file in response:
+                        # Detect Whether Current Entity is a Folder or File
+                        if file.get('mimeType') == "application/vnd.google-apps.folder":
+                            msg += f"📁<code>{file.get('name')}</code> <b>(folder)</b><br>" \
+                                f"<b><a href='https://drive.google.com/drive/folders/{file.get('id')}'>Drive Link</a></b>"
+                            if INDEX_URLS[INDEX] is not None:
+                                url_path = "/".join([requests.utils.quote(n, safe='') for n in self.get_recursive_list(file, parent_id)])
+                                url = f'{INDEX_URLS[INDEX]}/{url_path}/'
+                                msg += f'<b> | <a href="{url}">Index Link</a></b>'
+                            msg += '<br><br>'
+                            content_count += 1
+                            total_count += 1
+                        if content_count == TELEGRAPHLIMIT:
+                            self.telegraph_content.append(msg)
+                            msg = ""
+                            content_count = 0
+                else:
+                    for file in response:    
+                        # Excluded shortcuts from Index as indexes can't download/open them
+                        if file.get('mimeType') == 'application/vnd.google-apps.shortcut':
+                            msg += f"⁍<a href='https://drive.google.com/drive/folders/{file.get('id')}'>{file.get('name')}" \
+                                f"</a> (shortcut)"
+                        
+                        else:
+                            if file.get('mimeType') != "application/vnd.google-apps.folder":
+                                msg += f"📄<code>{file.get('name')}</code> <b>({get_readable_file_size(int(file.get('size')))})</b><br>" \
+                                    f"<b><a href='https://drive.google.com/uc?id={file.get('id')}&export=download'>Drive Link</a></b>"
+                                if INDEX_URLS[INDEX] is not None:
+                                    url_path = "/".join([requests.utils.quote(n, safe ='') for n in self.get_recursive_list(file, parent_id)])
+                                    url = f'{INDEX_URLS[INDEX]}/{url_path}'
+                                    msg += f'<b> | <a href="{url}">Index Link</a></b>'
+                                msg += '<br><br>'
+                                content_count += 1
+                                total_count += 1
+                                if content_count == TELEGRAPHLIMIT:
+                                    self.telegraph_content.append(msg)
+                                    msg = ""
+                                    content_count = 0
 
         if msg != '':
             self.telegraph_content.append(msg)
@@ -774,7 +785,7 @@ class GoogleDriveHelper:
         timelog = "{:.2f}".format(stop_time-start_time)+"s"
         msg = f"<b> Found {total_count} result(s) For {fileName} (<i>Finished in {timelog}</i>) </b>"
         buttons = button_build.ButtonMaker()   
-        buttons.buildbutton("🔎 GO TO RESULTS", f"https://telegra.ph/{self.path[0]}")
+        buttons.buildbutton("GO TO RESULTS 🗂️", f"https://telegra.ph/{self.path[0]}")
 
         return msg, InlineKeyboardMarkup(buttons.build_menu(1))
 

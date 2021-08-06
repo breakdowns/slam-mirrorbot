@@ -1,6 +1,6 @@
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
-# Slam Aria Mirror Bot
+# Slam Telegram Mirror Bot
 ![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-aria-mirror-bot?color=blue&style=flat)
 ![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-aria-mirror-bot?color=green&style=flat)
 ![GitHub issues](https://img.shields.io/github/issues/breakdowns/slam-aria-mirror-bot)
@@ -16,19 +16,19 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
 [![Channel](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/SlamMirrorUpdates)
 
-**Slam Aria Mirror Bot** is a _multipurpose_ Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
+**Slam Telegram Mirror Bot** is a _multipurpose_ Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
 <details>
     <summary><b>Click Here For More Details</b></summary>
 
 ## Additional Features
+- qBittorrent supported
 - Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update, for more info please check [Setting up config file](https://github.com/breakdowns/slam-aria-mirror-bot/tree/master#setting-up-config-file))
 - Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Tar/Unzip Google Drive link support
 - Sudo with Database support
-- Multiple Trackers support
 - Extracting **tar.xz** support
 - Counting Google Drive link
 - Heroku config support

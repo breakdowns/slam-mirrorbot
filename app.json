@@ -183,7 +183,20 @@
       },
       "STATUS_LIMIT": {
         "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
-        "value": "",
+        "required": false
+      },
+      "IS_VPS": {
+        "description": "Only for VPS, fill False.",
+        "value": "False",
+        "required": false
+      },
+      "SERVER_PORT": {
+        "description": "Only for VPS, no need to fill it.",
+        "required": false
+      },
+      "BASE_URL_OF_BOT": {
+        "description": "Heroku App name web url, Examples: https://yourappname.herokuapp.com",
+        "value": "False",
         "required": false
       }
     },
@@ -193,7 +206,7 @@
       }
     ],
     "formation": {
-            "worker": {
+            "web": {
                 "quantity": 1,
                 "size": "free"
             }

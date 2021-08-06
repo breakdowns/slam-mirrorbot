@@ -1,3 +1,7 @@
+# Implement By - @anasty17 (https://github.com/breakdowns/slam-tg-mirror-bot/commit/0bfba523f095ab1dccad431d72561e0e002e7a59)
+# (c) https://github.com/breakdowns/slam-aria-mirror-bot
+# All rights reserved
+
 from bot import DOWNLOAD_DIR, LOGGER, get_client
 from bot.helper.ext_utils.bot_utils import MirrorStatus, get_readable_file_size, get_readable_time
 from .status import Status
@@ -91,4 +95,3 @@ class QbDownloadStatus(Status):
         LOGGER.info(f"Cancelling Download: {self.name()}")
         self.__listener.onDownloadError('Download stopped by user!')
         self.__client.torrents_delete(torrent_hashes=self.__hash)
-

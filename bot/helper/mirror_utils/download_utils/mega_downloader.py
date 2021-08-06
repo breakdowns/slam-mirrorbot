@@ -177,6 +177,7 @@ class MegaDownloadHelper:
             if smsg:
                 msg1 = "File/Folder is already available in Drive.\nHere are the search results:"
                 sendMarkup(msg1, listener.bot, listener.update, button)
+                executor.continue_event.set()
                 return
         if MEGA_LIMIT is not None or TAR_UNZIP_LIMIT is not None:
             limit = None
@@ -193,10 +194,12 @@ class MegaDownloadHelper:
                 if 'G' in limit[1] or 'g' in limit[1]:
                     if api.getSize(node) > limitint * 1024**3:
                         sendMessage(msg3, listener.bot, listener.update)
+                        executor.continue_event.set()
                         return
                 elif 'T' in limit[1] or 't' in limit[1]:
                     if api.getSize(node) > limitint * 1024**4:
                         sendMessage(msg3, listener.bot, listener.update)
+                        executor.continue_event.set()
                         return
         with download_dict_lock:
             download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)

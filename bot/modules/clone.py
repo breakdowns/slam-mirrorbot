@@ -4,8 +4,8 @@ from bot.helper.telegram_helper.message_utils import *
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.mirror_utils.status_utils.clone_status import CloneStatus
-from bot import dispatcher, LOGGER, CLONE_LIMIT, STOP_DUPLICATE, download_dict, download_dict_lock, Interval, DOWNLOAD_STATUS_UPDATE_INTERVAL
-from bot.helper.ext_utils.bot_utils import get_readable_file_size, setInterval
+from bot import dispatcher, LOGGER, CLONE_LIMIT, STOP_DUPLICATE, download_dict, download_dict_lock, Interval
+from bot.helper.ext_utils.bot_utils import get_readable_file_size
 import random
 import string
 
@@ -50,8 +50,6 @@ def cloneNode(update, context):
             clone_status = CloneStatus(drive, clonesize, update, gid)
             with download_dict_lock:
                 download_dict[update.message.message_id] = clone_status
-            if len(Interval) == 0:
-                Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
             sendStatusMessage(update, context.bot)
             result, button = drive.clone(link)
             with download_dict_lock:

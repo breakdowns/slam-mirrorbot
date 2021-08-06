@@ -3,12 +3,13 @@ from telegram.ext import CommandHandler
 from telegram import InlineKeyboardMarkup
 
 from bot import Interval, INDEX_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, BLOCK_MEGA_FOLDER, BLOCK_MEGA_LINKS, VIEW_LINK, aria2
-from bot import dispatcher, DOWNLOAD_DIR, DOWNLOAD_STATUS_UPDATE_INTERVAL, download_dict, download_dict_lock, SHORTENER, SHORTENER_API, TAR_UNZIP_LIMIT
+from bot import dispatcher, DOWNLOAD_DIR, download_dict, download_dict_lock, SHORTENER, SHORTENER_API, TAR_UNZIP_LIMIT
 from bot.helper.ext_utils import fs_utils, bot_utils
-from bot.helper.ext_utils.bot_utils import setInterval, get_mega_link_type
+from bot.helper.ext_utils.bot_utils import get_mega_link_type
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException, NotSupportedExtractionArchive
 from bot.helper.mirror_utils.download_utils.aria2_download import AriaDownloadHelper
 from bot.helper.mirror_utils.download_utils.mega_downloader import MegaDownloadHelper
+from bot.helper.mirror_utils.download_utils.qbit_downloader import qbittorrent
 from bot.helper.mirror_utils.download_utils.direct_link_generator import direct_link_generator
 from bot.helper.mirror_utils.download_utils.telegram_downloader import TelegramDownloadHelper
 from bot.helper.mirror_utils.status_utils import listeners
@@ -235,8 +236,15 @@ def _mirror(bot, update, isTar=False, extract=False):
     mesg = update.message.text.split('\n')
     message_args = mesg[0].split(' ')
     name_args = mesg[0].split('|')
+    qbit = False
+    qbitsel = False
     try:
         link = message_args[1]
+        if link == "qb" or link == "qbs":
+            qbit = True
+            if link == "qbs":
+                qbitsel = True
+            link = message_args[2]
         print(link)
         if link.startswith("|") or link.startswith("pswd: "):
             link = ''
@@ -281,11 +289,13 @@ def _mirror(bot, update, isTar=False, extract=False):
                     tg_downloader = TelegramDownloadHelper(listener)
                     ms = update.message
                     tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
-                    if len(Interval) == 0:
-                        Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
                     return
                 else:
-                    link = file.get_file().file_path
+                    if qbit:
+                        file.get_file().download(custom_path=f"/usr/src/app/{file.file_name}")
+                        link = f"/usr/src/app/{file.file_name}"
+                    else:
+                        link = file.get_file().file_path
     else:
         tag = None
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
@@ -333,8 +343,6 @@ def _mirror(bot, update, isTar=False, extract=False):
         download_status = DownloadStatus(drive, size, listener, gid)
         with download_dict_lock:
             download_dict[listener.uid] = download_status
-        if len(Interval) == 0:
-            Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
         sendStatusMessage(update, bot)
         drive.download(link)
 
@@ -347,11 +355,14 @@ def _mirror(bot, update, isTar=False, extract=False):
         else:
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener)
+
+    elif qbit and (bot_utils.is_magnet(link) or os.path.exists(link)):
+        qbit = qbittorrent()
+        qbit.add_torrent(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener, qbitsel)
+
     else:
         ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener, name)
         sendStatusMessage(update, bot)
-    if len(Interval) == 0:
-        Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
 
 
 def mirror(update, context):

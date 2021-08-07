@@ -176,8 +176,6 @@ exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
 
 Above are the supported url Shorteners. Except these only some url Shorteners are supported.
-
-**Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
 ### Add more buttons (Optional Field)
 Three buttons are already added of Drive Link, Index Link, and View Link, you can add extra buttons, if you don't know what are below entries, simply leave them, don't fill anything in them.
 - **BUTTON_FOUR_NAME**:

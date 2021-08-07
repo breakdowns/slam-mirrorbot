@@ -167,8 +167,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **IGNORE_PENDING_REQUESTS**: If you want the bot to ignore pending requests after it restarts, set this to `True`.
 - **STATUS_LIMIT**: Status limit with buttons (**NOTE**: Recommend limit status to `4` tasks max).
 - **IS_VPS**: Set it to `True` if you use VPS
-- **SERVER_PORT**: Your VPA port
-- **BASE_URL_OF_BOT**: Your app URL Examples: `https://yourappname.herokuapp.com`
+- **SERVER_PORT**: Your VPS port
+- **BASE_URL_OF_BOT**: Valid BASE URL of where the bot is deploy. Ip/domain of your bot like `http://myip` or if oy have chosen other port then 80 then `http://myip:port`. No slash at the end, for Heroku fill `https://yourappname.herokuapp.com`.
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
 - **SHORTENER**: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
 ```

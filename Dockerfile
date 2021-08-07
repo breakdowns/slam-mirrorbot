@@ -1,7 +1,9 @@
-FROM breakdowns/mega-sdk-python:latest
+FROM anasty17/megasdk:latest
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
+
+RUN apt-get install -y wget xz-utils neofetch unzip && apt-get autoremove -y
 
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt

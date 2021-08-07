@@ -1,4 +1,4 @@
-# Implement By - @anasty17 (https://github.com/breakdowns/slam-aria-mirror-bot/pull/111)
+# Implement By - @anasty17 (https://github.com/breakdowns/slam-tg-mirror-bot/pull/111)
 # (c) https://github.com/breakdowns/slam-aria-mirror-bot
 # All rights reserved
 

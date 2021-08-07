@@ -4,8 +4,8 @@ from telegram.update import Update
 import psutil, shutil
 import time
 from bot import AUTO_DELETE_MESSAGE_DURATION, LOGGER, bot, \
-    status_reply_dict, status_reply_dict_lock, download_dict, download_dict_lock, botStartTime
-from bot.helper.ext_utils.bot_utils import get_readable_message, get_readable_file_size, get_readable_time, MirrorStatus
+    status_reply_dict, status_reply_dict_lock, download_dict, download_dict_lock, botStartTime, Interval, DOWNLOAD_STATUS_UPDATE_INTERVAL
+from bot.helper.ext_utils.bot_utils import get_readable_message, get_readable_file_size, get_readable_time, MirrorStatus, setInterval
 from telegram.error import TimedOut, BadRequest
 
 
@@ -108,6 +108,8 @@ def update_all_messages():
 
 
 def sendStatusMessage(msg, bot):
+    if len(Interval) == 0:
+        Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
     total, used, free = shutil.disk_usage('.')
     free = get_readable_file_size(free)
     currentTime = get_readable_time(time.time() - botStartTime)

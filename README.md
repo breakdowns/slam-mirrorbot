@@ -13,6 +13,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-tg-mirror-bot)
 ![GitHub](https://img.shields.io/github/license/breakdowns/slam-tg-mirror-bot)
 [![Channel](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/SlamMirrorUpdates)
+![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
 
 **Slam Tg Mirror Bot** is a _multipurpose_ Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
@@ -165,9 +166,9 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **HEROKU_APP_NAME**: (Only if you deploying on Heroku) Your Heroku app name.
 - **IGNORE_PENDING_REQUESTS**: If you want the bot to ignore pending requests after it restarts, set this to `True`.
 - **STATUS_LIMIT**: Status limit with buttons (**NOTE**: Recommend limit status to `4` tasks max).
-- **IS_VPS**: Set it to `True` if you use VPS.
-- **SERVER_PORT**: For VPS
-- **BASE_URL_OF_BOT**: Your app URL Examples: `https://yourappname.herokuapp.com`
+- **IS_VPS**: Set it to `True` if you use VPS
+- **SERVER_PORT**: Your VPS port
+- **BASE_URL_OF_BOT**: Valid BASE URL of where the bot is deploy. Ip/domain of your bot like `http://myip` or if you have chosen other port then `80` then `http://myip:port`. No slash at the end, for Heroku fill `https://yourappname.herokuapp.com`.
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
 - **SHORTENER**: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
 ```
@@ -175,8 +176,6 @@ exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
 
 Above are the supported url Shorteners. Except these only some url Shorteners are supported.
-
-**Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
 ### Add more buttons (Optional Field)
 Three buttons are already added of Drive Link, Index Link, and View Link, you can add extra buttons, if you don't know what are below entries, simply leave them, don't fill anything in them.
 - **BUTTON_FOUR_NAME**:

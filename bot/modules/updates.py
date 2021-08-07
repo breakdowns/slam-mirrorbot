@@ -57,7 +57,7 @@ async def update_it(client, message):
             ups_rem.pull(UPSTREAM_BRANCH)
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
-        subprocess.run(["pip3",  "install", "--no-cache-dir", "-r",  "requirements"])
+        subprocess.run(["pip3",  "install", "--no-cache-dir", "-r",  "requirements.txt"])
         await msg_.edit("`Updated Sucessfully! Give Me Some Time To Restart!`")
         with open("./aria.sh", 'rb') as file:
             script = file.read()

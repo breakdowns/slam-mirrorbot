@@ -13,6 +13,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-tg-mirror-bot)
 ![GitHub](https://img.shields.io/github/license/breakdowns/slam-tg-mirror-bot)
 [![Channel](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/SlamMirrorUpdates)
+![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
 
 **Slam Tg Mirror Bot** is a _multipurpose_ Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
@@ -165,8 +166,8 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **HEROKU_APP_NAME**: (Only if you deploying on Heroku) Your Heroku app name.
 - **IGNORE_PENDING_REQUESTS**: If you want the bot to ignore pending requests after it restarts, set this to `True`.
 - **STATUS_LIMIT**: Status limit with buttons (**NOTE**: Recommend limit status to `4` tasks max).
-- **IS_VPS**: Set it to `True` if you use VPS.
-- **SERVER_PORT**: For VPS
+- **IS_VPS**: Set it to `True` if you use VPS
+- **SERVER_PORT**: Your VPA port
 - **BASE_URL_OF_BOT**: Your app URL Examples: `https://yourappname.herokuapp.com`
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
 - **SHORTENER**: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:

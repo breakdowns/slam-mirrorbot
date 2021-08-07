@@ -185,19 +185,10 @@
         "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
         "required": false
       },
-      "IS_VPS": {
-        "description": "Only for VPS, fill False.",
-        "value": "False",
-        "required": false
-      },
-      "SERVER_PORT": {
-        "description": "Only for VPS, no need to fill it.",
-        "required": false
-      },
       "BASE_URL_OF_BOT": {
-        "description": "Heroku App name web url, Examples: https://yourappname.herokuapp.com",
-        "value": "False",
-        "required": false
+        "description": "Enter your Heroku app link to avoid the app from sleeping and to make it work with Torrent selection",
+        "value": "https://yourappname.herokuapp.com",
+        "required": true
       }
     },
     "addons": [

@@ -35,11 +35,11 @@ ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()
 
 class MirrorListener(listeners.MirrorListeners):
-    def __init__(self, bot, update, pswd, isTar=False, tag=None, extract=False):
+    def __init__(self, bot, update, pswd, isTar=False, extract=False, qbit=False):
         super().__init__(bot, update)
         self.isTar = isTar
-        self.tag = tag
         self.extract = extract
+        self.qbit = qbit
         self.pswd = pswd
 
     def onDownloadStarted(self):
@@ -65,11 +65,10 @@ class MirrorListener(listeners.MirrorListeners):
             name = download.name()
             gid = download.gid()
             size = download.size_raw()
-            if name is None: # when pyrogram's media.file_name is of NoneType
+            if name is None or self.qbit: # when pyrogram's media.file_name is of NoneType
                 name = os.listdir(f'{DOWNLOAD_DIR}{self.uid}')[0]
             m_path = f'{DOWNLOAD_DIR}{self.uid}/{name}'
         if self.isTar:
-            download.is_archiving = True
             try:
                 with download_dict_lock:
                     download_dict[self.uid] = TarStatus(name, m_path, size)
@@ -79,12 +78,9 @@ class MirrorListener(listeners.MirrorListeners):
                 self.onUploadError('Internal error occurred!!')
                 return
         elif self.extract:
-            download.is_extracting = True
             try:
                 path = fs_utils.get_base_name(m_path)
-                LOGGER.info(
-                    f"Extracting: {name} "
-                )
+                LOGGER.info(f"Extracting: {name}")
                 with download_dict_lock:
                     download_dict[self.uid] = ExtractStatus(name, m_path, size)
                 pswd = self.pswd
@@ -98,9 +94,7 @@ class MirrorListener(listeners.MirrorListeners):
                 else:
                     LOGGER.warning('Unable to extract archive! Uploading anyway')
                     path = f'{DOWNLOAD_DIR}{self.uid}/{name}'
-                LOGGER.info(
-                    f'got path: {path}'
-                )
+                LOGGER.info(f'got path: {path}')
 
             except NotSupportedExtractionArchive:
                 LOGGER.info("Not any valid archive, uploading file as it is.")
@@ -109,9 +103,7 @@ class MirrorListener(listeners.MirrorListeners):
             path = f'{DOWNLOAD_DIR}{self.uid}/{name}'
         up_name = pathlib.PurePath(path).name
         up_path = f'{DOWNLOAD_DIR}{self.uid}/{up_name}'
-        if up_name == "None":
-            up_name = "".join(os.listdir(f'{DOWNLOAD_DIR}{self.uid}/'))
-        LOGGER.info(f"Upload Name: {up_name}")
+        LOGGER.info(f"Upload Name: {name}")
         drive = gdriveTools.GoogleDriveHelper(up_name, self)
         size = fs_utils.get_path_size(up_path)
         upload_status = UploadStatus(drive, size, gid, self)
@@ -275,7 +267,6 @@ def _mirror(bot, update, isTar=False, extract=False):
     reply_to = update.message.reply_to_message
     if reply_to is not None:
         file = None
-        tag = reply_to.from_user.username
         media_array = [reply_to.document, reply_to.video, reply_to.audio]
         for i in media_array:
             if i is not None:
@@ -285,7 +276,7 @@ def _mirror(bot, update, isTar=False, extract=False):
         if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) or len(link) == 0:
             if file is not None:
                 if file.mime_type != "application/x-bittorrent":
-                    listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
+                    listener = MirrorListener(bot, update, pswd, isTar, extract)
                     tg_downloader = TelegramDownloadHelper(listener)
                     ms = update.message
                     tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
@@ -296,8 +287,7 @@ def _mirror(bot, update, isTar=False, extract=False):
                         link = f"/usr/src/app/{file.file_name}"
                     else:
                         link = file.get_file().file_path
-    else:
-        tag = None
+
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
         sendMessage('No download source provided', bot, update)
         return
@@ -313,7 +303,7 @@ def _mirror(bot, update, isTar=False, extract=False):
             sendMessage(f"{e}", bot, update)
             return
 
-    listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
+    listener = MirrorListener(bot, update, pswd, isTar, extract, qbit)
 
     if bot_utils.is_gdrive_link(link):
         if not isTar and not extract:

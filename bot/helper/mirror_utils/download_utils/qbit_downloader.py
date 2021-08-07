@@ -68,6 +68,8 @@ class qbittorrent:
                 sendMessage("This is an unsupported/invalid link.", listener.bot, listener.update)
                 return
             gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=14))
+            with download_dict_lock:
+                download_dict[listener.uid] = QbDownloadStatus(gid, listener, self.ext_hash, self.client)
             self.updater = setInterval(self.update_interval, self.update)
             tor_info = tor_info[0]
             if BASE_URL is not None and qbitsel:
@@ -102,10 +104,9 @@ class qbittorrent:
                 markup = sendMarkup(msg, listener.bot, listener.update, QBBUTTONS)
                 self.client.torrents_pause(torrent_hashes=self.ext_hash)
                 with download_dict_lock:
-                    download_dict[listener.uid] = QbDownloadStatus(gid, listener, self.ext_hash, self.client, markup)
+                    download = download_dict[listener.uid]
+                    download.markup = markup
             else:
-                with download_dict_lock:
-                    download_dict[listener.uid] = QbDownloadStatus(gid, listener, self.ext_hash, self.client ,markup)
                 sendStatusMessage(listener.update, listener.bot)
         except qba.UnsupportedMediaType415Error as e:
             LOGGER.error(str(e))

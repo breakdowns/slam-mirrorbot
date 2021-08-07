@@ -123,12 +123,12 @@ def get_readable_message():
                 msg += f"\n<b>Status:</b> <i>{download.status()}</i>"
                 if download.status() != MirrorStatus.STATUS_ARCHIVING and download.status() != MirrorStatus.STATUS_EXTRACTING:
                     msg += f"\n<code>{get_progress_bar_string(download)} {download.progress()}</code>"
-                    if download.status() == MirrorStatus.STATUS_DOWNLOADING:
-                        msg += f"\n<b>Downloaded:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
-                    elif download.status() == MirrorStatus.STATUS_CLONING:
+                    if download.status() == MirrorStatus.STATUS_CLONING:
                         msg += f"\n<b>Cloned:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
-                    else:
+                    elif download.status() == MirrorStatus.STATUS_UPLOADING:
                         msg += f"\n<b>Uploaded:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
+                    else:
+                        msg += f"\n<b>Downloaded:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                     msg += f"\n<b>Speed:</b> {download.speed()}" \
                             f", <b>ETA:</b> {download.eta()} "
                     # if hasattr(download, 'is_torrent'):

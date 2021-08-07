@@ -9,17 +9,15 @@ from .status import Status
 
 class QbDownloadStatus(Status):
 
-    def __init__(self, gid, listener, qbhash, client, markup):
+    def __init__(self, gid, listener, qbhash, client):
         super().__init__()
         self.__gid = gid
         self.__hash = qbhash
         self.__client = client
-        self.__markup = markup
+        self.markup = None
         self.__uid = listener.uid
         self.__listener = listener
         self.message = listener.message
-        self.is_extracting = False
-        self.is_archiving = False
 
 
     def progress(self):
@@ -58,7 +56,7 @@ class QbDownloadStatus(Status):
         download = self.torrent_info().state
         if download == "queuedDL":
             status = MirrorStatus.STATUS_WAITING
-        elif download == "metaDL":
+        elif download == "metaDL" or download == "checkingResumeData":
             status = MirrorStatus.STATUS_DOWNLOADING + " (Metadata)"
         elif download == "pausedDL":
             status = MirrorStatus.STATUS_PAUSE
@@ -89,7 +87,7 @@ class QbDownloadStatus(Status):
         return self.__client
 
     def mark(self):
-        return self.__markup
+        return self.markup
 
     def cancel_download(self):
         LOGGER.info(f"Cancelling Download: {self.name()}")

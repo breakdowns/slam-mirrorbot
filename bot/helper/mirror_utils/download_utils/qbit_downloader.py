@@ -1,3 +1,7 @@
+# Implement By - @anasty17 (https://github.com/breakdowns/slam-tg-mirror-bot/commit/0bfba523f095ab1dccad431d72561e0e002e7a59)
+# (c) https://github.com/breakdowns/slam-aria-mirror-bot
+# All rights reserved
+
 import os
 import random
 import string
@@ -195,4 +199,3 @@ pin_handler = CallbackQueryHandler(get_confirm, pattern="pin", run_async=True)
 done_handler = CallbackQueryHandler(get_confirm, pattern="done", run_async=True)
 dispatcher.add_handler(pin_handler)
 dispatcher.add_handler(done_handler)
-

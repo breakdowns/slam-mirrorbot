@@ -1,5 +1,5 @@
 {
-    "name": "slam-aria-mirror-bot",
+    "name": "slam-tg-mirror-bot",
     "description": "A Telegram bot for all your mirror needs",
     "logo": "https://telegra.ph/file/6507910fd06d18dfaba82.jpg",
     "keywords": [
@@ -7,8 +7,8 @@
       "telegram",
       "python"
     ],
-    "repository": "https://github.com/breakdowns/slam-aria-mirror-bot",
-    "website": "https://github.com/breakdowns/slam-aria-mirror-bot",
+    "repository": "https://github.com/breakdowns/slam-tg-mirror-bot",
+    "website": "https://github.com/breakdowns/slam-tg-mirror-bot",
     "success_url": "https://t.me/SlamMirrorSupport",
     "stack": "container",
     "env": {
@@ -183,7 +183,20 @@
       },
       "STATUS_LIMIT": {
         "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
-        "value": "",
+        "required": false
+      },
+      "IS_VPS": {
+        "description": "Only for VPS, fill False.",
+        "value": "False",
+        "required": false
+      },
+      "SERVER_PORT": {
+        "description": "Only for VPS, no need to fill it.",
+        "required": false
+      },
+      "BASE_URL_OF_BOT": {
+        "description": "Heroku App name web url, Examples: https://yourappname.herokuapp.com",
+        "value": "False",
         "required": false
       }
     },
@@ -193,7 +206,7 @@
       }
     ],
     "formation": {
-            "worker": {
+            "web": {
                 "quantity": 1,
                 "size": "free"
             }

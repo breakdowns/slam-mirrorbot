@@ -36,7 +36,7 @@ p { font-size: 12px; margin: 24px;}
 </style>
 </head>
 <body>
-<h1>Slam-mirror-bot : <a href="#">Github</a></h1>
+<h1>slam-tg-mirror-bot: <a href="#">Github</a></h1>
 <form action="{form_url}" method="POST">
 
 {My_content}

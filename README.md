@@ -49,6 +49,7 @@ streamtape.com, streamsb.net, feurl.com, pixeldrain.com, racaty.net,
 1fichier.com, 1drv.ms (Only works for file not folder or business account),
 uptobox.com (Uptobox account must be premium), solidfiles.com
 ```
+
 ## From Original Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 5GB/6 hours)
@@ -304,6 +305,9 @@ For Index Link with only password without username, even http auth will not work
 machine example.workers.dev password index_password
 ```
 Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of different hosts can be added each separated by a new line.
+
+# License
+**Slam Tg Mirror Bot** is released under the **GNU General Public License v3.0** (GPLv3) which can be found [HERE](https://github.com/breakdowns/slam-tg-mirror-bot/blob/master/LICENSE)
 
 # Credits
 

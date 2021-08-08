@@ -302,9 +302,6 @@ machine example.workers.dev password index_password
 ```
 Where host is the name of extractor (eg. Youtube, Twitch). Multiple accounts of different hosts can be added each separated by a new line.
 
-# License
-**Slam Tg Mirror Bot** is released under the **GNU General Public License v3.0** (GPLv3) which can be found [HERE](https://github.com/breakdowns/slam-tg-mirror-bot/blob/master/LICENSE)
-
 # Credits
 
 Thanks to:

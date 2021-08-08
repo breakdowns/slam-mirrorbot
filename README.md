@@ -137,7 +137,6 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
 - **UPSTREAM_REPO**: Link for Bot Upstream Repo, if you want default update, fill `https://github.com/breakdowns/slam-tg-mirror-bot`.
 - **UPSTREAM_BRANCH**: Branch name for Bot Upstream Repo, fill `master`.
-- **BASE_URL_OF_BOT**: Valid BASE URL of where the bot is deploy. Ip/domain of your bot like `http://myip` or if you have chosen other port then `80` then `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: No slash at the end)
 ### Optional Field
 - **ACCOUNTS_ZIP_URL**: Only if you want to load your Service Account externally from an Index Link. Archive your Service Account json files to a zip file directly (don't archive the accounts folder. Select all the jsons inside and zip them only instead. Name the zip file with whatever you want, it doesn't matter). Fill this with the direct link of that file.
 - **TOKEN_PICKLE_URL**: Only if you want to load your **token.pickle** externally from an Index Link. Fill this with the direct link of that file.
@@ -165,6 +164,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **STATUS_LIMIT**: Status limit with buttons (**NOTE**: Recommend limit status to `4` tasks max).
 - **IS_VPS**: Set it to `True` if you use VPS
 - **SERVER_PORT**: Your VPS port
+- **BASE_URL_OF_BOT**: Valid BASE URL of where the bot is deploy. Ip/domain of your bot like `http://myip` or if you have chosen other port then `80` then `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: No slash at the end)
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.
 - **SHORTENER**: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
 ```

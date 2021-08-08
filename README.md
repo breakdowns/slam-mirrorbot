@@ -5,7 +5,6 @@
 ![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-tg-mirror-bot?color=green&style=flat)
 ![GitHub watchers](https://img.shields.io/github/watchers/breakdowns/slam-tg-mirror-bot)
 ![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-tg-mirror-bot?style=flat)
-![GitHub repo size](https://img.shields.io/github/repo-size/breakdowns/slam-tg-mirror-bot?color=red)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/breakdowns/slam-tg-mirror-bot)
 ![GitHub](https://img.shields.io/github/license/breakdowns/slam-tg-mirror-bot)
 ![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)

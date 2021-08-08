@@ -13,10 +13,10 @@ class QbDownloadStatus(Status):
         super().__init__()
         self.__gid = gid
         self.__hash = qbhash
-        self.__client = client
+        self.client = client
         self.markup = None
         self.__uid = listener.uid
-        self.__listener = listener
+        self.listener = listener
         self.message = listener.message
 
 
@@ -65,11 +65,7 @@ class QbDownloadStatus(Status):
         return status
 
     def torrent_info(self):
-        tor_info = self.__client.torrents_info(torrent_hashes=self.__hash)
-        if len(tor_info) == 0:
-            return None
-        else:
-            return tor_info[0]
+        return self.client.torrents_info(torrent_hashes=self.__hash)[0]
 
     def download(self):
         return self
@@ -80,16 +76,7 @@ class QbDownloadStatus(Status):
     def gid(self):
         return self.__gid
 
-    def listen(self):
-        return self.__listener
-
-    def qbclient(self):
-        return self.__client
-
-    def mark(self):
-        return self.markup
-
     def cancel_download(self):
         LOGGER.info(f"Cancelling Download: {self.name()}")
-        self.__listener.onDownloadError('Download stopped by user!')
-        self.__client.torrents_delete(torrent_hashes=self.__hash)
+        self.listener.onDownloadError('Download stopped by user!')
+        self.client.torrents_delete(torrent_hashes=self.__hash)

@@ -103,7 +103,7 @@ class MirrorListener(listeners.MirrorListeners):
             path = f'{DOWNLOAD_DIR}{self.uid}/{name}'
         up_name = pathlib.PurePath(path).name
         up_path = f'{DOWNLOAD_DIR}{self.uid}/{up_name}'
-        LOGGER.info(f"Upload Name: {name}")
+        LOGGER.info(f"Upload Name: {up_name}")
         drive = gdriveTools.GoogleDriveHelper(up_name, self)
         size = fs_utils.get_path_size(up_path)
         upload_status = UploadStatus(drive, size, gid, self)

@@ -17,7 +17,7 @@ from telegram.ext import CallbackQueryHandler
 from bot import download_dict, download_dict_lock, BASE_URL, dispatcher, get_client
 from bot.helper.mirror_utils.status_utils.qbit_download_status import QbDownloadStatus
 from bot.helper.telegram_helper.message_utils import *
-from bot.helper.ext_utils.bot_utils import setInterval, new_thread, MirrorStatus
+from bot.helper.ext_utils.bot_utils import setInterval, new_thread, MirrorStatus, getDownloadByGid
 from bot.helper.telegram_helper import button_build
 
 LOGGER = logging.getLogger(__name__)
@@ -147,27 +147,22 @@ def get_confirm(update, context):
     user_id = query.from_user.id
     data = query.data
     data = data.split(" ")
-    qdl = None
-    with download_dict_lock:
-        for dl in download_dict.values():
-            if dl.status() ==  MirrorStatus.STATUS_PAUSE:
-                if dl.gid() == data[1]:
-                    qdl = dl
-                    break
+    qdl = getDownloadByGid(data[1])
     if qdl is not None:
-        if user_id != qdl.listen().message.from_user.id:
+        if user_id != qdl.listener.message.from_user.id:
             query.answer(text="Don't waste your time!", show_alert=True)
             return
         if data[0] == "pin":
             query.answer(text=data[2], show_alert=True)
         elif data[0] == "done":
             query.answer()
-            qdl.qbclient().torrents_resume(torrent_hashes=data[2])
-            sendStatusMessage(qdl.listen().update, qdl.listen().bot)
-            deleteMessage(context.bot, qdl.mark())
+            qdl.client.torrents_resume(torrent_hashes=data[2])
+            sendStatusMessage(qdl.listener.update, qdl.listener.bot)
+            deleteMessage(context.bot, qdl.markup)
     else:
         query.answer(text="This task has been cancelled!", show_alert=True)
         query.delete_message()
+
 
 
 def get_hash_magnet(mgt):

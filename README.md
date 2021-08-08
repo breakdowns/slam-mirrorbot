@@ -27,6 +27,7 @@
 - Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Tar/Unzip Google Drive link support
+- Select files before downloading
 - Sudo with Database support
 - Extracting **tar.xz** support
 - Counting Google Drive link

@@ -3,10 +3,6 @@
 # Slam Tg Mirror Bot
 ![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-tg-mirror-bot?color=blue&style=flat)
 ![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-tg-mirror-bot?color=green&style=flat)
-![GitHub issues](https://img.shields.io/github/issues/breakdowns/slam-tg-mirror-bot)
-![GitHub closed issues](https://img.shields.io/github/issues-closed/breakdowns/slam-tg-mirror-bot)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/breakdowns/slam-tg-mirror-bot)
-![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/breakdowns/slam-tg-mirror-bot)
 ![GitHub watchers](https://img.shields.io/github/watchers/breakdowns/slam-tg-mirror-bot)
 ![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-tg-mirror-bot?style=flat)
 ![GitHub repo size](https://img.shields.io/github/repo-size/breakdowns/slam-tg-mirror-bot?color=red)

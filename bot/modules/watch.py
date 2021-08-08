@@ -40,12 +40,8 @@ def _watch(bot: Bot, update, isTar=False):
     except IndexError:
       name = ""
     reply_to = update.message.reply_to_message
-    if reply_to is not None:
-        tag = reply_to.from_user.username
-    else:
-        tag = None
     pswd = ""
-    listener = MirrorListener(bot, update, pswd, isTar, tag)
+    listener = MirrorListener(bot, update, pswd, isTar)
     ydl = YoutubeDLHelper(listener)
     threading.Thread(target=ydl.add_download,args=(link, f'{DOWNLOAD_DIR}{listener.uid}', qual, name)).start()
     sendStatusMessage(update, bot)

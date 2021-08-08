@@ -36,7 +36,7 @@ p { font-size: 12px; margin: 24px;}
 </style>
 </head>
 <body>
-<h1>slam-tg-mirror-bot: <a href="#">Github</a></h1>
+<h1>slam-tg-mirror-bot: <a href="https://github.com/breakdowns/slam-tg-mirror-bot">@Github</a></h1>
 <form action="{form_url}" method="POST">
 
 {My_content}
@@ -277,7 +277,7 @@ async def set_priority(request):
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>See slam-mirror-bot <a href=\"#\">@GitHub</a>By Slam</h1>",content_type="text/html")
+    return web.Response(text="<h1>See slam-tg-mirror-bot <a href='https://github.com/breakdowns/slam-tg-mirror-bot'>@GitHub</a> By <a href='https://github.com/breakdowns'>Breakdowns</a></h1>",content_type="text/html")
 
 async def e404_middleware(app, handler):
 

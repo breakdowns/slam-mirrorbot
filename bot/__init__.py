@@ -72,7 +72,7 @@ def get_client() -> qba.TorrentsAPIMixIn:
     qb_client = qba.Client(host="localhost", port=8090, username="admin", password="adminadmin")
     try:
         qb_client.auth_log_in()
-        qb_client.application.set_preferences({"disk_cache":64, "incomplete_files_ext":True, "max_connec":3000, "max_connec_per_torrent":300, "async_io_thread":32})
+        qb_client.application.set_preferences({"disk_cache":64, "incomplete_files_ext":True, "max_connec":3000, "max_connec_per_torrent":300, "async_io_threads":32})
         return qb_client
     except qba.LoginFailed as e:
         LOGGER.error(str(e))

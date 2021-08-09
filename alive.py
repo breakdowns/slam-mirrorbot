@@ -16,6 +16,7 @@ try:
 except KeyError:
     BASE_URL = None
 
+IS_VPS = False
 try:
     IS_VPS = os.environ.get('IS_VPS')
     if IS_VPS.lower() == 'true':

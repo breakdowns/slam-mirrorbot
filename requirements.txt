@@ -28,5 +28,5 @@ telegraph
 tenacity
 TgCrypto
 torrentool
-youtube_dl
 urllib3
+youtube_dl

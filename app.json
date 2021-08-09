@@ -186,7 +186,7 @@
         "required": false
       },
       "IS_VPS": {
-        "description": "Required to keep the app awake.",
+        "description": "Required to keep the app awake, keep it False.",
         "value": "False",
         "required": true
       },

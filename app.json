@@ -185,11 +185,6 @@
         "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
         "required": false
       },
-      "IS_VPS": {
-        "description": "Required to keep the app awake, keep it False.",
-        "value": "False",
-        "required": true
-      },
       "BASE_URL_OF_BOT": {
         "description": "Enter your Heroku app link to avoid the app from sleeping and to make it work with Torrent selection",
         "value": "https://yourappname.herokuapp.com",

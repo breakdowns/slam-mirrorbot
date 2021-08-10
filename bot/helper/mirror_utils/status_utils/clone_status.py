@@ -1,3 +1,7 @@
+# Implement By - @anasty17 (https://github.com/breakdowns/slam-tg-mirror-bot/commit/80d33430715b4296cd253f62cefc089a81937ebf)
+# (c) https://github.com/breakdowns/slam-tg-mirror-bot
+# All rights reserved
+
 from .status import Status
 from bot.helper.ext_utils.bot_utils import MirrorStatus, get_readable_file_size, get_readable_time
 

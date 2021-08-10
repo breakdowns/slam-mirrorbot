@@ -29,4 +29,4 @@ tenacity
 TgCrypto
 torrentool
 urllib3
-youtube_dl
+yt_dlp

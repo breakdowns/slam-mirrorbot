@@ -79,8 +79,8 @@
         "required": true
       },
       "UPSTREAM_REPO": {
-        "description": "Link for Bot Upstream Repo, If you want default update, Fill https://github.com/breakdowns/slam-aria-mirror-bot.",
-        "value": "https://github.com/breakdowns/slam-aria-mirror-bot",
+        "description": "Link for Bot Upstream Repo, If you want default update, Fill https://github.com/breakdowns/slam-tg-mirror-bot.",
+        "value": "https://github.com/breakdowns/slam-tg-mirror-bot",
         "required": true
       },
       "UPSTREAM_BRANCH": {

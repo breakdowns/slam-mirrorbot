@@ -27,7 +27,7 @@ class qbittorrent:
 
 
     def __init__(self):
-        self.update_interval = 1.5
+        self.update_interval = 2
         self.meta_time = time.time()
 
     @new_thread

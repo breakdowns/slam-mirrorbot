@@ -1,14 +1,14 @@
 [![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
 
-# Slam Tg Mirror Bot
-![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-tg-mirror-bot?color=blue&style=flat)
-![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-tg-mirror-bot?color=green&style=flat)
-![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-tg-mirror-bot?style=flat)
-![GitHub watchers](https://img.shields.io/github/watchers/breakdowns/slam-tg-mirror-bot)
+# Slam Mirror Bot
+![GitHub Repo stars](https://img.shields.io/github/stars/breakdowns/slam-mirrorbot?color=blue&style=flat)
+![GitHub forks](https://img.shields.io/github/forks/breakdowns/slam-mirrorbot?color=green&style=flat)
+![GitHub contributors](https://img.shields.io/github/contributors/breakdowns/slam-mirrorbot?style=flat)
+![GitHub watchers](https://img.shields.io/github/watchers/breakdowns/slam-mirrorbot)
 ![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
 [![Channel](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/SlamMirrorUpdates)
 
-**Slam Tg Mirror Bot** is a _multipurpose_ Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
+**Slam Mirror Bot** is a _multipurpose_ Telegram Bot writen in Python for mirroring files on the Internet to our beloved Google Drive.
 
 # Features supported:
 <details>
@@ -16,7 +16,7 @@
 
 ## Additional Features
 - qBittorrent supported
-- Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update, for more info please check [Setting up config file](https://github.com/breakdowns/slam-tg-mirror-bot/tree/master#setting-up-config-file))
+- Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update, for more info please check [Setting up config file](https://github.com/breakdowns/slam-mirrorbot/tree/master#setting-up-config-file))
 - Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Tar/Unzip Google Drive link support
@@ -75,7 +75,7 @@ Deploying is pretty much straight forward and is divided into several steps as f
 
 - Clone this repo:
 ```
-git clone https://github.com/breakdowns/slam-tg-mirror-bot mirrorbot/
+git clone https://github.com/breakdowns/slam-mirrorbot mirrorbot/
 cd mirrorbot
 ```
 
@@ -134,16 +134,16 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
 - **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)  
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
-- **UPSTREAM_REPO**: Link for Bot Upstream Repo, if you want default update, fill `https://github.com/breakdowns/slam-tg-mirror-bot`.
+- **UPSTREAM_REPO**: Link for Bot Upstream Repo, if you want default update, fill `https://github.com/breakdowns/slam-mirrorbot`.
 - **UPSTREAM_BRANCH**: Branch name for Bot Upstream Repo, fill `master`.
 ### Optional Field
 - **ACCOUNTS_ZIP_URL**: Only if you want to load your Service Account externally from an Index Link. Archive your Service Account json files to a zip file directly (don't archive the accounts folder. Select all the jsons inside and zip them only instead. Name the zip file with whatever you want, it doesn't matter). Fill this with the direct link of that file.
 - **TOKEN_PICKLE_URL**: Only if you want to load your **token.pickle** externally from an Index Link. Fill this with the direct link of that file.
-- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-tg-mirror-bot/tree/master#generate-database) to generate database (**NOTE**: If you use database you can save your sudo id permanent using `/addsudo` command).
+- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database (**NOTE**: If you use database you can save your sudo id permanent using `/addsudo` command).
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id (not username) of you want to authorize, Seprate them with space, Examples: `-0123456789 -1122334455 6915401739`.
 - **SUDO_USERS**: Fill user_id (not username) of you want to sudoers, Seprate them with space, Examples: `0123456789 1122334455 6915401739` (**NOTE**: If you want save sudo id permanent without database, you must fill your sudo id there).
 - **IS_TEAM_DRIVE**: Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
-- **USE_SERVICE_ACCOUNTS**: (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using Service Accounts](https://github.com/breakdowns/slam-tg-mirror-bot#generate-service-accounts-what-is-service-account) section below.
+- **USE_SERVICE_ACCOUNTS**: (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using Service Accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.
 - **INDEX_URL**: Refer to https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index The URL should not have any trailing '/'
 - **MEGA_API_KEY**: Mega.nz api key to mirror mega.nz links. Get it from [Mega SDK Page](https://mega.nz/sdk)
 - **MEGA_EMAIL_ID**: Your email id you used to sign up on mega.nz for using premium accounts (Leave th)
@@ -157,6 +157,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **TAR_UNZIP_LIMIT**: To limit mirroring as Tar or unzipmirror. Available units is (gb or GB, tb or TB), Examples: `100 gb, 100 GB, 10 tb, 10 TB`
 - **VIEW_LINK**: View Link button to open file Index Link in browser instead of direct download link, you can figure out if it's compatible with your Index code or not, open any video from you Index and check if the END of link from browser link bar is `?a=view`, if yes make it `True` it will work (Compatible with [Bhadoo Index](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index) Code)
 - **UPTOBOX_TOKEN**: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
+- **HEROKU_EMAIL**: Heroku Account email Id in which the above app will be deployed (**NOTE**: Only needed if you deploying on Heroku with Github Workflow).
 - **HEROKU_API_KEY**: (Only if you deploying on Heroku) Your Heroku API key, get it from https://dashboard.heroku.com/account.
 - **HEROKU_APP_NAME**: (Only if you deploying on Heroku) Your Heroku app name.
 - **IGNORE_PENDING_REQUESTS**: If you want the bot to ignore pending requests after it restarts, set this to `True`.
@@ -212,13 +213,8 @@ docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfi
 sudo docker run mirrorbot
 ```
 
-## Deploying on Heroku
-
-- Give stars and Fork this repo then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL** (**NOTE**: If you didn't upload **token.pickle** uploading will not work). How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-tg-mirror-bot#getting-google-oauth-api-credential-file)
-- Hit the **DEPLOY TO HEROKU** button and follow the further instructions in the screen (**NOTE**: If vars not coming, just change deploy link to your fork, Example: `https://dashboard.heroku.com/new?template=https://github.com/yourgithubname/slam-tg-mirror-bot`)
-- Recommended to use 1 App in 1 Heroku accounts
-
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
+## Deploying on Heroku with Github Workflow
+<p><a href="https://github.com/breakdowns/slam-mirrorbot/blob/master/heroku-guide.md"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 ## Deploying on Heroku with heroku-cli and Goorm IDE
 <p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
@@ -288,7 +284,7 @@ python3 gen_sa_accounts.py --download-keys project_id
 python3 add_to_team_drive.py -d SharedTeamDriveSrcID
 ```
 
-# Youtube-dl authentication using [.netrc](https://github.com/breakdowns/slam-tg-mirror-bot/blob/master/.netrc) file
+# Youtube-dl authentication using [.netrc](https://github.com/breakdowns/slam-mirrorbot/blob/master/.netrc) file
 For using your premium accounts in Youtube-dl or for protected Index Links, edit the netrc file according to following format:
 ```
 machine host login username password my_youtube_password
@@ -311,4 +307,4 @@ Thanks to:
 - [breakdowns](https://github.com/breakdowns) for slam-tg-mirror-bot
 - [zevtyardt](https://github.com/zevtyardt) for some direct links
 
-And many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-tg-mirror-bot/graphs/contributors).
+And many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/breakdowns/slam-mirrorbot/graphs/contributors).

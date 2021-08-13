@@ -6,17 +6,18 @@
 ## Pre-requisites
 
 - [Heroku](heroku.com) accounts
-- Give stars and Fork this repo then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL** (**NOTE**: If you didn't upload **token.pickle** uploading will not work). How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-tg-mirror-bot#getting-google-oauth-api-credential-file)
 - Recommended to use 1 App in 1 Heroku accounts
 - Don't use bin/fake credits card, because your Heroku account will banned
 
 ## Deployment
 
-1. Go to Repository `Settings` -> `Secrets`
+1. Give stars and Fork this repo then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL** (**NOTE**: If you didn't upload **token.pickle** uploading will not work). How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-tg-mirror-bot#getting-google-oauth-api-credential-file)
+
+2. Go to Repository `Settings` -> `Secrets`
 
 	![secrets](https://telegra.ph/file/bb8cb0eced5caad68a41b.jpg)
 
-2. Add the below Required Variables one by one by clicking `New Repository Secret` everytime.
+3. Add the below Required Variables one by one by clicking `New Repository Secret` everytime.
 
 	```
 	HEROKU_EMAIL
@@ -50,17 +51,17 @@
 	* `UPSTREAM_BRANCH` Branch name for Bot Upstream Repo, fill `master`
 	### For Optional Variables you can get from [Here](https://github.com/breakdowns/slam-tg-mirror-bot#setting-up-config-file) 
 
-3. After adding all the above Required Variables go to Github Actions tab in your repo
+4. After adding all the above Required Variables go to Github Actions tab in your repo
 
-4. Select `Manually Deploy to heroku` workflow as shown below:
+5. Select `Manually Deploy to heroku` workflow as shown below:
 
 	![Example Manually Deploy to Heroku](https://telegra.ph/file/38ffda0165d9671f1d5dc.jpg)
 
-5. Then click on Run workflow
+6. Then click on Run workflow
 
 	![Run workflow](https://telegra.ph/file/c5b4c2e02f585cb59fe5c.jpg)
 
-6. _Done!_ your bot will be deployed now.
+7. _Done!_ your bot will be deployed now.
 
 ## Credits
 - [arghyac35](https://github.com/arghyac35) for Tutorial

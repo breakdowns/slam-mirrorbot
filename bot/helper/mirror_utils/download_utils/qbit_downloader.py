@@ -14,10 +14,10 @@ from torrentool.api import Torrent
 from telegram import InlineKeyboardMarkup
 from telegram.ext import CallbackQueryHandler
 
-from bot import download_dict, download_dict_lock, BASE_URL, dispatcher, get_client
+from bot import download_dict, download_dict_lock, BASE_URL, dispatcher, get_client, TORRENT_DIRECT_LIMIT
 from bot.helper.mirror_utils.status_utils.qbit_download_status import QbDownloadStatus
 from bot.helper.telegram_helper.message_utils import *
-from bot.helper.ext_utils.bot_utils import setInterval, new_thread, MirrorStatus, getDownloadByGid
+from bot.helper.ext_utils.bot_utils import setInterval, new_thread, MirrorStatus, getDownloadByGid, get_readable_file_size
 from bot.helper.telegram_helper import button_build
 
 LOGGER = logging.getLogger(__name__)
@@ -46,7 +46,7 @@ class qbittorrent:
                 self.ext_hash = get_hash_magnet(link)
             tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
             if len(tor_info) > 0:
-                sendMessage("This torrent is already in list.", listener.bot, listener.update)
+                sendMessage("This torrent is already in download list.", listener.bot, listener.update)
                 return
             if is_file:
                 op = self.client.torrents_add(torrent_files=[link], save_path=dire)
@@ -59,7 +59,7 @@ class qbittorrent:
                 if len(tor_info) == 0:
                     while True:
                         if time.time() - self.meta_time >= 300:
-                            sendMessage("The torrent was not added. report when u see this error", listener.bot, listener.update)
+                            sendMessage("The torrent was not added. report when u see this error.", listener.bot, listener.update)
                             return False
                         tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
                         if len(tor_info) > 0:
@@ -110,7 +110,7 @@ class qbittorrent:
                 sendStatusMessage(listener.update, listener.bot)
         except qba.UnsupportedMediaType415Error as e:
             LOGGER.error(str(e))
-            sendMessage("This is an unsupported/invalid link. {str(e)}", listener.bot, listener.update)
+            sendMessage(f"This is an unsupported/invalid link: {str(e)}", listener.bot, listener.update)
         except Exception as e:
             LOGGER.error(str(e))
             sendMessage(str(e), listener.bot, listener.update)
@@ -118,28 +118,48 @@ class qbittorrent:
 
 
     def update(self):
-        tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
-        if len(tor_info) == 0:
-            self.updater.cancel()
-            return
-        else:
-            tor_info = tor_info[0]
-        if tor_info.state == "metaDL":
-            if time.time() - self.meta_time > 600:
-                self.client.torrents_delete(torrent_hashes=self.ext_hash)
-                self.listener.onDownloadError("Dead Torrent!")
+         while True:
+            tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
+            if len(tor_info) == 0:
                 self.updater.cancel()
                 return
-        elif tor_info.state == "error":
-            self.client.torrents_delete(torrent_hashes=self.ext_hash)
-            self.listener.onDownloadError("Error. IDK why, report in support group")
-            self.updater.cancel()
-            return
-        elif tor_info.state == "uploading" or tor_info.state.lower().endswith("up"):
-            self.client.torrents_pause(torrent_hashes=self.ext_hash)
-            self.listener.onDownloadComplete()
-            self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
-            self.updater.cancel()
+            else:
+                tor_info = tor_info[0]
+                
+            if TORRENT_DIRECT_LIMIT is not None and tor_info.state == "downloading":
+                qsize = int(tor_info.size)
+                limit = TORRENT_DIRECT_LIMIT
+                limit = limit.split(" ", maxsplit=1)
+                limitint = int(limit[0])
+                if "G" in limit[1] or "g" in limit[1]:
+                    if qsize > limitint * 1024 ** 3:
+                        self.client.torrents_delete(torrent_hashes=self.ext_hash)
+                        self.listener.onDownloadError(f"Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}\nYour torrent size is {get_readable_file_size(qsize)}")
+                        self.updater.cancel()
+                        return
+                elif "T" in limit[1] or "t" in limit[1]:
+                    if qsize > limitint * 1024 ** 4:
+                        self.client.torrents_delete(torrent_hashes=self.ext_hash)
+                        self.listener.onDownloadError(f"Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}\nYour torrent size is {get_readable_file_size(qsize)}")
+                        self.updater.cancel()
+                        return
+        
+            if tor_info.state == "metaDL":
+                if time.time() - self.meta_time > 600:
+                    self.client.torrents_delete(torrent_hashes=self.ext_hash)
+                    self.listener.onDownloadError("Dead Torrent!")
+                    self.updater.cancel()
+                    return
+            elif tor_info.state == "error":
+                self.client.torrents_delete(torrent_hashes=self.ext_hash)
+                self.listener.onDownloadError("Error. IDK why, report in support group")
+                self.updater.cancel()
+                return
+            elif tor_info.state == "uploading" or tor_info.state.lower().endswith("up"):
+                self.client.torrents_pause(torrent_hashes=self.ext_hash)
+                self.listener.onDownloadComplete()
+                self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
+                self.updater.cancel()
 
 
 def get_confirm(update, context):

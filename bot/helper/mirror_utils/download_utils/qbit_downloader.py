@@ -134,13 +134,13 @@ class qbittorrent:
                 if "G" in limit[1] or "g" in limit[1]:
                     if qsize > limitint * 1024 ** 3:
                         self.client.torrents_delete(torrent_hashes=self.ext_hash)
-                        self.listener.onDownloadError(f"Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}\nYour torrent size is {get_readable_file_size(qsize)}")
+                        self.listener.onDownloadError(f"Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}\nYour torrent size is {get_readable_file_size(qsize)}, try mirror again with qbs and select less file to download.")
                         self.updater.cancel()
                         return
                 elif "T" in limit[1] or "t" in limit[1]:
                     if qsize > limitint * 1024 ** 4:
                         self.client.torrents_delete(torrent_hashes=self.ext_hash)
-                        self.listener.onDownloadError(f"Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}\nYour torrent size is {get_readable_file_size(qsize)}")
+                        self.listener.onDownloadError(f"Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}\nYour torrent size is {get_readable_file_size(qsize)}, try mirror again with qbs and select less file to download.")
                         self.updater.cancel()
                         return
         

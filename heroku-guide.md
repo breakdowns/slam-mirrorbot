@@ -1,7 +1,4 @@
-<div align="center">
-<h1>`Deploying slam-mirrorbot on Heroku with Github Workflows`.
-</h3>
-</div>
+# `Deploying slam-mirrorbot on Heroku with Github Workflows.`
 
 ## Pre-requisites
 

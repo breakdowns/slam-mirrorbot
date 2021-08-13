@@ -175,7 +175,7 @@ class GoogleDriveHelper:
         # File body description
         file_metadata = {
             'name': file_name,
-            'description': 'Uploaded.',
+            'description': '',
             'mimeType': mime_type,
         }
         try:
@@ -517,7 +517,7 @@ class GoogleDriveHelper:
                 if not file_name.endswith(".!qB"):
                     self.upload_file(current_file_name, file_name, mime_type, parent_id)
                     self.total_files += 1
-                    new_id = parent_id
+                new_id = parent_id
             if self.is_cancelled:
                 break
         return new_id

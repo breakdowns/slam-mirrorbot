@@ -212,14 +212,6 @@ docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfi
 sudo docker run mirrorbot
 ```
 
-## Deploying on Heroku
-
-- Give stars and Fork this repo then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL** (**NOTE**: If you didn't upload **token.pickle** uploading will not work). How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-tg-mirror-bot#getting-google-oauth-api-credential-file)
-- Hit the **DEPLOY TO HEROKU** button and follow the further instructions in the screen (**NOTE**: If vars not coming, just change deploy link to your fork, Example: `https://dashboard.heroku.com/new?template=https://github.com/yourgithubname/slam-tg-mirror-bot`)
-- Recommended to use 1 App in 1 Heroku accounts
-
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
-
 ## Deploying on Heroku with Github Workflow
 <p><a href="https://github.com/breakdowns/slam-tg-mirror-bot/blob/master/heroku-guide.md"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 

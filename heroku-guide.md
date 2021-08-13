@@ -13,7 +13,7 @@
 
 1. Go to Repository `Settings` -> `Secrets`
 
-	![secrets](https://raw.githubusercontent.com/arghyac35/aria-telegram-mirror-bot/main/.github/secrets.png)
+	![secrets](https://telegra.ph/file/bb8cb0eced5caad68a41b.jpg)
 
 2. Add the below Required Variables one by one by clicking `New Repository Secret` everytime.
 
@@ -51,13 +51,13 @@
 
 3. After adding all the above Required Variables go to Github Actions tab in your repo
 
-4. Select `Manually Deploy to Heroku` workflow as shown below:
+4. Select `Manually Deploy to heroku` workflow as shown below:
 
-	![Example Manually Deploy to heroku](https://raw.githubusercontent.com/arghyac35/aria-telegram-mirror-bot/main/.github/manually_deploy_workflow.png)
+	![Example Manually Deploy to Heroku](https://telegra.ph/file/38ffda0165d9671f1d5dc.jpg)
 
 5. Then click on Run workflow
 
-	![Run workflow](https://raw.githubusercontent.com/arghyac35/aria-telegram-mirror-bot/main/.github/run_workflow.png)
+	![Run workflow](https://telegra.ph/file/c5b4c2e02f585cb59fe5c.jpg)
 
 6. _Done!_ your bot will be deployed now.
 

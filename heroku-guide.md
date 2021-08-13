@@ -5,6 +5,7 @@
 
 ## Pre-requisites
 
+- [Heroku](heroku.com) accounts
 - Give stars and Fork this repo then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL** (**NOTE**: If you didn't upload **token.pickle** uploading will not work). How to generate **token.pickle**? [Read here](https://github.com/breakdowns/slam-tg-mirror-bot#getting-google-oauth-api-credential-file)
 - Recommended to use 1 App in 1 Heroku accounts
 - Don't use bin/fake credits card, because your Heroku account will banned

@@ -17,11 +17,9 @@ jobs:
           stack: "container"
           region: "us"
         env:
-          HD_AUTO_DELETE_MESSAGE_DURATION: ${{secrets.AUTO_DELETE_MESSAGE_DURATION}}
           HD_BASE_URL_OF_BOT: ${{secrets.BASE_URL_OF_BOT}}
           HD_BOT_TOKEN: ${{secrets.BOT_TOKEN}}
           HD_DOWNLOAD_DIR: ${{secrets.DOWNLOAD_DIR}}
-          HD_DOWNLOAD_STATUS_UPDATE_INTERVAL: ${{secrets.DOWNLOAD_STATUS_UPDATE_INTERVAL}}
           HD_IS_TEAM_DRIVE: ${{secrets.IS_TEAM_DRIVE}}
           HD_GDRIVE_FOLDER_ID: ${{secrets.GDRIVE_FOLDER_ID}}
           HD_OWNER_ID: ${{secrets.OWNER_ID}}

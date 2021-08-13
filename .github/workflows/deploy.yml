@@ -25,6 +25,8 @@ jobs:
           HD_IS_TEAM_DRIVE: ${{secrets.IS_TEAM_DRIVE}}
           HD_GDRIVE_FOLDER_ID: ${{secrets.GDRIVE_FOLDER_ID}}
           HD_OWNER_ID: ${{secrets.OWNER_ID}}
+          HD_HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
+          HD_HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
           HD_TELEGRAM_API: ${{secrets.TELEGRAM_API}}
           HD_TELEGRAM_HASH: ${{secrets.TELEGRAM_HASH}}
           HD_UPSTREAM_REPO: ${{secrets.UPSTREAM_REPO}}

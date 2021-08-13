@@ -1,4 +1,4 @@
-# `Deploying slam-mirrorbot on Heroku with Github Workflows.`
+## Deploying slam-mirrorbot on Heroku with Github Workflows.
 
 ## Pre-requisites
 

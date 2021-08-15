@@ -90,7 +90,7 @@ class MirrorListener(listeners.MirrorListeners):
                 else:
                     archive_result = subprocess.run(["extract", m_path])
                 if archive_result.returncode == 0:
-                    threading.Thread(target=os.remove, args=(m_path,)).start()
+                    threading.Thread(target=os.remove, args=(m_path)).start()
                     LOGGER.info(f"Deleting archive: {m_path}")
                 else:
                     LOGGER.warning('Unable to extract archive! Uploading anyway')
@@ -280,7 +280,7 @@ def _mirror(bot, update, isTar=False, extract=False):
                     listener = MirrorListener(bot, update, pswd, isTar, extract)
                     tg_downloader = TelegramDownloadHelper(listener)
                     ms = update.message
-                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
+                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}', name)
                     return
                 else:
                     if qbit:
@@ -315,19 +315,11 @@ def _mirror(bot, update, isTar=False, extract=False):
             sendMessage(res, bot, update)
             return
         if TAR_UNZIP_LIMIT is not None:
-            LOGGER.info(f'Checking File/Folder Size')
-            limit = TAR_UNZIP_LIMIT
-            limit = limit.split(' ', maxsplit=1)
-            limitint = int(limit[0])
-            msg = f'Failed, Tar/Unzip limit is {TAR_UNZIP_LIMIT}.\nYour File/Folder size is {get_readable_file_size(size)}.'
-            if 'G' in limit[1] or 'g' in limit[1]:
-                if size > limitint * 1024**3:
-                    sendMessage(msg, listener.bot, listener.update)
-                    return
-            elif 'T' in limit[1] or 't' in limit[1]:
-                if size > limitint * 1024**4:
-                    sendMessage(msg, listener.bot, listener.update)
-                    return
+            result = check_limit(size, TAR_UNZIP_LIMIT)
+            if result:
+                msg = f'Failed, Tar/Unzip limit is {TAR_UNZIP_LIMIT}.\nYour File/Folder size is {get_readable_file_size(size)}.'
+                sendMessage(msg, listener.bot, listener.update)
+                return
         LOGGER.info(f"Download Name : {name}")
         drive = gdriveTools.GoogleDriveHelper(name, listener)
         gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=12))
@@ -345,14 +337,14 @@ def _mirror(bot, update, isTar=False, extract=False):
             sendMessage("Mega links are blocked!", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
-            mega_dl.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener)
+            mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}', listener)
 
     elif qbit and (bot_utils.is_magnet(link) or os.path.exists(link)):
         qbit = qbittorrent()
-        qbit.add_torrent(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener, qbitsel)
+        qbit.add_torrent(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, qbitsel)
 
     else:
-        ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener, name)
+        ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, name)
         sendStatusMessage(update, bot)
 
 

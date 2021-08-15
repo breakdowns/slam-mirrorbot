@@ -3,7 +3,7 @@ import threading
 from mega import (MegaApi, MegaListener, MegaRequest, MegaTransfer, MegaError)
 from bot.helper.telegram_helper.message_utils import *
 import os
-from bot.helper.ext_utils.bot_utils import new_thread, get_mega_link_type, get_readable_file_size
+from bot.helper.ext_utils.bot_utils import new_thread, get_mega_link_type, get_readable_file_size, check_limit
 from bot.helper.mirror_utils.status_utils.mega_download_status import MegaDownloadStatus
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot import MEGA_LIMIT, STOP_DUPLICATE, TAR_UNZIP_LIMIT
@@ -180,27 +180,18 @@ class MegaDownloadHelper:
                 executor.continue_event.set()
                 return
         if MEGA_LIMIT is not None or TAR_UNZIP_LIMIT is not None:
-            limit = None
-            LOGGER.info(f'Checking File/Folder Size')
-            if TAR_UNZIP_LIMIT is not None and (listener.isTar or listener.extract):
-                limit = TAR_UNZIP_LIMIT
+            size = api.getSize(node)
+            if listener.isTar or listener.extract:
+                is_tar_ext = True
                 msg3 = f'Failed, Tar/Unzip limit is {TAR_UNZIP_LIMIT}.\nYour File/Folder size is {get_readable_file_size(api.getSize(node))}.'
-            elif MEGA_LIMIT is not None and limit is None:
-                limit = MEGA_LIMIT
+            else:
+                is_tar_ext = False
                 msg3 = f'Failed, Mega limit is {MEGA_LIMIT}.\nYour File/Folder size is {get_readable_file_size(api.getSize(node))}.'
-            if limit is not None:
-                limit = limit.split(' ', maxsplit=1)
-                limitint = int(limit[0])
-                if 'G' in limit[1] or 'g' in limit[1]:
-                    if api.getSize(node) > limitint * 1024**3:
-                        sendMessage(msg3, listener.bot, listener.update)
-                        executor.continue_event.set()
-                        return
-                elif 'T' in limit[1] or 't' in limit[1]:
-                    if api.getSize(node) > limitint * 1024**4:
-                        sendMessage(msg3, listener.bot, listener.update)
-                        executor.continue_event.set()
-                        return
+            result = check_limit(size, MEGA_LIMIT, TAR_UNZIP_LIMIT, is_tar_ext)
+            if result:
+                sendMessage(msg3, listener.bot, listener.update)
+                executor.continue_event.set()
+                return
         with download_dict_lock:
             download_dict[listener.uid] = MegaDownloadStatus(mega_listener, listener)
         os.makedirs(path)

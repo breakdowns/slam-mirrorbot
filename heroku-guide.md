@@ -20,6 +20,7 @@
 	HEROKU_EMAIL
 	HEROKU_API_KEY
 	HEROKU_APP_NAME
+	BASE_URL_OF_BOT
 	BOT_TOKEN
 	TELEGRAM_API
 	TELEGRAM_HASH
@@ -36,12 +37,13 @@
 	* `HEROKU_EMAIL` Heroku Account email Id in which the above app will be deployed
 	* `HEROKU_API_KEY` Go to your Heroku account and go to Account Settings. Scroll to the bottom until you see API Key. Copy this key and add it
 	* `HEROKU_APP_NAME` Your Heroku app name, Name Must be unique
+	* `BASE_URL_OF_BOT` Enter your Heroku app link to avoid the app from sleeping and to make it work with Torrent selection, Example: `https://yourappname.herokuapp.com` (**NOTE**: No slash at the end)
 	* `BOT_TOKEN` The Telegram bot token that you get from https://t.me/BotFather.
 	* `TELEGRAM_API` This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes
 	* `TELEGRAM_HASH` This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org
 	* `OWNER_ID` The Telegram user ID (not username) of the Owner of the bot
 	* `GDRIVE_FOLDER_ID` This is the folder ID of the Google Drive Folder to which you want to upload all the mirrors
-	* `DOWNLOAD_DIR` The path to the local folder where the downloads should be downloaded to
+	* `DOWNLOAD_DIR` The path to the local folder where the downloads should be downloaded to, Fill `/usr/src/app/downloads`
 	* `DOWNLOAD_STATUS_UPDATE_INTERVAL` A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)
 	* `AUTO_DELETE_MESSAGE_DURATION` Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
 	* `UPSTREAM_REPO` Link for Bot Upstream Repo, if you want default update, fill `https://github.com/breakdowns/slam-mirrorbot`

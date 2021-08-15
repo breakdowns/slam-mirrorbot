@@ -32,7 +32,7 @@ class QbDownloadStatus(Status):
         Gets total size of the mirror file/folder
         :return: total size of mirror
         """
-        return self.torrent_info().total_size
+        return self.torrent_info().size
 
     def processed_bytes(self):
         return self.torrent_info().downloaded
@@ -47,7 +47,7 @@ class QbDownloadStatus(Status):
         return f"{DOWNLOAD_DIR}{self.__uid}"
 
     def size(self):
-        return get_readable_file_size(self.torrent_info().total_size)
+        return get_readable_file_size(self.torrent_info().size)
 
     def eta(self):
         return get_readable_time(self.torrent_info().eta)
@@ -79,4 +79,4 @@ class QbDownloadStatus(Status):
     def cancel_download(self):
         LOGGER.info(f"Cancelling Download: {self.name()}")
         self.listener.onDownloadError('Download stopped by user!')
-        self.client.torrents_delete(torrent_hashes=self.__hash)
+        self.client.torrents_delete(torrent_hashes=self.__hash, delete_files=True)

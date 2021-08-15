@@ -137,7 +137,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **UPSTREAM_REPO**: Link for Bot Upstream Repo, if you want default update, fill `https://github.com/breakdowns/slam-mirrorbot`.
 - **UPSTREAM_BRANCH**: Branch name for Bot Upstream Repo, fill `master`.
 ### Optional Field
-- **ACCOUNTS_ZIP_URL**: Only if you want to load your Service Account externally from an Index Link. Archive your Service Account json files to a zip file directly (don't archive the accounts folder. Select all the jsons inside and zip them only instead. Name the zip file with whatever you want, it doesn't matter). Fill this with the direct link of that file.
+- **ACCOUNTS_ZIP_URL**: Only if you want to load your Service Account externally from an Index Link. Archive the accounts folder to a zip file. Fill this with the direct link of that file.
 - **TOKEN_PICKLE_URL**: Only if you want to load your **token.pickle** externally from an Index Link. Fill this with the direct link of that file.
 - **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database (**NOTE**: If you use database you can save your sudo id permanent using `/addsudo` command).
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id (not username) of you want to authorize, Seprate them with space, Examples: `-0123456789 -1122334455 6915401739`.

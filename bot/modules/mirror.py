@@ -5,7 +5,7 @@ from telegram import InlineKeyboardMarkup
 from bot import Interval, INDEX_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, BLOCK_MEGA_FOLDER, BLOCK_MEGA_LINKS, VIEW_LINK, aria2, get_client
 from bot import dispatcher, DOWNLOAD_DIR, download_dict, download_dict_lock, SHORTENER, SHORTENER_API, TAR_UNZIP_LIMIT
 from bot.helper.ext_utils import fs_utils, bot_utils
-from bot.helper.ext_utils.bot_utils import get_mega_link_type
+from bot.helper.ext_utils.bot_utils import get_mega_link_type, check_limit
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException, NotSupportedExtractionArchive
 from bot.helper.mirror_utils.download_utils.aria2_download import AriaDownloadHelper
 from bot.helper.mirror_utils.download_utils.mega_downloader import MegaDownloadHelper
@@ -291,7 +291,7 @@ def _mirror(bot, update, isTar=False, extract=False):
                     listener = MirrorListener(bot, update, pswd, isTar, extract)
                     tg_downloader = TelegramDownloadHelper(listener)
                     ms = update.message
-                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}', name)
+                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
                     return
                 else:
                     if qbit:
@@ -348,14 +348,14 @@ def _mirror(bot, update, isTar=False, extract=False):
             sendMessage("Mega links are blocked!", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
-            mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}', listener)
+            mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener)
 
     elif qbit and (bot_utils.is_magnet(link) or os.path.exists(link)):
         qbit = qbittorrent()
-        qbit.add_torrent(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, qbitsel)
+        qbit.add_torrent(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener, qbitsel)
 
     else:
-        ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, name)
+        ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener, name)
         sendStatusMessage(update, bot)
 
 

@@ -280,7 +280,7 @@ def _mirror(bot, update, isTar=False, extract=False):
                     listener = MirrorListener(bot, update, pswd, isTar, extract)
                     tg_downloader = TelegramDownloadHelper(listener)
                     ms = update.message
-                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}', name)
+                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
                     return
                 else:
                     if qbit:
@@ -337,14 +337,14 @@ def _mirror(bot, update, isTar=False, extract=False):
             sendMessage("Mega links are blocked!", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
-            mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}', listener)
+            mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener)
 
     elif qbit and (bot_utils.is_magnet(link) or os.path.exists(link)):
         qbit = qbittorrent()
-        qbit.add_torrent(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, qbitsel)
+        qbit.add_torrent(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener, qbitsel)
 
     else:
-        ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, name)
+        ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener, name)
         sendStatusMessage(update, bot)
 
 

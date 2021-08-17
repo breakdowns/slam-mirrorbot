@@ -22,21 +22,21 @@ from telegram import InlineKeyboardMarkup
 from bot.helper.telegram_helper import button_build
 from telegraph import Telegraph
 from bot import parent_id, DOWNLOAD_DIR, IS_TEAM_DRIVE, INDEX_URL, \
-    telegraph_token, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, SHORTENER, SHORTENER_API, VIEW_LINK
+    USE_SERVICE_ACCOUNTS, telegraph_token, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, SHORTENER, SHORTENER_API, VIEW_LINK
 from bot.helper.ext_utils.bot_utils import *
 from bot.helper.ext_utils.fs_utils import get_mime_type, get_path_size
 
 LOGGER = logging.getLogger(__name__)
 logging.getLogger('googleapiclient.discovery').setLevel(logging.ERROR)
-USE_SERVICE_ACCOUNTS = False
-SERVICE_ACCOUNT_INDEX = 0
+if USE_SERVICE_ACCOUNTS:
+    SERVICE_ACCOUNT_INDEX = randrange(len(os.listdir("accounts")))
 TELEGRAPHLIMIT = 80
 
 class GoogleDriveHelper:
-    def __init__(self,use_service_accounts, name=None, listener=None):
-        if use_service_accounts:
-            USE_SERVICE_ACCOUNTS = use_service_accounts
-            SERVICE_ACCOUNT_INDEX = randrange(len(os.listdir("accounts")))
+    def __init__(self,clonesa = None, name=None, listener=None):
+        if clonesa is not None:
+            global USE_SERVICE_ACCOUNTS
+            USE_SERVICE_ACCOUNTS = clonesa
         self.__G_DRIVE_TOKEN_FILE = "token.pickle"
         # Check https://developers.google.com/drive/scopes for all available scopes
         self.__OAUTH_SCOPE = ['https://www.googleapis.com/auth/drive']

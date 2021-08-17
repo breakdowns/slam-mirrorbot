@@ -14,7 +14,7 @@ def cloneNode(update, context, sa):
     args = update.message.text.split(" ", maxsplit=1)
     if len(args) > 1:
         link = args[1]
-        gd = gdriveTools.GoogleDriveHelper(sa)
+        gd = gdriveTools.GoogleDriveHelper(clonesa=sa)
         res, size, name, files = gd.clonehelper(link)
         if res != "":
             sendMessage(res, context.bot, update)
@@ -76,7 +76,7 @@ def clone(update,context):
 def cloneSA(update,context):
     cloneNode(update,context,True)
 
-clone_handler = CommandHandler(BotCommands.CloneCommand, cloneNode, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
-clonesa_handler = CommandHandler(BotCommands.CloneSACommand, cloneNode, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+clone_handler = CommandHandler(BotCommands.CloneCommand, clone, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+clonesa_handler = CommandHandler(BotCommands.CloneSACommand, cloneSA, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 dispatcher.add_handler(clone_handler)
 dispatcher.add_handler(clonesa_handler)

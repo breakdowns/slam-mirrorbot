@@ -30,6 +30,7 @@ import threading
 import re
 import random
 import string
+import time
 
 ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()
@@ -241,10 +242,10 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False):
             if link == "qbs":
                 qbitsel = True
             link = message_args[2]
-            if bot_utils.is_url(link) and link.endswith(".torrent"):
+            if not bot_utils.is_magnet(link):
                 resp = requests.get(link)
                 if resp.status_code == 200:
-                    file_name = link.split('/')[-1].replace(" ", "_")
+                    file_name = str(time.time()).replace(".","") + ".torrent"
                     with open(file_name, "wb") as f:
                         f.write(resp.content)
                     link = f"/usr/src/app/{file_name}"

@@ -98,6 +98,8 @@ def bot_help(update, context):
 
 /{BotCommands.CloneCommand} [drive_url]: Copy file/folder to Google Drive
 
+/{BotCommands.CloneSACommand} [drive_url] : Copy file/folder to Google Drive using SA
+
 /{BotCommands.CountCommand} [drive_url]: Count file/folder of Google Drive Links
 
 /{BotCommands.DeleteCommand} [drive_url]: Delete file from Google Drive (Only Owner & Sudo)
@@ -158,6 +160,8 @@ def bot_help(update, context):
 
 /{BotCommands.CloneCommand} [drive_url]: Copy file/folder to Google Drive
 
+/{BotCommands.CloneCommand} [drive_url]: Copy file/folder to Google Drive using SA
+
 /{BotCommands.CountCommand} [drive_url]: Count file/folder of Google Drive Links
 
 /{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help
@@ -190,6 +194,7 @@ botcmds = [
         (f'{BotCommands.UnzipMirrorCommand}','Extract files'),
         (f'{BotCommands.ZipMirrorCommand}','Start mirroring and upload as .zip'),
         (f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
+        (f'{BotCommands.CloneSACommand}','Copy file/folder to Drive using SA'),
         (f'{BotCommands.CountCommand}','Count file/folder of Drive link'),
         (f'{BotCommands.DeleteCommand}','Delete file from Drive'),
         (f'{BotCommands.WatchCommand}','Mirror Youtube-dl support link'),

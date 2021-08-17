@@ -34,7 +34,9 @@ TELEGRAPHLIMIT = 80
 
 class GoogleDriveHelper:
     def __init__(self,clonesa = None, name=None, listener=None):
+        
         if clonesa is not None:
+            LOGGER.info("CLONESA IS NOT NONE")
             global USE_SERVICE_ACCOUNTS
             USE_SERVICE_ACCOUNTS = clonesa
         self.__G_DRIVE_TOKEN_FILE = "token.pickle"

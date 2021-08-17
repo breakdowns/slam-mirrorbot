@@ -21,7 +21,7 @@ class _BotCommands:
         self.LogCommand = 'log'
         self.SpeedCommand = 'speedtest'
         self.CloneCommand = 'clone'
-        self.CloneSACommand = 'cloneSA'
+        self.CloneSACommand = 'clonesa'
         self.CountCommand = 'count'
         self.WatchCommand = 'watch'
         self.TarWatchCommand = 'tarwatch'

@@ -35,11 +35,12 @@ ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()
 
 class MirrorListener(listeners.MirrorListeners):
-    def __init__(self, bot, update, pswd, isTar=False, extract=False, qbit=False):
+    def __init__(self, bot, update, pswd, isTar=False, extract=False, isZip=False, isQbit=False):
         super().__init__(bot, update)
         self.isTar = isTar
         self.extract = extract
-        self.qbit = qbit
+        self.isZip = isZip
+        self.isQbit = isQbit
         self.pswd = pswd
 
     def onDownloadStarted(self):
@@ -66,14 +67,17 @@ class MirrorListener(listeners.MirrorListeners):
             name = download.name()
             gid = download.gid()
             size = download.size_raw()
-            if name is None or self.qbit: # when pyrogram's media.file_name is of NoneType
+            if name is None or self.isQbit: # when pyrogram's media.file_name is of NoneType
                 name = os.listdir(f'{DOWNLOAD_DIR}{self.uid}')[0]
             m_path = f'{DOWNLOAD_DIR}{self.uid}/{name}'
         if self.isTar:
             try:
                 with download_dict_lock:
                     download_dict[self.uid] = TarStatus(name, m_path, size)
-                path = fs_utils.tar(m_path)
+                if self.isZip:
+                    path = fs_utils.zip(name, m_path)
+                else:
+                    path = fs_utils.tar(m_path)
             except FileNotFoundError:
                 LOGGER.info('File to archive not found!')
                 self.onUploadError('Internal error occurred!!')
@@ -225,20 +229,28 @@ class MirrorListener(listeners.MirrorListeners):
         else:
             update_all_messages()
 
-def _mirror(bot, update, isTar=False, extract=False):
+def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False):
     mesg = update.message.text.split('\n')
     message_args = mesg[0].split(' ')
     name_args = mesg[0].split('|')
-    qbit = False
     qbitsel = False
     try:
         link = message_args[1]
         if link == "qb" or link == "qbs":
-            qbit = True
+            isQbit = True
             if link == "qbs":
                 qbitsel = True
             link = message_args[2]
-        print(link)
+            if bot_utils.is_url(link) and link.endswith(".torrent"):
+                resp = requests.get(link)
+                if resp.status_code == 200:
+                    file_name = link.split('/')[-1].replace(" ", "_")
+                    with open(file_name, "wb") as f:
+                        f.write(resp.content)
+                    link = f"/usr/src/app/{file_name}"
+                else:
+                    sendMessage("ERROR: link got HTTP response:" + resp.status_code, bot, update)
+                    return
         if link.startswith("|") or link.startswith("pswd: "):
             link = ''
     except IndexError:
@@ -263,7 +275,8 @@ def _mirror(bot, update, isTar=False, extract=False):
     if pswd is not None:
       pswd = pswd.groups()
       pswd = " ".join(pswd)
-    LOGGER.info(link)
+    if link != '':
+        LOGGER.info(link)
     link = link.strip()
     reply_to = update.message.reply_to_message
     if reply_to is not None:
@@ -277,13 +290,13 @@ def _mirror(bot, update, isTar=False, extract=False):
         if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) or len(link) == 0:
             if file is not None:
                 if file.mime_type != "application/x-bittorrent":
-                    listener = MirrorListener(bot, update, pswd, isTar, extract)
+                    listener = MirrorListener(bot, update, pswd, isTar, extract, isZip)
                     tg_downloader = TelegramDownloadHelper(listener)
                     ms = update.message
                     tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
                     return
                 else:
-                    if qbit:
+                    if isQbit:
                         file.get_file().download(custom_path=f"/usr/src/app/{file.file_name}")
                         link = f"/usr/src/app/{file.file_name}"
                     else:
@@ -292,19 +305,19 @@ def _mirror(bot, update, isTar=False, extract=False):
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
         sendMessage('No download source provided', bot, update)
         return
+    if not os.path.exists(link) and not bot_utils.is_mega_link(link) and not bot_utils.is_gdrive_link(link) and not bot_utils.is_magnet(link):
+        try:
+            link = direct_link_generator(link)
+        except DirectDownloadLinkException as e:
+            LOGGER.info(e)
+            if "ERROR:" in str(e):
+                sendMessage(f"{e}", bot, update)
+                return
+            if "Youtube" in str(e):
+                sendMessage(f"{e}", bot, update)
+                return
 
-    try:
-        link = direct_link_generator(link)
-    except DirectDownloadLinkException as e:
-        LOGGER.info(e)
-        if "ERROR:" in str(e):
-            sendMessage(f"{e}", bot, update)
-            return
-        if "Youtube" in str(e):
-            sendMessage(f"{e}", bot, update)
-            return
-
-    listener = MirrorListener(bot, update, pswd, isTar, extract, qbit)
+    listener = MirrorListener(bot, update, pswd, isTar, extract, isZip, isQbit)
 
     if bot_utils.is_gdrive_link(link):
         if not isTar and not extract:
@@ -339,7 +352,7 @@ def _mirror(bot, update, isTar=False, extract=False):
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener)
 
-    elif qbit and (bot_utils.is_magnet(link) or os.path.exists(link)):
+    elif isQbit and (bot_utils.is_magnet(link) or os.path.exists(link)):
         qbit = qbittorrent()
         qbit.add_torrent(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener, qbitsel)
 
@@ -359,6 +372,8 @@ def tar_mirror(update, context):
 def unzip_mirror(update, context):
     _mirror(context.bot, update, extract=True)
 
+def zip_mirror(update, context):
+    _mirror(context.bot, update, True, isZip=True)
 
 mirror_handler = CommandHandler(BotCommands.MirrorCommand, mirror,
                                 filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
@@ -366,6 +381,9 @@ tar_mirror_handler = CommandHandler(BotCommands.TarMirrorCommand, tar_mirror,
                                     filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 unzip_mirror_handler = CommandHandler(BotCommands.UnzipMirrorCommand, unzip_mirror,
                                       filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+zip_mirror_handler = CommandHandler(BotCommands.ZipMirrorCommand, zip_mirror,
+                                    filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 dispatcher.add_handler(mirror_handler)
 dispatcher.add_handler(tar_mirror_handler)
 dispatcher.add_handler(unzip_mirror_handler)
+dispatcher.add_handler(zip_mirror_handler)

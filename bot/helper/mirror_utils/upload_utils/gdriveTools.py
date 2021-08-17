@@ -36,11 +36,8 @@ class GoogleDriveHelper:
     def __init__(self,name=None, listener=None,clonesa = None ):
         
         if clonesa is not None:
-            LOGGER.info("CLONESA IS NOT NONE")
             global USE_SERVICE_ACCOUNTS
-            LOGGER.info(str(USE_SERVICE_ACCOUNTS))
             USE_SERVICE_ACCOUNTS = clonesa
-            LOGGER.info(str(USE_SERVICE_ACCOUNTS))
         self.__G_DRIVE_TOKEN_FILE = "token.pickle"
         # Check https://developers.google.com/drive/scopes for all available scopes
         self.__OAUTH_SCOPE = ['https://www.googleapis.com/auth/drive']

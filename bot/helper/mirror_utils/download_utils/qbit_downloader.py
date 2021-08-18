@@ -7,6 +7,7 @@ import random
 import string
 import time
 import logging
+import shutil
 
 import qbittorrentapi as qba
 from fnmatch import fnmatch
@@ -173,6 +174,9 @@ class qbittorrent:
                         for file in files:
                             if fnmatch(file, "*.!qB"):
                                 os.remove(os.path.join(dirpath, file))
+                        for folder in subdir:
+                            if fnmatch(folder, ".unwanted"):
+                                shutil.rmtree(os.path.join(dirpath, folder))
                         if not os.listdir(dirpath):
                             os.rmdir(dirpath)
                 self.listener.onDownloadComplete()

@@ -80,14 +80,14 @@ class MirrorListener(listeners.MirrorListeners):
                     path = fs_utils.zip(name, m_path)
                 else:
                     path = fs_utils.tar(m_path)
-                try:
-                    shutil.rmtree(m_path)
-                except:
-                    os.remove(m_path)
             except FileNotFoundError:
                 LOGGER.info('File to archive not found!')
                 self.onUploadError('Internal error occurred!!')
                 return
+            try:
+                shutil.rmtree(m_path)
+            except:
+                os.remove(m_path)
         elif self.extract:
             try:
                 path = fs_utils.get_base_name(m_path)

@@ -137,11 +137,11 @@ async def list_torrent_contents(request):
     gets = request.query
 
     if not "pin_code" in gets.keys():
-        rend_page = code_page.replace("{form_url}",f"/slam/files/{torr}")
-        return web.Response(text=rend_page,content_type='text/html')
+        rend_page = code_page.replace("{form_url}", f"/slam/files/{torr}")
+        return web.Response(text=rend_page, content_type='text/html')
 
     
-    client = qba.Client(host="localhost",port="8090",username="admin",password="adminadmin")
+    client = qba.Client(host="localhost", port="8090", username="admin", password="adminadmin")
     client.auth_log_in()
     try:
       res = client.torrents_files(torrent_hash=torr)
@@ -165,12 +165,12 @@ async def list_torrent_contents(request):
     par = nodes.make_tree(res)
     
     cont = ["",0]
-    nodes.create_list(par,cont)
+    nodes.create_list(par, cont)
 
-    rend_page = page.replace("{My_content}",cont[0])
-    rend_page = rend_page.replace("{form_url}",f"/slam/files/{torr}?pin_code={pincode}")
+    rend_page = page.replace("{My_content}", cont[0])
+    rend_page = rend_page.replace("{form_url}", f"/slam/files/{torr}?pin_code={pincode}")
     client.auth_log_out()
-    return web.Response(text=rend_page,content_type='text/html')
+    return web.Response(text=rend_page, content_type='text/html')
     
 
 async def re_verfiy(paused, resumed, client, torr):
@@ -204,25 +204,23 @@ async def re_verfiy(paused, resumed, client, torr):
 
 
         if not verify:
-            LOGGER.info("Reverification Failed :- correcting stuff")
-            # reconnect and issue the request again
+            LOGGER.error("Reverification Failed, correcting stuff...")
             client.auth_log_out()
-            client = qba.Client(host="localhost",port="8090",username="admin",password="adminadmin")
+            client = qba.Client(host="localhost", port="8090", username="admin", password="adminadmin")
             client.auth_log_in()
             try:
-                client.torrents_file_priority(torrent_hash=torr,file_ids=paused,priority=0)
+                client.torrents_file_priority(torrent_hash=torr, file_ids=paused, priority=0)
             except:
                 LOGGER.error("Errored in reverification paused")
             try:
-                client.torrents_file_priority(torrent_hash=torr,file_ids=resumed,priority=1)
+                client.torrents_file_priority(torrent_hash=torr, file_ids=resumed, priority=1)
             except:
                 LOGGER.error("Errored in reverification resumed")
             client.auth_log_out()
         else:
             break
         k += 1
-        if k >= 2:
-            # avoid an infite loop here
+        if k >= 4:
             return False
     return True
 
@@ -232,7 +230,7 @@ async def re_verfiy(paused, resumed, client, torr):
 async def set_priority(request):
 
     torr = request.match_info["hash_id"]
-    client = qba.Client(host="localhost",port="8090",username="admin",password="adminadmin")
+    client = qba.Client(host="localhost", port="8090", username="admin", password="adminadmin")
     client.auth_log_in()
 
     data = await request.post()
@@ -251,25 +249,23 @@ async def set_priority(request):
             
     pause = pause.strip("|")
     resume = resume.strip("|")
-    LOGGER.info(f"Paused {pause} of {torr}")
-    LOGGER.info(f"Resumed {resume} of {torr}")
     
     try:
-        client.torrents_file_priority(torrent_hash=torr,file_ids=pause,priority=0)
+        client.torrents_file_priority(torrent_hash=torr, file_ids=pause, priority=0)
     except qba.NotFound404Error:
         raise web.HTTPNotFound()
     except:
-        LOGGER.info("Errored in paused")
+        LOGGER.error("Errored in paused")
     
     try:
-        client.torrents_file_priority(torrent_hash=torr,file_ids=resume,priority=1)
+        client.torrents_file_priority(torrent_hash=torr, file_ids=resume, priority=1)
     except qba.NotFound404Error:
         raise web.HTTPNotFound()
     except:
-        LOGGER.info("Errored in resumed")
+        LOGGER.error("Errored in resumed")
 
     await asyncio.sleep(2)
-    if not await re_verfiy(pause,resume,client,torr):
+    if not await re_verfiy(pause, resume, client, torr):
         LOGGER.error("The torrent choose errored reverification failed")
     client.auth_log_out()
     return await list_torrent_contents(request)

@@ -239,14 +239,15 @@ input[type="submit"]:hover, input[type="submit"]:focus{
         });
       });
 
+      if(document.getElementsByTagName("ul").length >= 10){
       var labels = document.querySelectorAll("label");
       //Shorting the file/folder names
       labels.forEach(function (label) {
-        if (label.innerText.toString().split(" ").length != 4) {
+        if (label.innerText.toString().split(" ").length >= 6) {
           let FirstPart = label.innerText
             .toString()
             .split(" ")
-            .slice(0, 2)
+            .slice(0, 3)
             .join(" ");
           let SecondPart = label.innerText
             .toString()
@@ -255,7 +256,21 @@ input[type="submit"]:hover, input[type="submit"]:focus{
             .join(" ");
           label.innerText = `${FirstPart}... ${SecondPart}`;
         }
+        if (label.innerText.toString().split(".").length >= 6) {
+          let first = label.innerText
+            .toString()
+            .split(".")
+            .slice(0, 3)
+            .join(" ");
+          let second = label.innerText
+            .toString()
+            .split(".")
+            .splice(-3)
+            .join(".");
+          label.innerText = `${first}... ${second}`;
+        }
       });
+     }
     </script>
 
 <script>
@@ -526,7 +541,7 @@ section span{
           <input
             type="text"
             name="pin_code"
-            placeholder="Enter the code that you have got from Telegram to access the Torrent"
+            placeholder="Enter the code that you have got from telegram to access the torrent"
           />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -681,7 +696,7 @@ async def set_priority(request):
 
     await asyncio.sleep(2)
     if not await re_verfiy(pause, resume, client, torr):
-        LOGGER.error("The Torrent choose errored reverification failed")
+        LOGGER.error("The torrent choose errored reverification failed")
     client.auth_log_out()
     return await list_torrent_contents(request)
 

@@ -1,0 +1,31 @@
+name: Manually Deploy to Heroku
+
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          usedocker: true
+          docker_heroku_process_type: web
+          stack: "container"
+          region: "us"
+        env:
+          HD_AUTO_DELETE_MESSAGE_DURATION: ${{secrets.AUTO_DELETE_MESSAGE_DURATION}}
+          HD_BASE_URL_OF_BOT: ${{secrets.BASE_URL_OF_BOT}}
+          HD_BOT_TOKEN: ${{secrets.BOT_TOKEN}}
+          HD_DOWNLOAD_DIR: ${{secrets.DOWNLOAD_DIR}}
+          HD_DOWNLOAD_STATUS_UPDATE_INTERVAL: ${{secrets.DOWNLOAD_STATUS_UPDATE_INTERVAL}}
+          HD_IS_TEAM_DRIVE: ${{secrets.IS_TEAM_DRIVE}}
+          HD_GDRIVE_FOLDER_ID: ${{secrets.GDRIVE_FOLDER_ID}}
+          HD_OWNER_ID: ${{secrets.OWNER_ID}}
+          HD_TELEGRAM_API: ${{secrets.TELEGRAM_API}}
+          HD_TELEGRAM_HASH: ${{secrets.TELEGRAM_HASH}}
+          HD_UPSTREAM_REPO: ${{secrets.UPSTREAM_REPO}}
+          HD_UPSTREAM_BRANCH: ${{secrets.UPSTREAM_BRANCH}}

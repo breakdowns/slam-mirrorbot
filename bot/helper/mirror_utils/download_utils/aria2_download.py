@@ -36,29 +36,18 @@ class AriaDownloadHelper(DownloadHelper):
                     sendMarkup("Here are the search results:", dl.getListener().bot, dl.getListener().update, button)
                     return
             if (TORRENT_DIRECT_LIMIT is not None or TAR_UNZIP_LIMIT is not None) and dl is not None:
-                limit = None
-                if TAR_UNZIP_LIMIT is not None and (dl.getListener().isTar or dl.getListener().extract):
-                    LOGGER.info(f"Checking File/Folder Size...")
-                    limit = TAR_UNZIP_LIMIT
+                size = aria2.get_download(gid).total_length
+                if dl.getListener().isTar or dl.getListener().extract:
+                    is_tar_ext = True
                     mssg = f'Tar/Unzip limit is {TAR_UNZIP_LIMIT}'
-                elif TORRENT_DIRECT_LIMIT is not None and limit is None:
-                    LOGGER.info(f"Checking File/Folder Size...")
-                    limit = TORRENT_DIRECT_LIMIT
+                else:
+                    is_tar_ext = False
                     mssg = f'Torrent/Direct limit is {TORRENT_DIRECT_LIMIT}'
-                if limit is not None:
-                    size = aria2.get_download(gid).total_length
-                    limit = limit.split(' ', maxsplit=1)
-                    limitint = int(limit[0])
-                    if 'G' in limit[1] or 'g' in limit[1]:
-                        if size > limitint * 1024**3:
-                            dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
-                            aria2.remove([download], force=True)
-                            return
-                    elif 'T' in limit[1] or 't' in limit[1]:
-                        if size > limitint * 1024**4:
-                            dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
-                            aria2.remove([download], force=True)
-                            return
+                result = check_limit(size, TORRENT_DIRECT_LIMIT, TAR_UNZIP_LIMIT, is_tar_ext)
+                if result:
+                    dl.getListener().onDownloadError(f'{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}')
+                    aria2.remove([download], force=True)
+                    return
         update_all_messages()
 
     def __onDownloadComplete(self, api: API, gid):

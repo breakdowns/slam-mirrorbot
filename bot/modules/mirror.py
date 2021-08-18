@@ -31,6 +31,7 @@ import re
 import random
 import string
 import time
+import shutil
 
 ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()

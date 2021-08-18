@@ -616,7 +616,7 @@ async def re_verfiy(paused, resumed, client, torr):
         if not verify:
             LOGGER.error("Reverification Failed, correcting stuff...")
             client.auth_log_out()
-            lient = qba.Client(host="localhost", port="8090",
+            client = qba.Client(host="localhost", port="8090",
                                username="admin", password="adminadmin")
             client.auth_log_in()
             try:

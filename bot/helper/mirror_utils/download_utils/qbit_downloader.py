@@ -1,5 +1,5 @@
-# Implement By - @anasty17 (https://github.com/breakdowns/slam-mirrorbot/commit/0bfba523f095ab1dccad431d72561e0e002e7a59)
-# (c) https://github.com/breakdowns/slam-mirrorbot
+# Implement By - @anasty17 (https://github.com/breakdowns/slam-tg-mirrorbot/commit/0bfba523f095ab1dccad431d72561e0e002e7a59)
+# (c) https://github.com/breakdowns/slam-tg-mirrorbot
 # All rights reserved
 
 import os

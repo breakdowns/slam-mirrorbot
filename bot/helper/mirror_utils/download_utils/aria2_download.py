@@ -1,7 +1,6 @@
 from bot import aria2, download_dict_lock, STOP_DUPLICATE, TORRENT_DIRECT_LIMIT, TAR_UNZIP_LIMIT
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.ext_utils.bot_utils import *
-from .download_helper import DownloadHelper
 from bot.helper.mirror_utils.status_utils.aria_download_status import AriaDownloadStatus
 from bot.helper.telegram_helper.message_utils import *
 import threading
@@ -9,7 +8,7 @@ from aria2p import API
 from time import sleep
 
 
-class AriaDownloadHelper(DownloadHelper):
+class AriaDownloadHelper:
 
     def __init__(self):
         super().__init__()

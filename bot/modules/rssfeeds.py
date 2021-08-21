@@ -107,7 +107,7 @@ def cmd_rss_start(update, context):
 def cmd_rsshelp(update, context):
     help_string=f"""
 <b>Commands:</b> 
-• /help: <i>To get this message</i>
+• /rsshelp: <i>To get this message</i>
 • /feeds: <i>List your subscriptions</i>
 • /get Title 10: <i>Force fetch last n feed(s)</i>
 • /sub Title https://www.rss-url.com: <i>Subscribe to a RSS feed</i>
@@ -220,23 +220,16 @@ def rss_monitor(context):
     rss_load()
     LOGGER.info('Database Loaded.')
 
-def main():
+job_queue = updater.job_queue
 
-    job_queue = updater.job_queue
+dispatcher.add_handler(CommandHandler(BotCommands.RssHelpCommand, cmd_rsshelp, filters=CustomFilters.owner_filter, run_async=True))    
+dispatcher.add_handler(CommandHandler("feeds", cmd_rss_list, filters=CustomFilters.owner_filter, run_async=True))
+dispatcher.add_handler(CommandHandler("get", cmd_get, filters=CustomFilters.owner_filter, run_async=True))     
+dispatcher.add_handler(CommandHandler("sub", cmd_rss_sub, filters=CustomFilters.owner_filter, run_async=True))
+dispatcher.add_handler(CommandHandler("unsub", cmd_rss_unsub, filters=CustomFilters.owner_filter, run_async=True))
+dispatcher.add_handler(CommandHandler("unsuball", cmd_rss_unsuball, filters=CustomFilters.owner_filter, run_async=True))
 
-    dispatcher.add_handler(CommandHandler(BotCommands.RssHelpCommand, cmd_rsshelp, filters=CustomFilters.owner_filter, run_async=True))    
-    dispatcher.add_handler(CommandHandler("feeds", cmd_rss_list, filters=CustomFilters.owner_filter, run_async=True))
-    dispatcher.add_handler(CommandHandler("get", cmd_get, filters=CustomFilters.owner_filter, run_async=True))     
-    dispatcher.add_handler(CommandHandler("sub", cmd_rss_sub, filters=CustomFilters.owner_filter, run_async=True))
-    dispatcher.add_handler(CommandHandler("unsub", cmd_rss_unsub, filters=CustomFilters.owner_filter, run_async=True))
-    dispatcher.add_handler(CommandHandler("unsuball", cmd_rss_unsuball, filters=CustomFilters.owner_filter, run_async=True))
+init_postgres()
+init_feeds()
 
-    init_postgres()
-    init_feeds()
-
-    job_queue.run_repeating(rss_monitor, DELAY)
-
-    conn.close()
-
-if __name__ == '__main__':
-    main()
+job_queue.run_repeating(rss_monitor, DELAY)

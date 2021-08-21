@@ -233,3 +233,6 @@ init_postgres()
 init_feeds()
 
 job_queue.run_repeating(rss_monitor, DELAY)
+
+updater.start_polling()
+updater.idle()

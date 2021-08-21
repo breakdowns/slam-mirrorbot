@@ -31,6 +31,7 @@ import re
 import random
 import string
 import time
+import shutil
 
 ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()
@@ -83,6 +84,10 @@ class MirrorListener(listeners.MirrorListeners):
                 LOGGER.info('File to archive not found!')
                 self.onUploadError('Internal error occurred!!')
                 return
+            try:
+                shutil.rmtree(m_path)
+            except:
+                os.remove(m_path)
         elif self.extract:
             try:
                 path = fs_utils.get_base_name(m_path)
@@ -242,10 +247,10 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False):
             if link == "qbs":
                 qbitsel = True
             link = message_args[2]
-            if not bot_utils.is_magnet(link):
+            if bot_utils.is_url(link) and not bot_utils.is_magnet(link):
                 resp = requests.get(link)
                 if resp.status_code == 200:
-                    file_name = str(time.time()).replace(".","") + ".torrent"
+                    file_name = str(time.time()).replace(".", "") + ".torrent"
                     with open(file_name, "wb") as f:
                         f.write(resp.content)
                     link = f"/usr/src/app/{file_name}"

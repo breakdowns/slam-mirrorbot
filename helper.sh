@@ -115,8 +115,6 @@ while true; do
 								git config --global user.name "$name"
 								git commit -m "First Deployment"
 								git push heroku master --force
-								heroku ps:scale web=0 -a $bname
-								heroku ps:scale web=1 -a $bname
 							break
 							else 
 								echo "Then do it first!"
@@ -127,8 +125,21 @@ while true; do
 						"Then add it first!"
 					fi
 				done
-			;;
-            "2")
+		;;
+		"2")
+                		echo "Firstly we will login to heroku"
+				echo
+				for (( ; ; ))
+				do
+					echo "Enter your Heroku credentials: "
+					heroku login -i
+					status=$?
+					if test $status -eq 0; then
+						echo "Signed in successfully"
+					break
+					fi
+					echo "Invalid credentials, try again"
+				done
 				for (( ; ; ))
 				do
 					read -p "After adding credentials.json, token.pickle, SA folder (optional) and all necessary vars in config.env, press y): " req
@@ -154,8 +165,6 @@ while true; do
 					git config --global user.name "$name"
 					git commit -m "First Deployment"
 					git push heroku master --force
-					heroku ps:scale web=0 -a $bname
-					heroku ps:scale web=1 -a $bname
 				break
 					else
 						echo "Then do add it first!"
@@ -164,13 +173,10 @@ while true; do
 			break
             ;;
             "3")
-                read -p "Type your heroku appname: " bname
                 read -p "Enter commit description in one line: " c_des
                 git add -f .
                 git commit -m "$c_des"
                 git push heroku master --force
-                heroku ps:scale web=0 -a $bname
-                heroku ps:scale web=1 -a $bname
 			break
             ;;
             *)

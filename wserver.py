@@ -205,7 +205,7 @@ input[type="submit"]:hover, input[type="submit"]:focus{
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/breakdowns/slam-mirrorbot"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/Slam-Team/slam-mirrorbot"><i class="fab fa-github"></i></a>
         <a href="https://t.me/SlamMirrorUpdates"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -530,7 +530,7 @@ section span{
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/breakdowns/slam-mirrorbot"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/Slam-Team/slam-mirrorbot"><i class="fab fa-github"></i></a>
         <a href="https://t.me/SlamMirrorUpdates"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -704,7 +704,7 @@ async def set_priority(request):
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>See slam-mirrorbot <a href='https://github.com/breakdowns/slam-mirrorbot'>@GitHub</a> By <a href='https://github.com/breakdowns'>Breakdowns</a></h1>", content_type="text/html")
+    return web.Response(text="<h1>See slam-mirrorbot <a href='https://github.com/Slam-Team/slam-mirrorbot'>@GitHub</a> By <a href='https://github.com/Slam-Team'>Slam-Team</a></h1>", content_type="text/html")
 
 
 async def e404_middleware(app, handler):

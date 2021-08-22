@@ -29,7 +29,7 @@ def gen_chlog(repo, diff):
 
 # Update Command
 
-@app.on_message(filters.command(BotCommands.UpdateCommand) & filters.user(OWNER_ID))
+@app.on_message(filters.command([BotCommands.UpdateCommand, f'{BotCommands.UpdateCommand}@{bot.username}']) & filters.user(OWNER_ID))
 async def update_it(client, message):
     msg_ = await message.reply_text("`Updating Please Wait!`")
     text = get_text(message)    

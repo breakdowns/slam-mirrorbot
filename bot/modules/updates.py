@@ -13,7 +13,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
 from pyrogram import filters
 
-from bot import app, OWNER_ID, UPSTREAM_REPO, UPSTREAM_BRANCH
+from bot import app, OWNER_ID, UPSTREAM_REPO, UPSTREAM_BRANCH, bot
 from bot.helper import get_text, HEROKU_URL
 from bot.helper.telegram_helper.bot_commands import BotCommands
 

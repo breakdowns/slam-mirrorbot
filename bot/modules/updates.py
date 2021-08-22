@@ -14,7 +14,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from pyrogram import filters
 
 from bot import app, OWNER_ID, UPSTREAM_REPO, UPSTREAM_BRANCH, bot
-from bot.helper import get_text, HEROKU_URL
+from bot.helper import HEROKU_URL
 from bot.helper.telegram_helper.bot_commands import BotCommands
 
 REPO_ = UPSTREAM_REPO
@@ -32,7 +32,7 @@ def gen_chlog(repo, diff):
 @app.on_message(filters.command([BotCommands.UpdateCommand, f'{BotCommands.UpdateCommand}@{bot.username}']) & filters.user(OWNER_ID))
 async def update_it(client, message):
     msg_ = await message.reply_text("`Updating Please Wait!`")
-    text = get_text(message)    
+    text = message.text.split(None, 1)[1]
     try:
         repo = Repo()
     except GitCommandError:

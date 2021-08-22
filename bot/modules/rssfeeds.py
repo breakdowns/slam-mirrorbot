@@ -220,19 +220,20 @@ def rss_monitor(context):
     rss_load()
     LOGGER.info('Database Loaded.')
 
-job_queue = updater.job_queue
+def rss_init():
+    job_queue = updater.job_queue
 
-dispatcher.add_handler(CommandHandler(BotCommands.RssHelpCommand, cmd_rsshelp, filters=CustomFilters.owner_filter, run_async=True))    
-dispatcher.add_handler(CommandHandler("feeds", cmd_rss_list, filters=CustomFilters.owner_filter, run_async=True))
-dispatcher.add_handler(CommandHandler("get", cmd_get, filters=CustomFilters.owner_filter, run_async=True))     
-dispatcher.add_handler(CommandHandler("sub", cmd_rss_sub, filters=CustomFilters.owner_filter, run_async=True))
-dispatcher.add_handler(CommandHandler("unsub", cmd_rss_unsub, filters=CustomFilters.owner_filter, run_async=True))
-dispatcher.add_handler(CommandHandler("unsuball", cmd_rss_unsuball, filters=CustomFilters.owner_filter, run_async=True))
+    dispatcher.add_handler(CommandHandler(BotCommands.RssHelpCommand, cmd_rsshelp, filters=CustomFilters.owner_filter, run_async=True))    
+    dispatcher.add_handler(CommandHandler("feeds", cmd_rss_list, filters=CustomFilters.owner_filter, run_async=True))
+    dispatcher.add_handler(CommandHandler("get", cmd_get, filters=CustomFilters.owner_filter, run_async=True))     
+    dispatcher.add_handler(CommandHandler("sub", cmd_rss_sub, filters=CustomFilters.owner_filter, run_async=True))
+    dispatcher.add_handler(CommandHandler("unsub", cmd_rss_unsub, filters=CustomFilters.owner_filter, run_async=True))
+    dispatcher.add_handler(CommandHandler("unsuball", cmd_rss_unsuball, filters=CustomFilters.owner_filter, run_async=True))
 
-init_postgres()
-init_feeds()
+    init_postgres()
+    init_feeds()
 
-job_queue.run_repeating(rss_monitor, DELAY)
+    job_queue.run_repeating(rss_monitor, DELAY)
 
-updater.start_polling()
-updater.idle()
+    updater.start_polling()
+    updater.idle()

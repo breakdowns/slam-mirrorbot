@@ -4,7 +4,7 @@
 from pyrogram import filters, types, emoji
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot import app, OWNER_ID, bot
-from bot.helper import get_text, check_heroku
+from bot.helper import check_heroku
 from bot import *
 
 # Add Variable
@@ -14,7 +14,7 @@ from bot import *
 async def set_varr(client, message, app_):
     msg_ = await message.reply_text("`Please Wait!`")
     heroku_var = app_.config()
-    _var = get_text(message)
+    _var = message.text.split(None, 1)[1]
     if not _var:
         await msg_.edit("`Here is Usage Syntax: /setvar KEY VALUE`", parse_mode="markdown")
         return
@@ -39,7 +39,7 @@ async def set_varr(client, message, app_):
 async def del_varr(client, message, app_):
     msg_ = await message.reply_text("`Please Wait!`", parse_mode="markdown")
     heroku_var = app_.config()
-    _var = get_text(message)
+    _var = message.text.split(None, 1)[1]
     if not _var:
         await msg_.edit("`Give Var Name As Input!`", parse_mode="markdown")
         return

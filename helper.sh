@@ -115,6 +115,15 @@ while true; do
 								git config --global user.name "$name"
 								git commit -m "First Deployment"
 								git push heroku master --force
+								heroku apps:destroy $bname
+								heroku create $bname
+								heroku git:remote -a $bname
+								heroku stack:set container -a $bname
+								git add -f .
+								git config --global user.email "$mail"
+								git config --global user.name "$name"
+								git commit -m "Second Deployment"
+								git push heroku master --force
 							break
 							else 
 								echo "Then do it first!"
@@ -165,6 +174,15 @@ while true; do
 					git config --global user.name "$name"
 					git commit -m "First Deployment"
 					git push heroku master --force
+					heroku apps:destroy $bname
+					heroku create $bname
+					heroku git:remote -a $bname
+					heroku stack:set container -a $bname
+					git add -f .
+					git config --global user.email "$mail"
+					git config --global user.name "$name"
+					git commit -m "Second Deployment"
+					git push heroku master --force
 				break
 					else
 						echo "Then do add it first!"
@@ -177,7 +195,7 @@ while true; do
                 git add -f .
                 git commit -m "$c_des"
                 git push heroku master --force
-			break
+		break
             ;;
             *)
                 echo "Invalid Choice"

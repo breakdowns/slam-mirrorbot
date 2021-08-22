@@ -11,18 +11,33 @@ from dotenv import load_dotenv
 CONFIG_FILE_URL = os.environ.get('CONFIG_FILE_URL', None)
 if CONFIG_FILE_URL is not None:
     out = subprocess.run(["wget", "-q", "-O", "config.env", CONFIG_FILE_URL])
-
 load_dotenv('config.env')
 
-BASE_URL = os.environ.get('BASE_URL_OF_BOT', None)
-if len(BASE_URL) == 0:
-    BASE_URL = None
 
 IS_VPS = os.environ.get('IS_VPS', 'False')
 if IS_VPS.lower() == 'true':
     IS_VPS = True
 else:
     IS_VPS = False
+
+try:
+    HEROKU_APP_NAME = os.environ.get('HEROKU_APP_NAME', None)
+    if len(HEROKU_APP_NAME) == 0:
+        raise KeyError
+except KeyError:
+    HEROKU_APP_NAME = None
+
+try:
+    BASE_URL = os.environ.get('BASE_URL_OF_BOT', None)
+    if not IS_VPS and len(BASE_URL) == 0:
+        if HEROKU_APP_NAME is not None:
+            BASE_URL = "https://"+HEROKU_APP_NAME.lower()+".herokuapp.com"
+        if HEROKU_APP_NAME is None:
+            raise KeyError
+    if IS_VPS and len(BASE_URL) == 0:
+        raise KeyError
+except KeyError:
+    BASE_URL = None
 
 if not IS_VPS and BASE_URL is not None:
     while True:

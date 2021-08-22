@@ -328,14 +328,6 @@ except KeyError:
     pass
 
 try:
-    BASE_URL = getConfig('BASE_URL_OF_BOT')
-    if len(BASE_URL) == 0:
-        BASE_URL = None
-except KeyError:
-    logging.warning('BASE_URL_OF_BOT not provided!')
-    BASE_URL = None
-
-try:
     IS_VPS = getConfig('IS_VPS')
     if IS_VPS.lower() == 'true':
         IS_VPS = True
@@ -343,6 +335,21 @@ try:
         IS_VPS = False
 except KeyError:
     IS_VPS = False
+
+try:
+    BASE_URL = getConfig('BASE_URL_OF_BOT')
+    if not IS_VPS and len(BASE_URL) == 0:
+        if HEROKU_APP_NAME is not None:
+            BASE_URL = "https://"+HEROKU_APP_NAME.lower()+".herokuapp.com"
+        if HEROKU_APP_NAME is None:
+            logging.warning('Please provide HEROKU_APP_NAME to set BASE_URL!')
+            raise KeyError
+    if IS_VPS and len(BASE_URL) == 0:
+        raise KeyError
+except KeyError:
+    if IS_VPS:
+        logging.warning('BASE_URL_OF_BOT not provided!')
+    BASE_URL = None
 
 try:
     SERVER_PORT = getConfig('SERVER_PORT')

@@ -348,7 +348,7 @@ def fichier(link: str) -> str:
         req = requests.post(url)
       else:
         pw = {"pass": pswd}
-        req = requests.post(url, data=pe)
+        req = requests.post(url, data=pw)
     except:
       raise DirectDownloadLinkException("ERROR: Unable to reach 1fichier server!")
     if req.status_code == 404:

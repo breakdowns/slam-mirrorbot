@@ -3,7 +3,7 @@
 ## Pre-requisites
 
 - [token.pickle](https://github.com/Slam-Team/slam-mirrorbot#getting-google-oauth-api-credential-file)
-- [Heroku](heroku.com) accounts
+- [Heroku](heroku.com) account
 - Recommended to use 1 App in 1 Heroku account
 - Don't use bin/fake credits card, because your Heroku account will get banned.
 

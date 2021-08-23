@@ -560,7 +560,7 @@ class GoogleDriveHelper:
             Telegraph(access_token=telegraph_token).edit_page(path = self.path[prev_page],
                                  title = 'Slam Mirrorbot Search',
                                  author_name='Slam Mirrorbot',
-                                 author_url='https://github.com/Slam-Team/slam-mirrorbot',
+                                 author_url='https://github.com/SlamDevs/slam-mirrorbot',
                                  html_content=content)
         return
 
@@ -645,7 +645,7 @@ class GoogleDriveHelper:
                 self.path.append(Telegraph(access_token=telegraph_token).create_page(
                                                         title = 'Slam Mirrorbot Search',
                                                         author_name='Slam Mirrorbot',
-                                                        author_url='https://github.com/Slam-Team/slam-mirrorbot',
+                                                        author_url='https://github.com/SlamDevs/slam-mirrorbot',
                                                         html_content=content
                                                         )['path'])
 

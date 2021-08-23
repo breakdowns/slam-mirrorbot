@@ -15,8 +15,7 @@
     <summary><b>Click Here For More Details</b></summary>
 
 ## Additional Features
-- qBittorrent supported
-- Updater (**NOTE**: You must upload your **token.pickle** to Index and fill your **token.pickle** url to **TOKEN_PICKLE_URL**, because your **token.pickle** will deleted after update, for more info please check [Setting up config file](https://github.com/SlamDevs/slam-mirrorbot/tree/master#setting-up-config-file))
+- Qbittorrent supported
 - Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
 - Stop duplicate cloning Google Drive & mirroring Mega support
 - Tar/Unzip Google Drive link support
@@ -25,7 +24,6 @@
 - Multiple Trackers support
 - Extracting **tar.xz** support
 - Counting Google Drive link
-- Heroku config support
 - View Link button
 - Shell and Executor
 - Speedtest
@@ -165,7 +163,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - **HEROKU_APP_NAME**: (Only if you deploying on Heroku) Your Heroku app name.
 - **IGNORE_PENDING_REQUESTS**: If you want the bot to ignore pending requests after it restarts, set this to `True`.
 - **STATUS_LIMIT**: Status limit with buttons (**NOTE**: Recommend limit status to `4` tasks max).
-- **IS_VPS**: (Only for VPS) Don't set this to `True` even if you are using vps, unless facing error with web server. Also go to start.sh and replace `$PORT` by `80` or any port you want to use.
+- **IS_VPS**: (Only for VPS) Don't set this to `True` even if you are using VPS, unless facing error with web server. Also go to start.sh and replace `$PORT` by `80` or any port you want to use.
 - **SERVER_PORT**: (Only if IS_VPS is `True`) Base URL Port
 - **BASE_URL_OF_BOT**: (Required for Heroku) Valid BASE URL of where the bot is deploy. Ip/domain of your bot like `http://myip` or if you have chosen other port then `80` then `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: No slash at the end)
 - **SHORTENER_API**: Fill your Shortener api key if you are using Shortener.

@@ -307,6 +307,7 @@ Thanks to:
 - [SVR666](https://github.com/SVR666) for some features & fixes
 - [anasty17](https://github.com/anasty17) for some features & help
 - [breakdowns](https://github.com/breakdowns) for slam-mirrorbot
+- [AkhileshNS](https://github.com/AkhileshNS) for Github workflow method to deploy Heroku app .
 - [zevtyardt](https://github.com/zevtyardt) for some direct links
 - [yash-dk](https://github.com/yash-dk) for implementation qBittorrent on Python
 

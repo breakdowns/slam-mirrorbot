@@ -8,6 +8,7 @@ import subprocess
 
 import aria2p
 import qbittorrentapi as qba
+import requests
 import telegram.ext as tg
 from dotenv import load_dotenv
 from pyrogram import Client
@@ -77,11 +78,34 @@ aria2 = aria2p.API(
 )
 
 
+def gettrackers(urls,delimeter=" "):
+    tracker = ""
+    for url in urls.split(delimeter):
+        if len(urls) == 0:
+            LOGGER.warning("Tracker url not provided!")
+            continue
+        response = requests.get(url)
+        if response.status_code == 200:
+            tracker+= response.text
+    trackerlist = set(tracker.split("\n"))
+    if "" in trackerlist:
+        trackerlist.remove("")
+    return "\n\n".join(trackerlist)
+
+try:
+    TRACKER_LIST = gettrackers("https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt https://ngosang.github.io/trackerslist/trackers_all_http.txt https://newtrackon.com/api/all https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt https://raw.githubusercontent.com/hezhijie0327/Trackerslist/main/trackerslist_tracker.txt https://raw.githubusercontent.com/hezhijie0327/Trackerslist/main/trackerslist_exclude.txt")
+    if len(TRACKER_LIST) == 0:
+        raise KeyError
+    if len(TRACKER_LIST) > 0:
+        LOGGER.info("Donwloading Trackers for qBittorrent")
+except KeyError:
+    TRACKER_LIST = ""
+
 def get_client() -> qba.TorrentsAPIMixIn:
     qb_client = qba.Client(host="localhost", port=8090, username="admin", password="adminadmin")
     try:
         qb_client.auth_log_in()
-        qb_client.application.set_preferences({"disk_cache":64, "incomplete_files_ext":True, "max_connec":3000, "max_connec_per_torrent":300, "async_io_threads":8, "preallocate_all":True, "upnp":True, "dl_limit":-1, "up_limit":-1, "dht":True, "pex":True, "lsd":True, "encryption":0, "queueing_enabled":True, "max_active_downloads":15, "max_active_torrents":50, "dont_count_slow_torrents":True, "bittorrent_protocol":0, "recheck_completed_torrents":True, "enable_multi_connections_from_same_ip":True, "slow_torrent_dl_rate_threshold":100,"slow_torrent_inactive_timer":600})
+        qb_client.application.set_preferences({"disk_cache":64, "incomplete_files_ext":True, "max_connec":3000, "max_connec_per_torrent":300, "async_io_threads":8, "preallocate_all":True, "upnp":True, "dl_limit":-1, "up_limit":-1, "dht":True, "pex":True, "lsd":True, "encryption":0, "queueing_enabled":True, "max_active_downloads":15, "max_active_torrents":50, "dont_count_slow_torrents":True, "bittorrent_protocol":0, "recheck_completed_torrents":True, "enable_multi_connections_from_same_ip":True, "slow_torrent_dl_rate_threshold":100,"slow_torrent_inactive_timer":600,"add_trackers_enabled": True, "add_trackers":f"{TRACKER_LIST}"})
         return qb_client
     except qba.LoginFailed as e:
         LOGGER.error(str(e))

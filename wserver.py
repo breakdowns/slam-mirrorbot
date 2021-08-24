@@ -581,7 +581,7 @@ async def list_torrent_contents(request):
         raise web.HTTPNotFound()
     pincode = passw
     if gets["pin_code"] != pincode:
-        return web.Response(text="Incorrect pin code")
+        return web.Response(text="Eh, Incorrect pin code.")
 
     par = nodes.make_tree(res)
 
@@ -692,7 +692,7 @@ async def set_priority(request):
 
     await asyncio.sleep(2)
     if not await re_verfiy(pause, resume, client, torr):
-        LOGGER.error("The torrent choose errored reverification failed")
+        LOGGER.error("The Torrent choose errored reverification failed")
     client.auth_log_out()
     return await list_torrent_contents(request)
 

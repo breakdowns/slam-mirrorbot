@@ -4,7 +4,7 @@ import os
 import asyncio
 
 from pyrogram import idle
-from bot import app
+from bot import app, alive
 from sys import executable
 
 from telegram import ParseMode
@@ -17,8 +17,7 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules.rssfeeds import rss_init
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, config, updates, rssfeeds
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, reboot, rssfeeds
 
 
 def stats(update, context):
@@ -53,10 +52,9 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
     buttons.buildbutton("Repo", "https://github.com/hyPnOtICDo0g/hishirobot")
     buttons.buildbutton("Read ReLIFE", "https://myanimelist.net/manga/78523/ReLIFE")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
-    uptime = get_readable_time((time.time() - botStartTime))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         if update.message.chat.type == "private" :
-            sendMessage(f"Hey I'm Alive 🙂\nSince: <code>{uptime}</code>", context.bot, update)
+            sendMarkup(start_string, context.bot, update, reply_markup)
         else :
             sendMarkup(start_string, context.bot, update, reply_markup)
     else :
@@ -70,6 +68,7 @@ def restart(update, context):
         f.truncate(0)
         f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
     fs_utils.clean_all()
+    alive.terminate()
     os.execl(executable, executable, "-m", "bot")
 
 
@@ -131,10 +130,6 @@ def bot_help(update, context):
 /{BotCommands.RestartCommand}: Restart the bot
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
-
-/{BotCommands.ConfigMenuCommand}: Get Info Menu about bot config (Owner Only)
-
-/{BotCommands.UpdateCommand}: Update Bot from Upstream Repo (Owner Only)
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
@@ -203,7 +198,6 @@ botcmds = [
         (f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
         (f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
         (f'{BotCommands.TsHelpCommand}','Get help for Torrent search module'),
-        (f'{BotCommands.ShellCommand}','Run shell commands')
     ]
 
 

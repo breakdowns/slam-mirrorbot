@@ -27,7 +27,6 @@ class _BotCommands:
         self.DeleteCommand = 'del'
         self.ConfigMenuCommand = 'config'
         self.ShellCommand = 'sh'
-        self.UpdateCommand = 'update'
         self.ExecHelpCommand = 'exechelp'
         self.TsHelpCommand = 'tshelp'
         self.RssHelpCommand = 'rsshelp'

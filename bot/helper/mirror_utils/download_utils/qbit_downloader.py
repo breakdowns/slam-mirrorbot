@@ -1,5 +1,5 @@
-# Implement By - @anasty17 (https://github.com/Slam-Team/slam-mirrorbot/commit/0bfba523f095ab1dccad431d72561e0e002e7a59)
-# (c) https://github.com/Slam-Team/slam-mirrorbot
+# Implement By - @anasty17 (https://github.com/SlamDevs/slam-mirrorbot/commit/0bfba523f095ab1dccad431d72561e0e002e7a59)
+# (c) https://github.com/SlamDevs/slam-mirrorbot
 # All rights reserved
 
 import os
@@ -133,7 +133,7 @@ class qbittorrent:
             tor_info = tor_info[0]
             if tor_info.state == "metaDL":
                 self.stalled_time = time.time()
-                if time.time() - self.meta_time >= 600:
+                if time.time() - self.meta_time >= 999999999: # timeout while downloading metadata
                     self.listener.onDownloadError("Dead Torrent!")
                     self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
                     self.updater.cancel()
@@ -156,7 +156,7 @@ class qbittorrent:
                         self.updater.cancel()
                         return
             elif tor_info.state == "stalledDL":
-                if time.time() - self.stalled_time >= 900:
+                if time.time() - self.stalled_time >= 999999999: # timeout after downloading metadata
                     self.listener.onDownloadError("Dead Torrent!")
                     self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
                     self.updater.cancel()

@@ -56,7 +56,7 @@ uptobox.com (Uptobox account must be premium), solidfiles.com
 - Shortener support
 - Custom Filename (Only for URL, Telegram files and Youtube-dl. Not for Mega links and Magnet/Torrents)
 - Extracting password protected files, using custom filename and download from password protected Index Links see these examples:
-<p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
+<p><a href="https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20"> <img src="https://img.shields.io/badge/See%20Telegraph-grey?style=for-the-badge&logo=telegraph" width="170""/></a></p>
 
 - Extract these filetypes and uploads to Google Drive
 ```
@@ -83,9 +83,7 @@ For Debian based distros
 ```
 sudo apt install python3
 ```
-Install Docker by following the [official Docker docs](https://docs.docker.com/engine/install/debian/)
-
-OR
+Install Docker by following the [official Docker docs](https://docs.docker.com/engine/install/debian/), or
 ```
 sudo snap install docker 
 ```
@@ -112,7 +110,7 @@ pip3 install -r requirements-cli.txt
 - Copy your database url, and fill to **DATABASE_URL** in config
 
 **2. Using Heroku PostgreSQL**
-<p><a href="https://dev.to/prisma/how-to-setup-a-free-postgresql-database-on-heroku-1dc1"> <img src="https://img.shields.io/badge/see%20on%20dev.to-black?style=for-the-badge&logo=dev-dot-to" width="190""/></a></p>
+<p><a href="https://dev.to/prisma/how-to-setup-a-free-postgresql-database-on-heroku-1dc1"> <img src="https://img.shields.io/badge/See%20Dev.to-black?style=for-the-badge&logo=dev.to" width="170""/></a></p>
 
 </details>
 
@@ -214,11 +212,12 @@ docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfi
 sudo docker run mirrorbot
 ```
 
-## Deploying on Heroku with Github Workflow
-<p><a href="https://github.com/SlamDevs/slam-mirrorbot/blob/master/heroku-guide.md"> <img src="https://img.shields.io/badge/Deploy%20Guide-blueviolet?style=for-the-badge&logo=heroku" width="180""/></a></p>
+## Deploying on Heroku
+- Deploying on Heroku with Github Workflow
+<p><a href="https://github.com/SlamDevs/slam-mirrorbot/blob/master/heroku-guide.md"> <img src="https://img.shields.io/badge/Deploy%20Guide-blueviolet?style=for-the-badge&logo=heroku" width="170""/></a></p>
 
-## Deploying on Heroku with heroku-cli and Goorm IDE
-<p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/see%20on%20telegraph-grey?style=for-the-badge" width="190""/></a></p>
+- Deploying on Heroku with heroku-cli and Goorm IDE
+<p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/Deploy%20Guide-grey?style=for-the-badge&logo=telegraph" width="170""/></a></p>
 
 # Using Service Accounts for uploading to avoid user rate limit
 For Service Account to work, you must set **USE_SERVICE_ACCOUNTS=**"True" in config file or environment variables, 

@@ -5,149 +5,190 @@
 printf "This is an interactive script that will help you in deploying Slam- Mirrorbot. What do you want to do?
 1) Deploying first time
 2) Redeploying but already have credentials.json, token.pickle and SA folder (optional)
-3) Just commiting changes to existing repo"
+3) Just commiting changes to existing repo \n"
 while true; do
 	read -p "Select one of the following: " choice
-	case $choice in
+    case $choice in
             "1")
-                echo "Firstly we will login to heroku"
+				echo -e "Firstly we will make credentials.json"
+				echo -e "For that, follow the TUTORIAL 2 given in this post: https://telegra.ph/Deploying-your-own-Slam-Mirrorbot-08-18#TUTORIAL-2"
+				echo -e "If this script closes in between then just re-run it. \n"
+				for (( ; ; ))
+				do
+					read -p "After adding credentials.json, Press y : " cred
+					if [ $cred = y -o $cred = Y ] ; then
+						break
+					else
+						echo -e "Then do it first! \n"
+					fi
+				done
+				
+				echo -e "\nNow we will login to heroku"
 				echo
 				for (( ; ; ))
 				do
-					echo "Enter your Heroku credentials: "
+					echo -e "Enter your Heroku credentials: \n"
 					heroku login -i
 					status=$?
 					if test $status -eq 0; then
-						echo "Signed in successfully"
+						echo -e "Signed in successfully \n"
 					break
 					fi
-					echo "Invalid credentials, try again"
+					echo -e "Invalid credentials, try again \n"
 				done
+				
 				for (( ; ; ))
 				do
 					read -p "Enter unique appname for your bot: " bname
 					heroku create $bname
 					status=$?
 					if test $status -eq 0; then
-						echo "App created successfully"
+						echo -e "App created successfully \n"
 					break
 					fi
-					echo "Appname is already taken, choose another one"
+					echo -e "Appname is already taken, choose another one \n"
 				done
+				
 				heroku git:remote -a $bname
 				heroku stack:set container -a $bname
 				pip3 install -r requirements-cli.txt
 				pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
-				echo
-				echo "Now we will create credentials.json"
-				echo "For that, follow TUTORIAL 1 given in this post: https://telegra.ph/Deploying-your-own-Slam-Mirrorbot-08-18#TUTORIAL-1"
+				echo -e "\nNow we will create token.pickle. Follow the instructions given. \n"
+				python -m pip install google-auth-oauthlib
+				python3 generate_drive_token.py
+				echo -e "\nService Accounts (SA) help you bypass daily 750GB limit when you want to upload to Shared Drive/Team Drive (TD). Keeping this in mind, select one of the following: \n"
+				echo -e "1) You don't have SA but want to use them? \n"
+				echo -e "2) You already have SA and want to use them? \n"
+				echo -e "3) You don't want to add SA \n"
+				read -p "Enter your choice: " sa
+				if [ $sa = 1 ] ; then
+					python -m pip install progress
+					echo -e "Choose the project id which contains credentails.json, that way you can avoid mess of multiple projects \n"
+					python3 gen_sa_accounts.py --list-projects
+					echo
+					read -p "Project id: " pid
+					python3 gen_sa_accounts.py --enable-services $pid
+					python3 gen_sa_accounts.py --create-sas $pid
+					python3 gen_sa_accounts.py --download-keys $pid
+					echo
+				fi
+				if [ $sa = 2 ] ; then
+					echo -e "Choose the project id which contains SA \n"
+					python3 gen_sa_accounts.py --list-projects
+					echo
+					read -p "Project id: " pid
+					python3 gen_sa_accounts.py --download-keys $pid
+					echo
+				fi
+				if [ $sa = 1 -o $sa = 2 ] ; then
+					echo -e "As you can see, a folder named 'accounts' has been created and contains 100 SA. Now, how do you want to add these SA to your TD? \n"
+					echo -e "1) Directly add them to the TD \n"
+					echo -e "2) Make a Google Group and add all SA to it \n"
+					while true ; do
+						read -p "Enter your choice: " way
+						case $way in
+							"1")
+								echo "Enter your Team Drive id"
+								echo -e "(HINT- If your TD link is like 'https://drive.google.com/drive/folders/0ACYsMW75QbTSUk9PVA' then your TD id = 0ACYsMW75QbTSUk9PVA \n"
+								read -p "TD id: " id
+								python3 add_to_team_drive.py -d $id
+								echo -e "Now you can goto your TD and see that 100 SA have been added \n"
+								echo -e "Don't forget to set USE_SERVICE_ACCOUNTS to 'True' \n"
+								break
+							;;
+							"2")
+								cd accounts
+								grep -oPh '"client_email": "\K[^"]+' *.json > emails.txt
+								cd -
+								echo -e "For that, follow TUTORIAL 2 given in this post: https://telegra.ph/Deploying-your-own-Slam-Mirrorbot-08-18#TUTORIAL-2 \n"
+								for (( ; ; ))
+								do
+									read -p "After completing Tutorial, Press y : " tut
+									if [ $tut = y -o $tut = Y ] ; then
+										break
+									else
+										echo -e "Then complete it first! \n"
+									fi
+								done
+								break
+							;;
+							*)
+								echo -e "Invalid choice \n"
+							;;
+						esac
+					done
+				fi
+				if [ $sa = 3 ] ; then
+					echo -e "\nNo problem, lets proceed further \n"
+				break
+				fi
+				
 				for (( ; ; ))
 				do
-					read -p "After adding credentials.json, Press y" cred
-					if [ $cred = y -o $cred = Y ] ; then
-						echo "Now we will create token.pickle. Follow the instructions given."
-						python -m pip install google-auth-oauthlib
-						python3 generate_drive_token.py
+					read -p "Confirm that you have filled all required vars in config.env by pressing y : " conf
+					if [ $conf = y -o $conf = Y ] ; then
+						echo -e "\nSo lets proceed further \n"
 						echo
-						echo "Service Accounts (SA) help you bypass daily 750GB limit when you want to upload to Shared Drive/Team Drive (TD). Keeping this in mind, select one of the following: "
-						echo "1) You don't have SA but want to use them?"
-						echo "2) You already have SA and want to use them?"
-						echo "3) You don't want to add SA "
-						read -p "Enter your choice: " sa
-						if [ $sa = 1 ] ; then
-							python -m pip install progress
-							python3 gen_sa_accounts.py --quick-setup 1 --new-only
-							echo
-						fi
-						if [ $sa = 2 ] ; then
-							echo "Choose the project id which contains SA"
-							python3 gen_sa_accounts.py --list-projects
-							read -p "Project id: " pid
-							python3 gen_sa_accounts.py --download-keys $pid
-							echo
-						fi
-						if [ $sa = 1 -o $sa = 2 ] ; then
-							echo "As you can see, a folder named 'accounts' has been created and contains 100 SA. Now, how do you want to add these SA to your TD?"
-							echo "1) Directly add them to the TD"
-							echo "2) Make a Google Group and add all SA to it"
-							while true ; do
-								read -p "Enter your choice: " way
-								case $way in
-									"1")
-										echo "Enter your Team Drive id"
-										echo "(HINT- If your TD link is like 'https://drive.google.com/drive/folders/0ACYsMW75QbTSUk9PVA' then your TD id = 0ACYsMW75QbTSUk9PVA"
-										read -p "TD id: " id
-										python3 add_to_team_drive.py -d $id
-										echo "Now you can goto your TD and see that 100 SA have been added"
-										echo "Don't forget to set USE_SERVICE_ACCOUNTS to 'True'"
-										break
-									;;
-									"2")
-										cd accounts
-										grep -oPh '"client_email": "\K[^"]+' *.json > emails.txt
-										cd -
-										echo "For that, follow TUTORIAL 2 given in this post: https://telegra.ph/Deploying-your-own-Slam-Mirrorbot-08-18#TUTORIAL-2"
-										break
-									;;
-									*)
-										echo "Invalid choice"
-									;;
-								esac
-							done
-						break
-						fi
-						if [ $sa = 3 ] ; then
-							echo "No problem, lets proceed further"
-							echo
-						break
-						fi
-						for (( ; ; ))
-						do
-							read -p "After filling all required vars in config.env, press y : " conf
-							if [ $conf = y -o $conf = Y ] ; then
-								echo "So lets proceed further"
-								echo
-								echo "Now we will push this repo to heroku, for that"
-								read -p "Enter the mail which you used for heroku account: " mail
-								read -p "Enter your name: " name
-								git add -f .
-								git config --global user.email "$mail"
-								git config --global user.name "$name"
-								git commit -m "First Deployment"
-								git push heroku master --force
-								heroku apps:destroy $bname
+						echo -e "Now we will push this repo to heroku, for that \n"
+						read -p "Enter the mail which you used for heroku account: " mail
+						read -p "Enter your name: " name
+						echo -e "\nIt is suggested to deploy bot more than 1 time as it ensures that Heroku does not suspend app."
+						echo -e "For safety, it is recommended that app should be deployed atleast 2 times. \n"
+						read -p "How many times do want the bot to be deployed?: " redep
+						git add -f .
+						git config --global user.email "$mail"
+						git config --global user.name "$name"
+						git commit -m "Deploy number 1"
+						git push heroku master --force
+						i=$redep-1
+						if [[ $redep < 5 ]] ; then
+							for (( j = 1; j <= i; j++ ))
+							do
+								heroku apps:destroy -c $bname
 								heroku create $bname
 								heroku git:remote -a $bname
 								heroku stack:set container -a $bname
 								git add -f .
 								git config --global user.email "$mail"
 								git config --global user.name "$name"
-								git commit -m "Second Deployment"
+								git commit -m "Deploy number $((j+1))"
 								git push heroku master --force
-							break
-							else 
-								echo "Then do it first!"
-							fi
-						done
+							done
+						else
+							echo -e "\nYou mad or what!? Doing 4 times \n"
+							for (( j = 1; j <= 3; j++ ))
+							do
+								heroku apps:destroy -c $bname
+								heroku create $bname
+								heroku git:remote -a $bname
+								heroku stack:set container -a $bname
+								git add -f .
+								git config --global user.email "$mail"
+								git config --global user.name "$name"
+								git commit -m "Deploy number $((j+1))"
+								git push heroku master --force
+							done
+						fi
 					break
-					else
-						"Then add it first!"
+					else 
+						echo -e "Then do it first! \n"
 					fi
 				done
+            break
 		;;
 		"2")
-                		echo "Firstly we will login to heroku"
+                echo -e "Firstly we will login to heroku \n"
 				echo
 				for (( ; ; ))
 				do
-					echo "Enter your Heroku credentials: "
+					echo -e "Enter your Heroku credentials: \n"
 					heroku login -i
 					status=$?
 					if test $status -eq 0; then
-						echo "Signed in successfully"
+						echo -e "Signed in successfully \n"
 					break
 					fi
-					echo "Invalid credentials, try again"
+					echo -e "Invalid credentials, try again \n"
 				done
 				for (( ; ; ))
 				do
@@ -159,33 +200,53 @@ while true; do
 							heroku create $bname
 							status=$?
 							if test $status -eq 0; then
-								echo "App created successfully"
+								echo -e "App created successfully \n"
 							break
 							fi
-						echo "Appname is already taken, choose another one"
+						echo -e "Appname is already taken, choose another one \n"
 						done
-					read -p "Enter the mail which you used for heroku account: " mail
-					read -p "Enter your name: " name
-					heroku create $bname
-					heroku git:remote -a $bname
-					heroku stack:set container -a $bname
-					git add -f .
-					git config --global user.email "$mail"
-					git config --global user.name "$name"
-					git commit -m "First Deployment"
-					git push heroku master --force
-					heroku apps:destroy $bname
-					heroku create $bname
-					heroku git:remote -a $bname
-					heroku stack:set container -a $bname
-					git add -f .
-					git config --global user.email "$mail"
-					git config --global user.name "$name"
-					git commit -m "Second Deployment"
-					git push heroku master --force
+						read -p "Enter the mail which you used for heroku account: " mail
+						read -p "Enter your name: " name
+						echo -e "\nIt is suggested to deploy bot more than 1 time as it ensures that Heroku does not suspend app."
+						echo -e "For safety, it is recommended that app should be deployed atleast 2 times. \n"
+						read -p "How many times do want the bot to be deployed?: " redep
+						git add -f .
+						git config --global user.email "$mail"
+						git config --global user.name "$name"
+						git commit -m "Deploy number $i"
+						git push heroku master --force
+						i=$redep-1
+						if [[ $redep < 5 ]] ; then
+							for (( j = 1; j <= i; j++ ))
+							do
+								heroku apps:destroy -c $bname
+								heroku create $bname
+								heroku git:remote -a $bname
+								heroku stack:set container -a $bname
+								git add -f .
+								git config --global user.email "$mail"
+								git config --global user.name "$name"
+								git commit -m "Deploy number $i$((j+1))"
+								git push heroku master --force
+							done
+						else
+							echo -e "\nYou mad or what!? Doing 4 times \n"
+							for (( j = 1; j <= 3; j++ ))
+							do
+								heroku apps:destroy -c $bname
+								heroku create $bname
+								heroku git:remote -a $bname
+								heroku stack:set container -a $bname
+								git add -f .
+								git config --global user.email "$mail"
+								git config --global user.name "$name"
+								git commit -m "Deploy number $((j+1))"
+								git push heroku master --force
+							done
+						fi
 				break
 					else
-						echo "Then do add it first!"
+						echo -e "Then do add it first! \n"
 					fi
 				done
 			break
@@ -198,7 +259,7 @@ while true; do
 		break
             ;;
             *)
-                echo "Invalid Choice"
+                echo -e "Invalid Choice \n"
             ;;
 	esac
 done

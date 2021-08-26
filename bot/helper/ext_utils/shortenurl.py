@@ -31,8 +31,6 @@ def short_url(longurl):
         s = pyshorteners.Shortener()
         tinyurl = s.tinyurl.short(longurl)
         return tinyurl
-    elif SHORTENER is not None and SHORTENER_API is not None:
+    else:
         return requests.get(
             f'https://{SHORTENER}/api?api={SHORTENER_API}&url={longurl}&format=text', verify=False).text
-    else:
-        LOGGER.warning("Something is Wrong please report in @SlamSupport")

@@ -51,7 +51,7 @@ class qbittorrent:
                 self.ext_hash = get_hash_magnet(link)
             tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
             if len(tor_info) > 0:
-                sendMessage("This torrent is already in list.", listener.bot, listener.update)
+                sendMessage("This Torrent is already in list.", listener.bot, listener.update)
                 self.client.auth_log_out()
                 return
             if is_file:
@@ -64,7 +64,7 @@ class qbittorrent:
                 if len(tor_info) == 0:
                     while True:
                         if time.time() - self.meta_time >= 300:
-                            sendMessage("The torrent was not added. report when u see this error", listener.bot, listener.update)
+                            sendMessage("The Torrent was not added. report when you see this error", listener.bot, listener.update)
                             self.client.auth_log_out()
                             return False
                         tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
@@ -81,7 +81,7 @@ class qbittorrent:
             self.updater = setInterval(self.update_interval, self.update)
             if BASE_URL is not None and qbitsel:
                 if not is_file:
-                    meta = sendMessage("Downloading Metadata...Please wait then you can select files or mirror torrent file if it have low seeders", listener.bot, listener.update)
+                    meta = sendMessage("Downloading Metadata...Please wait then you can select files or mirror Torrent file if it have low seeders", listener.bot, listener.update)
                     while True:
                             tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
                             if len(tor_info) == 0:
@@ -169,7 +169,7 @@ class qbittorrent:
                     self.updater.cancel()
                     return
             elif tor_info.state == "error":
-                self.listener.onDownloadError("Error. IDK why, report in support group")
+                self.listener.onDownloadError("Error. IDK why, report in @SlamBugReport")
                 self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
                 self.client.auth_log_out()
                 self.updater.cancel()

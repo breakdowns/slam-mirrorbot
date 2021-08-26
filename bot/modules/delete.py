@@ -20,7 +20,7 @@ def deletefile(update, context):
 	if msg == '' : 
 		drive = gdriveTools.GoogleDriveHelper()
 		msg = drive.deletefile(link)
-	LOGGER.info(f"DeleteFileCmd : {msg}")
+	LOGGER.info(f"DeleteFileCmd: {msg}")
 	reply_message = sendMessage(msg, context.bot, update)
 
 	threading.Thread(target=auto_delete_message, args=(context.bot, update.message, reply_message)).start()

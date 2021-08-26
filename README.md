@@ -309,4 +309,4 @@ Thanks to:
 - [`zevtyardt`](https://github.com/zevtyardt) for some direct links
 - [`yash-dk`](https://github.com/yash-dk) for implementation qBittorrent on Python
 
-And many more people who aren't mentioned here, but may be found in [`Contributors`](https://github.com/SlamDevs/slam-mirrorbot/graphs/contributors).
+And many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/SlamDevs/slam-mirrorbot/graphs/contributors).

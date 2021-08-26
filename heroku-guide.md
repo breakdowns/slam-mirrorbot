@@ -27,8 +27,8 @@
 	![step 5](https://telegra.ph/file/416a550f7ded579b63272.jpg)
 
 	* **NOTE**: Remove commit id from raw link to be able to change variables without updating the `CONFIG_FILE_URL` in secrets. should be in this form: https://gist.githubusercontent.com/username/gist-id/raw/config.env
-	* Before: https://gist.githubusercontent.com/anasty17/8cce4a4b4e7f4ea47e948b2d058e52ac/raw/19ba5ab5eb43016422193319f28bc3c7dfb60f25/config.env
-	* After: https://gist.githubusercontent.com/anasty17/8cce4a4b4e7f4ea47e948b2d058e52ac/raw/config.env
+	* Before: `https://gist.githubusercontent.com/anasty17/8cce4a4b4e7f4ea47e948b2d058e52ac/raw/19ba5ab5eb43016422193319f28bc3c7dfb60f25/config.env`
+	* After: `https://gist.githubusercontent.com/anasty17/8cce4a4b4e7f4ea47e948b2d058e52ac/raw/config.env`
 	* You only need to restart your bot after editing `config.env` gist secret.
 
 4. After adding all the above Required Variables go to Github Actions tab in your repo

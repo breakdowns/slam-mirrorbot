@@ -7,7 +7,7 @@
 
 ## Deployment
 
-1. Give a star and Fork this repo then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to `TOKEN_PICKLE_URL` (**NOTE**: If you don't upload **token.pickle** uploading will not work).
+1. Give a star and Fork this repo then upload `token.pickle` to your forks, or you can upload your `token.pickle` to your Index and put your `token.pickle` link to `TOKEN_PICKLE_URL` (**NOTE**: If you don't upload `token.pickle` uploading will not work).
 
 2. Go to Repository `Settings` -> `Secrets`
 

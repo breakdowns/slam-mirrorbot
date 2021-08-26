@@ -47,5 +47,5 @@
 - Don't change/edit variables from Heroku if you want to change/edit do it in `config.env` from your gist.
 
 ## Credits
-- [arghyac35](https://github.com/arghyac35) for Tutorial
-- [AkhileshNS](https://github.com/AkhileshNS) for Github Workflow method to deploy Heroku app
+- [`arghyac35`](https://github.com/arghyac35) for Tutorial
+- [`AkhileshNS`](https://github.com/AkhileshNS) for Github Workflow method to deploy Heroku app

@@ -1,24 +1,8 @@
 import heroku3
 
 from functools import wraps
-from pyrogram.types import Message
 from bot import HEROKU_API_KEY, HEROKU_APP_NAME
 
-# Implement by https://github.com/jusidama18
-# Setting Message
-
-def get_text(message: Message) -> [None, str]:
-    """Extract Text From Commands"""
-    text_to_return = message.text
-    if message.text is None:
-        return None
-    if " " in text_to_return:
-        try:
-            return message.text.split(None, 1)[1]
-        except IndexError:
-            return None
-    else:
-        return None
 
 # Preparing For Setting Config
 # Implement by https://github.com/jusidama18 and Based on this https://github.com/DevsExpo/FridayUserbot/blob/master/plugins/heroku_helpers.py
@@ -44,27 +28,3 @@ def check_heroku(func):
                 await func(client, message, heroku_app)
 
     return heroku_cli
-
-# Preparing For Update Bot
-# Implement by https://github.com/jusidama18 and Based on this https://github.com/DevsExpo/FridayUserbot/blob/master/plugins/updater.py
-
-def fetch_heroku_git_url(api_key, app_name):
-    if not api_key:
-        return None
-    if not app_name:
-        return None
-    heroku = heroku3.from_key(api_key)
-    try:
-        heroku_applications = heroku.apps()
-    except:
-        return None
-    heroku_app = None
-    for app in heroku_applications:
-        if app.name == app_name:
-            heroku_app = app
-            break
-    if not heroku_app:
-        return None
-    return heroku_app.git_url.replace("https://", "https://api:" + api_key + "@")
-
-HEROKU_URL = fetch_heroku_git_url(HEROKU_API_KEY, HEROKU_APP_NAME)

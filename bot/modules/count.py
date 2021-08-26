@@ -1,5 +1,5 @@
-# Implement By - @anasty17 (https://github.com/Slam-Team/slam-mirrorbot/pull/111)
-# (c) https://github.com/Slam-Team/slam-mirrorbot
+# Implement By - @anasty17 (https://github.com/SlamDevs/slam-mirrorbot/pull/111)
+# (c) https://github.com/SlamDevs/slam-mirrorbot
 # All rights reserved
 
 from telegram.ext import CommandHandler

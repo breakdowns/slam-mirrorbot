@@ -27,10 +27,6 @@ def short_url(longurl):
         s = pyshorteners.Shortener(api_key=SHORTENER_API)
         bitly = s.bitly.short(longurl)
         return bitly
-    elif SHORTENER == "tinyurl.com" and SHORTENER_API is not None:
-        s = pyshorteners.Shortener()
-        tinyurl = s.tinyurl.short(longurl)
-        return tinyurl
     else:
         return requests.get(
             f'https://{SHORTENER}/api?api={SHORTENER_API}&url={longurl}&format=text', verify=False).text

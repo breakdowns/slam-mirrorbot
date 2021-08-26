@@ -8,10 +8,10 @@ from urllib3 import disable_warnings
 
 
 def short_url(longurl):
-    if SHORTENER == "shorte.st":
+    if "shorte.st" in SHORTENER:
         disable_warnings()
-        return requests.get(f'http://api.{SHORTENER}/stxt/{SHORTENER_API}/{longurl}', verify=False).text
-    elif "linkvertise" in SHORTENER:
+        return requests.get(f'http://api.shorte.st/stxt/{SHORTENER_API}/{longurl}', verify=False).text
+    elif SHORTENER == "linkvertise.net" or SHORTENER == "publisher.linkvertise.com" or SHORTENER == "linkvertise.com":
         url = quote(base64.b64encode(longurl.encode("utf-8")))
         linkvertise = [
             f"https://link-to.net/{SHORTENER_API}/{random.random() * 1000}/dynamic?r={url}",
@@ -19,7 +19,7 @@ def short_url(longurl):
             f"https://direct-link.net/{SHORTENER_API}/{random.random() * 1000}/dynamic?r={url}",
             f"https://file-link.net/{SHORTENER_API}/{random.random() * 1000}/dynamic?r={url}"]
         return random.choice(linkvertise)
-    elif "bitly" in SHORTENER:
+    elif "bitly.com" in SHORTENER:
         s = pyshorteners.Shortener(api_key=SHORTENER_API)
         bitly = s.bitly.short(longurl)
         return bitly

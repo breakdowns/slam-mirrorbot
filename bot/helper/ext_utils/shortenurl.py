@@ -1,4 +1,3 @@
-from bot.helper.telegram_helper.message_utils import sendMessage
 import urllib
 import requests
 from bot import LOGGER, SHORTENER, SHORTENER_API

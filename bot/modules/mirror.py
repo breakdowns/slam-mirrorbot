@@ -5,7 +5,7 @@ from telegram import InlineKeyboardMarkup
 from bot import Interval, INDEX_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, BLOCK_MEGA_FOLDER, BLOCK_MEGA_LINKS, VIEW_LINK, aria2, get_client
 from bot import dispatcher, DOWNLOAD_DIR, download_dict, download_dict_lock, SHORTENER, SHORTENER_API, TAR_UNZIP_LIMIT
 from bot.helper.ext_utils import fs_utils, bot_utils
-from bot.helper.ext_utils.bot_utils import get_mega_link_type, check_limit
+from bot.helper.ext_utils.shortenurl import short_url
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException, NotSupportedExtractionArchive
 from bot.helper.mirror_utils.download_utils.aria2_download import AriaDownloadHelper
 from bot.helper.mirror_utils.download_utils.mega_downloader import MegaDownloadHelper
@@ -164,7 +164,7 @@ class MirrorListener(listeners.MirrorListeners):
                 msg += f'\n<b>Type: </b><code>{typ}</code>'
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
-                surl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={link}&format=text').text
+                surl = short_url(link)
                 buttons.buildbutton("☁️ Drive Link", surl)
             else:
                 buttons.buildbutton("☁️ Drive Link", link)
@@ -175,17 +175,17 @@ class MirrorListener(listeners.MirrorListeners):
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
                     if SHORTENER is not None and SHORTENER_API is not None:
-                        siurl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={share_url}&format=text').text
+                        siurl = short_url(share_url)
                         buttons.buildbutton("⚡ Index Link", siurl)
                     else:
                         buttons.buildbutton("⚡ Index Link", share_url)
                 else:
                     share_urls = f'{INDEX_URL}/{url_path}?a=view'
                     if SHORTENER is not None and SHORTENER_API is not None:
-                        siurl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={share_url}&format=text').text
-                        siurls = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={share_urls}&format=text').text
+                        siurl = short_url(share_url)
                         buttons.buildbutton("⚡ Index Link", siurl)
                         if VIEW_LINK:
+                            siurls = short_url(share_urls)
                             buttons.buildbutton("🌐 View Link", siurls)
                     else:
                         buttons.buildbutton("⚡ Index Link", share_url)
@@ -335,7 +335,7 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False):
             sendMessage(res, bot, update)
             return
         if TAR_UNZIP_LIMIT is not None:
-            result = check_limit(size, TAR_UNZIP_LIMIT)
+            result = bot_utils.check_limit(size, TAR_UNZIP_LIMIT)
             if result:
                 msg = f'Failed, Tar/Unzip limit is {TAR_UNZIP_LIMIT}.\nYour File/Folder size is {get_readable_file_size(size)}.'
                 sendMessage(msg, listener.bot, listener.update)
@@ -350,11 +350,12 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False):
         drive.download(link)
 
     elif bot_utils.is_mega_link(link):
-        link_type = get_mega_link_type(link)
+        if BLOCK_MEGA_LINKS:
+            sendMessage("Mega links are blocked!", bot, update)
+            return
+        link_type = bot_utils.get_mega_link_type(link)
         if link_type == "folder" and BLOCK_MEGA_FOLDER:
             sendMessage("Mega folder are blocked!", bot, update)
-        elif BLOCK_MEGA_LINKS:
-            sendMessage("Mega links are blocked!", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener)

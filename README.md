@@ -205,7 +205,7 @@ sudo dockerd
 ```
 - Build Docker image:
 ```
-docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirrorbot
+docker build . -t mirror-bot
 ```
 - Run the image:
 ```

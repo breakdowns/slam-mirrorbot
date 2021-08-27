@@ -1,3 +1,5 @@
+# Implemented by https://github.com/junedkh
+
 import requests
 import random
 import base64

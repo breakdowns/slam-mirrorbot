@@ -54,17 +54,20 @@ while true; do
 				pip3 install -r requirements-cli.txt
 				pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 				echo -e "\nNow we will create token.pickle. Follow the instructions given. \n"
+                sleep 5
 				python -m pip install google-auth-oauthlib
 				python3 generate_drive_token.py
+                sleep 5
 				echo -e "\nService Accounts (SA) help you bypass daily 750GB limit when you want to upload to Shared Drive/Team Drive (TD). Keeping this in mind, select one of the following: \n"
 				echo -e "1) You don't have SA but want to use them? \n"
 				echo -e "2) You already have SA and want to use them? \n"
 				echo -e "3) You don't want to add SA \n"
 				read -p "Enter your choice: " sa
+                sleep 3
 				if [ $sa = 1 ] ; then
 					python -m pip install progress
-					echo -e "Choose the project id which contains credentails.json, that way you can avoid mess of multiple projects \n"
 					python3 gen_sa_accounts.py --list-projects
+                    echo -e "Choose the project id which contains credentails.json, that way you can avoid mess of multiple projects \n"
 					echo
 					read -p "Project id: " pid
 					python3 gen_sa_accounts.py --enable-services $pid
@@ -73,8 +76,8 @@ while true; do
 					echo
 				fi
 				if [ $sa = 2 ] ; then
-					echo -e "Choose the project id which contains SA \n"
 					python3 gen_sa_accounts.py --list-projects
+                    echo -e "Choose the project id which contains SA \n"
 					echo
 					read -p "Project id: " pid
 					python3 gen_sa_accounts.py --download-keys $pid
@@ -145,6 +148,8 @@ while true; do
 							for (( j = 1; j <= i; j++ ))
 							do
 								heroku apps:destroy -c $bname
+                                echo -e "\nDeploy number $((j+1))"
+                                sleep 3
 								heroku create $bname
 								heroku git:remote -a $bname
 								heroku stack:set container -a $bname
@@ -159,6 +164,8 @@ while true; do
 							for (( j = 1; j <= 3; j++ ))
 							do
 								heroku apps:destroy -c $bname
+                                echo -e "\nDeploy number $((j+1))"
+                                sleep 3
 								heroku create $bname
 								heroku git:remote -a $bname
 								heroku stack:set container -a $bname
@@ -220,20 +227,25 @@ while true; do
 							for (( j = 1; j <= i; j++ ))
 							do
 								heroku apps:destroy -c $bname
+                                echo -e "\nDeploy number $((j+1))"
+                                sleep 3
 								heroku create $bname
 								heroku git:remote -a $bname
 								heroku stack:set container -a $bname
 								git add -f .
 								git config --global user.email "$mail"
 								git config --global user.name "$name"
-								git commit -m "Deploy number $i$((j+1))"
+								git commit -m "Deploy number $((j+1))"
 								git push heroku master --force
 							done
 						else
 							echo -e "\nYou mad or what!? Doing 4 times \n"
+                            sleep 3
 							for (( j = 1; j <= 3; j++ ))
 							do
 								heroku apps:destroy -c $bname
+                                echo -e "\nDeploy number $((j+1))"
+                                sleep 3
 								heroku create $bname
 								heroku git:remote -a $bname
 								heroku stack:set container -a $bname

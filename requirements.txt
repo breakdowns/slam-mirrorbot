@@ -30,3 +30,4 @@ TgCrypto
 torrentool
 urllib3
 youtube_dl
+pyshorteners

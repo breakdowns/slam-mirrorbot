@@ -77,10 +77,10 @@ class MegaAppListener(MegaListener):
             self.continue_event.set()
 
     def onRequestTemporaryError(self, api, request, error: MegaError):
-        LOGGER.info(f'Mega Request error in {error}')
+        LOGGER.error(f'Mega Request error in {error}')
         if not self.is_cancelled:
-            self.listener.onDownloadError("RequestTempError: " + error.toString())
             self.is_cancelled = True
+            self.listener.onDownloadError("RequestTempError: " + error.toString())
         self.error = error.toString()
         self.continue_event.set()
 
@@ -90,12 +90,15 @@ class MegaAppListener(MegaListener):
     def onTransferUpdate(self, api: MegaApi, transfer: MegaTransfer):
         if self.is_cancelled:
             api.cancelTransfer(transfer, None)
+            return
         self.__speed = transfer.getSpeed()
         self.__bytes_transferred = transfer.getTransferredBytes()
 
     def onTransferFinish(self, api: MegaApi, transfer: MegaTransfer, error):
         try:
-            if transfer.isFolderTransfer() and transfer.isFinished() or transfer.getFileName() == self.name and not self.is_cancelled:
+            if self.is_cancelled:
+                self.continue_event.set()
+            elif transfer.isFinished() and (transfer.isFolderTransfer() or transfer.getFileName() == self.name):
                 self.listener.onDownloadComplete()
                 self.continue_event.set()
         except Exception as e:
@@ -105,7 +108,7 @@ class MegaAppListener(MegaListener):
         filen = transfer.getFileName()
         state = transfer.getState()
         errStr = error.toString()
-        LOGGER.info(f'Mega download error in file {transfer} {filen}: {error}')
+        LOGGER.error(f'Mega download error in file {transfer} {filen}: {error}')
 
         if state == 1 or state == 4:
             # Sometimes MEGA (offical client) can't stream a node either and raises a temp failed error.
@@ -163,7 +166,7 @@ class MegaDownloadHelper:
             executor.do(folder_api.loginToFolder, (mega_link,))
             node = folder_api.authorizeNode(mega_listener.node)
         if mega_listener.error is not None:
-            return listener.onDownloadError(str(mega_listener.error))
+            return sendMessage(str(mega_listener.error), listener.bot, listener.update)
         if STOP_DUPLICATE:
             LOGGER.info(f'Checking File/Folder if already in Drive')
             mname = node.getName()

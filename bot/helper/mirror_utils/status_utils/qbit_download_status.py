@@ -77,5 +77,6 @@ class QbDownloadStatus(Status):
 
     def cancel_download(self):
         LOGGER.info(f"Cancelling Download: {self.name()}")
+        self.client.torrents_pause(torrent_hashes=self.__hash)
         self.listener.onDownloadError('Download stopped by user!')
-        self.client.torrents_delete(torrent_hashes=self.__hash, delete_files=True)
+        self.client.torrents_delete(torrent_hashes=self.__hash)

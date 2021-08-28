@@ -49,7 +49,7 @@ def cancel_mirror(update, context):
     else:
         dl.download().cancel_download()
         sleep(3)  # incase of any error with ondownloaderror listener
-        clean_download(f'{DOWNLOAD_DIR}{mirror_message.message_id}/')
+        clean_download(f'{DOWNLOAD_DIR}{mirror_message.message_id}')
 
 
 def cancel_all(update, context):

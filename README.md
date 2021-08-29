@@ -27,11 +27,6 @@
 - View Link button
 - Shell and Executor
 - Speedtest
-- Torrent search Supported:
-```
-nyaa.si, sukebei, 1337x, piratebay,
-tgx, yts, eztv, torlock, rarbg
-```
 - Direct links Supported:
 ```
 letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles,

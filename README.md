@@ -216,7 +216,7 @@ sudo docker run -p 80:80 mirrorbot
 ```
 OR
 
-**NOTE**: If you want to use port other than 80, so change it in `docker-compose.yml`
+**NOTE**: If you want to use port other than 80, so change it in [docker-compose.yml](https://github.com/SlamDevs/slam-mirrorbot/blob/master/docker-compose.yml)
 
 - Using Docker-compose so you can edit and build your image in seconds:
 ```

@@ -83,7 +83,8 @@ For Debian based distros
 ```
 sudo apt install python3
 ```
-Install Docker by following the [official Docker docs](https://docs.docker.com/engine/install/debian/), or:
+Install Docker by following the [official Docker docs](https://docs.docker.com/engine/install/debian/)
+OR
 ```
 sudo snap install docker 
 ```
@@ -199,7 +200,7 @@ python3 generate_drive_token.py
 
 ## Deploying
 
-**IMPORTANT NOTE**: In start.sh you must replace $PORT with 80 or any other port you want to use
+**IMPORTANT NOTE**: In start.sh you must replace `$PORT` with 80 or any other port you want to use
 
 - Start Docker daemon (skip if already running):
 ```
@@ -215,7 +216,7 @@ sudo docker run -p 80:80 mirrorbot
 ```
 OR
 
-**NOTE**: If you want to use port other than 80, so change it in docker-compose.yml
+**NOTE**: If you want to use port other than 80, so change it in `docker-compose.yml`
 
 - Using Docker-compose so you can edit and build your image in seconds:
 ```
@@ -230,7 +231,7 @@ sudo docker-compose up
 sudo docker-compose build
 sudo docker-compose up
 ```
-or
+OR
 ```
 sudo docker-compose up --build
 ```

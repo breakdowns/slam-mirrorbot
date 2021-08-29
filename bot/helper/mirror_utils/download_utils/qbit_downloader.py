@@ -90,9 +90,8 @@ class qbittorrent:
                             try:
                                 tor_info = tor_info[0]
                                 if tor_info.state == "metaDL" or tor_info.state == "checkingResumeData":
-                                    time.sleep(0.5)
+                                    time.sleep(1)
                                 else:
-                                    time.sleep(2)
                                     deleteMessage(listener.bot, meta)
                                     break
                             except:
@@ -140,6 +139,7 @@ class qbittorrent:
                 self.stalled_time = time.time()
                 if time.time() - self.meta_time >= 999999999: # timeout while downloading metadata
                     self.client.torrents_pause(torrent_hashes=self.ext_hash)
+                    time.sleep(0.3)
                     self.listener.onDownloadError("Dead Torrent!")
                     self.client.torrents_delete(torrent_hashes=self.ext_hash)
                     self.client.auth_log_out()
@@ -159,6 +159,7 @@ class qbittorrent:
                     self.checked = True
                     if result:
                         self.client.torrents_pause(torrent_hashes=self.ext_hash)
+                        time.sleep(0.3)
                         self.listener.onDownloadError(f"{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}")
                         self.client.torrents_delete(torrent_hashes=self.ext_hash)
                         self.client.auth_log_out()
@@ -167,6 +168,7 @@ class qbittorrent:
             elif tor_info.state == "stalledDL":
                 if time.time() - self.stalled_time >= 999999999: # timeout after downloading metadata
                     self.client.torrents_pause(torrent_hashes=self.ext_hash)
+                    time.sleep(0.3)
                     self.listener.onDownloadError("Dead Torrent!")
                     self.client.torrents_delete(torrent_hashes=self.ext_hash)
                     self.client.auth_log_out()
@@ -174,7 +176,8 @@ class qbittorrent:
                     return
             elif tor_info.state == "error":
                 self.client.torrents_pause(torrent_hashes=self.ext_hash)
-                self.listener.onDownloadError("Error. IDK why, report in @SlamBugReport")
+                time.sleep(0.3)
+                self.listener.onDownloadError("No enough space for this torrent on device")
                 self.client.torrents_delete(torrent_hashes=self.ext_hash)
                 self.client.auth_log_out()
                 self.updater.cancel()

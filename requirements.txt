@@ -18,6 +18,7 @@ psutil
 psycopg2-binary
 pybase64
 pyrogram
+pyshorteners
 python-dotenv
 python-magic
 python-telegram-bot
@@ -30,4 +31,3 @@ TgCrypto
 torrentool
 urllib3
 youtube_dl
-pyshorteners

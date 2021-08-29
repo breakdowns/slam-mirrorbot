@@ -43,9 +43,9 @@ load_dotenv('config.env')
 
 alive = subprocess.Popen(["python3", "alive.py"])
 
-subprocess.run(["mkdir", "-p", "./.config/qBittorrent"])
-subprocess.run(["cp", "qBittorrent.conf", "./.config/qBittorrent/qBittorrent.conf"])
-subprocess.run(["qbittorrent-nox", "-d"])
+subprocess.run(["mkdir", "-p", "qBittorrent/config"])
+subprocess.run(["cp", "qBittorrent.conf", "qBittorrent/config/qBittorrent.conf"])
+subprocess.run(["qbittorrent-nox", "-d", "--profile=."])
 
 Interval = []
 

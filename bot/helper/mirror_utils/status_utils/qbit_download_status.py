@@ -5,6 +5,7 @@
 from bot import DOWNLOAD_DIR, LOGGER, get_client
 from bot.helper.ext_utils.bot_utils import MirrorStatus, get_readable_file_size, get_readable_time
 from .status import Status
+from time import sleep
 
 
 class QbDownloadStatus(Status):
@@ -78,5 +79,6 @@ class QbDownloadStatus(Status):
     def cancel_download(self):
         LOGGER.info(f"Cancelling Download: {self.name()}")
         self.client.torrents_pause(torrent_hashes=self.__hash)
+        sleep(0.3)
         self.listener.onDownloadError('Download stopped by user!')
         self.client.torrents_delete(torrent_hashes=self.__hash)

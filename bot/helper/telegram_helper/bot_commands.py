@@ -27,6 +27,5 @@ class _BotCommands:
         self.DeleteCommand = 'del'
         self.ShellCommand = 'shell'
         self.ExecHelpCommand = 'exechelp'
-        self.TsHelpCommand = 'tshelp'
 
 BotCommands = _BotCommands()

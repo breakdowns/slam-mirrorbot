@@ -199,6 +199,8 @@ python3 generate_drive_token.py
 
 ## Deploying
 
+**IMPORTANT NOTE**: In start.sh you must replace $PORT with 80 or any other port you want to use
+
 - Start Docker daemon (skip if already running):
 ```
 sudo dockerd
@@ -209,8 +211,45 @@ sudo docker build . -t mirror-bot
 ```
 - Run the image:
 ```
-sudo docker run mirrorbot
+sudo docker run -p 80:80 mirrorbot
 ```
+OR
+
+**NOTE**: If you want to use port other than 80, so change it in docker-compose.yml
+
+- Using Docker-compose so you can edit and build your image in seconds:
+```
+sudo apt install docker-compose
+```
+- Build and run Docker image:
+```
+sudo docker-compose up
+```
+- After edit files with nano for example (nano start.sh):
+```
+sudo docker-compose build
+sudo docker-compose up
+```
+or
+```
+sudo docker-compose up --build
+```
+- To stop docker run 
+```
+sudo docker ps
+```
+```
+sudo docker stop id
+```
+- To clear the container (this will not effect on image):
+```
+sudo docker container prune
+```
+- To delete the image:
+```
+sudo docker image prune -a
+```
+## [Video From Tortoolkit Repo](https://youtu.be/c8_TU1sPK08)
 
 ## Deploying on Heroku
 - Deploying on Heroku with Github Workflow

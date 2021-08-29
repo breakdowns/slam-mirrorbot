@@ -56,7 +56,6 @@ class qbittorrent:
                 return
             if is_file:
                 op = self.client.torrents_add(torrent_files=[link], save_path=dire)
-                LOGGER.info(op)
                 os.remove(link)
             else:
                 op = self.client.torrents_add(link, save_path=dire)

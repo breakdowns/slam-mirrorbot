@@ -208,7 +208,7 @@ sudo docker build . -t mirror-bot
 ```
 - Run the image:
 ```
-sudo docker run -p 80:80 mirrorbot
+sudo docker run -p 80:80 mirror-bot
 ```
 OR
 

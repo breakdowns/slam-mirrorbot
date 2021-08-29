@@ -251,7 +251,7 @@ sudo docker image prune -a
 ```
 - [Video From Tortoolkit Repo](https://youtu.be/c8_TU1sPK08)
 
-<p><a href="https://youtu.be/c8_TU1sPK08"> <img src="https://img.shields.io/badge/YouTube?style=for-the-badge&logo=YouTube" width="170""/></a></p>
+<p><a href="https://youtu.be/c8_TU1sPK08"> <img src="https://img.shields.io/badge/YouTube-black?style=for-the-badge&logo=YouTube" width="170""/></a></p>
 
 ## Deploying on Heroku
 - Deploying on Heroku with Github Workflow

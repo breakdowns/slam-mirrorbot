@@ -236,7 +236,7 @@ OR
 ```
 sudo docker-compose up --build
 ```
-- To stop docker run 
+- To stop Docker run 
 ```
 sudo docker ps
 ```
@@ -252,7 +252,6 @@ sudo docker container prune
 sudo docker image prune -a
 ```
 - Video From Tortoolkit Repo
-
 <p><a href="https://youtu.be/c8_TU1sPK08"> <img src="https://img.shields.io/badge/See%20Video-black?style=for-the-badge&logo=YouTube" width="160""/></a></p>
 
 ## Deploying on Heroku

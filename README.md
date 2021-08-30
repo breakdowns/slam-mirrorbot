@@ -15,18 +15,20 @@
     <summary><b>Click Here For More Details</b></summary>
 
 ## Additional Features
-- Qbittorrent supported
-- Limiting size Torrent/Direct, Tar/Unzip, Mega, cloning Google Drive support
-- Stop duplicate cloning Google Drive & mirroring Mega support
+- Qbittorrent
+- Size limiting for Torrent/Direct, Tar/Unzip, Mega and clone
+- Stop duplicate for all except qbittorrent tasks
 - Tar/Unzip Google Drive link support
-- Select files from Torrent before downloading
-- Sudo with Database support
+- Select files from Torrent before downloading using qbittorrent
+- Sudo with or without Database
 - Multiple Trackers support
 - Extracting **tar.xz** support
 - Counting Google Drive link
 - View Link button
 - Shell and Executor
-- Speedtest
+- Speedtes
+- Status Pages for unlimited tasks
+- Clone status
 - Direct links Supported:
 ```
 letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles,
@@ -36,8 +38,9 @@ streamtape.com, streamsb.net, feurl.com, pixeldrain.com, racaty.net,
 1fichier.com, 1drv.ms (Only works for file not folder or business account),
 uptobox.com (Uptobox account must be premium), solidfiles.com
 ```
+- Many bugs has been fixed
 
-## From Original Repos
+## From Original and Other Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 5GB/6 hours)
 - Copy files from someone's Drive to your Drive (Using Autorclone)
@@ -194,7 +197,7 @@ pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 python3 generate_drive_token.py
 ```
 
-## Deploying
+## Deploy On VPS
 
 **IMPORTANT NOTE**: In start.sh you must replace `$PORT` with 80 or any other port you want to use
 

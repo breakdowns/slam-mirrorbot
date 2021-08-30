@@ -17,7 +17,7 @@
 ## Additional Features
 - Qbittorrent
 - Size limiting for Torrent/Direct, Tar/Unzip, Mega and clone
-- Stop duplicate for all except qbittorrent tasks
+- Stop duplicate for all except qbittorrent tasks and youtube-dl
 - Tar/Unzip Google Drive link support
 - Select files from Torrent before downloading using qbittorrent
 - Sudo with or without Database
@@ -26,7 +26,7 @@
 - Counting Google Drive link
 - View Link button
 - Shell and Executor
-- Speedtes
+- Speedtest
 - Status Pages for unlimited tasks
 - Clone status
 - Direct links Supported:

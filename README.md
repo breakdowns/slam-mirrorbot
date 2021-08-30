@@ -29,6 +29,7 @@
 - Speedtest
 - Status Pages for unlimited tasks
 - Clone status
+- Many bugs has been fixed
 - Direct links Supported:
 ```
 letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles,
@@ -38,7 +39,6 @@ streamtape.com, streamsb.net, feurl.com, pixeldrain.com, racaty.net,
 1fichier.com, 1drv.ms (Only works for file not folder or business account),
 uptobox.com (Uptobox account must be premium), solidfiles.com
 ```
-- Many bugs has been fixed
 
 ## From Original and Other Repos
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive

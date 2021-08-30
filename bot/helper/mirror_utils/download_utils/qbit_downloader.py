@@ -63,8 +63,9 @@ class qbittorrent:
                 tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
                 if len(tor_info) == 0:
                     while True:
-                        if time.time() - self.meta_time >= 300:
-                            sendMessage("The Torrent was not added. report when you see this error", listener.bot, listener.update)
+                        if time.time() - self.meta_time >= 20:
+                            sendMessage("The Torrent was not added. Report when you see this error", listener.bot, listener.update)
+                            self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
                             self.client.auth_log_out()
                             return False
                         tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
@@ -72,6 +73,8 @@ class qbittorrent:
                             break
             else:
                 sendMessage("This is an unsupported/invalid link.", listener.bot, listener.update)
+                self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
+                self.client.auth_log_out()
                 return
             gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=14))
             with download_dict_lock:
@@ -118,7 +121,8 @@ class qbittorrent:
                 sendStatusMessage(listener.update, listener.bot)
         except qba.UnsupportedMediaType415Error as e:
             LOGGER.error(str(e))
-            sendMessage("This is an unsupported/invalid link. {str(e)}", listener.bot, listener.update)
+            sendMessage("This is an unsupported/invalid link: {str(e)}", listener.bot, listener.update)
+            self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
             self.client.auth_log_out()
         except Exception as e:
             LOGGER.error(str(e))
@@ -228,19 +232,15 @@ def get_confirm(update, context):
 def get_hash_magnet(mgt):
     if mgt.startswith('magnet:'):
         _, _, _, _, query, _ = urlparse(mgt)
-
     qs = parse_qs(query)
     v = qs.get('xt', None)
-    
     if v == None or v == []:
         LOGGER.error('Invalid magnet URI: no "xt" query parameter.')
-        return False
-        
+        return
     v = v[0]
     if not v.startswith('urn:btih:'):
         LOGGER.error('Invalid magnet URI: "xt" value not valid for BitTorrent.')
-        return False
-
+        return
     mgt = v[len('urn:btih:'):]
     return mgt.lower()
 

@@ -264,10 +264,10 @@ For Service Account to work, you must set `USE_SERVICE_ACCOUNTS`="True" in confi
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts.
 **NOTE**: Using Service Accounts is only recommended while uploading to a Team Drive.
 
-## Generate Service Accounts. [What is Service Account](https://cloud.google.com/iam/docs/service-accounts)
+## Generate Service Accounts.
 <details>
     <summary><b>Click Here For More Details</b></summary>
-
+[`What is Service Account`](https://cloud.google.com/iam/docs/service-accounts)
 Let us create only the Service Accounts that we need. 
 **Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 SAs allow you plenty of use, its also possible that over abuse might get your projects banned by Google. 
 

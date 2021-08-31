@@ -234,7 +234,7 @@ def get_hash_magnet(mgt):
         _, _, _, _, query, _ = urlparse(mgt)
     qs = parse_qs(query)
     v = qs.get('xt', None)
-    if v == None or v == []:
+    if v is None or v == []:
         LOGGER.error('Invalid magnet URI: no "xt" query parameter.')
         return
     v = v[0]

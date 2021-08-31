@@ -82,17 +82,13 @@ class YoutubeDLHelper(DownloadHelper):
                     chunk_size = d['downloaded_bytes'] - self.last_downloaded
                     self.last_downloaded = tbyte * progress
                     self.downloaded_bytes += chunk_size
-                    try:
-                        self.progress = (self.downloaded_bytes / self.size) * 100
-                    except ZeroDivisionError:
-                        pass
                 else:
                     self.size = d['total_bytes']
                     self.downloaded_bytes = d['downloaded_bytes']
-                    try:
-                        self.progress = (self.downloaded_bytes / self.size) * 100
-                    except ZeroDivisionError:
-                        pass
+                try:
+                    self.progress = (self.downloaded_bytes / self.size) * 100
+                except ZeroDivisionError:
+                    pass
 
     def __onDownloadStart(self):
         with download_dict_lock:
@@ -111,10 +107,7 @@ class YoutubeDLHelper(DownloadHelper):
         with YoutubeDL(self.opts) as ydl:
             try:
                 result = ydl.extract_info(link, download=False)
-                if name == "":
-                    name = ydl.prepare_filename(result)
-                else:
-                    name = name
+                name = ydl.prepare_filename(result) if name == "" else name
                 # noobway hack for changing extension after converting to mp3
                 if qual == "audio":
                   name = name.replace(".mp4", ".mp3").replace(".webm", ".mp3")

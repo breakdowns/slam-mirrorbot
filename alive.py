@@ -11,11 +11,7 @@ if len(BASE_URL) == 0:
     BASE_URL = None
 
 IS_VPS = os.environ.get('IS_VPS', 'False')
-if IS_VPS.lower() == 'true':
-    IS_VPS = True
-else:
-    IS_VPS = False
-
+IS_VPS = IS_VPS.lower() == 'true'
 if not IS_VPS and BASE_URL is not None:
     while True:
         time.sleep(600)

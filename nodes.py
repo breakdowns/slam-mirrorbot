@@ -27,8 +27,7 @@ class TorNode(NodeMixin):
 
 def get_folders(path):
     path_seperator = "/"
-    folders = path.split(path_seperator)
-    return folders
+    return path.split(path_seperator)
 
 
 def make_tree(res):
@@ -42,10 +41,7 @@ def make_tree(res):
         TorNode: Parent node of the tree constructed and can be used further.
     """
     parent = TorNode("Torrent")
-    #nodes = dict()
-    l = 0
-    
-    for i in res:
+    for l, i in enumerate(res):
         # Get the hierarchy of the folders by splitting based on '/'
         folders = get_folders(i.name)
         # Check if the file is alone for if its in folder
@@ -54,27 +50,19 @@ def make_tree(res):
 
             # Set the parent 
             previous_node = parent
-            
+
             # Traverse till second last assuming the last is a file.
             for j in range(len(folders)-1):
                 current_node = None
-                
-                if previous_node is not None:
-                    # As we are traversing the folder from top to bottom we are searching
-                    # the first folder (folders list) under the parent node in first iteration.
-                    # If the node is found then it becomes the current node else the current node
-                    # is left None. 
-                    for k in previous_node.children:
-                        if k.name == folders[j]:
-                            current_node = k 
-                            break
-                else:
-                    # think its useless afterall
-                    for k in parent.children:
-                        if k.name == folders[j]:
-                            current_node = k
-                            break
-                
+
+                # As we are traversing the folder from top to bottom we are searching
+                # the first folder (folders list) under the parent node in first iteration.
+                # If the node is found then it becomes the current node else the current node
+                # is left None. 
+                for k in previous_node.children:
+                    if k.name == folders[j]:
+                        current_node = k 
+                        break
                 # if the node is not found then create the folder node
                 # if the node is found then use it as base for the next 
                 if current_node is None:
@@ -83,13 +71,9 @@ def make_tree(res):
                     previous_node = current_node
             # at this point the previous_node will contain the deepest folder in it so add the file to it 
             TorNode(folders[-1],is_file=True,parent=previous_node,progress=i.progress,size=i.size,priority=i.priority,file_id=l)
-            l += 1
         else:
             # at the file to the parent if no folders are there 
             TorNode(folders[-1],is_file=True,parent=parent,progress=i.progress,size=i.size,priority=i.priority,file_id=l)
-            l += 1
-
-
     return parent
 
 
@@ -114,15 +98,12 @@ def create_list(par, msg):
             msg[0] += "<li>"
             if i.priority == 0:
                 msg[0] += f"<input type=\"checkbox\" name=\"filenode_{i.file_id}\"> <label for=\"filenode_{i.file_id}\">{i.name} - {get_readable_file_size(i.size)}</label>"
-                msg[0] += f"<input type=\"hidden\" value=\"off\" name=\"filenode_{i.file_id}\">"
-                
             else:
                 msg[0] += f"<input type=\"checkbox\" checked name=\"filenode_{i.file_id}\"> <label for=\"filenode_{i.file_id}\">{i.name} - {get_readable_file_size(i.size)}</label>"
-                msg[0] += f"<input type=\"hidden\" value=\"off\" name=\"filenode_{i.file_id}\">"
-            
+            msg[0] += f"<input type=\"hidden\" value=\"off\" name=\"filenode_{i.file_id}\">"
 
             msg[0] += "</li>"
-    
+
     if par.name != ".unwanted":
         msg[0] += "</ul>"
 

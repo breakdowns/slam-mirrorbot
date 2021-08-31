@@ -20,56 +20,52 @@ class DbManger:
 
     def db_auth(self,chat_id: int):
         self.connect()
-        if self.err :
+        if self.err:
             return "There's some error check log for details"
-        else:
-            sql = 'INSERT INTO users VALUES ({});'.format(chat_id)
-            self.cur.execute(sql)
-            self.conn.commit()
-            self.disconnect()
-            AUTHORIZED_CHATS.add(chat_id)
-            return 'Authorized successfully'
+        sql = 'INSERT INTO users VALUES ({});'.format(chat_id)
+        self.cur.execute(sql)
+        self.conn.commit()
+        self.disconnect()
+        AUTHORIZED_CHATS.add(chat_id)
+        return 'Authorized successfully'
 
     def db_unauth(self,chat_id: int):
         self.connect()
-        if self.err :
+        if self.err:
             return "There's some error check log for details"
-        else:
-            sql = 'DELETE from users where uid = {};'.format(chat_id)
-            self.cur.execute(sql)
-            self.conn.commit()
-            self.disconnect()
-            AUTHORIZED_CHATS.remove(chat_id)
-            return 'Unauthorized successfully'
+        sql = 'DELETE from users where uid = {};'.format(chat_id)
+        self.cur.execute(sql)
+        self.conn.commit()
+        self.disconnect()
+        AUTHORIZED_CHATS.remove(chat_id)
+        return 'Unauthorized successfully'
 
     def db_addsudo(self,chat_id: int):
         self.connect()
-        if self.err :
+        if self.err:
             return "There's some error check log for details"
-        else:
-            if chat_id in AUTHORIZED_CHATS:
-                sql = 'UPDATE users SET sudo = TRUE where uid = {};'.format(chat_id)
-                self.cur.execute(sql)
-                self.conn.commit()
-                self.disconnect()
-                SUDO_USERS.add(chat_id)
-                return 'Successfully promoted as Sudo'
-            else:
-                sql = 'INSERT INTO users VALUES ({},TRUE);'.format(chat_id)
-                self.cur.execute(sql)
-                self.conn.commit()
-                self.disconnect()
-                SUDO_USERS.add(chat_id)
-                return 'Successfully Authorized and promoted as Sudo'
-
-    def db_rmsudo(self,chat_id: int):
-        self.connect()
-        if self.err :
-            return "There's some error check log for details"
-        else:
-            sql = 'UPDATE users SET sudo = FALSE where uid = {};'.format(chat_id)
+        if chat_id in AUTHORIZED_CHATS:
+            sql = 'UPDATE users SET sudo = TRUE where uid = {};'.format(chat_id)
             self.cur.execute(sql)
             self.conn.commit()
             self.disconnect()
-            SUDO_USERS.remove(chat_id)
-            return 'Successfully removed from Sudo'
+            SUDO_USERS.add(chat_id)
+            return 'Successfully promoted as Sudo'
+        else:
+            sql = 'INSERT INTO users VALUES ({},TRUE);'.format(chat_id)
+            self.cur.execute(sql)
+            self.conn.commit()
+            self.disconnect()
+            SUDO_USERS.add(chat_id)
+            return 'Successfully Authorized and promoted as Sudo'
+
+    def db_rmsudo(self,chat_id: int):
+        self.connect()
+        if self.err:
+            return "There's some error check log for details"
+        sql = 'UPDATE users SET sudo = FALSE where uid = {};'.format(chat_id)
+        self.cur.execute(sql)
+        self.conn.commit()
+        self.disconnect()
+        SUDO_USERS.remove(chat_id)
+        return 'Successfully removed from Sudo'

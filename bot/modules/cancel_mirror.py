@@ -35,10 +35,9 @@ def cancel_mirror(update, context):
                BotCommands.UnzipMirrorCommand in mirror_message.text:
                 msg1 = "Mirror Already Have Been Cancelled"
                 sendMessage(msg1, context.bot, update)
-                return
             else:
                 sendMessage(msg, context.bot, update)
-                return
+            return
         elif not mirror_message:
             sendMessage(msg, context.bot, update)
             return

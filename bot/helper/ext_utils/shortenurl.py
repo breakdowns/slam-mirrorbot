@@ -23,7 +23,6 @@ def short_url(longurl):
         return random.choice(linkvertise)
     elif "bitly.com" in SHORTENER:
         s = pyshorteners.Shortener(api_key=SHORTENER_API)
-        bitly = s.bitly.short(longurl)
-        return bitly
+        return s.bitly.short(longurl)
     else:
         return requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={longurl}&format=text').text

@@ -100,7 +100,7 @@ pip3 install -r requirements-cli.txt
     <summary><b>Click Here For More Details</b></summary>
 
 **1. Using ElephantSQL**
-- Go to https://elephantsql.com and create account (skip this if you already have `ElephantSQL` account)
+- Go to https://elephantsql.com and create account (skip this if you already have **ElephantSQL** account)
 - Hit `Create New Instance`
 - Follow the further instructions in the screen
 - Hit `Select Region`
@@ -264,11 +264,10 @@ For Service Account to work, you must set `USE_SERVICE_ACCOUNTS`="True" in confi
 Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts.
 **NOTE**: Using Service Accounts is only recommended while uploading to a Team Drive.
 
-## Generate Service Accounts.
+## Generate Service Accounts. [What is Service Account](https://cloud.google.com/iam/docs/service-accounts)
 <details>
     <summary><b>Click Here For More Details</b></summary>
 
-[`What is Service Account?`](https://cloud.google.com/iam/docs/service-accounts)
 Let us create only the Service Accounts that we need. 
 **Warning**: abuse of this feature is not the aim of this project and we do **NOT** recommend that you make a lot of projects, just one project and 100 SAs allow you plenty of use, its also possible that over abuse might get your projects banned by Google. 
 

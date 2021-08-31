@@ -10,7 +10,7 @@ from .exceptions import NotSupportedExtractionArchive
 
 def clean_download(path: str):
     if os.path.exists(path):
-        LOGGER.info(f"Cleaning download: {path}")
+        LOGGER.info(f"Cleaning Download: {path}")
         shutil.rmtree(path)
 
 

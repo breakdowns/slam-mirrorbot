@@ -3,10 +3,10 @@ import re
 print("\n\n"\
       "        Bot can search files recursively, but you have to add the list of drives you want to search.\n"\
       "        Use the following format: (You can use 'root' in the ID in case you wan to use main drive.)\n"\
-      "        teamdrive NAME      -->   anything that u likes\n"\
-      "        teamdrive ID        -->   id of teamdrives in which u likes to search ('root' for main drive)\n"\
+      "        teamdrive NAME      -->   anything that you likes\n"\
+      "        teamdrive ID        -->   id of teamdrives in which you likes to search ('root' for main drive)\n"\
       "        teamdrive INDEX URL -->   enter index url for this drive.\n" \
-      "                                     goto the respective drive and copy the url from address bar\n")
+      "                                    go to the respective drive and copy the url from address bar\n")
 msg = ''
 if os.path.exists('drive_folder'):
     with open('drive_folder', 'r+') as f:
@@ -47,4 +47,3 @@ with open('drive_folder', 'w') as file:
     file.truncate(0)
     file.write(msg)
 print("\n\n    Done!")
-

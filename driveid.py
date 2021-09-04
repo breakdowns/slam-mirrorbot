@@ -6,7 +6,7 @@ print("\n\n"\
       "        teamdrive NAME      -->   anything that you likes\n"\
       "        teamdrive ID        -->   id of teamdrives in which you likes to search ('root' for main drive)\n"\
       "        teamdrive INDEX URL -->   enter index url for this drive.\n" \
-      "                                    go to the respective drive and copy the url from address bar\n")
+      "                                  go to the respective drive and copy the url from address bar\n")
 msg = ''
 if os.path.exists('drive_folder'):
     with open('drive_folder', 'r+') as f:

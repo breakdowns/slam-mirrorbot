@@ -30,6 +30,7 @@
 - Status Pages for unlimited tasks
 - Clone status
 - Many bugs has been fixed
+- Multiple search Drive file/folder
 - Direct links Supported:
 ```
 letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles,

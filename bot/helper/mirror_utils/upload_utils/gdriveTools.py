@@ -612,14 +612,19 @@ class GoogleDriveHelper:
                 if name != '':
                     query += f"name contains '{name}' and "
         query += "trashed = false"
-        response = self.__service.files().list(supportsTeamDrives=True,
-                                               includeTeamDriveItems=True,
-                                               q=query,
-                                               spaces='drive',
-                                               pageSize=200,
-                                               fields='files(id, name, mimeType, size)',
-                                               orderBy='name asc').execute()
-        return response
+        return (
+            self.__service.files()
+            .list(
+                supportsTeamDrives=True,
+                includeTeamDriveItems=True,
+                q=query,
+                spaces='drive',
+                pageSize=200,
+                fields='files(id, name, mimeType, size)',
+                orderBy='name asc',
+            )
+            .execute()
+        )
 
 
     def drive_list(self, fileName, stopDup=False):

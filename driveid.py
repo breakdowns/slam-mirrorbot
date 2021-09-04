@@ -16,32 +16,30 @@ if os.path.exists('drive_folder'):
         print("\n\n"\
               "      DO YOU WISH TO KEEP THE ABOVE DETAILS THAT YOU PREVIOUSLY ADDED???? ENTER (y/n)\n"\
               "      IF NOTHING SHOWS ENTER n")
-        while (1):
+        while 1:
             choice = input()
-            if choice == 'y' or choice == 'Y':
+            if choice in ['y', 'Y']:
                 msg = f'{lines}'
                 break
-            elif choice == 'n' or choice == 'N':
+            elif choice in ['n', 'N']:
                 break
             else:
                 print("\n\n      DO YOU WISH TO KEEP THE ABOVE DETAILS ???? y/n <=== this is option ..... OPEN YOUR EYES & READ...")
 num = int(input("    How Many Drive/Folder You Likes To Add : "))
-count = 1
-while count <= num :
+for count in range(1, num + 1):
     print(f"\n        > DRIVE - {count}\n")
     name  = input("    Enter Drive NAME  (anything)     : ")
     id    = input("    Enter Drive ID                   : ")
     index = input("    Enter Drive INDEX URL (optional) : ")
     if not name or not id:
         print("\n\n        ERROR : Dont leave the name/id without filling.")
-        exit(1) 
+        exit(1)
     name=name.replace(" ", "_")
     if index:
         if index[-1] == "/":
             index = index[:-1]
     else:
         index = ''
-    count+=1
     msg += f"{name} {id} {index}\n"
 with open('drive_folder', 'w') as file:
     file.truncate(0)

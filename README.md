@@ -10,11 +10,11 @@
 
 **Slam Mirror Bot** is a _multipurpose_ Telegram Bot written in Python for mirroring files on the Internet to our beloved Google Drive. Based on [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot)
 
-# Features supported:
+# Features:
 <details>
     <summary><b>Click Here For More Details</b></summary>
 
-## Additional Features
+## By Slam Devs
 - qBittorrent
 - Size limiting for Torrent/Direct, Tar/Unzip, Mega and clone
 - Stop duplicates for all tasks except for qBittorrent and youtube-dl tasks 
@@ -217,9 +217,9 @@ sudo docker run -p 80:80 mirror-bot
 ```
 OR
 
-**NOTE**: If you want to use port other than 80, so change it in [docker-compose.yml](https://github.com/SlamDevs/slam-mirrorbot/blob/master/docker-compose.yml)
+**NOTE**: If you want to use port other than 80, change it in [docker-compose.yml](https://github.com/SlamDevs/slam-mirrorbot/blob/master/docker-compose.yml)
 
-- Using Docker-compose so you can edit and build your image in seconds:
+- Using Docker-compose, you can edit and build your image in seconds:
 ```
 sudo apt install docker-compose
 ```
@@ -227,7 +227,7 @@ sudo apt install docker-compose
 ```
 sudo docker-compose up
 ```
-- After edit files with nano for example (nano start.sh):
+- After editing files with nano for example (nano start.sh):
 ```
 sudo docker-compose build
 sudo docker-compose up
@@ -236,14 +236,14 @@ OR
 ```
 sudo docker-compose up --build
 ```
-- To stop Docker run 
+- To stop Docker : 
 ```
 sudo docker ps
 ```
 ```
 sudo docker stop id
 ```
-- To clear the container (this will not effect on image):
+- To clear the container (this will not affect the image):
 ```
 sudo docker container prune
 ```

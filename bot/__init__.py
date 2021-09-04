@@ -187,7 +187,7 @@ app = Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_t
 
 DRIVE_NAME = []
 DRIVE_ID = []
-INDEX_URLS = []
+SEARCH_INDEXES = []
 
 if os.path.exists('drive_folder'):
     with open('drive_folder', 'r+') as f:
@@ -197,9 +197,9 @@ if os.path.exists('drive_folder'):
             DRIVE_NAME.append(temp[0].replace("_", " "))
             DRIVE_ID.append(temp[1])
             try:
-                INDEX_URLS.append(temp[2])
+                SEARCH_INDEXES.append(temp[2])
             except IndexError as e:
-                INDEX_URLS.append(None)
+                SEARCH_INDEXES.append(None)
 
 # Generate Telegraph Token
 sname = ''.join(random.SystemRandom().choices(string.ascii_letters, k=8))

@@ -23,7 +23,7 @@ from tenacity import *
 from telegram import InlineKeyboardMarkup
 from bot.helper.telegram_helper import button_build
 from telegraph import Telegraph
-from bot import parent_id, DOWNLOAD_DIR, IS_TEAM_DRIVE, INDEX_URL, \
+from bot import parent_id, DOWNLOAD_DIR, IS_TEAM_DRIVE, INDEX_URL, telegra_ph, DRIVE_NAME, DRIVE_ID, SEARCH_INDEXES, \
     USE_SERVICE_ACCOUNTS, telegraph_token, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, SHORTENER, SHORTENER_API, VIEW_LINK, DRIVES_NAMES, DRIVES_IDS, INDEX_URLS
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, setInterval
 from bot.helper.ext_utils.fs_utils import get_mime_type, get_path_size
@@ -592,7 +592,7 @@ class GoogleDriveHelper:
         rtnlist.reverse()
         return rtnlist
 
-    def drive_query(self, parent_id, fileName):
+    def recur_query(self, parent_id, fileName):
         # Create a search query for an API request.
         query = f"name contains '{fileName}' and trashed=false"
         if parent_id != "root":
@@ -744,9 +744,9 @@ class GoogleDriveHelper:
 
         for content in self.telegraph_content :
             self.path.append(Telegraph(access_token=telegraph_token).create_page(
-                                                    title = 'Slam Mirrorbot Search',
-                                                    author_name='Slam Mirrorbot',
-                                                    author_url='https://github.com/SlamDevs/slam-mirrorbot',
+                                                    title = 'Hishiro Search',
+                                                    author_name='Hishiro Bot',
+                                                    author_url='https://github.com/hyPnOtICDo0g/hishirobot',
                                                     html_content=content
                                                     )['path'])
 
@@ -770,7 +770,7 @@ class GoogleDriveHelper:
         file_check=re.search(" -f", fileName)
         fileName=fileName.replace(" -f", "")
         for parent_id in DRIVE_ID :
-            response = self.drive_query(parent_id, fileName)    
+            response = self.recur_query(parent_id, fileName)    
             INDEX += 1
             if response:
                 if add_title_msg == True:
@@ -783,9 +783,9 @@ class GoogleDriveHelper:
                         if file.get('mimeType') == "application/vnd.google-apps.folder":
                             msg += f"📁<code>{file.get('name')}</code> <b>(folder)</b><br>" \
                                 f"<b><a href='https://drive.google.com/drive/folders/{file.get('id')}'>Drive Link</a></b>"
-                            if INDEX_URLS[INDEX] is not None:
+                            if SEARCH_INDEXES[INDEX] is not None:
                                 url_path = "/".join([requests.utils.quote(n, safe='') for n in self.get_recursive_list(file, parent_id)])
-                                url = f'{INDEX_URLS[INDEX]}/{url_path}/'
+                                url = f'{SEARCH_INDEXES[INDEX]}/{url_path}/'
                                 msg += f'<b> | <a href="{url}">Index Link</a></b>'
                             msg += '<br><br>'
                             content_count += 1
@@ -805,9 +805,9 @@ class GoogleDriveHelper:
                             if file.get('mimeType') != "application/vnd.google-apps.folder":
                                 msg += f"📄<code>{file.get('name')}</code> <b>({get_readable_file_size(int(file.get('size')))})</b><br>" \
                                     f"<b><a href='https://drive.google.com/uc?id={file.get('id')}&export=download'>Drive Link</a></b>"
-                                if INDEX_URLS[INDEX] is not None:
+                                if SEARCH_INDEXES[INDEX] is not None:
                                     url_path = "/".join([requests.utils.quote(n, safe ='') for n in self.get_recursive_list(file, parent_id)])
-                                    url = f'{INDEX_URLS[INDEX]}/{url_path}'
+                                    url = f'{SEARCH_INDEXES[INDEX]}/{url_path}'
                                     msg += f'<b> | <a href="{url}">Index Link</a></b>'
                                 msg += '<br><br>'
                                 content_count += 1

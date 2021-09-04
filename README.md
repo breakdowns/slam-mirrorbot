@@ -165,7 +165,7 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 - `IS_VPS`: (Only for VPS) Don't set this to `True` even if you are using VPS, unless facing error with web server. Also go to start.sh and replace `$PORT` by `80` or any port you want to use.
 - `SERVER_PORT`: (Only if IS_VPS is `True`) Base URL Port
 - `BASE_URL_OF_BOT`: (Required for Heroku to avoid sleep) Valid BASE URL of where the bot is deploy. Ip/domain of your bot like `http://myip` or if you have chosen other port then `80` then `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: No slash at the end), still got idling? You can use http://cron-job.org to ping your Heroku app.
-- `MULTI_SEARCH_URL`: This is for Multiple Drive Search, Make `drive_folder` file with format `anyname folder/td(id) indexlink`. Example: `Slam 5l4mm1R0r80T yourindexlink.workers.dev` then upload it to https://gist.github.com.
+- `MULTI_SEARCH_URL`: This is for Multiple Drive Search, Make `drive_folder` file with format `anyname folder/td(id) indexlink`. Examples: `Slam 5l4mm1R0r80T yourindexlink.workers.dev` then upload it to https://gist.github.com.
 - `SHORTENER_API`: Fill your Shortener api key if you are using Shortener.
 - `SHORTENER`: if you want to use Shortener in Gdrive and index link, fill Shortener url here. Examples:
 ```

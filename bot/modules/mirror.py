@@ -246,8 +246,7 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False):
                 resp = requests.get(link)
                 if resp.status_code == 200:
                     file_name = str(time.time()).replace(".", "") + ".torrent"
-                    with open(file_name, "wb") as f:
-                        f.write(resp.content)
+                    open(file_name, "wb").write(resp.content)
                     link = f"{file_name}"
                 else:
                     sendMessage("ERROR: link got HTTP response:" + resp.status_code, bot, update)

@@ -130,20 +130,44 @@ try:
         SUDO_USERS.add(int(chats))
 except:
     pass
+
 try:
     BOT_TOKEN = getConfig('BOT_TOKEN')
-    parent_id = getConfig('GDRIVE_FOLDER_ID')
+    GDRIVE_FOLDER_ID = getConfig('GDRIVE_FOLDER_ID')
     DOWNLOAD_DIR = getConfig('DOWNLOAD_DIR')
     if not DOWNLOAD_DIR.endswith("/"):
         DOWNLOAD_DIR = DOWNLOAD_DIR + '/'
-    DOWNLOAD_STATUS_UPDATE_INTERVAL = int(getConfig('DOWNLOAD_STATUS_UPDATE_INTERVAL'))
     OWNER_ID = int(getConfig('OWNER_ID'))
-    AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
-except KeyError as e:
-    LOGGER.error("One or more env variables missing! Exiting now")
-    exit(1)
+except KeyError:
+    # Looking for required variable
+    MissingVars = []
+    for reqvar in ["BOT_TOKEN", "GDRIVE_FOLDER_ID", "OWNER_ID", "DOWNLOAD_DIR", "TELEGRAM_API", "TELEGRAM_HASH"]:
+        try:
+            variables = getConfig(reqvar)
+            if not variables:
+                raise KeyError
+        except KeyError:
+            MissingVars.append(reqvar)
+    if MissingVars:
+        LOGGER.error(f"{MissingVars} is missing from config Please fill that than Try Again...")
+        exit(1)
+
+parent_id = GDRIVE_FOLDER_ID
+
+try:
+    DOWNLOAD_STATUS_UPDATE_INTERVAL = int(getConfig('DOWNLOAD_STATUS_UPDATE_INTERVAL'))
+    if DOWNLOAD_STATUS_UPDATE_INTERVAL < 5 or DOWNLOAD_STATUS_UPDATE_INTERVAL is None:
+        raise KeyError
+    AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
+    if AUTO_DELETE_MESSAGE_DURATION < 20 or AUTO_DELETE_MESSAGE_DURATION is None:
+        raise KeyError
+except KeyError:
+    AUTO_DELETE_MESSAGE_DURATION = 20
+    DOWNLOAD_STATUS_UPDATE_INTERVAL = 5
+
+
 try:
     DB_URI = getConfig('DATABASE_URL')
     if len(DB_URI) == 0:

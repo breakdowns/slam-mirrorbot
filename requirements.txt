@@ -1,8 +1,8 @@
 aiohttp
 anytree
 aria2p
-attrdict
 appdirs
+attrdict
 beautifulsoup4
 cloudscrape
 feedparser

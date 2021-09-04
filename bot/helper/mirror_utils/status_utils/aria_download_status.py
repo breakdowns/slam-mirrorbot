@@ -59,12 +59,11 @@ class AriaDownloadStatus(Status):
     def status(self):
         download = self.aria_download()
         if download.is_waiting:
-            status = MirrorStatus.STATUS_WAITING
+            return MirrorStatus.STATUS_WAITING
         elif download.has_failed:
-            status = MirrorStatus.STATUS_FAILED
+            return MirrorStatus.STATUS_FAILED
         else:
-            status = MirrorStatus.STATUS_DOWNLOADING
-        return status
+            return MirrorStatus.STATUS_DOWNLOADING
 
     def aria_download(self):
         self.__update()

@@ -653,7 +653,7 @@ class GoogleDriveHelper:
                         msg += f"<b><a href={sfurl}>Drive Link</a></b>"
                     else:
                         msg += f"<b><a href={furl}>Drive Link</a></b>"
-                    if INDEX_URL[index] is not None:
+                    if INDEX_URLS[index] is not None:
                         url_path = requests.utils.quote(f'{file.get("name")}')
                         url = f'{INDEX_URLS[index]}/{url_path}/'
                         if SHORTENER is not None and SHORTENER_API is not None:
@@ -673,7 +673,7 @@ class GoogleDriveHelper:
                         msg += f"<b><a href={sfurl}>Drive Link</a></b>"
                     else:
                         msg += f"<b><a href={furl}>Drive Link</a></b>"
-                    if INDEX_URL[index] is not None:
+                    if INDEX_URLS[index] is not None:
                         url_path = requests.utils.quote(f'{file.get("name")}')
                         url = f'{INDEX_URLS[index]}/{url_path}'
                         urls = f'{INDEX_URLS[index]}/{url_path}?a=view'

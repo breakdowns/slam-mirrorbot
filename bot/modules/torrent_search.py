@@ -315,7 +315,7 @@ RESULT_STR_ALL = (
     "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 
-TORRENT_API = 'https://torrents-api.netlify.app/.netlify/functions/api'
+TORRENT_API = 'https://api.linkstore.eu.org/api'
 
 torrents_dict = {
     '1337x': {'source': f"{TORRENT_API}/1337x/", 'result_str': RESULT_STR_1337},

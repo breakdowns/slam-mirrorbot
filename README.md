@@ -31,6 +31,11 @@
 - Clone status
 - Search in multiple Drive folder/TD
 - Many bugs has been fixed
+- Torrent search Supported:
+```
+nyaa.si, sukebei, 1337x, piratebay,
+tgx, yts, eztv, torlock, rarbg
+```
 - Direct links Supported:
 ```
 letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles,

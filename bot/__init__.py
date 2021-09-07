@@ -400,9 +400,12 @@ if os.path.exists('drive_folder'):
     with open('drive_folder', 'r+') as f:
         lines = f.readlines()
         for line in lines:
-            temp = line.strip().split()
-            DRIVES_NAMES.append(temp[0].replace("_", " "))
-            DRIVES_IDS.append(temp[1])
+            try:
+                temp = line.strip().split()
+                DRIVES_IDS.append(temp[1])
+                DRIVES_NAMES.append(temp[0].replace("_", " "))
+            except:
+                DRIVES_NAMES.append(None)
             try:
                 INDEX_URLS.append(temp[2])
             except IndexError as e:

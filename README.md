@@ -31,6 +31,11 @@
 - Clone status
 - Search in multiple Drive folder/TD
 - Many bugs has been fixed
+- Torrent search Supported:
+```
+nyaa.si, sukebei, 1337x, piratebay,
+tgx, yts, eztv, torlock, rarbg
+```
 - Direct links Supported:
 ```
 letsupload.io, hxfile.co, anonfiles.com, bayfiles.com, antfiles,
@@ -169,7 +174,8 @@ Fill up rest of the fields. Meaning of each field is discussed below:
 - `SHORTENER_API`: Fill your Shortener API key if you are using Shortener.
 - `SHORTENER`: if you want to use Shortener in G-Drive and index link, fill Shortener URL here. Examples:
 ```
-exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
+exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com,
+bit.ly, shorte.st, link-to.net, up-to-down.net, direct-link.net, file-link.net
 ```
 
 Above are the supported URL Shorteners. Except these only some URL Shorteners are supported.
@@ -236,7 +242,7 @@ OR
 ```
 sudo docker-compose up --build
 ```
-- To stop Docker : 
+- To stop Docker: 
 ```
 sudo docker ps
 ```
@@ -350,6 +356,6 @@ Thanks to:
 - [`breakdowns`](https://github.com/breakdowns) for slam-mirrorbot
 - [`zevtyardt`](https://github.com/zevtyardt) for some direct links
 - [`yash-dk`](https://github.com/yash-dk) for implementation of qBittorrent on Python
-- [`xyou365`](https://github.com/xyou365) for Service Accounts script.
+- [`xyou365`](https://github.com/xyou365) for Service Accounts script
 
 And many more people who aren't mentioned here, but can be found in [Contributors](https://github.com/SlamDevs/slam-mirrorbot/graphs/contributors).

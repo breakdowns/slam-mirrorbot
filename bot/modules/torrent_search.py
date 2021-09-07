@@ -315,15 +315,17 @@ RESULT_STR_ALL = (
     "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
 
+TORRENT_API = 'https://torrents-api.netlify.app/.netlify/functions/api'
+
 torrents_dict = {
-    '1337x': {'source': "https://torrents-api.netlify.app/.netlify/functions/api/1337x/", 'result_str': RESULT_STR_1337},
-    'piratebay': {'source': "https://torrents-api.netlify.app/.netlify/functions/api/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
-    'tgx': {'source': "https://torrents-api.netlify.app/.netlify/functions/api/tgx/", 'result_str': RESULT_STR_TGX},
-    'yts': {'source': "https://torrents-api.netlify.app/.netlify/functions/api/yts/", 'result_str': RESULT_STR_YTS},
-    'eztv': {'source': "https://torrents-api.netlify.app/.netlify/functions/api/eztv/", 'result_str': RESULT_STR_EZTV},
-    'torlock': {'source': "https://torrents-api.netlify.app/.netlify/functions/api/torlock/", 'result_str': RESULT_STR_TORLOCK},
-    'rarbg': {'source': "https://torrents-api.netlify.app/.netlify/functions/api/rarbg/", 'result_str': RESULT_STR_RARBG},
-    'ts': {'source': "https://torrents-api.netlify.app/.netlify/functions/api/all/", 'result_str': RESULT_STR_ALL}
+    '1337x': {'source': f"{TORRENT_API}/1337x/", 'result_str': RESULT_STR_1337},
+    'piratebay': {'source': f"{TORRENT_API}/piratebay/", 'result_str': RESULT_STR_PIRATEBAY},
+    'tgx': {'source': f"{TORRENT_API}/tgx/", 'result_str': RESULT_STR_TGX},
+    'yts': {'source': f"{TORRENT_API}/yts/", 'result_str': RESULT_STR_YTS},
+    'eztv': {'source': f"{TORRENT_API}/eztv/", 'result_str': RESULT_STR_EZTV},
+    'torlock': {'source': f"{TORRENT_API}/torlock/", 'result_str': RESULT_STR_TORLOCK},
+    'rarbg': {'source': f"{TORRENT_API}/rarbg/", 'result_str': RESULT_STR_RARBG},
+    'ts': {'source': f"{TORRENT_API}/all/", 'result_str': RESULT_STR_ALL}
 }
 
 torrent_handlers = [

@@ -145,9 +145,6 @@ try:
         DOWNLOAD_DIR = DOWNLOAD_DIR + '/'
     DOWNLOAD_STATUS_UPDATE_INTERVAL = int(getConfig('DOWNLOAD_STATUS_UPDATE_INTERVAL'))
     OWNER_ID = int(getConfig('OWNER_ID'))
-    CHAT_ID = getConfig('CHAT_ID')
-    DELAY = int(getConfig('DELAY'))
-    INIT_FEEDS = getConfig('INIT_FEEDS')
     AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
@@ -207,6 +204,7 @@ LOGGER.info("Generating TELEGRAPH_TOKEN using '" + sname + "' name")
 telegraph = Telegraph()
 telegraph.create_account(short_name=sname)
 telegraph_token = telegraph.get_access_token()
+telegra_ph = Telegraph(access_token=telegraph_token)
 
 try:
     STATUS_LIMIT = getConfig('STATUS_LIMIT')
@@ -352,7 +350,13 @@ else :
     LOGGER.error("The README.md file there to be read! Exiting now!")
     exit(1)
 
-telegra_ph = Telegraph(access_token=telegraph_token)
+try:
+    CHAT_ID = getConfig('CHAT_ID')
+    DELAY = int(getConfig('DELAY'))
+    INIT_FEEDS = getConfig('INIT_FEEDS')
+    CUSTOM_MESSAGES = getConfig('CUSTOM_MESSAGES')        
+except:
+    pass
 
 try:
     BASE_URL = getConfig('BASE_URL_OF_BOT')

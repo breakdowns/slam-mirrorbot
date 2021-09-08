@@ -123,7 +123,8 @@ def zippy_share(url: str) -> str:
 
 
 def yandex_disk(url: str) -> str:
-    """ Yandex.Disk direct links generator """
+    """ Yandex.Disk direct links generator
+    Based on https://github.com/wldhx/yadisk-direct """
     try:
         link = re.findall(r'\bhttps?://.*yadi\.sk\S+', url)[0]
     except IndexError:
@@ -136,7 +137,8 @@ def yandex_disk(url: str) -> str:
 
 
 def uptobox(url: str) -> str:
-    """ Uptobox direct links generator """
+    """ Uptobox direct links generator
+    based on https://github.com/jovanzers/WinTenCermin """
     try:
         link = re.findall(r'\bhttps?://.*uptobox\.com\S+', url)[0]
     except IndexError:
@@ -253,7 +255,8 @@ def sbembed(link: str) -> str:
 
 
 def onedrive(link: str) -> str:
-    """ Onedrive direct link generator """
+    """ Onedrive direct link generator
+    Based on https://github.com/UsergeTeam/Userge """
     link_without_query = urlparse(link)._replace(query=None).geturl()
     direct_link_encoded = str(standard_b64encode(bytes(link_without_query, "utf-8")), "utf-8")
     direct_link1 = f"https://api.onedrive.com/v1.0/shares/u!{direct_link_encoded}/root/content"
@@ -267,6 +270,7 @@ def onedrive(link: str) -> str:
 
 
 def pixeldrain(url: str) -> str:
+    """ Based on https://github.com/yash-dk/TorToolkit-Telegram """
     url = url.strip("/ ")
     file_id = url.split("/")[-1]
     info_link = f"https://pixeldrain.com/api/file/{file_id}/info"

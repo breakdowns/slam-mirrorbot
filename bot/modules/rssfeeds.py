@@ -9,7 +9,7 @@ import psycopg2
 from psycopg2 import Error
 
 from telegram.ext import  CommandHandler
-from bot import LOGGER, dispatcher, updater, CHAT_ID, DELAY, DB_URI, INIT_FEEDS
+from bot import LOGGER, dispatcher, updater, CHAT_ID, DELAY, DB_URI, INIT_FEEDS, CUSTOM_MESSAGES
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
 
@@ -236,4 +236,3 @@ def rss_init():
     job_queue.run_repeating(rss_monitor, DELAY)
 
     updater.start_polling()
-    updater.idle()

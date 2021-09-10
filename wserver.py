@@ -10,6 +10,10 @@ import asyncio
 from aiohttp import web
 import nodes
 
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    handlers=[logging.FileHandler('log.txt'), logging.StreamHandler()],
+                    level=logging.INFO)
+
 LOGGER = logging.getLogger(__name__)
 
 routes = web.RouteTableDef()
@@ -626,7 +630,7 @@ async def re_verfiy(paused, resumed, client, torr):
 
         if verify:
             break
-        LOGGER.error("Reverification Failed, correcting stuff...")
+        LOGGER.info("Reverification Failed: correcting stuff...")
         client.auth_log_out()
         client = qba.Client(host="localhost", port="8090",
                            username="admin", password="adminadmin")
@@ -645,6 +649,7 @@ async def re_verfiy(paused, resumed, client, torr):
         k += 1
         if k > 4:
             return False
+    LOGGER.info("Verified")
     return True
 
 
@@ -691,7 +696,7 @@ async def set_priority(request):
 
     await asyncio.sleep(2)
     if not await re_verfiy(pause, resume, client, torr):
-        LOGGER.error("The Torrent choose errored reverification failed")
+        LOGGER.error("Verification Failed")
     client.auth_log_out()
     return await list_torrent_contents(request)
 
@@ -725,7 +730,7 @@ async def start_server():
     return app
 
 
-async def start_server_async(port=8080):
+async def start_server_async(port=80):
 
     app = web.Application(middlewares=[e404_middleware])
     app.add_routes(routes)

@@ -163,13 +163,10 @@ Fill up rest of the fields. Meaning of each field is discussed below:
 - `TAR_UNZIP_LIMIT`: To limit the size of mirroring as Tar or unzipmirror. Available units are (gb or GB, tb or TB), Examples: `100 gb, 100 GB, 10 tb, 10 TB`
 - `VIEW_LINK`: View Link button to open file Index Link in browser instead of direct download link, you can figure out if it's compatible with your Index code or not, open any video from you Index and check if its URL ends with `?a=view`, if yes make it `True` it will work (Compatible with https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index Code)
 - `UPTOBOX_TOKEN`: Uptobox token to mirror uptobox links. Get it from [Uptobox Premium Account](https://uptobox.com/my_account).
-- `HEROKU_EMAIL`: E-Mail of the Heroku account in which the above app will be deployed (**NOTE**: Only needed if you are deploying on Heroku with Github Workflow).
-- `HEROKU_API_KEY`: (Only if you deploying on Heroku) Your Heroku API key, get it from https://dashboard.heroku.com/account.
-- `HEROKU_APP_NAME`: (Only if you deploying on Heroku) Your Heroku app name.
 - `IGNORE_PENDING_REQUESTS`: If you want the bot to ignore pending requests after it restarts, set this to `True`.
 - `STATUS_LIMIT`: Limit the no. of tasks shown in status message with button. (**NOTE**: Recommended limit is `4` tasks at max).
 - `IS_VPS`: (Only for VPS) Don't set this to `True` even if you are using VPS, unless facing error with web server. Also go to start.sh and replace `$PORT` by `80` or any port you want to use.
-- `SERVER_PORT`: (Only if IS_VPS is `True`) Base URL Port
+- `SERVER_PORT`: Only For VPS even if `IS_VPS` is `False` --> Base URL Port
 - `BASE_URL_OF_BOT`: (Required for Heroku to avoid sleep/idling) Valid BASE URL of app where the bot is deployed. IP/Domain of your bot like `http://myip` or if you have chosen other port then `80` then `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: Do not put slash at the end), still got idling? You can use http://cron-job.org to ping your Heroku app.
 - `SHORTENER_API`: Fill your Shortener API key if you are using Shortener.
 - `SHORTENER`: if you want to use Shortener in G-Drive and index link, fill Shortener URL here. Examples:

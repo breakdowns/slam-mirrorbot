@@ -4,20 +4,19 @@ import os
 import asyncio
 
 from pyrogram import idle
-from bot import app, alive
 from sys import executable
 
 from telegram import ParseMode
 from telegram.ext import CommandHandler
 from wserver import start_server_async
-from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, IS_VPS, SERVER_PORT
+from bot import bot, app, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, IS_VPS, PORT, alive, web
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, reboot
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count
 
 
 def stats(update, context):
@@ -71,6 +70,7 @@ def restart(update, context):
         f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
     fs_utils.clean_all()
     alive.terminate()
+    web.terminate()
     os.execl(executable, executable, "-m", "bot")
 
 
@@ -207,7 +207,7 @@ def main():
     fs_utils.start_cleanup()
 
     if IS_VPS:
-        asyncio.get_event_loop().run_until_complete(start_server_async(SERVER_PORT))
+        asyncio.get_event_loop().run_until_complete(start_server_async(PORT))
 
     # Check if the bot is restarting
     if os.path.isfile(".restartmsg"):

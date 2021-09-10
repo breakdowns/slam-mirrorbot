@@ -204,7 +204,7 @@ python3 generate_drive_token.py
 
 ## Deploying On VPS
 
-**IMPORTANT NOTE**: In start.sh you must replace `$PORT` with 80 or any other port you want to use
+**IMPORTANT NOTE**: You must set `SERVER_PORT` variable to `80` or any other port you want to use.
 
 - Start Docker daemon (skip if already running):
 ```

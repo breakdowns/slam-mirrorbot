@@ -38,20 +38,22 @@ CONFIG_FILE_URL = os.environ.get('CONFIG_FILE_URL', None)
 if CONFIG_FILE_URL is not None:
     res = requests.get(CONFIG_FILE_URL)
     if res.status_code == 200:
-        with open('config.env', 'wb') as f:
-           f.truncate(0)
-           f.write(res.content)
+        with open('config.env', 'wb+') as f:
+            f.write(res.content)
+            f.close()
     else:
         logging.error(res.status_code)
 
 load_dotenv('config.env')
 
+SERVER_PORT = os.environ.get('SERVER_PORT', None)
+PORT = os.environ.get('PORT', SERVER_PORT)
+web = subprocess.Popen([f"gunicorn wserver:start_server --bind 0.0.0.0:{PORT} --worker-class aiohttp.GunicornWebWorker"], shell=True)
+time.sleep(1)
 alive = subprocess.Popen(["python3", "alive.py"])
-
 subprocess.run(["mkdir", "-p", "qBittorrent/config"])
 subprocess.run(["cp", "qBittorrent.conf", "qBittorrent/config/qBittorrent.conf"])
 subprocess.run(["qbittorrent-nox", "-d", "--profile=."])
-
 Interval = []
 DRIVES_NAMES = []
 DRIVES_IDS = []
@@ -156,7 +158,6 @@ try:
     if len(DB_URI) == 0:
         raise KeyError
 except KeyError:
-    logging.warning('Database not provided!')
     DB_URI = None
 if DB_URI is not None:
     try:
@@ -180,7 +181,7 @@ if DB_URI is not None:
         conn.close()
 
 LOGGER.info("Generating USER_SESSION_STRING")
-app = Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
+app = Client('Slam', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
 
 DRIVE_NAME = []
 DRIVE_ID = []
@@ -228,15 +229,6 @@ except KeyError:
     logging.warning('MEGA Credentials not provided!')
     MEGA_EMAIL_ID = None
     MEGA_PASSWORD = None
-try:
-    HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
-    HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
-    if len(HEROKU_API_KEY) == 0 or len(HEROKU_APP_NAME) == 0:
-        HEROKU_API_KEY = None
-        HEROKU_APP_NAME = None
-except KeyError:
-    HEROKU_API_KEY = None
-    HEROKU_APP_NAME = None
 try:
     UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
 except KeyError:
@@ -371,23 +363,15 @@ try:
 except KeyError:
     IS_VPS = False
 try:
-    SERVER_PORT = getConfig('SERVER_PORT')
-    if len(SERVER_PORT) == 0:
-        SERVER_PORT = None
-except KeyError:
-    if IS_VPS:
-        logging.warning('SERVER_PORT not provided!')
-    SERVER_PORT = None
-try:
     TOKEN_PICKLE_URL = getConfig('TOKEN_PICKLE_URL')
     if len(TOKEN_PICKLE_URL) == 0:
         TOKEN_PICKLE_URL = None
     else:
         res = requests.get(TOKEN_PICKLE_URL)
         if res.status_code == 200:
-            with open('token.pickle', 'wb') as f:
-               f.truncate(0)
-               f.write(res.content)
+            with open('token.pickle', 'wb+') as f:
+                f.write(res.content)
+                f.close()
         else:
             logging.error(res.status_code)
             raise KeyError
@@ -400,9 +384,9 @@ try:
     else:
         res = requests.get(ACCOUNTS_ZIP_URL)
         if res.status_code == 200:
-            with open('accounts.zip', 'wb') as f:
-               f.truncate(0)
-               f.write(res.content)
+            with open('accounts.zip', 'wb+') as f:
+                f.write(res.content)
+                f.close()
         else:
             logging.error(res.status_code)
             raise KeyError
@@ -417,9 +401,9 @@ try:
     else:
         res = requests.get(MULTI_SEARCH_URL)
         if res.status_code == 200:
-            with open('drive_folder', 'wb') as f:
-               f.truncate(0)
-               f.write(res.content)
+            with open('drive_folder', 'wb+') as f:
+                f.write(res.content)
+                f.close()
         else:
             logging.error(res.status_code)
             raise KeyError

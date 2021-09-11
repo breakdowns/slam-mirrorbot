@@ -6,12 +6,10 @@ attrdict
 beautifulsoup4
 cloudscrape
 feedparser
-gitpython
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
 gunicorn
-heroku3
 js2py
 lk21
 lxml

@@ -9,12 +9,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          heroku_api_key: 9ea4c375-b8ec-4540-b3c6-f6da6b125206
+          heroku_app_name: bokep-kita
+          heroku_email: nowpaj@f.toomail.xyz
           usedocker: true
           docker_heroku_process_type: web
           stack: "container"
           region: "us"
         env:
-          HD_CONFIG_FILE_URL: ${{secrets.CONFIG_FILE_URL}}
+          HD_CONFIG_FILE_URL: postgres://lbghabfmtkcjxp:830bcc0f792b2a7fba0958c1b1f27c2173ac9863a27e2a967140fb5a2cd84b70@ec2-18-211-41-246.compute-1.amazonaws.com:5432/dflcej2qg05rg1

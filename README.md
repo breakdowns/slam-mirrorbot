@@ -265,8 +265,7 @@ sudo docker image prune -a
 <p><a href="https://telegra.ph/How-to-Deploy-a-Mirror-Bot-to-Heroku-with-CLI-05-06"> <img src="https://img.shields.io/badge/Deploy%20Guide-grey?style=for-the-badge&logo=telegraph" width="170""/></a></p>
 
 # Using Service Accounts for uploading to avoid user rate limit
-For Service Account to work, you must set `USE_SERVICE_ACCOUNTS` = "True" in config file or environment variables, 
-Many thanks to [AutoRClone](https://github.com/xyou365/AutoRclone) for the scripts.
+For Service Account to work, you must set `USE_SERVICE_ACCOUNTS` = "True" in config file or environment variables.
 **NOTE**: Using Service Accounts is only recommended while uploading to a Team Drive.
 
 ## Generate Service Accounts. [What is Service Account](https://cloud.google.com/iam/docs/service-accounts)

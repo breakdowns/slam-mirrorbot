@@ -23,4 +23,4 @@ Add logs of your bot (hiding credentials) so that we can help you quickly.
 Any other details about the issue.
 
 **NOTE:**
-We don't provide support for modified code/repo of slam-mirrorbot, so don't report errors/bug arising from your modified code. Fix it yourself :)
+We don't provide support for modified code/repo of slam-mirrorbot, so don't report errors/bug arising from your modified code. Fix it yourself.

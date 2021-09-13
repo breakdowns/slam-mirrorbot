@@ -65,7 +65,7 @@ class MirrorListener(listeners.MirrorListeners):
         with download_dict_lock:
             LOGGER.info(f"Download completed: {download_dict[self.uid].name()}")
             download = download_dict[self.uid]
-            name = "{download.name()}"
+            name = f"{download.name()}"
             name = name.replace('/', '')
             gid = download.gid()
             size = download.size_raw()

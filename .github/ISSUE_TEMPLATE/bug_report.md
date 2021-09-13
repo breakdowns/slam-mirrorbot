@@ -1,23 +1,26 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: Bug Report
+about: Create a bug report to help us improve
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Describe the Bug**
+A clear and concise description about the bug.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Expected behaviour**
+Tell us what you had expected to happen.
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
+If applicable, add screenshots to  explain your problem.
 
-**Additional context**
-Add any other context about the problem here.
+**Add Logs**
+Add logs of your bot (hiding credentials) so that we can help you quickly.
+
+**Additional info**
+Any other details about the issue.
 
 **NOTE:**
-We don't officially support modified for slam-mirrorbot, So don't report for errors your bot/deploy/code, If any error you should fix it yourself.
+We don't provide support for modified code/repo of slam-mirrorbot, so don't report errors/bug arising from your modified code. Fix it yourself.

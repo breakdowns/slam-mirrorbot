@@ -216,19 +216,20 @@ def main():
             chat_id, msg_id = map(int, f)
         bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
         os.remove(".restartmsg")
-    bot.set_my_commands(botcmds)
     
     elif OWNER_ID:
         try:
-            text = "<b>From Chat with ID</b> <code>{}</code>\n\n<b>Bot Restarted successfully!</b>"
-            bot.sendMessage(chat_id=OWNER_ID, text=text.format(OWNER_ID), parse_mode=ParseMode.HTML)
+            text = "<b>Bot Restarted!</b>"
+            bot.sendMessage(chat_id=OWNER_ID, text=text, parse_mode=ParseMode.HTML)
             if AUTHORIZED_CHATS:
                 for i in AUTHORIZED_CHATS:
-                    bot.sendMessage(chat_id=i, text=text.format(i), parse_mode=ParseMode.HTML)
+                    bot.sendMessage(chat_id=i, text=text, parse_mode=ParseMode.HTML)
         except Unauthorized:
             LOGGER.warning("Bot isn't able to send message to OWNER_ID or AUTHORIZED_CHATS, go and check!")
         except BadRequest as e:
             LOGGER.warning(e.message)
+
+    bot.set_my_commands(botcmds)
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,

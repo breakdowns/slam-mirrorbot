@@ -209,7 +209,7 @@ mirror - Start Mirroring
 tarmirror - Start mirroring and upload as .tar
 zipmirror - Start mirroring and upload as .zip
 unzipmirror - Extract files
-qbmirror - Start Mirroring using Qbittorrent
+qbmirror - Start Mirroring using qBittorrent
 qbtarmirror - Start mirroring and upload as .tar using qb
 qbzipmirror - Start mirroring and upload as .zip using qb
 qbunzipmirror - Extract files using qb

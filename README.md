@@ -72,6 +72,35 @@ NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 
 </details>
 
+## Bot commands to be set in [@BotFather](https://t.me/BotFather)
+
+```
+mirror - Start Mirroring
+tarmirror - Start mirroring and upload as .tar
+zipmirror - Start mirroring and upload as .zip
+unzipmirror - Extract files
+qbmirror - Start Mirroring using qBittorrent
+qbtarmirror - Start mirroring and upload as .tar using qb
+qbzipmirror - Start mirroring and upload as .zip using qb
+qbunzipmirror - Extract files using qBittorrent
+clone - Copy file/folder to Drive
+count - Count file/folder of Drive link
+watch - Mirror Youtube-dl support link
+tarwatch - Mirror Youtube playlist link as .tar
+zipwatch - Mirror Youtube playlist link as .zip
+status - Get Mirror Status message
+list - Searches files in Drive
+cancel - Cancel a task
+cancelall - Cancel all tasks
+del - Delete file from Drive
+log - Get the Bot Log [owner/sudo only]
+shell - Run commands in Shell (Only Owner)
+restart - Restart the bot [owner/sudo only]
+stats - Bot Usage Stats
+ping - Ping the Bot
+help - Get Detailed Help
+```
+
 # How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:
 ## Installing requirements
@@ -168,6 +197,7 @@ Fill up rest of the fields. Meaning of each field is discussed below:
 - `IS_VPS`: (Only for VPS) Don't set this to `True` even if you are using VPS, unless facing error with web server. Also go to start.sh and replace `$PORT` by `80` or any port you want to use.
 - `SERVER_PORT`: Only For VPS even if `IS_VPS` is `False` --> Base URL Port
 - `BASE_URL_OF_BOT`: (Required for Heroku to avoid sleep/idling) Valid BASE URL of app where the bot is deployed. IP/Domain of your bot like `http://myip` or if you have chosen other port then `80` then `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: Do not put slash at the end), still got idling? You can use http://cron-job.org to ping your Heroku app.
+- `RECURSIVE_SEARCH`: Search in Subfolders (**NOTE**: Only for teamdriveid or root, you can't with folderid)
 - `SHORTENER_API`: Fill your Shortener API key if you are using Shortener.
 - `SHORTENER`: if you want to use Shortener in G-Drive and index link, fill Shortener URL here. Examples:
 ```
@@ -200,35 +230,6 @@ Three buttons are already added including Drive Link, Index Link, and View Link,
 ```
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 python3 generate_drive_token.py
-```
-
-## Bot commands to be set with botfather
-
-```
-mirror - Start Mirroring
-tarmirror - Start mirroring and upload as .tar
-zipmirror - Start mirroring and upload as .zip
-unzipmirror - Extract files
-qbmirror - Start Mirroring using qBittorrent
-qbtarmirror - Start mirroring and upload as .tar using qb
-qbzipmirror - Start mirroring and upload as .zip using qb
-qbunzipmirror - Extract files using qBittorrent
-clone - Copy file/folder to Drive
-count - Count file/folder of Drive link
-watch - Mirror Youtube-dl support link
-tarwatch - Mirror Youtube playlist link as .tar
-zipwatch - Mirror Youtube playlist link as .zip
-status - Get Mirror Status message
-list - Searches files in Drive
-cancel - Cancel a task
-cancelall - Cancel all tasks
-del - Delete file from Drive
-log - Get the Bot Log [owner/sudo only]
-shell - Run commands in Shell (Only Owner)
-restart - Restart the bot [owner/sudo only]
-stats - Bot Usage Stats
-ping - Ping the Bot
-help - Get Detailed Help
 ```
 
 ## Deploying On VPS

@@ -247,7 +247,7 @@ def main():
                     bot.sendMessage(chat_id=i, text=text, parse_mode=ParseMode.HTML)
         except Exception as e:
             LOGGER.warning(e)
-    #bot.set_my_commands(botcmds)
+    # bot.set_my_commands(botcmds)
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)

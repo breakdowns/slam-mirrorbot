@@ -321,7 +321,7 @@ except KeyError:
 try:
     BASE_URL = getConfig('BASE_URL_OF_BOT')
     if len(BASE_URL) == 0:
-        BASE_URL = None
+        raise KeyError
 except KeyError:
     logging.warning('BASE_URL_OF_BOT not provided!')
     BASE_URL = None
@@ -330,6 +330,11 @@ try:
     IS_VPS = IS_VPS.lower() == 'true'
 except KeyError:
     IS_VPS = False
+try:
+    RECURSIVE_SEARCH = getConfig('RECURSIVE_SEARCH')
+    RECURSIVE_SEARCH = RECURSIVE_SEARCH.lower() == 'true'
+except KeyError:
+    RECURSIVE_SEARCH = False
 try:
     TOKEN_PICKLE_URL = getConfig('TOKEN_PICKLE_URL')
     if len(TOKEN_PICKLE_URL) == 0:
@@ -389,7 +394,7 @@ if os.path.exists('drive_folder'):
                 DRIVES_IDS.append(temp[1])
                 DRIVES_NAMES.append(temp[0].replace("_", " "))
             except:
-                DRIVES_NAMES.append(None)
+                pass
             try:
                 INDEX_URLS.append(temp[2])
             except IndexError as e:

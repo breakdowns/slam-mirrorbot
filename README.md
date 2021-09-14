@@ -212,7 +212,7 @@ unzipmirror - Extract files
 qbmirror - Start Mirroring using qBittorrent
 qbtarmirror - Start mirroring and upload as .tar using qb
 qbzipmirror - Start mirroring and upload as .zip using qb
-qbunzipmirror - Extract files using qb
+qbunzipmirror - Extract files using qBittorrent
 clone - Copy file/folder to Drive
 count - Count file/folder of Drive link
 watch - Mirror Youtube-dl support link

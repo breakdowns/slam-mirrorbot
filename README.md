@@ -72,35 +72,6 @@ NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 
 </details>
 
-## Bot commands to be set in [@BotFather](https://t.me/BotFather)
-
-```
-mirror - Start Mirroring
-tarmirror - Start mirroring and upload as .tar
-zipmirror - Start mirroring and upload as .zip
-unzipmirror - Extract files
-qbmirror - Start Mirroring using qBittorrent
-qbtarmirror - Start mirroring and upload as .tar using qb
-qbzipmirror - Start mirroring and upload as .zip using qb
-qbunzipmirror - Extract files using qBittorrent
-clone - Copy file/folder to Drive
-count - Count file/folder of Drive link
-watch - Mirror Youtube-dl support link
-tarwatch - Mirror Youtube playlist link as .tar
-zipwatch - Mirror Youtube playlist link as .zip
-status - Get Mirror Status message
-list - Searches files in Drive
-cancel - Cancel a task
-cancelall - Cancel all tasks
-del - Delete file from Drive
-log - Get the Bot Log [owner/sudo only]
-shell - Run commands in Shell (Only Owner)
-restart - Restart the bot [owner/sudo only]
-stats - Bot Usage Stats
-ping - Ping the Bot
-help - Get Detailed Help
-```
-
 # How to deploy?
 Deploying is pretty much straight forward and is divided into several steps as follows:
 ## Installing requirements
@@ -216,6 +187,35 @@ Three buttons are already added including Drive Link, Index Link, and View Link,
 - `BUTTON_SIX_URL`:
 
 </details>
+
+## Bot commands to be set in [@BotFather](https://t.me/BotFather)
+
+```
+mirror - Start Mirroring
+tarmirror - Start mirroring and upload as .tar
+zipmirror - Start mirroring and upload as .zip
+unzipmirror - Extract files
+qbmirror - Start Mirroring using qBittorrent
+qbtarmirror - Start mirroring and upload as .tar using qb
+qbzipmirror - Start mirroring and upload as .zip using qb
+qbunzipmirror - Extract files using qBittorrent
+clone - Copy file/folder to Drive
+count - Count file/folder of Drive link
+watch - Mirror Youtube-dl support link
+tarwatch - Mirror Youtube playlist link as .tar
+zipwatch - Mirror Youtube playlist link as .zip
+status - Get Mirror Status message
+list - Searches files in Drive
+cancel - Cancel a task
+cancelall - Cancel all tasks
+del - Delete file from Drive
+log - Get the Bot Log [owner/sudo only]
+shell - Run commands in Shell (Only Owner)
+restart - Restart the bot [owner/sudo only]
+stats - Bot Usage Stats
+ping - Ping the Bot
+help - Get Detailed Help
+```
 
 ## Getting Google OAuth API credential file
 - Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)

@@ -172,7 +172,7 @@ Fill up rest of the fields. Meaning of each field is discussed below:
 - `SHORTENER`: if you want to use Shortener in G-Drive and index link, fill Shortener URL here. Examples:
 ```
 exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com, bit.ly,
-shorte.st, link-to.net, up-to-down.net, direct-link.net, file-link.net
+shorte.st, linkvertise.com , ouo.io
 ```
 
 Above are the supported URL Shorteners. Except these only some URL Shorteners are supported.

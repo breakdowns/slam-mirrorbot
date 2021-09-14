@@ -163,7 +163,7 @@ def bot_help(update, context):
 
 /{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
 
-/{BotCommands.QbMirrorCommand} [download_url][magnet_link]: Start Mirroring using qBittorrent, Use /{BotCommandsQbMirrorCommand} s to select files before downloading
+/{BotCommands.QbMirrorCommand} [download_url][magnet_link]: Start Mirroring using qBittorrent, Use /{BotCommands.QbMirrorCommand} s to select files before downloading
 
 /{BotCommands.QbTarMirrorCommand} [download_url][magnet_link]: Start mirroring using qBittorrent and upload the archived (.tar) version of the download
 

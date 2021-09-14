@@ -206,10 +206,10 @@ watch - Mirror Youtube-dl support link
 tarwatch - Mirror Youtube playlist link as .tar
 zipwatch - Mirror Youtube playlist link as .zip
 status - Get Mirror Status message
-list - Searches files in Drive
+list -  [query] Searches files in Drive
 cancel - Cancel a task
 cancelall - Cancel all tasks
-del - Delete file from Drive
+del - [drive_url] Delete file from Drive
 log - Get the Bot Log [owner/sudo only]
 shell - Run commands in Shell [owner only]
 restart - Restart the bot [owner/sudo only]

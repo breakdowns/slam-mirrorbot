@@ -191,6 +191,7 @@ Three buttons are already added including Drive Link, Index Link, and View Link,
 ## Bot commands to be set in [@BotFather](https://t.me/BotFather)
 
 ```
+help - Get Detailed Help
 mirror - Start Mirroring
 tarmirror - Start mirroring and upload as .tar
 zipmirror - Start mirroring and upload as .zip
@@ -214,7 +215,6 @@ shell - Run commands in Shell [owner only]
 restart - Restart the bot [owner/sudo only]
 stats - Bot Usage Stats
 ping - Ping the Bot
-help - Get Detailed Help
 ```
 
 ## Getting Google OAuth API credential file

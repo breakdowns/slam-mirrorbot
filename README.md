@@ -210,7 +210,7 @@ cancel - Cancel a task
 cancelall - Cancel all tasks
 del - Delete file from Drive
 log - Get the Bot Log [owner/sudo only]
-shell - Run commands in Shell (Only Owner)
+shell - Run commands in Shell [owner only]
 restart - Restart the bot [owner/sudo only]
 stats - Bot Usage Stats
 ping - Ping the Bot

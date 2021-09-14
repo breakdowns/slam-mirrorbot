@@ -625,11 +625,13 @@ class GoogleDriveHelper:
             if self.stopDup:
                 query = f"name = '{fileName}' and "
             else:
-                query = ""
                 fileName = fileName.split(' ')
-                for name in fileName:
-                    if name != '':
-                        query += f"name contains '{name}' and "
+                query = "".join(
+                    f"name contains '{name}' and "
+                    for name in fileName
+                    if name != ''
+                )
+
             query += "trashed = false"
             if parent_id == "root":
                 return (
@@ -733,7 +735,11 @@ class GoogleDriveHelper:
                         msg += f"<b><a href={furl}>Drive Link</a></b>"
                     if INDEX_URLS[index] is not None:
                         if RECURSIVE_SEARCH:
-                            url_path = "/".join([requests.utils.quote(n, safe='') for n in self.get_recursive_list(file, parent_id)])
+                            url_path = "/".join(
+                                requests.utils.quote(n, safe='')
+                                for n in self.get_recursive_list(file, parent_id)
+                            )
+
                         else:
                             url_path = requests.utils.quote(f'{file.get("name")}')
                         url = f'{INDEX_URLS[index]}/{url_path}'

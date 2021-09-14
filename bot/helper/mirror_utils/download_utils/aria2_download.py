@@ -22,10 +22,8 @@ class AriaDownloadHelper:
         if STOP_DUPLICATE and dl is not None:
             LOGGER.info('Checking File/Folder if already in Drive...')
             sname = aria2.get_download(gid).name
-            if dl.getListener().isTar and dl.getListener().isZip:
-                 sname = sname + ".zip"
-            elif dl.getListener().isTar:
-                sname = sname + ".tar"
+            if dl.getListener().isTar:
+                sname = sname + ".zip" if dl.getListener().isZip else sname + ".tar"
             if dl.getListener().extract:
                 smsg = None
             else:

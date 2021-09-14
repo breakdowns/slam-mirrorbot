@@ -299,8 +299,14 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False):
             not bot_utils.is_url(link)
             and not bot_utils.is_magnet(link)
             or len(link) == 0
-        ) and file is not None:
-            if isQbit:
+        ):
+            if file is None:
+                reply_text = reply_to.text
+                reply_text = re.split('\n ', reply_text)[0]
+                if bot_utils.is_url(reply_text) or bot_utils.is_magnet(reply_text):
+                    link = reply_text
+
+            elif isQbit:
                 file_name = str(time.time()).replace(".", "") + ".torrent"
                 file.get_file().download(custom_path=f"{file_name}")
                 link = f"{file_name}"
@@ -312,16 +318,6 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False):
                 return
             else:
                 link = file.get_file().file_path
-        elif (
-              not bot_utils.is_url(link)
-              and not bot_utils.is_magnet(link)
-              or len(link) == 0
-        ) and file is None:
-            reply_text = reply_to.text
-            reply_text = re.split('\n ', reply_text)[0]
-            if bot_utils.is_url(reply_text) or bot_utils.is_magnet(reply_text):
-                link = reply_text
-
     if bot_utils.is_url(link) and not bot_utils.is_magnet(link) and not os.path.exists(link) and isQbit:
         resp = requests.get(link)
         if resp.status_code == 200:

@@ -157,7 +157,7 @@ def bot_help(update, context):
     help = Telegraph(access_token=telegraph_token).create_page(title = 'Slam Mirrorbot Search', author_name='Slam Mirrorbot',
                                                                author_url='https://github.com/SlamDevs/slam-mirrorbot', html_content=help_string_telegraph)["path"]
     button = button_build.ButtonMaker()
-    button.buildbutton("Other Command", f"https://telegra.ph/{help}")
+    button.buildbutton("Other Commands", f"https://telegra.ph/{help}")
     reply_markup = InlineKeyboardMarkup(button.build_menu(1))
     sendMarkup(help_string, context.bot, update, reply_markup)
 

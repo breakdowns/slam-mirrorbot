@@ -209,7 +209,6 @@ botcmds = [
         (f'{BotCommands.UnzipMirrorCommand}','Extract files'),
         (f'{BotCommands.ZipMirrorCommand}','Start mirroring and upload as .zip'),
         (f'{BotCommands.QbMirrorCommand}','Start Mirroring using qBittorrent'),
-        (f'{BotCommands.QbUnzipMirrorCommand}','Extract files using qBitorrent'),
         (f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
         (f'{BotCommands.CountCommand}','Count file/folder of Drive link'),
         (f'{BotCommands.DeleteCommand}','Delete file from Drive'),
@@ -220,7 +219,6 @@ botcmds = [
         (f'{BotCommands.StatsCommand}','Bot Usage Stats'),
         (f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
         (f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
-        (f'{BotCommands.TsHelpCommand}','Get help for Torrent search module')
     ]
 
 

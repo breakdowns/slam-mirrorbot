@@ -9,7 +9,7 @@ from bot.helper.telegram_helper.filters import CustomFilters
 import threading
 
 
-def _watch(bot: Bot, update, isTar=False):
+def _watch(bot: Bot, update, isTar=False, isZip=False):
     mssg = update.message.text
     message_args = mssg.split(' ')
     name_args = mssg.split('|')
@@ -44,7 +44,7 @@ def _watch(bot: Bot, update, isTar=False):
       name = ""
     
     pswd = ""
-    listener = MirrorListener(bot, update, pswd, isTar)
+    listener = MirrorListener(bot, update, pswd, isTar, isZip=isZip)
     ydl = YoutubeDLHelper(listener)
     threading.Thread(target=ydl.add_download,args=(link, f'{DOWNLOAD_DIR}{listener.uid}', qual, name)).start()
     sendStatusMessage(update, bot)
@@ -53,6 +53,8 @@ def _watch(bot: Bot, update, isTar=False):
 def watchTar(update, context):
     _watch(context.bot, update, True)
 
+def watchZip(update, context):
+    _watch(context.bot, update, True, True)
 
 def watch(update, context):
     _watch(context.bot, update)
@@ -62,7 +64,10 @@ mirror_handler = CommandHandler(BotCommands.WatchCommand, watch,
                                 filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 tar_mirror_handler = CommandHandler(BotCommands.TarWatchCommand, watchTar,
                                     filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+zip_mirror_handler = CommandHandler(BotCommands.ZipWatchCommand, watchZip,
+                                    filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 
 
 dispatcher.add_handler(mirror_handler)
 dispatcher.add_handler(tar_mirror_handler)
+dispatcher.add_handler(zip_mirror_handler)

@@ -98,13 +98,13 @@ def bot_help(update, context):
 <br><br>
 <b>/{BotCommands.UnzipMirrorCommand}</b> [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
 <br><br>
-<b>/{BotCommands.QbMirrorCommand}</b> [download_url][magnet_link]: Start Mirroring using qBittorrent, Use /{BotCommands.QbMirrorCommand} s to select files before downloading
+<b>/{BotCommands.QbMirrorCommand}</b> [magnet_link]: Start Mirroring using qBittorrent, Use /{BotCommands.QbMirrorCommand} s to select files before downloading
 <br><br>
-<b>/{BotCommands.QbTarMirrorCommand}</b> [download_url][magnet_link]: Start mirroring using qBittorrent and upload the archived (.tar) version of the download
+<b>/{BotCommands.QbTarMirrorCommand}</b> [magnet_link]: Start mirroring using qBittorrent and upload the archived (.tar) version of the download
 <br><br>
-<b>/{BotCommands.QbZipMirrorCommand}</b> [download_url][magnet_link]: Start mirroring using qBittorrent and upload the archived (.zip) version of the download
+<b>/{BotCommands.QbZipMirrorCommand}</b> [magnet_link]: Start mirroring using qBittorrent and upload the archived (.zip) version of the download
 <br><br>
-<b>/{BotCommands.QbUnzipMirrorCommand}</b> [download_url][magnet_link]: Starts mirroring using qBittorrent and if downloaded file is any archive, extracts it to Google Drive
+<b>/{BotCommands.QbUnzipMirrorCommand}</b> [magnet_link]: Starts mirroring using qBittorrent and if downloaded file is any archive, extracts it to Google Drive
 <br><br>
 <b>/{BotCommands.CloneCommand}</b> [drive_url]: Copy file/folder to Google Drive
 <br><br>

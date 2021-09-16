@@ -10,7 +10,7 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: 3f8a163e-ece7-436d-9c42-4a75978dea63
-          heroku_app_name: bokep-kita
+          heroku_app_name: bokep-mirrorbersama
           heroku_email: uzakimanag.er2@gmail.com
           usedocker: true
           docker_heroku_process_type: web

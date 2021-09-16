@@ -1,0 +1,39 @@
+name: Bug Report
+description: Create a bug report to help us improve
+body:
+  - type: textarea
+    id: describe-the-bug
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description about the bug. **NOTE:** We don't provide support for modified code/repo of slam-mirrorbot, so don't report errors/bug arising from your modified code. Fix it yourself.
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected behaviour
+      description: Tell us what you had expected to happen.
+    validations:
+      required: false
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to explain your problem.
+    validations:
+      required: false
+  - type: textarea
+    id: add-logs
+    attributes:
+      label: Add Logs
+      description: Add logs of your bot (hiding credentials) so that we can help you quickly.
+    validations:
+      required: true
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional info
+      description: Any other details about the issue.
+    validations:
+      required: true

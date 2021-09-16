@@ -205,13 +205,13 @@ input[type="submit"]:hover, input[type="submit"]:focus{
           src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
           alt="logo"
         />
-        <a href="https://t.me/SlamMirrorUpdates"> 
-          <h2 class="name">slam-mirrorbot</h2>
+        <a href="https://t.me/tokisaki_mitsuha_publik"> 
+          <h2 class="name">uzaki-mirror</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/SlamDevs/slam-mirrorbot"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/SlamMirrorUpdates"><i class="fab fa-telegram"></i></a>
+        <a href="https://t.me/tokisaki_mitsuha_publik"><i class="fab fa-github"></i></a>
+        <a href="https://t.me/tokisaki_mitsuha_publik"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <section>
@@ -530,13 +530,13 @@ section span{
           src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
           alt="logo"
         />
-        <a href="https://t.me/SlamMirrorUpdates">
-          <h2 class="name">slam-mirrorbot</h2>
+        <a href="https://t.me/tokisaki_mitsuha_publik">
+          <h2 class="name">uzaki-mirrorbot</h2>
         </a>
       </div>
       <div class="social">
         <a href="https://github.com/SlamDevs/slam-mirrorbot"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/SlamMirrorUpdates"><i class="fab fa-telegram"></i></a>
+        <a href="https://t.me/tokisaki_mitsuha_publik"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <section>

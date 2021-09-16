@@ -17,4 +17,4 @@ jobs:
           stack: "container"
           region: "us"
         env:
-          HD_CONFIG_FILE_URL: postgres://lbghabfmtkcjxp:830bcc0f792b2a7fba0958c1b1f27c2173ac9863a27e2a967140fb5a2cd84b70@ec2-18-211-41-246.compute-1.amazonaws.com:5432/dflcej2qg05rg1
+          HD_CONFIG_FILE_URL: https://raw.githubusercontent.com/TranCongVinh1/slam-mirrorbot/main/config.env

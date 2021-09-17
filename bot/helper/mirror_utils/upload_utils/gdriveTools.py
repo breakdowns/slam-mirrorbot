@@ -761,8 +761,8 @@ class GoogleDriveHelper:
                     self.telegraph_content.append(msg)
                     msg = ""
                     content_count = 0
-                if clone:
-                    break
+            if clone:
+                break
 
         if msg != '':
             self.telegraph_content.append(msg)

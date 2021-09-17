@@ -86,8 +86,7 @@ def log(update, context):
     sendLogFile(context.bot, update)
 
 
-def bot_help(update, context):
-    help_string_telegraph = f'''<br>
+help_string_telegraph = f'''<br>
 <b>/{BotCommands.HelpCommand}</b>: To get this message
 <br><br>
 <b>/{BotCommands.MirrorCommand}</b> [download_url][magnet_link]: Start mirroring the link to Google Drive.
@@ -128,8 +127,14 @@ def bot_help(update, context):
 <br><br>
 <b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
 '''
+help = Telegraph(access_token=telegraph_token).create_page(
+        title='Slam Mirrorbot Help',
+        author_name='Slam Mirrorbot',
+        author_url='https://github.com/SlamDevs/slam-mirrorbot',
+        html_content=help_string_telegraph,
+    )["path"]
 
-    help_string = f'''
+help_string = f'''
 /{BotCommands.PingCommand}: Check how long it takes to Ping the Bot
 
 /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
@@ -154,8 +159,8 @@ def bot_help(update, context):
 
 /{BotCommands.TsHelpCommand}: Get help for Torrent search module
 '''
-    help = Telegraph(access_token=telegraph_token).create_page(title = 'Slam Mirrorbot Help', author_name='Slam Mirrorbot',
-                                                               author_url='https://github.com/SlamDevs/slam-mirrorbot', html_content=help_string_telegraph)["path"]
+
+def bot_help(update, context):
     button = button_build.ButtonMaker()
     button.buildbutton("Other Commands", f"https://telegra.ph/{help}")
     reply_markup = InlineKeyboardMarkup(button.build_menu(1))

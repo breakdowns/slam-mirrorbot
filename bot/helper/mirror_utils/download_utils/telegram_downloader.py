@@ -102,7 +102,7 @@ class TelegramDownloadHelper(DownloadHelper):
                 if STOP_DUPLICATE:
                     LOGGER.info('Checking File/Folder if already in Drive...')
                     gd = GoogleDriveHelper()
-                    smsg, button = gd.drive_list(name, True)
+                    smsg, button = gd.drive_list(name, True, True)
                     if smsg:
                         sendMarkup("File/Folder is already available in Drive.\nHere are the search results:", self.__listener.bot, self.__listener.update, button)
                         return

@@ -83,7 +83,7 @@ class YoutubeDLHelper(DownloadHelper):
                     self.last_downloaded = tbyte * progress
                     self.downloaded_bytes += chunk_size
                 else:
-                    self.size = d['total_bytes']
+                    self.size = tbyte
                     self.downloaded_bytes = d['downloaded_bytes']
                 try:
                     self.progress = (self.downloaded_bytes / self.size) * 100

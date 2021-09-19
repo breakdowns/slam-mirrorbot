@@ -595,23 +595,31 @@ class GoogleDriveHelper:
     def recur_query(self, parent_id, fileName):
         # Create a search query for an API request.
         query = f"name contains '{fileName}' and trashed=false"
-        if parent_id != "root":
-            response = self.__service.files().list(supportsTeamDrives=True,
-                                               includeTeamDriveItems=True,
-                                               teamDriveId=parent_id,
-                                               q=query,
-                                               corpora='drive',
-                                               spaces='drive',
-                                               pageSize=200,
-                                               fields='files(id, name, mimeType, size, teamDriveId, parents)',
-                                               orderBy='folder, modifiedTime desc').execute()["files"]
-        else:
-            response = self.__service.files().list(q=query + " and 'me' in owners",
-                                               pageSize=200,
-                                               spaces='drive',
-                                               fields='files(id, name, mimeType, size, parents)',
-                                               orderBy='folder, modifiedTime desc').execute()["files"]
-        return response
+        return (
+            self.__service.files()
+            .list(
+                supportsTeamDrives=True,
+                includeTeamDriveItems=True,
+                teamDriveId=parent_id,
+                q=query,
+                corpora='drive',
+                spaces='drive',
+                pageSize=200,
+                fields='files(id, name, mimeType, size, teamDriveId, parents)',
+                orderBy='folder, modifiedTime desc',
+            )
+            .execute()["files"]
+            if parent_id != "root"
+            else self.__service.files()
+            .list(
+                q=query + " and 'me' in owners",
+                pageSize=200,
+                spaces='drive',
+                fields='files(id, name, mimeType, size, parents)',
+                orderBy='folder, modifiedTime desc',
+            )
+            .execute()["files"]
+        )
 
     def edit_telegraph(self):
         nxt_page = 1 
@@ -832,28 +840,32 @@ class GoogleDriveHelper:
     def search_recur(self, fileName):
         start_time = perf_counter()
         msg = ''
-        INDEX = -1
         total_count = 0
         content_count = 0
         add_title_msg = True
         file_check=re.search(" -f", fileName)
         fileName=fileName.replace(" -f", "")
-        for parent_id in DRIVE_ID :
-            response = self.recur_query(parent_id, fileName)    
-            INDEX += 1
+        for INDEX, parent_id in enumerate(DRIVE_ID):
+            response = self.recur_query(parent_id, fileName)
             if response:
-                if add_title_msg == True:
+                if add_title_msg:
                     msg = f'<h3>Search Results for : {fileName}</h3><br>'
                     add_title_msg = False
                 msg += f"╾────────────╼<br><b>{DRIVE_NAME[INDEX]}</b><br>╾────────────╼<br>"
-                if file_check == None:
-                    for file in response:
+                for file in response:
+                    if file_check is None:
                         # Detect Whether Current Entity is a Folder or File
                         if file.get('mimeType') == "application/vnd.google-apps.folder":
                             msg += f"📁<code>{file.get('name')}</code> <b>(folder)</b><br>" \
                                 f"<b><a href='https://drive.google.com/drive/folders/{file.get('id')}'>Drive Link</a></b>"
                             if SEARCH_INDEXES[INDEX] is not None:
-                                url_path = "/".join([requests.utils.quote(n, safe='') for n in self.get_recursive_list(file, parent_id)])
+                                url_path = "/".join(
+                                    requests.utils.quote(n, safe='')
+                                    for n in self.get_recursive_list(
+                                        file, parent_id
+                                    )
+                                )
+
                                 url = f'{SEARCH_INDEXES[INDEX]}/{url_path}/'
                                 msg += f'<b> | <a href="{url}">Index Link</a></b>'
                             msg += '<br><br>'
@@ -863,28 +875,28 @@ class GoogleDriveHelper:
                             self.telegraph_content.append(msg)
                             msg = ""
                             content_count = 0
-                else:
-                    for file in response:    
-                        # Excluded shortcuts from Index as indexes can't download/open them
-                        if file.get('mimeType') == 'application/vnd.google-apps.shortcut':
-                            msg += f"⁍<a href='https://drive.google.com/drive/folders/{file.get('id')}'>{file.get('name')}" \
-                                f"</a> (shortcut)"
-                        
-                        else:
-                            if file.get('mimeType') != "application/vnd.google-apps.folder":
-                                msg += f"📄<code>{file.get('name')}</code> <b>({get_readable_file_size(int(file.get('size')))})</b><br>" \
-                                    f"<b><a href='https://drive.google.com/uc?id={file.get('id')}&export=download'>Drive Link</a></b>"
-                                if SEARCH_INDEXES[INDEX] is not None:
-                                    url_path = "/".join([requests.utils.quote(n, safe ='') for n in self.get_recursive_list(file, parent_id)])
-                                    url = f'{SEARCH_INDEXES[INDEX]}/{url_path}'
-                                    msg += f'<b> | <a href="{url}">Index Link</a></b>'
-                                msg += '<br><br>'
-                                content_count += 1
-                                total_count += 1
-                                if content_count == TELEGRAPHLIMIT:
-                                    self.telegraph_content.append(msg)
-                                    msg = ""
-                                    content_count = 0
+                    elif file.get('mimeType') == 'application/vnd.google-apps.shortcut':
+                        msg += f"⁍<a href='https://drive.google.com/drive/folders/{file.get('id')}'>{file.get('name')}" \
+                            f"</a> (shortcut)"
+
+                    elif file.get('mimeType') != "application/vnd.google-apps.folder":
+                        msg += f"📄<code>{file.get('name')}</code> <b>({get_readable_file_size(int(file.get('size')))})</b><br>" \
+                            f"<b><a href='https://drive.google.com/uc?id={file.get('id')}&export=download'>Drive Link</a></b>"
+                        if SEARCH_INDEXES[INDEX] is not None:
+                            url_path = "/".join(
+                                requests.utils.quote(n, safe='')
+                                for n in self.get_recursive_list(file, parent_id)
+                            )
+
+                            url = f'{SEARCH_INDEXES[INDEX]}/{url_path}'
+                            msg += f'<b> | <a href="{url}">Index Link</a></b>'
+                        msg += '<br><br>'
+                        content_count += 1
+                        total_count += 1
+                        if content_count == TELEGRAPHLIMIT:
+                            self.telegraph_content.append(msg)
+                            msg = ""
+                            content_count = 0
 
         if msg != '':
             self.telegraph_content.append(msg)
@@ -899,13 +911,13 @@ class GoogleDriveHelper:
                                                     author_url='https://github.com/hyPnOtICDo0g/hishirobot',
                                                     html_content=content )['path'])
 
-        self.num_of_path = len(self.path)      
+        self.num_of_path = len(self.path)
         if self.num_of_path > 1:
             self.edit_telegraph()
         stop_time = perf_counter()
         timelog = "{:.2f}".format(stop_time-start_time)+"s"
         msg = f"<b> Found {total_count} result(s) For {fileName} (<i>Finished in {timelog}</i>) </b>"
-        buttons = button_build.ButtonMaker()   
+        buttons = button_build.ButtonMaker()
         buttons.buildbutton("GO TO RESULTS 🗂️", f"https://telegra.ph/{self.path[0]}")
 
         return msg, InlineKeyboardMarkup(buttons.build_menu(1))

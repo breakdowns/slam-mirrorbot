@@ -45,6 +45,8 @@ def cancel_mirror(update, context):
         sendMessage("Archival in Progress, You Can't Cancel It.", context.bot, update)
     elif dl.status() == MirrorStatus.STATUS_EXTRACTING:
         sendMessage("Extract in Progress, You Can't Cancel It.", context.bot, update)
+    elif dl.status() == MirrorStatus.STATUS_SPLITTING:
+        sendMessage("Split in Progress, You Can't Cancel It.", context.bot, update)
     else:
         dl.download().cancel_download()
         sleep(3)  # incase of any error with ondownloaderror listener

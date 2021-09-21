@@ -2,8 +2,6 @@ from bot.helper.telegram_helper.message_utils import sendMessage
 from bot import AUTHORIZED_CHATS, SUDO_USERS, dispatcher, DB_URI
 from telegram.ext import CommandHandler
 from bot.helper.telegram_helper.filters import CustomFilters
-from telegram.ext import Filters
-from telegram import Update
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.ext_utils.db_handler import DbManger
 

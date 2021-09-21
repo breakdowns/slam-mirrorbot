@@ -115,6 +115,8 @@ download_dict = {}
 # Stores list of users and chats the bot is authorized to use in
 AUTHORIZED_CHATS = set()
 SUDO_USERS = set()
+AS_DOC_USERS = set()
+AS_MEDIA_USERS = set()
 if os.path.exists('authorized_chats.txt'):
     with open('authorized_chats.txt', 'r+') as f:
         lines = f.readlines()
@@ -191,11 +193,15 @@ telegraph.create_account(short_name=sname)
 telegraph_token = telegraph.get_access_token()
 
 try:
-    STATUS_LIMIT = getConfig('STATUS_LIMIT')
-    if len(STATUS_LIMIT) == 0:
+    TG_SPLIT_SIZE = int(getConfig('TG_SPLIT_SIZE'))
+    if len(f'TG_SPLIT_SIZE') == 0 or TG_SPLIT_SIZE > 2097152000:
         raise KeyError
-    else:
-        STATUS_LIMIT = int(getConfig('STATUS_LIMIT'))
+except KeyError:
+    TG_SPLIT_SIZE = 2097152000
+try:
+    STATUS_LIMIT = int(getConfig('STATUS_LIMIT'))
+    if len(f'STATUS_LIMIT') == 0:
+        raise KeyError
 except KeyError:
     STATUS_LIMIT = None
 try:
@@ -330,6 +336,11 @@ try:
     IS_VPS = IS_VPS.lower() == 'true'
 except KeyError:
     IS_VPS = False
+try:
+    AS_DOCUMENT = getConfig('AS_DOCUMENT')
+    AS_DOCUMENT = AS_DOCUMENT.lower() == 'true'
+except KeyError:
+    AS_DOCUMENT = False
 try:
     RECURSIVE_SEARCH = getConfig('RECURSIVE_SEARCH')
     RECURSIVE_SEARCH = RECURSIVE_SEARCH.lower() == 'true'

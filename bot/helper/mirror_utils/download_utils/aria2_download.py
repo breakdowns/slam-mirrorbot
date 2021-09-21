@@ -19,7 +19,7 @@ class AriaDownloadHelper:
             sleep(1)
             dl = getDownloadByGid(gid)
             download = aria2.get_download(gid)
-        if STOP_DUPLICATE and dl is not None:
+        if STOP_DUPLICATE and dl is not None and not dl.getListener().isLeech:
             LOGGER.info('Checking File/Folder if already in Drive...')
             sname = aria2.get_download(gid).name
             if dl.getListener().isTar:
@@ -89,8 +89,7 @@ class AriaDownloadHelper:
         aria2.listen_to_notifications(threaded=True, on_download_start=self.__onDownloadStarted,
                                       on_download_error=self.__onDownloadError,
                                       on_download_stop=self.__onDownloadStopped,
-                                      on_download_complete=self.__onDownloadComplete,
-                                      timeout=1)
+                                      on_download_complete=self.__onDownloadComplete)
 
     def add_download(self, link: str, path, listener, filename):
         if is_magnet(link):

@@ -26,7 +26,7 @@ page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent File Selector</title>
-    <link rel="icon" href="https://telegra.ph/file/6507910fd06d18dfaba82.jpg" type="image/jpg">
+    <link rel="icon" href="https://telegra.ph/file/a97fb49ff2498018a59a7.png" type="image/jpg">
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
@@ -202,7 +202,7 @@ input[type="submit"]:hover, input[type="submit"]:focus{
     <header>
       <div class="brand">
         <img
-          src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
+          src="https://telegra.ph/file/a97fb49ff2498018a59a7.png"
           alt="logo"
         />
         <a href="https://t.me/SlamMirrorUpdates"> 
@@ -527,7 +527,7 @@ section span{
     <header>
       <div class="brand">
         <img
-          src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
+          src="https://telegra.ph/file/a97fb49ff2498018a59a7.png"
           alt="logo"
         />
         <a href="https://t.me/SlamMirrorUpdates">

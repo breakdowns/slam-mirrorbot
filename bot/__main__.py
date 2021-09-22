@@ -137,7 +137,7 @@ help_string_telegraph = f'''<br>
 <br><br>
 <b>/{BotCommands.LeechTarWatchCommand}</b> Leech through youtube-dl and tar before uploading 
 <br><br>
-<b>/{BotCommands.LeechTarWatchCommand}</b> Leech through youtube-dl and zip before uploading 
+<b>/{BotCommands.LeechZipWatchCommand}</b> Leech through youtube-dl and zip before uploading 
 <br><br>
 <b>/{BotCommands.LeechSetCommand}</b> Leech Settings 
 <br><br>

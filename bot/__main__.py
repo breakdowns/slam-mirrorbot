@@ -139,6 +139,10 @@ help_string_telegraph = f'''<br>
 <br><br>
 <b>/{BotCommands.LeechTarWatchCommand}</b> Leech through youtube-dl and zip before uploading 
 <br><br>
+<b>/{BotCommands.LeechSetCommand}</b> Leech Settings 
+<br><br>
+<b>/{BotCommands.SetThumbCommand}</b> Reply to photo to set it as thumbnail for next uploads 
+<br><br>
 <b>/{BotCommands.CancelMirror}</b>: Reply to the message by which the download was initiated and that download will be cancelled
 <br><br>
 <b>/{BotCommands.CancelAllCommand}</b>: Cancel all running tasks

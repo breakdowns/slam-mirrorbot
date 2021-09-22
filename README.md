@@ -8,7 +8,7 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
 [![Channel](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/SlamMirrorUpdates)
 
-**Slam Mirror Bot** is a _multipurpose_ Telegram Bot written in Python for mirroring/leeching files on the Internet to our beloved Google Drive. Based on [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot)
+**Slam Mirror Bot** is a _multipurpose_ Telegram Bot written in Python for mirroring files on the Internet to our beloved Google Drive. Based on [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot)
 
 # Features:
 <details>
@@ -204,11 +204,24 @@ qbmirror - Start Mirroring using qBittorrent
 qbtarmirror - Start mirroring and upload as .tar using qb
 qbzipmirror - Start mirroring and upload as .zip using qb
 qbunzipmirror - Extract files using qBittorrent
+leech - Leech Torrent/Direct link
+tarleech - Leech Torrent/Direct link and upload as .tar
+zipleech - Leech Torrent/Direct link and upload as .zip
+unzipleech - Leech Torrent/Direct link and extract
+qbleech - Leech Torrent/Direct link using qBittorrent
+qbtarleech - Leech Torrent/Direct link and upload as .tar using qb
+qbzipleech - Leech Torrent/Direct link and upload as .zip using qb
+qbunzipleech - Leech Torrent/Direct link and extract using qb
 clone - Copy file/folder to Drive
 count - Count file/folder of Drive link
 watch - Mirror Youtube-dl supported link
 tarwatch - Mirror Youtube playlist link and upload as .tar
 zipwatch - Mirror Youtube playlist link and upload as .zip
+leechwatch - Leech through Youtube-dl supported link
+leechtarwatch - Leech Youtube playlist link and upload as .tar
+leechzipwatch - Leech Youtube playlist link and upload as .zip
+leechset - Leech settings
+leechset - Set Thumbnail
 status - Get Mirror Status message
 list -  [query] Searches files in Drive
 cancel - Cancel a task

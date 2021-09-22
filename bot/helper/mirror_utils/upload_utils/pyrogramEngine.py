@@ -50,7 +50,7 @@ class TgUploader:
                 msgs_dict[file] = self.sent_msg.message_id
                 os.remove(up_path)
                 self.last_uploaded = 0
-        LOGGER.info("Leeching Done!")
+        LOGGER.info(f"Leech Done: {self.name}")
         self.__listener.onUploadComplete(self.name, None, msgs_dict, None, None)
 
     def upload_file(self, up_path, file):

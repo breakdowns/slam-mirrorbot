@@ -183,7 +183,7 @@ def split(path, size, split_size, start_time=0, i=1):
     if base_name.upper().endswith(VIDEO_SUFFIXES):
         base_name, extension = os.path.splitext(path)
         metadata = extractMetadata(createParser(path))
-        total_duration = metadata.get('duration').seconds - 5
+        total_duration = metadata.get('duration').seconds - 8
         while start_time < total_duration:
             parted_name = "{}.part{}{}".format(str(base_name), str(i).zfill(2), str(extension))
             out_path = os.path.join(out_dir, parted_name)

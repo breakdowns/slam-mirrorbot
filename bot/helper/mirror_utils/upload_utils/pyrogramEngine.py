@@ -11,13 +11,13 @@ from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 
 from bot import app, DOWNLOAD_DIR, AS_DOCUMENT, AS_DOC_USERS, AS_MEDIA_USERS
-from bot.helper.ext_utils.fs_utils import get_mime_type, take_ss 
+from bot.helper.ext_utils.fs_utils import take_ss 
 
 LOGGER = logging.getLogger(__name__)
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 VIDEO_SUFFIXES = ("M4V", "MP4", "MOV", "FLV", "WMV", "3GP", "MPG", "WEBM", "MKV", "AVI")
-AUDIO_SUFFIXES = ("MP3", "M4A", "M4B", "FLAC", "WAV", "AIF", "OGG", "AAC", "DTS", "MID", "AMR")
+AUDIO_SUFFIXES = ("MP3", "M4A", "M4B", "FLAC", "WAV", "AIF", "OGG", "AAC", "DTS", "MID", "AMR", "MKA")
 IMAGE_SUFFIXES = ("JPG", "JPX", "PNG", "GIF", "WEBP", "CR2", "TIF", "BMP", "JXR", "PSD", "ICO", "HEIC")
 
 
@@ -58,11 +58,8 @@ class TgUploader:
         thumb = self.thumb
         try:
             if not self.as_doc:
-                ftype = get_mime_type(up_path)
-                ftype = ftype.split("/")[0]
-                ftype = ftype.lower().strip()
                 duration = 0
-                if ftype == "video" or file.upper().endswith(VIDEO_SUFFIXES):
+                if file.upper().endswith(VIDEO_SUFFIXES):
                     width = 0
                     height = 0
                     metadata = extractMetadata(createParser(up_path))
@@ -81,9 +78,9 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
-                    if self.thumb is None:
+                    if self.thumb is None and thumb is not None and os.path.lexists(thumb):
                         os.remove(thumb)
-                elif ftype == "audio" or file.upper().endswith(AUDIO_SUFFIXES):
+                elif file.upper().endswith(AUDIO_SUFFIXES):
                     title = None
                     artist = None
                     metadata = extractMetadata(createParser(up_path))
@@ -103,7 +100,7 @@ class TgUploader:
                                                               thumb=thumb,
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
-                elif ftype == "image" or file.upper().endswith(IMAGE_SUFFIXES):
+                elif file.upper().endswith(IMAGE_SUFFIXES):
                     self.sent_msg = self.sent_msg.reply_photo(photo=up_path,
                                                               quote=True,
                                                               caption=file,

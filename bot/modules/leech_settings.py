@@ -53,35 +53,27 @@ def setLeechType(update, context):
     elif data[0] == "doc":
         if user_id in AS_DOC_USERS:
             query.answer(text="Already As Document!", show_alert=True)
-            query.message.delete()
         elif user_id in AS_MEDIA_USERS:
             AS_MEDIA_USERS.remove(user_id)
             AS_DOC_USERS.add(user_id)
             query.answer(text="Done!", show_alert=True)
-            query.message.delete()
         elif AS_DOCUMENT:
             query.answer(text="Already As Document!", show_alert=True)
-            query.message.delete()
         elif not AS_DOCUMENT:
             AS_DOC_USERS.add(user_id)
             query.answer(text="Done!", show_alert=True)
-            query.message.delete()
     elif data[0] == "med":
         if user_id in AS_DOC_USERS:
             AS_DOC_USERS.remove(user_id)
             AS_MEDIA_USERS.add(user_id)
             query.answer(text="Done!", show_alert=True)
-            query.message.delete()
         elif user_id in AS_MEDIA_USERS:
             query.answer(text="Already As Media!", show_alert=True)
-            query.message.delete()
         elif AS_DOCUMENT:
             AS_MEDIA_USERS.add(user_id)
             query.answer(text="Done!", show_alert=True)
-            query.message.delete()
         elif not AS_DOCUMENT:
             query.answer(text="Already As Media!", show_alert=True)
-            query.message.delete()
     elif data[0] == "thumb":
         path = f"Thumbnails/{user_id}.jpg"
         if os.path.lexists(path):
@@ -89,14 +81,13 @@ def setLeechType(update, context):
             query.answer(text="Done!", show_alert=True)
         else:
             query.answer(text="No Thumbnail To Delete!", show_alert=True)
-        query.message.delete()
     elif data[0] == "closeset":
         query.message.delete()
 
 def setThumb(update, context):
     user_id = update.message.from_user.id
     reply_to = update.message.reply_to_message
-    if reply_to.photo:
+    if reply_to is not None and reply_to.photo:
         path = "Thumbnails"
         if not os.path.exists(path):
             os.mkdir(path)

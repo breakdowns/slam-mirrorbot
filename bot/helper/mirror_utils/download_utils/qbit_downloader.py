@@ -53,12 +53,9 @@ class QbitTorrent:
                 self.ext_hash = get_hash_magnet(link)
             tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
             if len(tor_info) > 0:
-                if tor_info[0].state == "pausedDL":
-                    self.client.torrents_delete(torrent_hashes=self.ext_hash)
-                else:
-                    sendMessage("This Torrent is already in list.", listener.bot, listener.update)
-                    self.client.auth_log_out()
-                    return
+                sendMessage("This Torrent is already in list.", listener.bot, listener.update)
+                self.client.auth_log_out()
+                return
             if is_file:
                 op = self.client.torrents_add(torrent_files=[link], save_path=dire)
                 os.remove(link)

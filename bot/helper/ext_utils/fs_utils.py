@@ -10,14 +10,11 @@ import time
 from PIL import Image
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
-from fsplit.filesplit import Filesplit
 
 from .exceptions import NotSupportedExtractionArchive
 from bot import aria2, LOGGER, DOWNLOAD_DIR, get_client, TG_SPLIT_SIZE
 
 VIDEO_SUFFIXES = ("M4V", "MP4", "MOV", "FLV", "WMV", "3GP", "MPG", "WEBM", "MKV", "AVI")
-
-fs = Filesplit()
 
 def clean_download(path: str):
     if os.path.exists(path):
@@ -168,14 +165,14 @@ def take_ss(video_file, duration):
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", str(duration),
                     "-i", video_file, "-vframes", "1", des_dir])
     if not os.path.lexists(des_dir):
-        return None, 0, 0
+        return None, 0
 
     Image.open(des_dir).convert("RGB").save(des_dir)
     img = Image.open(des_dir)
     w, h = img.size
     img.resize((320, h))
     img.save(des_dir, "JPEG")
-    return des_dir, 320, h
+    return des_dir, 320
 
 def split(path, size, split_size, start_time=0, i=1):
     out_dir = os.path.dirname(path)
@@ -184,8 +181,9 @@ def split(path, size, split_size, start_time=0, i=1):
         base_name, extension = os.path.splitext(path)
         metadata = extractMetadata(createParser(path))
         total_duration = metadata.get('duration').seconds - 8
+        split_size = split_size - 2000000
         while start_time < total_duration:
-            parted_name = "{}.part{}{}".format(str(base_name), str(i).zfill(2), str(extension))
+            parted_name = "{}.part{}{}".format(str(base_name), str(i).zfill(3), str(extension))
             out_path = os.path.join(out_dir, parted_name)
             subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-i", 
                             path, "-ss", str(start_time), "-fs", str(split_size),
@@ -193,14 +191,13 @@ def split(path, size, split_size, start_time=0, i=1):
             out_size = get_path_size(out_path)
             if out_size > TG_SPLIT_SIZE:
                 dif = out_size - TG_SPLIT_SIZE
-                split_size = split_size - dif
+                split_size = TG_SPLIT_SIZE - dif
                 os.remove(out_path)
                 return split(path, size, split_size, start_time, i)
             metadata = extractMetadata(createParser(out_path))
             start_time = start_time + metadata.get('duration').seconds - 5
             i = i + 1
     else:
-        #subprocess.run(["split", "--numeric-suffixes=1", "--suffix-length=5", f"--bytes={split_size}", path, out_dir])
-        fs.split(file=path, split_size=split_size, output_dir=out_dir)
-        csv_path = os.path.join(out_dir, "fs_manifest.csv")
-        os.remove(csv_path)
+        out_path = os.path.join(out_dir, base_name + ".")
+        subprocess.run(["split", "--numeric-suffixes=1", "--suffix-length=3", f"--bytes={split_size}", path, out_path])
+

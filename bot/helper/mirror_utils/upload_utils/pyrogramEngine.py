@@ -45,8 +45,12 @@ class TgUploader:
         self.user_settings()
         for dirpath, subdir, files in sorted(os.walk(path)):
             for file in sorted(files):
+                if self.is_cancelled:
+                    return
                 up_path = os.path.join(dirpath, file)
                 self.upload_file(up_path, file)
+                if self.is_cancelled:
+                    return
                 msgs_dict[file] = self.sent_msg.message_id
                 os.remove(up_path)
                 self.last_uploaded = 0
@@ -54,6 +58,7 @@ class TgUploader:
         self.__listener.onUploadComplete(self.name, None, msgs_dict, None, None)
 
     def upload_file(self, up_path, file):
+        cap_mono = f"<code>{file}</code>"
         notMedia = False
         thumb = self.thumb
         try:
@@ -66,11 +71,12 @@ class TgUploader:
                     if metadata.has("duration"):
                         duration = metadata.get("duration").seconds
                     if thumb is None:
-                        thumb, width, height = take_ss(up_path, duration)
+                        thumb, width = take_ss(up_path, duration)
+                    if self.is_cancelled:
+                        return
                     self.sent_msg = self.sent_msg.reply_video(video=up_path,
                                                               quote=True,
-                                                              caption=file,
-                                                              parse_mode="html",
+                                                              caption=cap_mono,
                                                               duration=duration,
                                                               width=width,
                                                               height=height,
@@ -88,8 +94,7 @@ class TgUploader:
                     artist = metadata.get("artist") if metadata.has("artist") else None
                     self.sent_msg = self.sent_msg.reply_audio(audio=up_path,
                                                               quote=True,
-                                                              caption=file,
-                                                              parse_mode="html",
+                                                              caption=cap_mono,
                                                               duration=duration,
                                                               performer=artist,
                                                               title=title,
@@ -99,8 +104,7 @@ class TgUploader:
                 elif file.upper().endswith(IMAGE_SUFFIXES):
                     self.sent_msg = self.sent_msg.reply_photo(photo=up_path,
                                                               quote=True,
-                                                              caption=file,
-                                                              parse_mode="html",
+                                                              caption=cap_mono,
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
@@ -110,8 +114,7 @@ class TgUploader:
                 self.sent_msg = self.sent_msg.reply_document(document=up_path,
                                                              quote=True,
                                                              thumb=thumb,
-                                                             caption=file,
-                                                             parse_mode="html",
+                                                             caption=cap_mono,
                                                              disable_notification=True,
                                                              progress=self.upload_progress)
         except FloodWait as f:

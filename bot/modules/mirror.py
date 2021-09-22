@@ -205,7 +205,7 @@ class MirrorListener(listeners.MirrorListeners):
             chat_id = str(self.message.chat.id)
             count = len(files)
             if OWNER_ID  == int(chat_id):
-                msg = f'<b>Name:</b> {link}\n'
+                msg = f'<b>Name:</b> <code>{link}</code>\n'
                 msg += f'<b>Total Files:</b> {count}'
                 sendMessage(msg, self.bot, self.update)
             else:

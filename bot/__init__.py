@@ -208,7 +208,6 @@ try:
         STATUS_LIMIT = int(STATUS_LIMIT)
 except KeyError:
     STATUS_LIMIT = None
-
 try:
     MEGA_API_KEY = getConfig('MEGA_API_KEY')
 except KeyError:

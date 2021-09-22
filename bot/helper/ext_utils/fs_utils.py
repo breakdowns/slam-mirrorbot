@@ -163,27 +163,24 @@ def take_ss(video_file, duration):
     des_dir = f"Thumbnails"
     if not os.path.exists(des_dir):
         os.mkdir(des_dir)
-    des_dir = os.path.join(des_dir, f"{time.time()}.jpg")
+    des_dir = os.path.join(des_dir, f"{round(time.time())}.jpg")
     duration = int(duration) / 2
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", str(duration),
                     "-i", video_file, "-vframes", "1", des_dir])
-    Image.open(des_dir).convert("RGB").save(des_dir)
-    img = Image.open(des_dir)
-    w, h = img.size
-    img.resize((320, h))
-    img.save(des_dir, "JPEG")
     if os.path.lexists(des_dir):
+        Image.open(des_dir).convert("RGB").save(des_dir)
+        img = Image.open(des_dir)
+        w, h = img.size
+        img.resize((320, h))
+        img.save(des_dir, "JPEG")
         return des_dir, 320, h
     else:
         return None, 0, 0
 
 def split(path, size, split_size, start_time=0, i=1):
-    ftype = get_mime_type(path)
-    ftype = ftype.split("/")[0]
-    ftype = ftype.lower().strip()
     out_dir = os.path.dirname(path)
     base_name = os.path.basename(path)
-    if ftype == "video" or base_name.upper().endswith(VIDEO_SUFFIXES):
+    if base_name.upper().endswith(VIDEO_SUFFIXES):
         base_name, extension = os.path.splitext(path)
         metadata = extractMetadata(createParser(path))
         total_duration = metadata.get('duration').seconds - 5

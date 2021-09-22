@@ -170,6 +170,8 @@ Fill up rest of the fields. Meaning of each field is discussed below:
 - `SERVER_PORT`: Only For VPS even if `IS_VPS` is `False` --> Base URL Port
 - `BASE_URL_OF_BOT`: (Required for Heroku to avoid sleep/idling) Valid BASE URL of app where the bot is deployed. Format of URL should be `http://myip` (where `myip` is the IP/Domain of your bot) or if you have chosen other port than `80` then fill in this format `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: Do not put slash at the end), still got idling? You can use http://cron-job.org to ping your Heroku app.
 - `RECURSIVE_SEARCH`: Set this to `True` to search in sub-folders with `/list` (**NOTE**: This will only work with shared-drive ID or fill `root` for main drive. Folder IDs are not compatible with it.)
+- `TG_SPLIT_SIZE`: Size Telegram split, leave it empty for max size `2GB`
+- `AS_DOCUMENT`: Should all the upload to telegram be forced as documents or not, set it `True` or `False`
 - `SHORTENER_API`: Fill your Shortener API key if you are using Shortener.
 - `SHORTENER`: if you want to use Shortener in G-Drive and index link, fill Shortener URL here. Examples:
 ```

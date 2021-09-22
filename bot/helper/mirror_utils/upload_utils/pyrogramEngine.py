@@ -1,3 +1,7 @@
+# Implement By - @anasty17 (https://github.com/SlamDevs/slam-mirrorbot/commit/d888a1e7237f4633c066f7c2bbfba030b83ad616)
+# (c) https://github.com/SlamDevs/slam-mirrorbot
+# All rights reserved
+
 import os
 import logging
 import time
@@ -146,5 +150,3 @@ class TgUploader:
         self.is_cancelled = True
         LOGGER.info(f"Cancelling Upload: {self.name}")
         self.__listener.onUploadError('your upload has been stopped!')
-        
-

@@ -193,17 +193,22 @@ telegraph.create_account(short_name=sname)
 telegraph_token = telegraph.get_access_token()
 
 try:
-    TG_SPLIT_SIZE = int(getConfig('TG_SPLIT_SIZE'))
-    if len(f'TG_SPLIT_SIZE') == 0 or TG_SPLIT_SIZE > 2097152000:
+    TG_SPLIT_SIZE = getConfig('TG_SPLIT_SIZE')
+    if len(TG_SPLIT_SIZE) == 0 or int(TG_SPLIT_SIZE) > 2097152000:
         raise KeyError
+    else:
+        TG_SPLIT_SIZE = int(TG_SPLIT_SIZE)
 except KeyError:
     TG_SPLIT_SIZE = 2097152000
 try:
-    STATUS_LIMIT = int(getConfig('STATUS_LIMIT'))
-    if len(f'STATUS_LIMIT') == 0:
+    STATUS_LIMIT = getConfig('STATUS_LIMIT')
+    if len(STATUS_LIMIT) == 0:
         raise KeyError
+    else:
+        STATUS_LIMIT = int(STATUS_LIMIT)
 except KeyError:
     STATUS_LIMIT = None
+
 try:
     MEGA_API_KEY = getConfig('MEGA_API_KEY')
 except KeyError:

@@ -221,7 +221,7 @@ leechwatch - Leech through Youtube-dl supported link
 leechtarwatch - Leech Youtube playlist link and upload as .tar
 leechzipwatch - Leech Youtube playlist link and upload as .zip
 leechset - Leech settings
-leechset - Set Thumbnail
+setthumb - Set Thumbnail
 status - Get Mirror Status message
 list -  [query] Searches files in Drive
 cancel - Cancel a task

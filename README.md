@@ -1,4 +1,4 @@
-[![Slam](https://telegra.ph/file/db03910496f06094f1f7a.jpg)](https://youtu.be/Pk_TthHfLeE)
+[![SlamDevs](https://telegra.ph/file/143032e96542e7534f073.jpg)](https://t.me/SlamDevs)
 
 # Slam Mirror Bot
 ![GitHub Repo stars](https://img.shields.io/github/stars/SlamDevs/slam-mirrorbot?color=blue&style=flat)
@@ -8,7 +8,7 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/breakdowns/mega-sdk-python?label=Docker%20Pull)
 [![Channel](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/SlamMirrorUpdates)
 
-**Slam Mirror Bot** is a _multipurpose_ Telegram Bot written in Python for mirroring files on the Internet to our beloved Google Drive. Based on [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot)
+**Slam Mirror Bot** is a _multipurpose_ Telegram Bot written in Python for mirroring/leeching files on the Internet to our beloved Google Drive. Based on [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot)
 
 # Features:
 <details>
@@ -16,6 +16,8 @@
 
 ## By Slam Devs
 - qBittorrent
+- Leach supported
+- Thumbnail supported
 - Size limiting for Torrent/Direct, Tar/Unzip, Mega and clone
 - Stop duplicates for all tasks except for qBittorrent and youtube-dl tasks 
 - Tar/Unzip G-Drive link 
@@ -169,6 +171,8 @@ Fill up rest of the fields. Meaning of each field is discussed below:
 - `SERVER_PORT`: Only For VPS even if `IS_VPS` is `False` --> Base URL Port
 - `BASE_URL_OF_BOT`: (Required for Heroku to avoid sleep/idling) Valid BASE URL of app where the bot is deployed. Format of URL should be `http://myip` (where `myip` is the IP/Domain of your bot) or if you have chosen other port than `80` then fill in this format `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: Do not put slash at the end), still got idling? You can use http://cron-job.org to ping your Heroku app.
 - `RECURSIVE_SEARCH`: Set this to `True` to search in sub-folders with `/list` (**NOTE**: This will only work with shared-drive ID or fill `root` for main drive. Folder IDs are not compatible with it.)
+- `TG_SPLIT_SIZE`: Size Telegram split, leave it empty for max size `2GB`
+- `AS_DOCUMENT`: Should all the upload to telegram be forced as documents or not, set it `True` or `False`
 - `SHORTENER_API`: Fill your Shortener API key if you are using Shortener.
 - `SHORTENER`: if you want to use Shortener in G-Drive and index link, fill Shortener URL here. Examples:
 ```

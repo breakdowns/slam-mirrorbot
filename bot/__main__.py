@@ -105,6 +105,22 @@ help_string_telegraph = f'''<br>
 <br><br>
 <b>/{BotCommands.QbUnzipMirrorCommand}</b> [magnet_link]: Starts mirroring using qBittorrent and if downloaded file is any archive, extracts it to Google Drive
 <br><br>
+<b>/{BotCommands.LeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<br><br>
+<b>/{BotCommands.TarLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.tar). [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<br><br>
+<b>/{BotCommands.ZipLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.zip). [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<br><br>
+<b>/{BotCommands.UnzipLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and if file is any archive, extracts it. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<br><br>
+<b>/{BotCommands.QbLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<br><br>
+<b>/{BotCommands.QbTarLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.tar) using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<br><br>
+<b>/{BotCommands.QbZipLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.zip) using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<br><br>
+<b>/{BotCommands.QbUnzipLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and if file is any archive, extracts it using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<br><br>
 <b>/{BotCommands.CloneCommand}</b> [drive_url]: Copy file/folder to Google Drive
 <br><br>
 <b>/{BotCommands.CountCommand}</b> [drive_url]: Count file/folder of Google Drive Links
@@ -116,6 +132,16 @@ help_string_telegraph = f'''<br>
 <b>/{BotCommands.TarWatchCommand}</b> [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
 <br><br>
 <b>/{BotCommands.ZipWatchCommand}</b> [youtube-dl supported link]: Mirror through youtube-dl and zip before uploading
+<br><br>
+<b>/{BotCommands.LeechWatchCommand}</b> Leech through youtube-dl 
+<br><br>
+<b>/{BotCommands.LeechTarWatchCommand}</b> Leech through youtube-dl and tar before uploading 
+<br><br>
+<b>/{BotCommands.LeechTarWatchCommand}</b> Leech through youtube-dl and zip before uploading 
+<br><br>
+<b>/{BotCommands.LeechSetCommand}</b> Leech Settings 
+<br><br>
+<b>/{BotCommands.SetThumbCommand}</b> Reply to photo to set it as thumbnail for next uploads 
 <br><br>
 <b>/{BotCommands.CancelMirror}</b>: Reply to the message by which the download was initiated and that download will be cancelled
 <br><br>

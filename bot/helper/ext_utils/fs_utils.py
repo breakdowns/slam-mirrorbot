@@ -160,22 +160,22 @@ def get_mime_type(file_path):
     return mime_type
 
 def take_ss(video_file, duration):
-    des_dir = f"Thumbnails"
+    des_dir = 'Thumbnails'
     if not os.path.exists(des_dir):
         os.mkdir(des_dir)
     des_dir = os.path.join(des_dir, f"{round(time.time())}.jpg")
     duration = int(duration) / 2
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", str(duration),
                     "-i", video_file, "-vframes", "1", des_dir])
-    if os.path.lexists(des_dir):
-        Image.open(des_dir).convert("RGB").save(des_dir)
-        img = Image.open(des_dir)
-        w, h = img.size
-        img.resize((320, h))
-        img.save(des_dir, "JPEG")
-        return des_dir, 320, h
-    else:
+    if not os.path.lexists(des_dir):
         return None, 0, 0
+
+    Image.open(des_dir).convert("RGB").save(des_dir)
+    img = Image.open(des_dir)
+    w, h = img.size
+    img.resize((320, h))
+    img.save(des_dir, "JPEG")
+    return des_dir, 320, h
 
 def split(path, size, split_size, start_time=0, i=1):
     out_dir = os.path.dirname(path)

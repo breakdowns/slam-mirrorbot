@@ -16,6 +16,7 @@
 
 ## By Slam Devs
 - qBittorrent
+- Leach supported
 - Size limiting for Torrent/Direct, Tar/Unzip, Mega and clone
 - Stop duplicates for all tasks except for qBittorrent and youtube-dl tasks 
 - Tar/Unzip G-Drive link 

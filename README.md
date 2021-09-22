@@ -208,10 +208,10 @@ leech - Leech Torrent/Direct link
 tarleech - Leech Torrent/Direct link and upload as .tar
 zipleech - Leech Torrent/Direct link and upload as .zip
 unzipleech - Leech Torrent/Direct link and extract
-qbleech - Leech Torrent/Direct link using qBittorrent
-qbtarleech - Leech Torrent/Direct link and upload as .tar using qb
-qbzipleech - Leech Torrent/Direct link and upload as .zip using qb
-qbunzipleech - Leech Torrent/Direct link and extract using qb
+qbleech - Leech Torrent using qBittorrent
+qbtarleech - Leech Torrent and upload as .tar using qb
+qbzipleech - Leech Torrent and upload as .zip using qb
+qbunzipleech - Leech Torrent and extract using qb
 clone - Copy file/folder to Drive
 count - Count file/folder of Drive link
 watch - Mirror Youtube-dl supported link

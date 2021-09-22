@@ -215,18 +215,18 @@ def get_confirm(update, context):
     data = query.data
     data = data.split(" ")
     qdl = getDownloadByGid(data[1])
-    if qdl is not None:
-        if user_id != qdl.listener.message.from_user.id:
-            query.answer(text="Don't waste your time!", show_alert=True)
-        elif data[0] == "pin":
-            query.answer(text=data[2], show_alert=True)
-        elif data[0] == "done":
-            query.answer()
-            qdl.client.torrents_resume(torrent_hashes=data[2])
-            sendStatusMessage(qdl.listener.update, qdl.listener.bot)
-            query.message.delete()
-    else:
+    if qdl is None:
         query.answer(text="This task has been cancelled!", show_alert=True)
+        query.message.delete()
+
+    elif user_id != qdl.listener.message.from_user.id:
+        query.answer(text="Don't waste your time!", show_alert=True)
+    elif data[0] == "pin":
+        query.answer(text=data[2], show_alert=True)
+    elif data[0] == "done":
+        query.answer()
+        qdl.client.torrents_resume(torrent_hashes=data[2])
+        sendStatusMessage(qdl.listener.update, qdl.listener.bot)
         query.message.delete()
 
 

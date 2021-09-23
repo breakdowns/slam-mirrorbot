@@ -160,7 +160,7 @@ def take_ss(video_file, duration):
     des_dir = 'Thumbnails'
     if not os.path.exists(des_dir):
         os.mkdir(des_dir)
-    des_dir = os.path.join(des_dir, f"{round(time.time())}.jpg")
+    des_dir = os.path.join(des_dir, f"{time.time()}.jpg")
     duration = int(duration) / 2
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", str(duration),
                     "-i", video_file, "-vframes", "1", des_dir])

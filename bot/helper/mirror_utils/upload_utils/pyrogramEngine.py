@@ -77,6 +77,7 @@ class TgUploader:
                     self.sent_msg = self.sent_msg.reply_video(video=up_path,
                                                               quote=True,
                                                               caption=cap_mono,
+                                                              parse_mode="html",
                                                               duration=duration,
                                                               width=width,
                                                               height=height,
@@ -95,6 +96,7 @@ class TgUploader:
                     self.sent_msg = self.sent_msg.reply_audio(audio=up_path,
                                                               quote=True,
                                                               caption=cap_mono,
+                                                              parse_mode="html",
                                                               duration=duration,
                                                               performer=artist,
                                                               title=title,
@@ -105,7 +107,7 @@ class TgUploader:
                     self.sent_msg = self.sent_msg.reply_photo(photo=up_path,
                                                               quote=True,
                                                               caption=cap_mono,
-                                                              supports_streaming=True,
+                                                              parse_mode="html",
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
                 else:
@@ -115,6 +117,7 @@ class TgUploader:
                                                              quote=True,
                                                              thumb=thumb,
                                                              caption=cap_mono,
+                                                             parse_mode="html",
                                                              disable_notification=True,
                                                              progress=self.upload_progress)
         except FloodWait as f:

@@ -16,7 +16,7 @@
 
 ## By Slam Devs
 - qBittorrent
-- Leach supported
+- Leech supported
 - Thumbnail supported
 - Size limiting for Torrent/Direct, Tar/Unzip, Mega and clone
 - Stop duplicates for all tasks except for qBittorrent and youtube-dl tasks 

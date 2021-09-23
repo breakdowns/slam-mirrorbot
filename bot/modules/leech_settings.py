@@ -28,7 +28,7 @@ def leechSet(update, context):
         msg += "DOCUMENT"
     else:
         msg += "MEDIA"
-    msg += "\nCustom Thmubnail "
+    msg += "\nCustom Thumbnail "
     msg += "exists" if os.path.exists(path) else "not exists"
     buttons = button_build.ButtonMaker()
     buttons.sbutton("As Document", f"doc {user_id}")
@@ -98,7 +98,7 @@ def setThumb(update, context):
         # img.resize((320, h))
         img.save(des_dir, "JPEG")
         os.remove(photo_dir)
-        sendMessage(f"Custom thumbnail saved for {user_id} user.", context.bot, update)
+        sendMessage(f"Custom thumbnail saved for <code>{user_id}</code> user.", context.bot, update)
     else:
         sendMessage("Reply to a photo to save custom thumbnail.", context.bot, update)
 

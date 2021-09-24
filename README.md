@@ -170,9 +170,9 @@ Fill up rest of the fields. Meaning of each field is discussed below:
 - `IS_VPS`: (Only for VPS) Don't set this to `True` even if you are using VPS, unless facing error with web server.
 - `SERVER_PORT`: Only For VPS even if `IS_VPS` is `False` --> Base URL Port
 - `BASE_URL_OF_BOT`: (Required for Heroku to avoid sleep/idling) Valid BASE URL of app where the bot is deployed. Format of URL should be `http://myip` (where `myip` is the IP/Domain of your bot) or if you have chosen other port than `80` then fill in this format `http://myip:port`, for Heroku fill `https://yourappname.herokuapp.com` (**NOTE**: Do not put slash at the end), still got idling? You can use http://cron-job.org to ping your Heroku app.
-- `RECURSIVE_SEARCH`: Set this to `True` to search in sub-folders with `/list` (**NOTE**: This will only work with shared-drive ID or fill `root` for main drive. Folder IDs are not compatible with it.)
+- `RECURSIVE_SEARCH`: Set this to `True` to search in sub-folders with `/list` (**NOTE**: This will only work with Shared-Drive ID or fill `root` for main Drive. Folder IDs are not compatible with it.)
 - `TG_SPLIT_SIZE`: Size Telegram split, leave it empty for max size `2GB`
-- `AS_DOCUMENT`: Should all the upload to telegram be forced as documents or not, set it `True` or `False`
+- `AS_DOCUMENT`: Should all the upload to Telegram be forced as documents or not, set it `True` or `False`
 - `SHORTENER_API`: Fill your Shortener API key if you are using Shortener.
 - `SHORTENER`: if you want to use Shortener in G-Drive and index link, fill Shortener URL here. Examples:
 ```
@@ -194,45 +194,7 @@ Three buttons are already added including Drive Link, Index Link, and View Link,
 
 ## Bot commands to be set in [@BotFather](https://t.me/BotFather)
 
-```
-help - Get Detailed Help
-mirror - Start Mirroring
-tarmirror - Start mirroring and upload as .tar
-zipmirror - Start mirroring and upload as .zip
-unzipmirror - Extract files
-qbmirror - Start Mirroring using qBittorrent
-qbtarmirror - Start mirroring and upload as .tar using qb
-qbzipmirror - Start mirroring and upload as .zip using qb
-qbunzipmirror - Extract files using qBittorrent
-leech - Leech Torrent/Direct link
-tarleech - Leech Torrent/Direct link and upload as .tar
-zipleech - Leech Torrent/Direct link and upload as .zip
-unzipleech - Leech Torrent/Direct link and extract
-qbleech - Leech Torrent/Magnet using qBittorrent
-qbtarleech - Leech Torrent/Magnet and upload as .tar using qb
-qbzipleech - Leech Torrent/Magnet and upload as .zip using qb
-qbunzipleech - Leech Torrent and extract using qb
-clone - Copy file/folder to Drive
-count - Count file/folder of Drive link
-watch - Mirror Youtube-dl supported link
-tarwatch - Mirror Youtube playlist link and upload as .tar
-zipwatch - Mirror Youtube playlist link and upload as .zip
-leechwatch - Leech through Youtube-dl supported link
-leechtarwatch - Leech Youtube playlist link and upload as .tar
-leechzipwatch - Leech Youtube playlist link and upload as .zip
-leechset - Leech settings
-setthumb - Set Thumbnail
-status - Get Mirror Status message
-list -  [query] Searches files in Drive
-cancel - Cancel a task
-cancelall - Cancel all tasks
-del - [drive_url] Delete file from Drive
-log - Get the Bot Log [owner/sudo only]
-shell - Run commands in Shell [owner only]
-restart - Restart the Bot [owner/sudo only]
-stats - Bot Usage Stats
-ping - Ping the Bot
-```
+<p><a href="https://github.com/SlamDevs/slam-mirrorbot/wiki/Bot-commands-to-be-set-in-BotFather"> <img src="https://img.shields.io/badge/See%20On%20Wiki-grey?style=for-the-badge&logo=github" width="160""/></a></p>
 
 ## Getting Google OAuth API credential file
 - Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)

@@ -6,3 +6,6 @@ contact_links:
   - name: Slam Mirrorbot Group
     url: https://t.me/SlamSupport
     about: Support Group
+  - name: Bug Report Group
+    url: https://t.me/SlamBugReport
+    about: Bug Report & Feature Request Group

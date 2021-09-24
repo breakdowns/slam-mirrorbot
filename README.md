@@ -194,7 +194,7 @@ Three buttons are already added including Drive Link, Index Link, and View Link,
 
 ## Bot commands to be set in [@BotFather](https://t.me/BotFather)
 
-<p><a href="https://github.com/SlamDevs/slam-mirrorbot/wiki/Bot-commands-to-be-set-in-BotFather"> <img src="https://img.shields.io/badge/See%20On%20Wiki-grey?style=for-the-badge&logo=github" width="150""/></a></p>
+<p><a href="https://github.com/SlamDevs/slam-mirrorbot/wiki/Bot-commands-to-be-set-in-BotFather"> <img src="https://img.shields.io/badge/See%20On%20Wiki-grey?style=for-the-badge&logo=github" width="160""/></a></p>
 
 ## Getting Google OAuth API credential file
 - Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)

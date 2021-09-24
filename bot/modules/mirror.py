@@ -83,7 +83,16 @@ class MirrorListener(listeners.MirrorListeners):
             try:
                 with download_dict_lock:
                     download_dict[self.uid] = TarStatus(name, m_path, size)
-                path = fs_utils.zip(name, m_path) if self.isZip else fs_utils.tar(m_path)
+                if self.isZip:
+                    pswd = self.pswd
+                    path = m_path + ".zip"
+                    LOGGER.info(f'Zip: orig_path: {m_path}, zip_path: {path}')
+                    if pswd is not None:
+                        subprocess.run(["7z", "a", f"-p{pswd}", path, m_path])
+                    else:
+                        subprocess.run(["7z", "a", path, m_path])
+                else:
+                    path = fs_utils.tar(m_path)
             except FileNotFoundError:
                 LOGGER.info('File to archive not found!')
                 self.onUploadError('Internal error occurred!!')

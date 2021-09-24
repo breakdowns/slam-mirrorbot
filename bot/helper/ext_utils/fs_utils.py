@@ -57,20 +57,12 @@ def get_path_size(path):
 
 def tar(org_path):
     tar_path = org_path + ".tar"
-    #path = pathlib.PurePath(org_path)
+    path = pathlib.PurePath(org_path)
     LOGGER.info(f'Tar: orig_path: {org_path}, tar_path: {tar_path}')
     tar = tarfile.open(tar_path, "w")
-    tar.add(org_path, arcname=os.path.basename(org_path))
+    tar.add(org_path, arcname=path.name)
     tar.close()
     return tar_path
-
-def zip(name, path):
-    root_dir = os.path.dirname(path)
-    base_dir = os.path.basename(path.strip(os.sep))
-    zip_file = shutil.make_archive(name, "zip", root_dir, base_dir)
-    zip_path = shutil.move(zip_file, root_dir)
-    LOGGER.info(f"Zip: {zip_path}")
-    return zip_path
 
 def get_base_name(orig_path: str):
     if orig_path.endswith(".tar.bz2"):
@@ -180,7 +172,7 @@ def split(path, size, file, dirpath, split_size, start_time=0, i=1):
         base_name, extension = os.path.splitext(file)
         metadata = extractMetadata(createParser(path))
         total_duration = metadata.get('duration').seconds - 8
-        split_size = split_size - 2000000
+        split_size = split_size - 3000000
         while start_time < total_duration:
             parted_name = "{}.part{}{}".format(str(base_name), str(i).zfill(3), str(extension))
             out_path = os.path.join(dirpath, parted_name)
@@ -190,7 +182,7 @@ def split(path, size, file, dirpath, split_size, start_time=0, i=1):
             out_size = get_path_size(out_path)
             if out_size > TG_SPLIT_SIZE:
                 dif = out_size - TG_SPLIT_SIZE
-                split_size = TG_SPLIT_SIZE - dif
+                split_size = split_size - dif + 2000000
                 os.remove(out_path)
                 return split(path, size, file, dirpath, split_size, start_time, i)
             metadata = extractMetadata(createParser(out_path))

@@ -87,7 +87,6 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
-                    os.remove(up_path)
                     if self.thumb is None and thumb is not None and os.path.lexists(thumb):
                         os.remove(thumb)
                 elif file.upper().endswith(AUDIO_SUFFIXES):
@@ -106,7 +105,6 @@ class TgUploader:
                                                               thumb=thumb,
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
-                    os.remove(up_path)
                 elif file.upper().endswith(IMAGE_SUFFIXES):
                     self.sent_msg = self.sent_msg.reply_photo(photo=up_path,
                                                               quote=True,
@@ -114,12 +112,13 @@ class TgUploader:
                                                               parse_mode="html",
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
-                    os.remove(up_path)
                 else:
                     notMedia = True
             if self.as_doc or notMedia:
                 if file.upper().endswith(VIDEO_SUFFIXES) and thumb is None:
                     thumb = take_ss(up_path)
+                if self.is_cancelled:
+                    return
                 self.sent_msg = self.sent_msg.reply_document(document=up_path,
                                                              quote=True,
                                                              thumb=thumb,
@@ -127,6 +126,9 @@ class TgUploader:
                                                              parse_mode="html",
                                                              disable_notification=True,
                                                              progress=self.upload_progress)
+                if self.thumb is None and thumb is not None and os.path.lexists(thumb):
+                    os.remove(thumb)
+            if not self.is_cancelled:
                 os.remove(up_path)
         except FloodWait as f:
             LOGGER.info(f)

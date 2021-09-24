@@ -93,9 +93,8 @@ def setThumb(update, context):
         des_dir = os.path.join(path, str(user_id) + ".jpg")
         # Image.open(photo_dir).convert("RGB").save(photo_dir)
         img = Image.open(photo_dir)
-        w, h = img.size
-        img.thumbnail((320, h))
-        # img.resize((320, h))
+        img.thumbnail((480, 320))
+        # img.resize((480, 320))
         img.save(des_dir, "JPEG")
         os.remove(photo_dir)
         sendMessage(f"Custom thumbnail saved for <code>{user_id}</code> user.", context.bot, update)

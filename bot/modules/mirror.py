@@ -17,7 +17,7 @@ from fnmatch import fnmatch
 from bot import Interval, INDEX_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, \
                 BUTTON_SIX_NAME, BUTTON_SIX_URL, BLOCK_MEGA_FOLDER, BLOCK_MEGA_LINKS, VIEW_LINK, aria2, \
                 dispatcher, DOWNLOAD_DIR, download_dict, download_dict_lock, SHORTENER, SHORTENER_API, \
-                TAR_UNZIP_LIMIT, TG_SPLIT_SIZE, OWNER_ID
+                TAR_UNZIP_LIMIT, TG_SPLIT_SIZE
 from bot.helper.ext_utils import fs_utils, bot_utils
 from bot.helper.ext_utils.shortenurl import short_url
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException, NotSupportedExtractionArchive
@@ -150,7 +150,7 @@ class MirrorListener(listeners.MirrorListeners):
                             with download_dict_lock:
                                 download_dict[self.uid] = SplitStatus(up_name, up_path, size)
                             LOGGER.info(f"Splitting: {up_name}")
-                        fs_utils.split(f_path, f_size, TG_SPLIT_SIZE)
+                        fs_utils.split(f_path, f_size, file, dirpath, TG_SPLIT_SIZE)
                         os.remove(f_path)
             LOGGER.info(f"Leech Name: {up_name}")
             tg = pyrogramEngine.TgUploader(up_name, self)
@@ -202,14 +202,13 @@ class MirrorListener(listeners.MirrorListeners):
                 uname = f"@{self.message.from_user.username}"
             else:
                 uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
-            chat_id = str(self.message.chat.id)
             count = len(files)
-            if OWNER_ID  == int(chat_id) and count != 1:
+            if self.message.chat.type == 'private':
                 msg = f'<b>Name:</b> <code>{link}</code>\n'
                 msg += f'<b>Total Files:</b> {count}'
                 sendMessage(msg, self.bot, self.update)
             else:
-                chat_id = chat_id[4:]
+                chat_id = str(self.message.chat.id)[4:]
                 msg = f"<b>Name:</b> <a href='https://t.me/c/{chat_id}/{self.uid}'>{link}</a>\n"
                 msg += f'<b>Total Files:</b> {count}\n'
                 msg += f'cc: {uname}\n\n'

@@ -162,10 +162,7 @@ def take_ss(video_file):
         os.mkdir(des_dir)
     des_dir = os.path.join(des_dir, f"{time.time()}.jpg")
     metadata = extractMetadata(createParser(video_file))
-    if metadata.has("duration"):
-        duration = metadata.get('duration').seconds
-    else:
-        duration = 5
+    duration = metadata.get('duration').seconds if metadata.has("duration") else 5
     duration = int(duration) / 2
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", str(duration),
                     "-i", video_file, "-vframes", "1", des_dir])

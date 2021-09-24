@@ -182,7 +182,7 @@ shorte.st, linkvertise.com , ouo.io
 
 Above are the supported URL Shorteners. Except these only some URL Shorteners are supported.
 ### Add more buttons (Optional Field)
-Three buttons are already added including Drive Link, Index Link, and View Link, you can add extra buttons, if you don't know what are the below entries, simply leave them, don't fill anything in them.
+Three buttons are already added including Drive Link, Index Link, and View Link, you can add extra buttons, if you don't know what are the below entries, simply leave them empty.
 - `BUTTON_FOUR_NAME`:
 - `BUTTON_FOUR_URL`:
 - `BUTTON_FIVE_NAME`:

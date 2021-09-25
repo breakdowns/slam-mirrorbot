@@ -1,20 +1,35 @@
-name: Manually Deploy to Heroku
+name: Heroku Container
 
 on: workflow_dispatch
 
+env:
+  IMAGE_NAME: slam-mirrorbot
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+  CONFIG_FILE_URL: ${{ secrets.CONFIG_FILE_URL }}
+
 jobs:
-  deploy:
+  build_and_push:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          usedocker: true
-          docker_heroku_process_type: web
-          stack: "container"
-          region: "eu"
-        env:
-          HD_CONFIG_FILE_URL: ${{secrets.CONFIG_FILE_URL}}
+      
+      - name: Create heroku app and set region
+        run: heroku create -a "${HEROKU_APP_NAME}" --region eu
+
+      - name: Build the image
+        run: docker build . --file Dockerfile --tag "${IMAGE_NAME}"
+
+      - name: Login into Heroku Container registry
+        run: heroku container:login
+
+      - name: Push the image to Heroku
+        run: heroku container:push "${IMAGE_NAME}" -a "${HEROKU_APP_NAME}"
+        
+      - name: Release image to Heroku
+        run: heroku container:release "${IMAGE_NAME}" -a "${HEROKU_APP_NAME}"
+
+      - name: Set ENV
+        run: |
+            heroku config:set -a "${HEROKU_APP_NAME}" CONFIG_FILE_URL="${CONFIG_FILE_URL}"

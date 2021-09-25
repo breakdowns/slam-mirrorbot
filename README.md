@@ -362,5 +362,6 @@ Thanks to:
 - [`zevtyardt`](https://github.com/zevtyardt) for some direct links
 - [`yash-dk`](https://github.com/yash-dk) for implementation of qBittorrent on Python
 - [`xyou365`](https://github.com/xyou365) for Service Accounts script
+- [`Adek` ](https://github.com/adekmaulana) heroku container idea build with github workflows
 
 And many more people who aren't mentioned here, but can be found in [Contributors](https://github.com/SlamDevs/slam-mirrorbot/graphs/contributors).

@@ -203,6 +203,7 @@ class QbitTorrent:
                 self.client.auth_log_out()
                 self.updater.cancel()
         except:
+            self.client.auth_log_out()
             self.updater.cancel()
 
 

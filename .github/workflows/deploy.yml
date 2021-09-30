@@ -18,3 +18,4 @@ jobs:
           region: "eu"
         env:
           HD_CONFIG_FILE_URL: ${{secrets.CONFIG_FILE_URL}}
+          HD_BASE_URL_OF_BOT: https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com
